@@ -14,3 +14,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 
+const tickets_routes = require('./routes/tickets_routes');
+const user_routes = require('./routes/user_routes');
+
+app.use('/tickets', tickets_routes);
+
+app.use('/user', user_routes);
+
+app.listen(3000);
