@@ -2,6 +2,6 @@ const path = require('path');
 const User = require('../models/usuario');
 
 
-exports.login = (request, response, next) => {
+exports.nuevo = (request, response, next) => {
     //response.render()
 };

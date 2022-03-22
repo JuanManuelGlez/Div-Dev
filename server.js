@@ -12,10 +12,15 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 
 const tickets_routes = require('./routes/tickets_routes');
-const user_routes = require('./routes/user_routes');
+const usuario_routes = require('./routes/usuario_routes');
 
 app.use('/tickets', tickets_routes);
 
-app.use('/user', user_routes);
+app.use('/usuario', usuario_routes);
+
+app.use((request, response, next) => {
+    response.status(404);
+    response.send('<!DOCTYPE html><html><head><meta charset="utf-8"><title>Not found</title></head><body><h1 id="principal">404, esta página no existe</h1></body>');
+});
 
 app.listen(5000);

@@ -3,12 +3,12 @@ const path = require('path');
 const express = require('express');
 const app = express();
 
-const user_controller = require('../controllers/user_controller');
+const usuario_controller = require('../controllers/usuario_controller');
 
 const router = express.Router();
 
 
-router.use('/login', user_controller.login);
+router.post('/nuevo', usuario_controller.nuevo);
 
 
 
