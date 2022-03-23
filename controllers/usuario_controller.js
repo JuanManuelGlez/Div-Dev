@@ -1,16 +1,16 @@
 const path = require('path');
-const User = require('../models/usuario');
+const Usuario = require('../models/usuario');
 
 exports.signup_get = (request, response, next) => {
-    response.render('usuarios/registro_usuario', []);
+    response.render('usuarios/signup');
 };
 
 exports.signup_post = (request, response, next) => {
-    const usuario_nuevo= new Usuario(request.body.nombre, request.body.correo, request.body.contrasenia, 'https://img.com');
+    const usuario_nuevo= new Usuario(request.body.nombre, request.body.correo, request.body.contrasenia, 'https://tanzolymp.com/images/default-non-user-no-photo-1.jpg');
 
     usuario_nuevo.usuario_save()
         .then(() => {
-            response.redirect('./usuario/login');
+            response.redirect('/usuario/login');
         })
         .catch(err => console.log(err));
 };

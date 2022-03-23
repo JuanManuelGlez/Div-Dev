@@ -9,23 +9,26 @@ module.exports = class Usuario{
         this.login_usuario = login;
         this.contrasenia_usuario = contrasenia;
         this.url_foto_usuario = url_foto;
-        this.id_rol_usuario = id_rol;
+        this.id_rol_usuario = 4;
     }
 
     //Este método servirá para guardar de manera persistente el nuevo objeto. 
-    Usuario_save() {
-        let comando = 'INSERT INTO usuario VALUES (?, ?, ?, ?, ?)';
+    usuario_save = () => {
+        let comando = 'INSERT INTO usuario(Id_Rol, Nombre_Usuario, Login, Contraseña, URL_Foto) VALUES (?, ?, ?, ?, ?)';
         return bcrypt.hash(this.contrasenia_usuario, 12)
         .then((contrasenia_usuario_cifrado) => {
-            return db.execute(comando, 
-                [this.nombre_usuario,
-                this.login_usuario,
-                contrasenia_usuario_cifrado,
-                this.url_foto_usuario,
-                4]    
+            console.log(contrasenia_usuario_cifrado);
+            return db.execute('INSERT INTO usuario(Id_Rol, Nombre_Usuario, Login, Contraseña, URL_Foto) VALUES (?, ?, ?, ?, ?)', 
+                [
+                    this.id_rol_usuario,
+                    this.nombre_usuario,
+                    this.login_usuario,
+                    contrasenia_usuario_cifrado,
+                    this.url_foto_usuario
+                ]    
         );
         })
-        .catch((err) =>{
+        .catch((err) =>{    
             console.log(err);
         });
     }
