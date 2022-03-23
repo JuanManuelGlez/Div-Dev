@@ -1,16 +1,14 @@
 <%- include('includes/head.ejs') %>
 
-    <div class="container">
-      <div class="row justify-content-center">
-        <form action="usuario/login_post" id="form_login" method="POST">
-          <label for="username">Nombre de usuario: </label>
-          <input type="text" id="username" placeholder="Pedro">
-          <label for="contrasenia">Contraseña: </label>
-          <input type="password" id="contrasenia">
-          <br>
-          <button type="submit" class="btn btn-primary mt-3" id="enviar">Submit</button>
-        </form>
-      </div>
-    </div>
-
+    <h2>Para ingresar al sitio, introduce tus datos de acceso:</h2>
+    <form id="form_login" method="POST">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <label for="correo">Correo Electronico: </label>
+        <input type="text" id="correo" name="correo" placeholder="Pedro">
+        <label for="contrasenia">Contraseña: </label>
+        <input type="password" id="password" name="contrasenia">
+        <br><br>
+        <input type="submit"class="btn btn-primary mt-3" value="Enviar">
+    </form>
+    <br><br>
 <%- include('includes/foot.ejs') %>

@@ -37,8 +37,9 @@ module.exports = class Usuario{
     static fetchAll() {
     }
 
-    static fetchOne() {
-
+    static findOne(nombre_usuario) {
+        return db.execute('SELECT * FROM usuario WHERE Login=?',
+            [login_usuario]);
     }
 
 }
