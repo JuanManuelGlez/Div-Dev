@@ -1,0 +1,16 @@
+<%- include('includes/head.ejs') %>
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <form action="usuario/login_post" id="form_login" method="POST">
+          <label for="username">Nombre de usuario: </label>
+          <input type="text" id="username" placeholder="Pedro">
+          <label for="contrasenia">Contraseña: </label>
+          <input type="password" id="contrasenia">
+          <br>
+          <button type="submit" class="btn btn-primary mt-3" id="enviar">Submit</button>
+        </form>
+      </div>
+    </div>
+
+<%- include('includes/foot.ejs') %>
