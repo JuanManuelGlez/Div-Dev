@@ -11,7 +11,7 @@ exports.signup_post = (request, response, next) => {
 
     usuario_nuevo.usuario_save()
         .then(() => {
-            response.redirect('/usuario/login');
+            response.redirect('usuarios/login');
         })
         .catch(err => console.log(err));
 };

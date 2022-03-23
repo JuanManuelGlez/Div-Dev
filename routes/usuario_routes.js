@@ -8,7 +8,7 @@ const isAuth= require ('../util/is-auth.js')
 const usuario_controller = require('../controllers/usuario_controller');
 
 
-router.get('/signup',isAuth ,usuario_controller.signup_get);
+router.get('/signup',usuario_controller.signup_get);
 
 router.post('/signup',usuario_controller.signup_post);
 
