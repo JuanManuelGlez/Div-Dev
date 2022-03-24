@@ -26,12 +26,12 @@ exports.login_get = (request, response, next) => {
 
 exports.login_post = (request, response, next) => {
     Usuario.findOne(request.body.correo)
-           .then(([rows,fielData])=>{
-               if (rows.length<1){
-                   return response.redirect('usuarios/login');
-               }
-               const usuario=new Usuario(rows[0].nombre,rows[0].correo, rows[0].contrasenia);
-               bcrypt.compare(request.body.contrasenia,usuario.contrasenia_usuario)
+            .then(([rows,fielData])=>{
+                if (rows.length<1){
+                    return response.redirect('usuarios/login');
+                }
+                const usuario=new Usuario(rows[0].nombre,rows[0].correo, rows[0].contrasenia);
+                bcrypt.compare(request.body.contrasenia,usuario.contrasenia_usuario)
                     .then (doMatch =>{
                         if (doMatch) {
                             request.session.isLoggedIn=true;
@@ -45,9 +45,9 @@ exports.login_post = (request, response, next) => {
                     }).catch(err=>{
                         response.redirect('usuarios/login');
                     });
-           }).catch((error)=>{
-               console.log(error)
-           });
+            }).catch((error)=>{
+                console.log(error)
+            });
 };
 
 exports.logout = (request, response, next) => {

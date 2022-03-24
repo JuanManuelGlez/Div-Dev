@@ -12,4 +12,8 @@ module.exports = class Ticket{
     static fetchAll() {
     }
 
+    static fetchOne() {
+        
+    }
+
 }
