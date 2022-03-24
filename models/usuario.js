@@ -14,7 +14,6 @@ module.exports = class Usuario{
 
     //Este método servirá para guardar de manera persistente el nuevo objeto. 
     usuario_save = () => {
-        let comando = 'INSERT INTO usuario(Id_Rol, Nombre_Usuario, Login, Contraseña, URL_Foto) VALUES (?, ?, ?, ?, ?)';
         return bcrypt.hash(this.contrasenia_usuario, 12)
         .then((contrasenia_usuario_cifrado) => {
             console.log(contrasenia_usuario_cifrado);
