@@ -19,13 +19,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
+app.use(bodyParser.json());
 
 const tickets_routes = require('./routes/tickets_routes');
 const usuario_routes = require('./routes/usuario_routes');
+const tipo_incidencia_routes = require('./routes/tipo_incidencia_routes');
 
 app.use('/tickets', tickets_routes);
 
 app.use('/usuario', usuario_routes);
+
+app.use('/tipo_incidencia', tipo_incidencia_routes);
 
 app.use((request, response, next) => {
     response.status(404);
