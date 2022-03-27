@@ -16,12 +16,15 @@ app.use(session({
 }));
 
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(express.static(path.join(__dirname, 'assets')));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 
 const tickets_routes = require('./routes/tickets_routes');
 const usuario_routes = require('./routes/usuario_routes');
+const metricasruta = require('./routes/general.routes');
+
+app.use('/', metricasruta);
 
 app.use('/tickets', tickets_routes);
 
