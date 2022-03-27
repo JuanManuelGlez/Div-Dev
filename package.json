@@ -1,0 +1,37 @@
+{
+  "name": "div-dev",
+  "version": "1.0.0",
+  "description": "Paquetes proyecto Tickets",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juanManuelGonzalezA00572003/Div-Dev.git"
+  },
+  "keywords": [
+    "Div-Dev",
+    "Zebrands",
+    "Tickets"
+  ],
+  "author": "Div-Dev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/juanManuelGonzalezA00572003/Div-Dev/issues"
+  },
+  "homepage": "https://github.com/juanManuelGonzalezA00572003/Div-Dev#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.2",
+    "concurrently": "^7.0.0",
+    "cookie-parser": "^1.4.6",
+    "csurf": "^1.11.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "express-session": "^1.17.2",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.15"
+  }
+}
