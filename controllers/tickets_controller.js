@@ -17,7 +17,7 @@ exports.nuevo_get = (request, response, next) => {
                 .then(([rowsProcedencias, fieldDataProsedencias]) => {
                     Ticket.fetchLabels()
                     .then(([rowsLabels, fieldDataLabels]) => {
-                        response.render('tickets/nuevo_ticket', {
+                        response.render('tickets/nuevo_ticket_f', {
                             tipos_incidencia: rowsTipoIncidencia,
                             prioridades: rowsPrioridades,
                             procedencias: rowsProcedencias,
@@ -35,12 +35,16 @@ exports.nuevo_get = (request, response, next) => {
 
 exports.nuevo_post = (request, response, next) => {
 
-    const ticketNuevo = new Ticket(request.body.asunto, request.body.descripcion, request.body.prioridad, request.body.tipo_incidencia, request.body.prosedencia);
+    const ticketNuevo = new Ticket(request.body.asunto, request.body.descripcion, request.body.prioridad, request.body.tipo_incidencia, request.body.procedencia);
     ticketNuevo.save()
         .then((result) => {
             let idNuevo = result[0].insertId; //probablemente una mejor manera de hacer esto
-            Ticket.assignLabel(idNuevo, request.body.labels);
             Ticket.assignEstado(idNuevo, 1);
+
+            for(label of request.body.labels)
+            {
+                Ticket.assignLabel(idNuevo, label);
+            }
 
             for(let i = 0; i < request.body.numPreguntas; i++)
             {

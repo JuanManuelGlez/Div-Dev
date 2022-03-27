@@ -1,4 +1,8 @@
 
+$(document).ready(function () {
+    $('.form-select-label').selectpicker();
+});
+
 document.getElementById("select_tipo_incidencia").onchange = () =>
 {
     let campos = document.getElementById("campos_ticket");

@@ -12,9 +12,10 @@ module.exports = class Tipo_incidencia{
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
-        return db.execute('SELECT * FROM tipo_incidencia');
+        return db.execute('SELECT * FROM tipo_incidencia WHERE Visibilidad_Tipo_Incidencia = 1');
     }
-
+    //6.4 ratio pizza precio de 300 varod dominos
+    //7.3 ratio precio pizza extra grande
     static fetchPreguntas(id_tipo_incidencia) {
         return db.execute('SELECT p.Id_Pregunta, p.Texto_Pregunta FROM pregunta p, tipo_incidencia_pregunta tip WHERE p.Id_Pregunta = tip.Id_Pregunta AND tip.Id_Tipo_Incidencia = ?',
         [id_tipo_incidencia]
