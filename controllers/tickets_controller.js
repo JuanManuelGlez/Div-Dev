@@ -59,3 +59,35 @@ exports.nuevo_post = (request, response, next) => {
         .catch(err => console.log(err));
 
 };
+
+exports.ticket_get=(request,response,next) => {
+    Ticket.fetchEstado_Ticket(request.params.id_ticket)
+        .then(([rowsEstados,fielDataEstados])=>{
+            Ticket.fetchLabel_Ticket(request.params.id_ticket)
+            .then(([rowsLabels,fielDataLabels])=>{
+                Ticket.fetchOne(request.params.id_ticket)
+                .then(([rowsTickets,fielData])=>{
+                    response.render('tickets/ticket_f',{
+                        tickets:rowsTickets,
+                        //prioridades:rowsPrioridades
+                        labels:rowsLabels,
+                        estado:rowsEstados
+                    });
+                })
+                .catch(err =>{
+                    console.log(err);
+                });
+        })
+        .catch(err=>{
+            console.log(err);
+        });
+        
+        }).catch(err=>{
+            console.log(err);
+        });    
+        
+};
+
+exports.ticket_post=(request,response,next)=>{
+    //save
+}
