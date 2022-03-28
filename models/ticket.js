@@ -40,7 +40,7 @@ module.exports = class Ticket{
 
     static fetchOne(id_ticket){
         //return db.execute('SELECT Id_Ticket,Id_Procedencia,Id_Tipo_Incidencia,Id_Prioridad,Fecha_Inicio,Fecha_Fin,Descripcion,Asunto,prioridad.Nombre_Prioridad,procedencia.Nombre_Procedencia FROM ticket, prioridad,procedencia WHERE Id_Ticket=? AND ticket.Id_Prioridad=prioridad.Id_Prioridad AND ticket.Id_Procedencia=procedencia.Id_Procedencia ',[id_ticket]);
-        return db.execute('SELECT * FROM ticket, prioridad,procedencia,tipo_incidencia WHERE Id_Ticket=? AND ticket.Id_Prioridad=prioridad.Id_Prioridad AND ticket.Id_Procedencia=procedencia.Id_Procedencia AND ticket.Id_Tipo_Incidencia=tipo_incidencia.Id_Tipo_Incidencia',[id_ticket]);
+        return db.execute('SELECT * FROM ticket, prioridad, procedencia, tipo_incidencia WHERE Id_Ticket=? AND ticket.Id_Prioridad=prioridad.Id_Prioridad AND ticket.Id_Procedencia=procedencia.Id_Procedencia AND ticket.Id_Tipo_Incidencia=tipo_incidencia.Id_Tipo_Incidencia',[id_ticket]);
     }
     static fetchLabel_Ticket(id_ticket){
         return db.execute('SELECT Id_Label FROM label_ticket WHERE Id_Ticket=?',[id_ticket]);
