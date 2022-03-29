@@ -1,5 +1,6 @@
 const path = require('path');
 const Ticket = require('../models/ticket');
+const Comentario = require('../models/comentario');
 
 
 exports.lista = (request, response, next) => {
