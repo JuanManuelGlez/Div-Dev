@@ -72,18 +72,14 @@ module.exports = class Ticket{
     static assignEstado(id_ticket, id_estado) {
         return db.execute('INSERT INTO estado_ticket VALUES(?, ?, CURRENT_TIMESTAMP)',
         [id_estado, id_ticket])
-        .then(()=>{
-            console.log("aver");
-        })
+        .then()
         .catch(err => console.log(err));
     }
 
     static assignPrioridad(id_ticket,id_prioridad){
         return db.execute('UPDATE ticket SET Id_Prioridad=? WHERE Id_Ticket=?',
         [id_prioridad,id_ticket])
-        .then((aver)=>{
-            console.log(aver);
-        })
+        .then()
         .catch(err => console.log(err));
     }
 
@@ -100,7 +96,6 @@ module.exports = class Ticket{
     }
 
     static async update(id_ticket,id_estado,id_prioridad,Estado_Actual){
-        console.log(id_ticket,id_prioridad,id_estado,Estado_Actual);
         this.assignPrioridad(id_ticket,id_prioridad);
             if(id_estado!=Estado_Actual){
                 this.assignEstado(id_ticket,id_estado);
