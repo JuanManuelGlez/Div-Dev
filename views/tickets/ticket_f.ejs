@@ -10,27 +10,34 @@
                     Descripcion : <%=ticket.Descripcion %> <br>
                     Procedencia : <%=ticket.Nombre_Procedencia %> <br>
                 </p>
-                <% for (let label of labels){
-                  <p><%label.Id_Label%></p>
-                }
-            }
-            <form id="modify_ticket" method="POST">
-                <select class="form-select" id="select_prioridad" name="prioridad" aria-label="Default select example">
-                  <option selected><%ticket.Nombre_Prioridad %></option>
-                  <% for (let prioridad of prioridades){%>
-                    <option value="<%=prioridad.Id_Prioridad%>"><%=prioridad.Nombre_Prioridad %> </option>
-                  <%}%>
-                </select> <br>
-                <select class="form-select" id="select_estado" name="estado" aria-label="Default select example">
-                  <option selected><%estado.Nombre_Estado%></option>
-                  <% for (let estado of estados){%>
-                    <option value="<%=prioridad.Id_Estado%>"><%=Estado.Nombre_Estado %> </option>
-                  <%}%>
-                </select> <br>
+                <% for (let label of labels){%>
+                  <p><%=label.Id_Label%></p>
+                <%}%>
 
-
-            </form>
-            
+                    
+                <form id="modify_ticket" method="POST">
+                  <select class="form-select" id="select_prioridad" name="prioridad" aria-label="Default select example">
+                    <option selected><%=ticket.Nombre_Prioridad %></option>
+                    <% for (let prioridad of prioridades){%>
+                      <option value="<%=prioridad.Id_Prioridad%>"><%=prioridad.Nombre_Prioridad %> </option>
+                    <%}%>
+                  </select> <br>
+                  <select class="form-select" id="select_estado" name="estado" aria-label="Default select example">
+                    <option selected><%=estado.Nombre%></option>
+                    <% for (let estado of estados){%>
+                      <option value="<%=estado.Id_Estado%>"><%=estado.Nombre %> </option>
+                    <%}%>
+                     
+                  </select> <br>
+                  <button type="submit" class="btn btn-primary mt-3" id="enviar">Guardar Cambios</button>
+              </form>
+              <%for (let pregunta of preguntas){%>
+                <p><%=pregunta.Pregunta%> <br>
+                  <%=pregunta.Respuesta%>
+                </p>
+              <%}%>
+              
+            <%}%>
         </div>
     </div>
 
