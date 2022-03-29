@@ -10,6 +10,12 @@ module.exports = class Tipo_incidencia{
     save() {
     }
 
+    static assign_pregunta (id_tipo_incidencia, Id_Pregunta) {
+        return db.execute('INSERT INTO tipo_incidencia_pregunta(Id_Pregunta, Id_Tipo_Incidencia) VALUES (?,?)',
+        [Id_Pregunta,
+        id_tipo_incidencia]);
+    }
+
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
         return db.execute('SELECT * FROM tipo_incidencia WHERE Visibilidad_Tipo_Incidencia = 1');
