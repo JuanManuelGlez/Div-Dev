@@ -1,6 +1,6 @@
 const path = require('path');
 const Usuario = require('../models/usuario');
-const bcrypt= require('bcryptjs')
+const bcrypt = require('bcryptjs')
 
 exports.signup_get = (request, response, next) => {
     response.render('usuarios/signup');
@@ -11,7 +11,7 @@ exports.signup_post = (request, response, next) => {
 
     usuario_nuevo.usuario_save()
         .then(() => {
-            response.redirect('usuarios/login');
+            response.redirect('login');
         })
         .catch(err => console.log(err));
 };
@@ -28,11 +28,11 @@ exports.login_post = (request, response, next) => {
     Usuario.findOne(request.body.correo)
             .then(([rows,fielData])=>{
                 if (rows.length<1){
-                    return response.redirect('usuarios/login');
+                    return response.redirect('login');
                 }
-                const usuario=new Usuario(rows[0].nombre,rows[0].correo, rows[0].contrasenia);
-                bcrypt.compare(request.body.contrasenia,usuario.contrasenia_usuario)
-                    .then (doMatch =>{
+                const usuario=new Usuario(rows[0].Nombre_Usuario,rows[0].Login, rows[0]['Contraseña'], '');
+                bcrypt.compare(request.body.contrasenia, usuario.contrasenia_usuario)
+                    .then((doMatch) =>{
                         if (doMatch) {
                             request.session.isLoggedIn=true;
                             request.session.usuario=usuario;
@@ -41,12 +41,13 @@ exports.login_post = (request, response, next) => {
                                 response.redirect('/panelticket');
                             });
                         }
-                        response.redirect('usuarios/login');
+                        response.redirect('login');
                     }).catch(err=>{
-                        response.redirect('usuarios/login');
+                        console.log(err);
+                        response.redirect('login');
                     });
             }).catch((error)=>{
-                console.log(error)
+                console.log(error);
             });
 };
 

@@ -1,14 +1,14 @@
-<%- include('../include/head.ejs') %>
+<%- include('../includes/head.ejs') %>
 
     <h2>Para ingresar al sitio, introduce tus datos de acceso:</h2>
     <form id="form_login" method="POST">
         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <label for="correo">Correo Electronico: </label>
-        <input type="text" id="correo" name="correo" placeholder="Pedro">
+        <input type="text" id="correo" name="correo" placeholder="<%= correo %>">
         <label for="contrasenia">Contraseña: </label>
-        <input type="password" id="password" name="contrasenia">
+        <input type="password" id="contrasenia" name="contrasenia">
         <br><br>
         <input type="submit"class="btn btn-primary mt-3" value="Enviar">
     </form>
     <br><br>
-<%- include('../include/foot.ejs') %>
+<%- include('../includes/foot.ejs') %>

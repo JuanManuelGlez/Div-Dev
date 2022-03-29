@@ -1,8 +1,5 @@
 const db = require('../util/database');
-<<<<<<< HEAD
 const bcrypt = require('bcryptjs');
-=======
->>>>>>> develop
 
 module.exports = class Ticket{
 
@@ -34,10 +31,9 @@ module.exports = class Ticket{
     static fetchAll() {
     }
 
-<<<<<<< HEAD
     static fetchOne() {
-        
-=======
+    }
+
     static fetchPrioridades() {
         return db.execute('SELECT * FROM prioridad');
     }
@@ -74,7 +70,6 @@ module.exports = class Ticket{
         })
         .catch(err => console.log(err));
 
->>>>>>> develop
     }
 
 }
