@@ -59,3 +59,59 @@ exports.nuevo_post = (request, response, next) => {
         .catch(err => console.log(err));
 
 };
+
+exports.ticket_get=(request,response,next) => {
+        Ticket.fetchPregunta_Ticket(request.params.id_ticket)
+        .then(([rowsPreguntas,fielDataPregunta])=>{
+            Ticket.fetchPrioridades()
+            .then(([rowsPrioridades,fieldDataPrioridades])=>{
+                Ticket.fetchEstado() 
+                .then(([rowsEstados,fielDataEstados])=>{
+                    Ticket.fetchEstado_Ticket(request.params.id_ticket)
+                        .then(([rowsEstado,fielDataEstado])=>{
+                            Ticket.fetchLabel_Ticket(request.params.id_ticket)
+                            .then(([rowsLabels,fielDataLabels])=>{
+                                Ticket.fetchOne(request.params.id_ticket)
+                                .then(([rowsTickets,fielData])=>{
+                                    response.render('tickets/ticket_f',{
+                                        tickets:rowsTickets,
+                                        prioridades:rowsPrioridades,
+                                        labels:rowsLabels,
+                                        estado:rowsEstado,
+                                        estados:rowsEstados,
+                                        preguntas:rowsPreguntas
+                                    });
+                                })
+                                .catch(err =>{
+                                    console.log(err);
+                                });
+                        })
+                        .catch(err=>{
+                            console.log(err);
+                        });
+                        
+                        }).catch(err=>{
+                            console.log(err);
+                        });      
+                })
+                .catch(err=>{
+                    console.log(err);
+                });   
+                
+            }) .catch(err=>{
+                console.log(err);
+            })
+        }).catch(err=>{
+            console.log(err);
+        })
+                 
+};
+
+exports.ticket_post=(request,response,next)=>{
+    Ticket.update(request.params.id_ticket,request.body.estado,request.body.prioridad,request.body.Estado_Actual)
+        .then(()=>{
+            response.redirect('/tickets/'+request.params.id_ticket);
+        }).catch(err=>{
+            console.log(err);
+        })
+}
