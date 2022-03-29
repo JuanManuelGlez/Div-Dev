@@ -17,16 +17,21 @@
                     
                 <form id="modify_ticket" method="POST">
                   <select class="form-select" id="select_prioridad" name="prioridad" aria-label="Default select example">
-                    <option selected><%=ticket.Nombre_Prioridad %></option>
+                    <option selected value="<%=ticket.Id_Prioridad%>"><%=ticket.Nombre_Prioridad %></option>
                     <% for (let prioridad of prioridades){%>
-                      <option value="<%=prioridad.Id_Prioridad%>"><%=prioridad.Nombre_Prioridad %> </option>
+                      <%if(ticket.Nombre_Prioridad!=prioridad.Nombre_Prioridad){%>
+                        <option value="<%=prioridad.Id_Prioridad%>"><%=prioridad.Nombre_Prioridad %> </option>
+                      <%}%>
                     <%}%>
                   </select> <br>
                   <select class="form-select" id="select_estado" name="estado" aria-label="Default select example">
-                    <option selected><%=estado.Nombre%></option>
-                    <% for (let estado of estados){%>
-                      <option value="<%=estado.Id_Estado%>"><%=estado.Nombre %> </option>
+                    <option selected value="<%=estado[0].Id_Estado%>"><%=estado[0].Nombre_Estado%></option>
+                    <% for (let estadoo of estados){%>
+                      <%if(estado[0].Nombre_Estado !=estadoo.Nombre_Estado){%>
+                        <option value="<%=estadoo.Id_Estado%>"><%=estadoo.Nombre_Estado %> </option>
+                      <%}%>
                     <%}%>
+                    <input type="hidden" name="Estado_Actual" value="<%=estado[0].Id_Estado%>">
                      
                   </select> <br>
                   <button type="submit" class="btn btn-primary mt-3" id="enviar">Guardar Cambios</button>

@@ -108,5 +108,10 @@ exports.ticket_get=(request,response,next) => {
 };
 
 exports.ticket_post=(request,response,next)=>{
-    Ticket.update(request.params.id_ticket,request.body.estado,request.body.prioridad,request.body.Estado_Actual);
+    Ticket.update(request.params.id_ticket,request.body.estado,request.body.prioridad,request.body.Estado_Actual)
+        .then(()=>{
+            response.redirect('/tickets/'+request.params.id_ticket);
+        }).catch(err=>{
+            console.log(err);
+        })
 }
