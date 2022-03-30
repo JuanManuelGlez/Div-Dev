@@ -68,4 +68,9 @@ module.exports = class Ticket{
 
     }
 
+    static UsuarioEncargado (id_ticket){
+        db.execute('SELECT u.Nombre_Usuario, u.Foto_Usuario, COUNT(UT.IdUsuario')
+    }
+
 }
+
