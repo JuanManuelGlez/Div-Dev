@@ -52,6 +52,8 @@ exports.login_post = (request, response, next) => {
 };
 
 exports.logout = (request, response, next) => {
-    //request.session.destroy(() =>)
+    request.session.destroy(() => {
+        response.redirect('/usuarios/login');
+    });
 };
 

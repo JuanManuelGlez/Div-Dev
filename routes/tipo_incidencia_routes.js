@@ -9,6 +9,9 @@ const router = express.Router();
     
 router.get('/preguntas/:id_tipo_incidencia', tipo_incidencia_controller.getPreguntas);
 
+router.post('/preguntasNuevas/:id_tipo_incidencia', tipo_incidencia_controller.getPreguntasNuevas);
+
+
 
 
 module.exports = router;

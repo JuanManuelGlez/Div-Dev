@@ -10,3 +10,12 @@ exports.getPreguntas = (request, response, next) => {
         })
         .catch(err => console.log(err));
 };
+
+exports.getPreguntasNuevas = (request, response, next) => {
+    const id = request.params.id_tipo_incidencia;
+    Tipo_incidencia.fetchPreguntasNuevas(id, request.body.idTicket)
+        .then(([rows, fieldData]) => {
+            response.status(200).json({preguntas: rows});
+        })
+        .catch(err => console.log(err));
+};
