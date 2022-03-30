@@ -133,7 +133,7 @@ exports.ticket_post=(request,response,next)=>{
 }
 
 exports.usuarios_get=(request,response,next)=>{
-    Usuario.fetchAll_AsignarTicket()
+    Usuario.UsuarioEncargado(request.params.id_ticket)
     .then(([rows_encargado,fielData_encargado])=>{
         Usuario.fetchAll_AsignarTicket()
             .then(([rows,fielData])=>{
@@ -143,3 +143,13 @@ exports.usuarios_get=(request,response,next)=>{
          }).catch(error=>console.log(error));
     }).catch(error=>console.log(error));
 }
+
+
+exports.asignar_usuario=(request,response,next)=>{
+
+}
+
+/* Desasignar:
+exports.desasignar_usuario=(request,response,next)=>{
+    
+}*/
