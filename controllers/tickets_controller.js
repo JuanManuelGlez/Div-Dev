@@ -118,6 +118,12 @@ exports.ticket_get=(request,response,next) => {
 exports.ticket_post=(request,response,next)=>{
     Ticket.update(request.params.id_ticket,request.body.estado,request.body.prioridad,request.body.Estado_Actual)
         .then(()=>{
+            for(let i = 0; i < request.body.numPreguntas; i++)
+            {
+                let actualP = 'pregunta' + i;
+                let actualR = 'respuesta' + i;
+                Ticket.assignPregunta(idNuevo, request.body[actualP], request.body[actualR]); //Esto funciona, no se si sea lo mejor
+            }
             response.redirect('/tickets/'+request.params.id_ticket);
         }).catch(err=>{
             console.log(err);
