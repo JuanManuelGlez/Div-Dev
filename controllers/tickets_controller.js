@@ -122,7 +122,7 @@ exports.ticket_post=(request,response,next)=>{
             {
                 let actualP = 'pregunta' + i;
                 let actualR = 'respuesta' + i;
-                Ticket.assignPregunta(idNuevo, request.body[actualP], request.body[actualR]); //Esto funciona, no se si sea lo mejor
+                Ticket.assignPregunta(request.params.id_ticket, request.body[actualP], request.body[actualR]); //Esto funciona, no se si sea lo mejor
             }
             response.redirect('/tickets/'+request.params.id_ticket);
         }).catch(err=>{

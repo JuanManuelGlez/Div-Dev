@@ -5,22 +5,23 @@ document.getElementById("select_tipo_incidencia").onchange = () =>
     let idTipo = document.getElementById("select_tipo_incidencia").value;
     const csrf = document.getElementById('_csrf').value;
     let idTicket=document.getElementById('Id_Ticket').value;
-
+    let data={
+        id:idTicket
+    }
     let rutaPreguntas = '../tipo_incidencia/preguntasNuevas/' + idTipo;
-
+    
     preguntas.innerHTML = '';
-    console.log(JSON.stringify(idTicket));
     fetch(rutaPreguntas, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'csrf-token': csrf
         },
-        body: JSON.stringify(idTicket)
+        body:JSON.stringify(data)
     })
+    
     .then(response => response.json())
     .then(response => {
-        console.log(body)
         let cont = 0;
         for(let pregunta of response.preguntas)
         {
@@ -29,6 +30,7 @@ document.getElementById("select_tipo_incidencia").onchange = () =>
             cont++;
         }
         preguntas.innerHTML += '<input type="hidden" id="numPreguntas" name="numPreguntas" value="' + cont + '">';
+        
     }).catch(err => {
         console.log(err);
     });
