@@ -14,9 +14,17 @@
                   <p><%=label.Id_Label%></p>
                 <%}%>
 
-                    
                 <form id="modify_ticket" method="POST">
                   <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                  <select class="form-select" id="select_incidencia" name="incidencia" aria-label="Default select example">
+                    <option selected vaule="<%=ticket.Id_Tipo_Incidencia%>"><%=ticket.Nombre_Tipo_Incidencia</option>
+                    <% for (let incidencia of incidencias){%>
+                      <%if(ticket.Nombre_Tipo_Incidencia != incidencia.Nombre_Tipo_Incidencia){%>
+                        <option value="<%=incidencia.Id_Tipo_Incidencia%>"><%=incidencia.Nombre_Tipo_Incidencia</option>
+                        <%}%>
+                    <%}%>
+                  </select><br>
+
                   <select class="form-select" id="select_prioridad" name="prioridad" aria-label="Default select example">
                     <option selected value="<%=ticket.Id_Prioridad%>"><%=ticket.Nombre_Prioridad %></option>
                     <% for (let prioridad of prioridades){%>
@@ -37,12 +45,13 @@
                   </select> <br>
                   <button type="submit" class="btn btn-primary mt-3" id="enviar">Guardar Cambios</button>
               </form>
+              <p>Preguntas:</p>
               <%for (let pregunta of preguntas){%>
                 <p><%=pregunta.Pregunta%> <br>
                   <%=pregunta.Respuesta%>
                 </p>
               <%}%>
-              
+              <div id="preguntas_nuevas"></div>
             <%}%>
         </div>
     </div>

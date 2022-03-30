@@ -61,50 +61,58 @@ exports.nuevo_post = (request, response, next) => {
 };
 
 exports.ticket_get=(request,response,next) => {
-        Ticket.fetchPregunta_Ticket(request.params.id_ticket)
-        .then(([rowsPreguntas,fielDataPregunta])=>{
-            Ticket.fetchPrioridades()
-            .then(([rowsPrioridades,fieldDataPrioridades])=>{
-                Ticket.fetchEstado() 
-                .then(([rowsEstados,fielDataEstados])=>{
-                    Ticket.fetchEstado_Ticket(request.params.id_ticket)
-                        .then(([rowsEstado,fielDataEstado])=>{
-                            Ticket.fetchLabel_Ticket(request.params.id_ticket)
-                            .then(([rowsLabels,fielDataLabels])=>{
-                                Ticket.fetchOne(request.params.id_ticket)
-                                .then(([rowsTickets,fielData])=>{
-                                    response.render('tickets/ticket_f',{
-                                        tickets:rowsTickets,
-                                        prioridades:rowsPrioridades,
-                                        labels:rowsLabels,
-                                        estado:rowsEstado,
-                                        estados:rowsEstados,
-                                        preguntas:rowsPreguntas
+    Tipo_incidencia.fetchAll()
+        .then(([rowsIncidencias,fielDataIncidencias])=>{
+            Ticket.fetchPregunta_Ticket(request.params.id_ticket)
+            .then(([rowsPreguntas,fielDataPregunta])=>{
+                Ticket.fetchPrioridades()
+                .then(([rowsPrioridades,fieldDataPrioridades])=>{
+                    Ticket.fetchEstado() 
+                    .then(([rowsEstados,fielDataEstados])=>{
+                        Ticket.fetchEstado_Ticket(request.params.id_ticket)
+                            .then(([rowsEstado,fielDataEstado])=>{
+                                Ticket.fetchLabel_Ticket(request.params.id_ticket)
+                                .then(([rowsLabels,fielDataLabels])=>{
+                                    Ticket.fetchOne(request.params.id_ticket)
+                                    .then(([rowsTickets,fielData])=>{
+                                        response.render('tickets/ticket_f',{
+                                            tickets:rowsTickets,
+                                            prioridades:rowsPrioridades,
+                                            labels:rowsLabels,
+                                            estado:rowsEstado,
+                                            estados:rowsEstados,
+                                            preguntas:rowsPreguntas,
+                                            incidencias:rowsIncidencias
+                                        });
+                                    })
+                                    .catch(err =>{
+                                        console.log(err);
                                     });
-                                })
-                                .catch(err =>{
-                                    console.log(err);
-                                });
-                        })
-                        .catch(err=>{
-                            console.log(err);
-                        });
-                        
-                        }).catch(err=>{
-                            console.log(err);
-                        });      
-                })
-                .catch(err=>{
+                            })
+                            .catch(err=>{
+                                console.log(err);
+                            });
+                            
+                            }).catch(err=>{
+                                console.log(err);
+                            });      
+                    })
+                    .catch(err=>{
+                        console.log(err);
+                    });   
+                    
+                }) .catch(err=>{
                     console.log(err);
-                });   
-                
-            }) .catch(err=>{
+                })
+            }).catch(err=>{
                 console.log(err);
             })
+        
         }).catch(err=>{
             console.log(err);
         })
-                 
+            
+                    
 };
 
 exports.ticket_post=(request,response,next)=>{
