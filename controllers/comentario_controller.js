@@ -17,18 +17,14 @@ exports.nuevocomentario_post = (request, response, next) => {
 
         url_archivo_comentario = request.file;
         console.log(url_archivo_comentario);
-        console.log('CASOOOOO1');
         if((typeof(url_archivo_comentario) == "undefined")){
             url_archivo_comentario = "";
             console.log(url_archivo_comentario);
-            console.log('CASOOOOO2');
         }else{
             url_archivo_comentario = request.file.filename;
             console.log(url_archivo_comentario);
-            console.log('CASOOOOO3');
         }
         console.log(url_archivo_comentario);
-        console.log('CASOOOOOFINAL');
 
         const comentario_nuevo= new Comentario(10, request.body.id_ticket, request.body.texto_comentario, url_archivo_comentario);
         console.log(comentario_nuevo);
