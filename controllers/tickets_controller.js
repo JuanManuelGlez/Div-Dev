@@ -1,6 +1,8 @@
 const path = require('path');
+const { fetchAll } = require('../models/ticket');
 const Ticket = require('../models/ticket');
 const Tipo_incidencia = require('../models/tipo_incidencia');
+const Usuario = require('../models/usuario');
 
 
 exports.lista = (request, response, next) => {
@@ -60,3 +62,84 @@ exports.nuevo_post = (request, response, next) => {
 
 };
 
+exports.ticket_get=(request,response,next) => {
+    Tipo_incidencia.fetchAll()
+        .then(([rowsIncidencias,fielDataIncidencias])=>{
+            Ticket.fetchPregunta_Ticket(request.params.id_ticket)
+            .then(([rowsPreguntas,fielDataPregunta])=>{
+                Ticket.fetchPrioridades()
+                .then(([rowsPrioridades,fieldDataPrioridades])=>{
+                    Ticket.fetchEstado() 
+                    .then(([rowsEstados,fielDataEstados])=>{
+                        Ticket.fetchEstado_Ticket(request.params.id_ticket)
+                            .then(([rowsEstado,fielDataEstado])=>{
+                                Ticket.fetchLabel_Ticket(request.params.id_ticket)
+                                .then(([rowsLabels,fielDataLabels])=>{
+                                    Ticket.fetchOne(request.params.id_ticket)
+                                    .then(([rowsTickets,fielData])=>{
+                                        response.render('tickets/ticket_f',{
+                                            tickets:rowsTickets,
+                                            prioridades:rowsPrioridades,
+                                            labels:rowsLabels,
+                                            estado:rowsEstado,
+                                            estados:rowsEstados,
+                                            preguntas:rowsPreguntas,
+                                            incidencias:rowsIncidencias
+                                        });
+                                    })
+                                    .catch(err =>{
+                                        console.log(err);
+                                    });
+                            })
+                            .catch(err=>{
+                                console.log(err);
+                            });
+                            
+                            }).catch(err=>{
+                                console.log(err);
+                            });      
+                    })
+                    .catch(err=>{
+                        console.log(err);
+                    });   
+                    
+                }) .catch(err=>{
+                    console.log(err);
+                })
+            }).catch(err=>{
+                console.log(err);
+            })
+        
+        }).catch(err=>{
+            console.log(err);
+        })
+            
+                    
+};
+
+exports.ticket_post=(request,response,next)=>{
+    Ticket.update(request.params.id_ticket,request.body.estado,request.body.prioridad,request.body.Estado_Actual)
+        .then(()=>{
+            for(let i = 0; i < request.body.numPreguntas; i++)
+            {
+                let actualP = 'pregunta' + i;
+                let actualR = 'respuesta' + i;
+                Ticket.assignPregunta(request.params.id_ticket, request.body[actualP], request.body[actualR]); //Esto funciona, no se si sea lo mejor
+            }
+            response.redirect('/tickets/'+request.params.id_ticket);
+        }).catch(err=>{
+            console.log(err);
+        })
+}
+
+exports.usuarios_get=(request,response,next)=>{
+    Usuario.fetchAll_AsignarTicket()
+    .then(([rows_encargado,fielData_encargado])=>{
+        Usuario.fetchAll_AsignarTicket()
+            .then(([rows,fielData])=>{
+                response.render('tickets/asignar_ticket', {
+                    usuarios:rows, encargado: rows_encargado
+                });
+         }).catch(error=>console.log(error));
+    }).catch(error=>console.log(error));
+}

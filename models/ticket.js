@@ -1,4 +1,5 @@
 const db = require('../util/database');
+const bcrypt = require('bcryptjs');
 
 module.exports = class Ticket{
 
@@ -26,8 +27,27 @@ module.exports = class Ticket{
         );
     }
 
+
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
+    }
+
+    static fetchOne(id_ticket){
+        return db.execute('SELECT Id_Ticket,ticket.Id_Procedencia,ticket.Id_Tipo_Incidencia,ticket.Id_Prioridad,Fecha_Inicio,Fecha_Fin,Descripcion,Asunto,prioridad.Nombre_Prioridad,procedencia.Nombre_Procedencia,tipo_incidencia.Nombre_Tipo_Incidencia FROM ticket, prioridad,procedencia,tipo_incidencia WHERE Id_Ticket=? AND ticket.Id_Prioridad=prioridad.Id_Prioridad AND ticket.Id_Procedencia=procedencia.Id_Procedencia AND ticket.Id_Tipo_Incidencia=tipo_incidencia.Id_Tipo_Incidencia ',[id_ticket]);
+        //return db.execute('SELECT *,Nombre_Prioridad FROM ticket, prioridad,procedencia,tipo_incidencia WHERE Id_Ticket=? AND ticket.Id_Prioridad=prioridad.Id_Prioridad AND ticket.Id_Procedencia=procedencia.Id_Procedencia AND ticket.Id_Tipo_Incidencia=tipo_incidencia.Id_Tipo_Incidencia',[id_ticket]);
+    }
+    static fetchLabel_Ticket(id_ticket){
+        return db.execute('SELECT Id_Label FROM label_ticket WHERE Id_Ticket=?',[id_ticket]);
+    }
+    static fetchEstado_Ticket(id_ticket){
+        return db.execute('SELECT estado.Nombre_Estado,estado.Id_Estado FROM estado_ticket, estado WHERE Id_Ticket=? AND estado_ticket.Id_Estado=estado.Id_Estado ORDER BY Fecha_y_Hora DESC  LIMIT 1',[id_ticket]);
+    }
+    static fetchPregunta_Ticket(id_ticket){
+        return db.execute('SELECT Pregunta, Respuesta FROM pregunta_ticket WHERE Id_Ticket=?',[id_ticket]);
+    }
+
+    static fetchEstado(){
+        return db.execute('SELECT * FROM estado WHERE Visibilidad_Estado=1')
     }
 
     static fetchPrioridades() {
@@ -56,6 +76,13 @@ module.exports = class Ticket{
         .catch(err => console.log(err));
     }
 
+    static assignPrioridad(id_ticket,id_prioridad){
+        return db.execute('UPDATE ticket SET Id_Prioridad=? WHERE Id_Ticket=?',
+        [id_prioridad,id_ticket])
+        .then()
+        .catch(err => console.log(err));
+    }
+
     static assignPregunta(id_ticket, id_pregunta, respuesta) {
         db.execute('SELECT Texto_Pregunta FROM pregunta WHERE Id_Pregunta = ?', [id_pregunta])
         .then(([rows, fieldData]) => {
@@ -72,5 +99,17 @@ module.exports = class Ticket{
         db.execute('SELECT u.Nombre_Usuario, u.Foto_Usuario, COUNT(UT.IdUsuario')
     }
 
-}
 
+
+    static async update(id_ticket,id_estado,id_prioridad,Estado_Actual){
+        this.assignPrioridad(id_ticket,id_prioridad);
+            if(id_estado!=Estado_Actual){
+                this.assignEstado(id_ticket,id_estado);
+                if(id_estado ==1||5){
+                    return db.execute('UPDATE ticket SET Fecha_Fin=CURRENT_TIMESTAMP WHERE Id_Ticket=?',[id_ticket]);
+                }
+                           
+            }          
+        
+    }
+}

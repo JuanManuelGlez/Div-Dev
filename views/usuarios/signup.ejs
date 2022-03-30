@@ -1,8 +1,9 @@
-<%- include('../include/head.ejs') %>
+<%- include('../includes/head.ejs') %>
 
     <div class="container">
       <div class="row justify-content-center">
-        <form id="form_login" method="POST">
+        <form id="form_signup" method="POST">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
           <label for="nombre">Nombre de usuario: </label>
           <input type="text" id="nombre" name="nombre" placeholder="Pedro">
           <label for="contrasenia">Contraseña: </label>
@@ -14,5 +15,4 @@
         </form>
       </div>
     </div>
-
-<%- include('../include/foot.ejs') %>
+<%- include('../includes/foot.ejs') %>
