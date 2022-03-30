@@ -34,7 +34,12 @@ module.exports = class Usuario{
     }
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
-    static fetchAll() {
+    /*static fetchAll() {
+        return db.execute('SELECT * FROM usuario')
+    }*/ 
+
+    static fetchAll_AsignarTicket(){
+        return db.execute('SELECT FROM usuario')
     }
 
     static fetchOne() {
