@@ -16,7 +16,7 @@ exports.signup_post = (request, response, next) => {
 };
 
 exports.login_get = (request, response, next) => {
-    response.render('usuarios/login', []);
+    response.render('usuario/login', []);
 };
 
 exports.login_post = (request, response, next) => {
