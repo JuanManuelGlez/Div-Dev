@@ -10,7 +10,7 @@ module.exports = class Tipo_incidencia{
     save() {
     }
 
-    static assign_pregunta (id_tipo_incidencia, Id_Pregunta) {
+    static assign_pregunta(id_tipo_incidencia, Id_Pregunta) {
         return db.execute('INSERT INTO tipo_incidencia_pregunta(Id_Pregunta, Id_Tipo_Incidencia) VALUES (?,?)',
         [Id_Pregunta,
         id_tipo_incidencia]);

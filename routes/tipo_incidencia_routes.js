@@ -8,7 +8,8 @@ const tipo_incidencia_controller = require('../controllers/tipo_incidencia_contr
 const router = express.Router();
     
 router.get('/preguntas/:id_tipo_incidencia', tipo_incidencia_controller.getPreguntas);
-router.post('/preguntas/:id_tipo_incidencia', tipo_incidencia_controller.assignar_pregunta);
+router.post('/preguntas/:id_tipo_incidencia', tipo_incidencia_controller.assignar_pregunta_post);
+router.get('/preguntas/:id_tipo_incidencia', tipo_incidencia_controller.assignar_pregunta_get);
 
 
 module.exports = router;

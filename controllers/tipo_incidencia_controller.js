@@ -11,7 +11,7 @@ exports.getPreguntas = (request, response, next) => {
         .catch(err => console.log(err));
 };
 
-exports.assignar_pregunta = (request, response, next) => {
+exports.assignar_pregunta_get = (request, response, next) => {
     const id_pregunta_ = request.body.id_pregunta;
     const id_tipo_incidencia_ = request.params.id_tipo_incidencia;
     Tipo_incidencia.assign_pregunta(id_pregunta_, id_tipo_incidencia_)
@@ -20,3 +20,17 @@ exports.assignar_pregunta = (request, response, next) => {
         })
         .catch(err=> console.log(err));
 };
+
+exports.assignar_pregunta_post = (request, response, next) => {
+
+};
+
+exports.assign_pregunta = (request, response, next) => {
+    Tipo_incidencia.fetchAll
+        .then(([rowsTipoIncidencia, fieldDataTipoIncidencia]) => {
+            response.render('/preguntas/:id_tipo_incidencia', {
+                tipos_incidencia: rowsTipoIncidencia
+            });
+        })
+        .catch(err => console.log(err));
+    };
