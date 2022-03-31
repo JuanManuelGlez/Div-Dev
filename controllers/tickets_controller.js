@@ -116,7 +116,7 @@ exports.ticket_get=(request,response,next) => {
 };
 
 exports.ticket_post=(request,response,next)=>{
-    Ticket.update(request.params.id_ticket,request.body.estado,request.body.prioridad,request.body.Estado_Actual)
+    Ticket.update(request.params.id_ticket,request.body.estado,request.body.prioridad,request.body.Estado_Actual,request.body.select_tipo_incidencia)
         .then(()=>{
             for(let i = 0; i < request.body.numPreguntas; i++)
             {
