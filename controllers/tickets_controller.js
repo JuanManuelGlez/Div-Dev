@@ -17,7 +17,7 @@ exports.nuevo_get = (request, response, next) => {
                 .then(([rowsProcedencias, fieldDataProsedencias]) => {
                     Ticket.fetchLabels()
                     .then(([rowsLabels, fieldDataLabels]) => {
-                        response.render('tickets/nuevo_ticket_f', {
+                        response.render('nuevo_ticket', {
                             tipos_incidencia: rowsTipoIncidencia,
                             prioridades: rowsPrioridades,
                             procedencias: rowsProcedencias,
