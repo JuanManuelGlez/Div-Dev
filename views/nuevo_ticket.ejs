@@ -11,10 +11,9 @@
     </div>
     <div class="container">
         <div class="row">
-            <form id="form_nuevo_ticket" method="POST" style="margin-right: 30px;margin-left: 30px;margin-bottom: 100px;"></form>
+            <form id="form_nuevo_ticket" method="POST" style="margin-right: 30px;margin-left: 30px;margin-bottom: 100px;">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>"></input>
             <div class="col-9 col-sm-9 col-lg-5 col-xl-5 col-xxl-5 offset-3 offset-sm-9 offset-lg-0 offset-xxl-0" style="margin-left: 40px;margin-bottom:80px;box-shadow: 0px 0px 17px rgb(145,145,145);">
-                
-                    <input type="hidden" name="_csrf" value="<%= csrfToken %>"><input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <div class="row">
                         <div class="col" style="padding: 30px 0px;">
                             <h1 class="text-dark" style="background: rgba(255,89,90,0);text-align: center;border-radius: 20px;color: rgb(255,255,255);">Información General</h1>

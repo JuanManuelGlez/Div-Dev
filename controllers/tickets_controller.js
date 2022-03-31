@@ -34,7 +34,9 @@ exports.nuevo_get = (request, response, next) => {
 };
 
 exports.nuevo_post = (request, response, next) => {
-
+    if(!Array.isArray(request.body.labels))
+        request.body.labels = [request.body.labels];
+        
     const ticketNuevo = new Ticket(request.body.asunto, request.body.descripcion, request.body.prioridad, request.body.tipo_incidencia, request.body.procedencia);
     ticketNuevo.save()
         .then((result) => {
