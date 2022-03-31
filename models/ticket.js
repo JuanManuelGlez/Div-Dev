@@ -83,6 +83,13 @@ module.exports = class Ticket{
         .catch(err => console.log(err));
     }
 
+    static assignIncidencia(id_ticket,id_incidencia){
+        return db.execute('UPDATE ticket SET Id_Tipo_Incidencia=? WHERE Id_Ticket=?',
+        [id_incidencia,id_ticket])
+        .then()
+        .catch(err => console.log(err));
+    }
+
     static assignPregunta(id_ticket, id_pregunta, respuesta) {
         db.execute('SELECT Texto_Pregunta FROM pregunta WHERE Id_Pregunta = ?', [id_pregunta])
         .then(([rows, fieldData]) => {
@@ -95,7 +102,8 @@ module.exports = class Ticket{
 
     }
 
-    static async update(id_ticket,id_estado,id_prioridad,Estado_Actual){
+    static async update(id_ticket,id_estado,id_prioridad,Estado_Actual,id_incidencia){
+        this.assignIncidencia(id_ticket,id_incidencia);
         this.assignPrioridad(id_ticket,id_prioridad);
             if(id_estado!=Estado_Actual){
                 this.assignEstado(id_ticket,id_estado);
