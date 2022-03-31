@@ -37,5 +37,9 @@ router.get('/lista_usuarios',(request, response, next) =>{
     response.render('lista_usuarios');
 });
 
+router.get('/reporte',(request, response, next) =>{
+    response.render('reporte');
+});
+
 
 module.exports = router;
