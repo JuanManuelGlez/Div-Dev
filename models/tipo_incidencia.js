@@ -27,5 +27,4 @@ module.exports = class Tipo_incidencia{
         [id_tipo_incidencia]
         );
     }
-
 }
