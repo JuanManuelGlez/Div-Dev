@@ -9,10 +9,12 @@
             </div>
         </div>
     </div>
-    <div class="container" style="margin-top: 30px;">
+    <div class="container">
         <div class="row">
-            <div class="col-9 col-sm-9 col-lg-5 col-xl-5 col-xxl-5 offset-3 offset-sm-9 offset-lg-0 offset-xxl-0" style="margin-left: 40px;box-shadow: 0px 0px 17px rgb(145,145,145);">
-                <form id="form_nuevo_ticket" method="POST" style="margin-right: 30px;margin-left: 30px;margin-bottom: 100px;">
+            <form id="form_nuevo_ticket" method="POST" style="margin-right: 30px;margin-left: 30px;margin-bottom: 100px;"></form>
+            <div class="col-9 col-sm-9 col-lg-5 col-xl-5 col-xxl-5 offset-3 offset-sm-9 offset-lg-0 offset-xxl-0" style="margin-left: 40px;margin-bottom:80px;box-shadow: 0px 0px 17px rgb(145,145,145);">
+                
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>"><input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <div class="row">
                         <div class="col" style="padding: 30px 0px;">
                             <h1 class="text-dark" style="background: rgba(255,89,90,0);text-align: center;border-radius: 20px;color: rgb(255,255,255);">Información General</h1>
@@ -33,12 +35,12 @@
                     </div>
                     <div id="campos_ticket" style="display: none">
                         <div class="row" style="padding: 15px 0px;">
-                            <div class="col-xxl-4"><label id="asunto" name="asunto" class="col-form-label text-dark">Asunto</label></div>
-                            <div class="col"><input class="form-control" type="text"></div>
+                            <div class="col-xxl-4"><label  class="col-form-label text-dark">Asunto</label></div>
+                            <div class="col"><input id="asunto" name="asunto" class="form-control" type="text"></div>
                         </div>
                         <div class="row" style="padding: 15px 0px;">
-                            <div class="col-xxl-4"><label id="descripcion" name="descripcion" class="col-form-label text-dark">Descripción</label></div>
-                            <div class="col"><input class="form-control" type="text"></div>
+                            <div class="col-xxl-4"><label  class="col-form-label text-dark">Descripción</label></div>
+                            <div class="col"><input id="descripcion" name="descripcion" class="form-control" type="text"></div>
                         </div>
                         <div class="row" style="padding: 15px 0px;">
                             <div class="col-xxl-4"><label class="col-form-label text-dark">Prioridad</label></div>
@@ -81,15 +83,15 @@
                             </div>
                         </div>
                     </div>
-                <div id="preguntas_ticket"></div>
-                <button type="submit" class="btn btn-primary mt-3" id="enviar">Submit</button>
-                </form>
+                
+                
                 <!-- <div class="row" style="padding: 30px 0px;padding-top: 0px;">
                     <div class="col" style="text-align: center;"><button class="btn btn-primary shadow" type="button" style="background: rgb(0,0,0);border-width: 0px;">Siguiente</button></div>
                 </div> -->
 
             </div>
-            <div class="col-9 col-lg-5 col-xl-5 col-xxl-5 offset-3 offset-sm-3 offset-lg-1 offset-xl-1 offset-xxl-1" style="padding-left: 12px;box-shadow: 0px 0px 20px rgb(162,162,162);">
+        
+            <div class="col-9 col-lg-5 col-xl-5 col-xxl-5 offset-3 offset-sm-3 offset-lg-1 offset-xl-1 offset-xxl-1" style="padding-left: 12px;margin-bottom:80px;box-shadow: 0px 0px 20px rgb(162,162,162);">
                 <form style="margin-right: 30px;margin-left: 30px;margin-bottom: 100px;">
                     <div class="row">
                         <div class="col" style="padding: 30px 0px;">
@@ -97,7 +99,7 @@
                         </div>
                     </div>
                      
-                    <div class="row" style="padding: 15px 0px;">
+                    <!-- <div class="row" style="padding: 15px 0px;">
                         <div class="col-xxl-4"><label class="col-form-label text-dark">Pregunta 1</label></div>
                         <div class="col"><input class="form-control" type="text"></div>
                     </div>
@@ -116,12 +118,16 @@
                     <div class="row" style="padding: 15px 0px;">
                         <div class="col-xxl-4"><label class="col-form-label text-dark">Pregunta 5</label></div>
                         <div class="col"><input class="form-control" type="text"></div>
+                    </div> -->
+                    <div id="preguntas_ticket"></div>
+                    <div class="row" style="padding: 30px 0px;">
+                        <div class="col" style="text-align: center;"><button type="submit" class="btn btn-primary shadow" type="button" style="background: rgb(0,0,0);border-width: 0px;" id="enviar">Crear Ticket</button></div>
                     </div>
+                
                 </form>
-                <div class="row" style="padding: 30px 0px;">
-                    <div class="col" style="text-align: center;"><button class="btn btn-primary shadow" type="button" style="background: rgb(0,0,0);border-width: 0px;">Crear Ticket</button></div>
-                </div>
+                
             </div>
+        </form>
         </div>
     </div>
 </div>
