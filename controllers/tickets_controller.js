@@ -129,3 +129,23 @@ exports.ticket_post=(request,response,next)=>{
             console.log(err);
         })
 }
+
+exports.ticket_panel=(request,response,next)=>{
+    Ticket.fetchAll_Completo()
+    .then(([rowsCompleto,fielDataCompleto])=>{
+        Ticket.fetchAll_Progreso()
+        .then(([rowsProgreso,fielDataProgreso])=>{
+                    response.render('tickets/panel_f',{
+                    ticket_progreso:rowsProgreso,
+                    ticket_completo:rowsCompleto
+            });
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+    })
+    .catch(err=>{
+        console.log(err);
+    })  
+        
+}

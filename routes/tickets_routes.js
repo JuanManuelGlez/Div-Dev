@@ -18,6 +18,7 @@ router.get('/:id_ticket', tickets_controller.ticket_get);
 
 router.post('/:id_ticket',tickets_controller.ticket_post);
 
+router.get('/panel/hola',tickets_controller.ticket_panel);
 
 
 module.exports = router;
