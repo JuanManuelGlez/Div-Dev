@@ -21,8 +21,11 @@ router.get('/panel',(request, response, next) =>{
 router.get('/ayuda',(request, response, next) =>{
     response.render('ayuda');
 });
-router.get('/cerrar_sesion',(request, response, next) =>{
-    response.render('cerrar_sesion');
+router.get('/login',(request, response, next) =>{
+    response.render('login');
+});
+router.get('/signup',(request, response, next) =>{
+    response.render('signup');
 });
 router.get('/administrar_privilegios',(request, response, next) =>{
     response.render('administrar_privilegios');
@@ -32,6 +35,10 @@ router.get('/nuevo_tipo_incidencia',(request, response, next) =>{
 });
 router.get('/lista_usuarios',(request, response, next) =>{
     response.render('lista_usuarios');
+});
+
+router.get('/reporte',(request, response, next) =>{
+    response.render('reporte');
 });
 
 

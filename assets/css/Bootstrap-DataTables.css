@@ -2,3 +2,39 @@
   min-height: 100vh;
 }
 
+img {
+  background-size: 100%;
+}
+
+@media (max-width:1200px) {
+  #login_img {
+    width: 593px;
+  }
+}
+
+#login_img {
+  background-size: contain;
+}
+
+@media (max-width:1200px) {
+  .column {
+    width: 593px;
+  }
+}
+
+@media (max-width:768px) {
+  #login_img {
+    width: 593px;
+  }
+}
+
+@media (max-width:1400px) {
+  #login_img {
+    width: 700px;
+  }
+}
+
+.fillRem {
+  height: 100vh;
+}
+

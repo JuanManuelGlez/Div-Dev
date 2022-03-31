@@ -17,11 +17,15 @@ exports.signup_post = (request, response, next) => {
 };
 
 exports.login_get = (request, response, next) => {
+<<<<<<< HEAD
     response.render('usuarios/login', {
         //login_usuario??
         correo: request.session.correo ? request.session.correo: '',
         info:''
     });
+=======
+    response.render('usuario/login', []);
+>>>>>>> 9c387ce790256af6907dfdf4b0a2608f56a4dbc3
 };
 
 exports.login_post = (request, response, next) => {

@@ -1,19 +1,23 @@
 <%- include('includes/header.ejs') %>
 <%- include('includes/sidebar.ejs') %>
+
+
+
 <div class="page-content-wrapper" style="color: var(--bs-teal);">
     <div class="container-fluid" style="color: transparent;background: var(--bs-indigo);">
-        <div class="row" style="background: var(--bs-red);">
-            <div class="col" style="color: var(--bs-purple);background: #A2C7E2;">
+        <div class="row" style="background: #FF595A;">
+            <div class="col-sm-5 col-md-7 col-lg-8 col-xl-9 offset-2 offset-sm-1 offset-md-0 offset-lg-0" style="color: var(--bs-purple);background: #FF595A;">
                 <div></div>
-                <h1 style="color: var(--bs-gray-900);margin-left: 20px;font-weight: bold;">Métricas</h1>
+                <h1 style="color: var(--bs-body-bg);margin-left: 60px;">Métricas</h1>
             </div>
+            <div class="col-sm-5 col-md-5 col-lg-4 col-xl-3 offset-3 offset-sm-1 offset-md-0 offset-lg-0" style="color: var(--bs-purple);background: #FF595A;"><button class="btn btn-primary" type="button" style="--bs-primary: #000000;--bs-primary-rgb: 0,0,0;background: rgb(0,0,0);margin-top: 10px; border-width: 0px;" onClick="convertHTMLToPDF()">Obtener Reporte<i class="fa fa-file-o" style="margin-left: 15px;"></i></button></div>
         </div>
     </div>
-    <div class="container">
+    <div class="container" id="content">
         <div class="row" style="margin-top: 0px;">
-            <div class="col" style="text-align: center;">
+            <div class="col offset-sm-1 offset-lg-0" style="text-align: center;">
                 <div class="row" style="margin-top: 30px;">
-                    <div class="col">
+                    <div class="col offset-2 offset-sm-0 offset-lg-0 offset-xl-0 offset-xxl-0">
                         <div class="card" style="box-shadow: 1px 4px 8px rgba(0,0,0,0.46);">
                             <div class="card-body" style="text-align: left;width: 262px;">
                                 <h4 class="card-title" style="color: rgb(0,0,0);text-align: left;">Status</h4>
@@ -22,9 +26,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col" style="text-align: center;">
+            <div class="col offset-sm-1 offset-xl-0" style="text-align: center;">
                 <div class="row" style="margin-top: 30px;">
-                    <div class="col">
+                    <div class="col offset-2 offset-sm-0 offset-lg-0 offset-xl-0 offset-xxl-0">
                         <div class="card" style="box-shadow: 1px 4px 8px rgba(0,0,0,0.46);">
                             <div class="card-body" style="text-align: left;width: 262px;">
                                 <h4 class="card-title" style="color: rgb(0,0,0);text-align: left;">Procedencia</h4>
@@ -33,9 +37,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col" style="text-align: center;">
+            <div class="col offset-sm-1 offset-lg-0" style="text-align: center;">
                 <div class="row" style="margin-top: 30px;">
-                    <div class="col">
+                    <div class="col offset-2 offset-sm-0 offset-lg-0 offset-xl-0 offset-xxl-0">
                         <div class="card" style="box-shadow: 1px 4px 8px rgba(0,0,0,0.46);">
                             <div class="card-body" style="text-align: left;width: 262px;">
                                 <h4 class="card-title" style="color: rgb(0,0,0);text-align: left;">Tipo de Incidencia</h4>
@@ -46,12 +50,12 @@
             </div>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col offset-2 offset-sm-1 offset-lg-0">
                 <div class="row" style="margin-top: 30px;">
                     <div class="col">
                         <div class="card" style="box-shadow: 1px 4px 8px rgba(0,0,0,0.46);">
-                            <div class="card-body" style="text-align: left;width: 262px;">
-                                <h4 class="card-title" style="color: rgb(0,0,0);text-align: left;width: 1000px;">Historial de Tickets Complettados a tiempo vs a Destiempo</h4>
+                            <div class="card-body" style="text-align: left;width: 100%;">
+                                <h4 class="card-title" style="color: rgb(0,0,0);text-align: left;width: 100%;">Historial de Tickets Complettados a tiempo vs a Destiempo</h4>
                             </div>
                         </div>
                     </div>
@@ -59,7 +63,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col offset-2 offset-sm-1 offset-lg-0">
                 <div class="row" style="margin-top: 30px;">
                     <div class="col">
                         <div class="card" style="box-shadow: 1px 4px 8px rgba(0,0,0,0.46);">
@@ -72,17 +76,17 @@
             </div>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col offset-2 offset-sm-1 offset-lg-0">
                 <div class="row" style="margin-top: 30px;">
                     <div class="col">
                         <div class="card" style="box-shadow: 1px 4px 8px rgba(0,0,0,0.46);">
                             <div class="card-body" style="text-align: left;width: 262px;">
                                 <h4 class="card-title" style="color: rgb(0,0,0);text-align: left;width: 1000px;">Tiempos Promedio de respuesta</h4>
                             </div>
-                            <div class="row">
+                            <div class="row" style="margin-bottom: 40px;">
                                 <div class="col">
                                     <div class="card" style="margin-left: 15px;margin-right: 15px;width: 150px;height: 150px;">
-                                        <div class="card-body" style="background: #f9e24c;border-radius: 16px;">
+                                        <div class="card-body shadow" style="background: #f9e24c;border-radius: 16px;">
                                             <h4 class="card-title" style="text-align: center;color: rgb(0,0,0);">Database</h4>
                                             <h4 class="card-title" style="text-align: center;color: #9e6b05;margin-top: 24px;font-size: 34px;font-weight: bold;">34hrs</h4>
                                         </div>
@@ -90,7 +94,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="card" style="margin-left: 15px;margin-right: 15px;width: 150px;height: 150px;">
-                                        <div class="card-body" style="background: #f9e24c;border-radius: 16px;">
+                                        <div class="card-body shadow" style="background: #f9e24c;border-radius: 16px;">
                                             <h4 class="card-title" style="text-align: center;color: rgb(0,0,0);">Database</h4>
                                             <h4 class="card-title" style="text-align: center;color: #9e6b05;margin-top: 24px;font-size: 34px;font-weight: bold;">34hrs</h4>
                                         </div>
@@ -98,7 +102,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="card" style="margin-left: 15px;margin-right: 15px;width: 150px;height: 150px;">
-                                        <div class="card-body" style="background: #f9e24c;border-radius: 16px;">
+                                        <div class="card-body shadow" style="background: #f9e24c;border-radius: 16px;">
                                             <h4 class="card-title" style="text-align: center;color: rgb(0,0,0);">Database</h4>
                                             <h4 class="card-title" style="text-align: center;color: #9e6b05;margin-top: 24px;font-size: 34px;font-weight: bold;">34hrs</h4>
                                         </div>
@@ -106,7 +110,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="card" style="margin-left: 15px;margin-right: 15px;width: 150px;height: 150px;">
-                                        <div class="card-body" style="background: #f9e24c;border-radius: 16px;">
+                                        <div class="card-body shadow" style="background: #f9e24c;border-radius: 16px;">
                                             <h4 class="card-title" style="text-align: center;color: rgb(0,0,0);">Database</h4>
                                             <h4 class="card-title" style="text-align: center;color: #9e6b05;margin-top: 24px;font-size: 34px;font-weight: bold;">34hrs</h4>
                                         </div>
@@ -114,7 +118,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="card" style="margin-left: 15px;margin-right: 15px;width: 150px;height: 150px;">
-                                        <div class="card-body" style="background: #f9e24c;border-radius: 16px;">
+                                        <div class="card-body shadow" style="background: #f9e24c;border-radius: 16px;">
                                             <h4 class="card-title" style="text-align: center;color: rgb(0,0,0);">Database</h4>
                                             <h4 class="card-title" style="text-align: center;color: #9e6b05;margin-top: 24px;font-size: 34px;font-weight: bold;">34hrs</h4>
                                         </div>
