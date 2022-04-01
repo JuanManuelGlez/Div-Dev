@@ -6,6 +6,17 @@ exports.signup_get = (request, response, next) => {
     response.render('signup');
 };
 
+exports.lista = (request, response, next) => {
+    Usuario.fetchAll()
+    .then(([rowsUsuarios,fielData])=>{
+        response.render('lista_usuarios',{
+            usuarios:rowsUsuarios,
+        });
+    })
+    .catch(err => console.log(err));
+
+};
+
 exports.signup_post = (request, response, next) => {
     const usuario_nuevo= new Usuario(request.body.nombre, request.body.correo, request.body.contrasenia, 'https://tanzolymp.com/images/default-non-user-no-photo-1.jpg');
 
