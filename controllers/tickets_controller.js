@@ -3,15 +3,8 @@ const Ticket = require('../models/ticket');
 const Tipo_incidencia = require('../models/tipo_incidencia');
 
 
-
-exports.lista = (request, response, next) =>{
-    Ticket.fetchList()
-    .then(([rowsTickets,fielData])=>{
-        response.render('panel_principal_f',{
-            tickets:rowsTickets,
-        });
-    })
-    .catch(err => console.log(err));
+exports.lista = (request, response, next) => {
+    //response.render()
 };
 
 exports.nuevo_get = (request, response, next) => {
@@ -24,7 +17,7 @@ exports.nuevo_get = (request, response, next) => {
                 .then(([rowsProcedencias, fieldDataProsedencias]) => {
                     Ticket.fetchLabels()
                     .then(([rowsLabels, fieldDataLabels]) => {
-                        response.render('nuevo_ticket', {
+                        response.render('tickets/nuevo_ticket_f', {
                             tipos_incidencia: rowsTipoIncidencia,
                             prioridades: rowsPrioridades,
                             procedencias: rowsProcedencias,
@@ -41,9 +34,7 @@ exports.nuevo_get = (request, response, next) => {
 };
 
 exports.nuevo_post = (request, response, next) => {
-    if(!Array.isArray(request.body.labels))
-        request.body.labels = [request.body.labels];
-        
+
     const ticketNuevo = new Ticket(request.body.asunto, request.body.descripcion, request.body.prioridad, request.body.tipo_incidencia, request.body.procedencia);
     ticketNuevo.save()
         .then((result) => {
@@ -70,69 +61,55 @@ exports.nuevo_post = (request, response, next) => {
 };
 
 exports.ticket_get=(request,response,next) => {
-    Tipo_incidencia.fetchAll()
-        .then(([rowsIncidencias,fielDataIncidencias])=>{
-            Ticket.fetchPregunta_Ticket(request.params.id_ticket)
-            .then(([rowsPreguntas,fielDataPregunta])=>{
-                Ticket.fetchPrioridades()
-                .then(([rowsPrioridades,fieldDataPrioridades])=>{
-                    Ticket.fetchEstado() 
-                    .then(([rowsEstados,fielDataEstados])=>{
-                        Ticket.fetchEstado_Ticket(request.params.id_ticket)
-                            .then(([rowsEstado,fielDataEstado])=>{
-                                Ticket.fetchLabel_Ticket(request.params.id_ticket)
-                                .then(([rowsLabels,fielDataLabels])=>{
-                                    Ticket.fetchOne(request.params.id_ticket)
-                                    .then(([rowsTickets,fielData])=>{
-                                        response.render('panel_principal',{
-                                            tickets:rowsTickets,
-                                            prioridades:rowsPrioridades,
-                                            labels:rowsLabels,
-                                            estado:rowsEstado,
-                                            estados:rowsEstados,
-                                            preguntas:rowsPreguntas,
-                                            incidencias:rowsIncidencias
-                                        });
-                                    })
-                                    .catch(err =>{
-                                        console.log(err);
+        Ticket.fetchPregunta_Ticket(request.params.id_ticket)
+        .then(([rowsPreguntas,fielDataPregunta])=>{
+            Ticket.fetchPrioridades()
+            .then(([rowsPrioridades,fieldDataPrioridades])=>{
+                Ticket.fetchEstado() 
+                .then(([rowsEstados,fielDataEstados])=>{
+                    Ticket.fetchEstado_Ticket(request.params.id_ticket)
+                        .then(([rowsEstado,fielDataEstado])=>{
+                            Ticket.fetchLabel_Ticket(request.params.id_ticket)
+                            .then(([rowsLabels,fielDataLabels])=>{
+                                Ticket.fetchOne(request.params.id_ticket)
+                                .then(([rowsTickets,fielData])=>{
+                                    response.render('tickets/ticket_f',{
+                                        tickets:rowsTickets,
+                                        prioridades:rowsPrioridades,
+                                        labels:rowsLabels,
+                                        estado:rowsEstado,
+                                        estados:rowsEstados,
+                                        preguntas:rowsPreguntas
                                     });
-                            })
-                            .catch(err=>{
-                                console.log(err);
-                            });
-                            
-                            }).catch(err=>{
-                                console.log(err);
-                            });      
-                    })
-                    .catch(err=>{
-                        console.log(err);
-                    });   
-                    
-                }) .catch(err=>{
-                    console.log(err);
+                                })
+                                .catch(err =>{
+                                    console.log(err);
+                                });
+                        })
+                        .catch(err=>{
+                            console.log(err);
+                        });
+                        
+                        }).catch(err=>{
+                            console.log(err);
+                        });      
                 })
-            }).catch(err=>{
+                .catch(err=>{
+                    console.log(err);
+                });   
+                
+            }) .catch(err=>{
                 console.log(err);
             })
-        
         }).catch(err=>{
             console.log(err);
         })
-            
-                    
+                 
 };
 
 exports.ticket_post=(request,response,next)=>{
-    Ticket.update(request.params.id_ticket,request.body.estado,request.body.prioridad,request.body.Estado_Actual,request.body.select_tipo_incidencia)
+    Ticket.update(request.params.id_ticket,request.body.estado,request.body.prioridad,request.body.Estado_Actual)
         .then(()=>{
-            for(let i = 0; i < request.body.numPreguntas; i++)
-            {
-                let actualP = 'pregunta' + i;
-                let actualR = 'respuesta' + i;
-                Ticket.assignPregunta(request.params.id_ticket, request.body[actualP], request.body[actualR]); //Esto funciona, no se si sea lo mejor
-            }
             response.redirect('/tickets/'+request.params.id_ticket);
         }).catch(err=>{
             console.log(err);

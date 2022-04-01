@@ -33,8 +33,8 @@ module.exports = class Tipo_incidencia{
         );
     }
 
-    static fetchPreguntasNuevas(id_tipo_incidencia,id_ticket) {
-        return db.execute('SELECT p.Id_Pregunta, p.Texto_Pregunta FROM pregunta p, tipo_incidencia_pregunta tip WHERE p.Id_Pregunta = tip.Id_Pregunta AND tip.Id_Tipo_Incidencia = ? AND p.Id_Pregunta NOT IN (SELECT pt.Id_Pregunta FROM pregunta_ticket pt WHERE Id_Ticket = ?)',
+    static fetchPreguntasNuevas(id_ticket, id_tipo_incidencia) {
+        return db.execute('SELECT p.Id_Pregunta, p.Texto_Pregunta FROM pregunta p, tipo_incidencia_pregunta tip WHERE p.Id_Pregunta = tip.Id_Pregunta AND tip.Id_Tipo_Incidencia = ? AND p.Id_Pregunta NOT IN (SELECT p.Id_Pregunta FROM pregunta_ticket WHERE Id_Ticket = ?)',
         [id_tipo_incidencia, id_ticket]
         );
     }

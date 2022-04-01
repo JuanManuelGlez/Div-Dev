@@ -1,103 +1,10 @@
 <%- include('includes/header.ejs') %>
 <%- include('includes/sidebar.ejs') %>
-<div class="page-content-wrapper" style="color: var(--bs-teal);">
-    <div class="container-fluid" style="color: rgba(0,0,0,0.08);background: transparent;">
-        <div class="row" style="background: var(--bs-red);">
-            <div class="col-md-12 offset-2 offset-sm-1 offset-md-0" style="color: var(--bs-purple);background: #ff595a;">
-                <div></div>
-                <h1 style="color: var(--bs-white);margin-left: 20px;">Administrar Roles y Privilegios</h1>
-            </div>
-        </div>
-        <div class="row" style="background: TRANSPARENT;margin: 0px 30px;margin-top: 40px;box-shadow: 0px 0px 20px rgba(139,139,139,0.48);border-radius: 17px;">
-            <div class="col" style="padding: 0px;border-radius: 17px;">
-                <div class="row" style="padding: 0px;margin: 0px;margin-top: 0px;">
-                    <div class="col" style="color: rgba(0,0,0,0.08);padding: 10px 0px;text-align: center;background: #a3a3a3;border-top-left-radius: 17px;border-width: 1px;border-color: rgb(0,0,0);border-right-color: rgb(152,152,152);"><span style="color: rgb(255,255,255);font-weight: bold;">Privilegios</span></div>
-                    <div class="col" style="padding: 10px 0px;text-align: center;background: #d6d6d6;"><span style="color: rgb(0,0,0);font-weight: bold;">Administrador</span></div>
-                    <div class="col" style="padding: 10px 0px;text-align: center;background: #d6d6d6;"><span style="color: rgb(0,0,0);font-weight: bold;">Líder de Equipo&nbsp;</span></div>
-                    <div class="col" style="padding: 10px 0px;text-align: center;background: #d6d6d6;"><span style="color: rgb(0,0,0);font-weight: bold;">Técnico de Soporte</span></div>
-                    <div class="col" style="padding: 10px;text-align: center;background: #d6d6d6;border-top-right-radius: 17px;"><span style="color: rgb(0,0,0);font-weight: bold;">Usuario Zebrands</span></div>
-                </div>
-                <div class="row" style="padding: 0px;margin: 0px;margin-top: 0px;">
-                    <div class="col" style="color: rgba(0,0,0,0.08);padding: 10px 0px;text-align: center;background: #ffffff;--bs-primary: #ffffff;--bs-primary-rgb: 255,255,255;border-width: 1px;border-color: rgb(0,0,0);border-right-width: 1px;border-right-style: solid;"><span style="color: rgb(0,0,0);font-weight: bold;">Asignar Ticket</span></div>
-                    <div class="col" style="padding: 10px 0px;text-align: center;"><span style="color: rgb(0,0,0);">TRUE</span></div>
-                    <div class="col" style="padding: 10px 0px;text-align: center;"><span style="color: rgb(0,0,0);">TRUE</span></div>
-                    <div class="col" style="padding: 10px 0px;text-align: center;"><span style="color: rgb(0,0,0);">TRUE</span></div>
-                    <div class="col" style="padding: 10px;text-align: center;"><span style="color: rgb(0,0,0);">FALSE</span></div>
-                </div>
-                <div class="row" style="padding: 0px;margin: 0px;margin-top: 0px;">
-                    <div class="col" style="color: rgba(0,0,0,0.08);padding: 10px 0px;text-align: center;background: #ffffff;border-right: 1px solid rgb(0,0,0) ;"><span style="color: rgb(0,0,0);font-weight: bold;">Crear Ticket</span></div>
-                    <div class="col" style="padding: 10px 0px;text-align: center;"><span style="color: rgb(0,0,0);">TRUE</span></div>
-                    <div class="col" style="padding: 10px 0px;text-align: center;"><span style="color: rgb(0,0,0);">TRUE</span></div>
-                    <div class="col" style="padding: 10px 0px;text-align: center;"><span style="color: rgb(0,0,0);">TRUE</span></div>
-                    <div class="col" style="padding: 10px;text-align: center;"><span style="color: rgb(0,0,0);">TRUE</span></div>
-                </div>
-                <div class="row" style="padding: 0px;margin: 0px ;margin-top: 0px;">
-                    <div class="col" style="color: rgba(0,0,0,0.08);padding: 10px 0px;text-align: center;background: #ffffff;border-right: 1px solid rgb(0,0,0) ;"><span style="color: rgb(0,0,0);font-weight: bold;">Modificar Ticket</span></div>
-                    <div class="col" style="padding: 10px 0px;text-align: center;"><span style="color: rgb(0,0,0);">TRUE</span></div>
-                    <div class="col" style="padding: 10px 0px;text-align: center;"><span style="color: rgb(0,0,0);">TRUE</span></div>
-                    <div class="col" style="padding: 10px 0px;text-align: center;"><span style="color: rgb(0,0,0);">TRUE</span></div>
-                    <div class="col" style="padding: 10px;text-align: center;"><span style="color: rgb(0,0,0);">FALSE</span></div>
-                </div>
-                <div class="row" style="padding: 0px;margin: 0px;margin-top: 0px;">
-                    <div class="col" style="color: rgba(0,0,0,0.08);padding: 10px 0px;text-align: center;background: #ffffff;border-right: 1px solid rgb(0,0,0) ;"><span style="color: rgb(0,0,0);font-weight: bold;">Crear Tipo Incidencia</span></div>
-                    <div class="col" style="padding: 10px 0px;text-align: center;"><span style="color: rgb(0,0,0);">TRUE</span></div>
-                    <div class="col" style="padding: 10px 0px;text-align: center;"><span style="color: rgb(0,0,0);">FALSE</span></div>
-                    <div class="col" style="padding: 10px 0px;text-align: center;"><span style="color: rgb(0,0,0);">FALSE</span></div>
-                    <div class="col" style="padding: 10px;text-align: center;"><span style="color: rgb(0,0,0);">FALSE</span></div>
-                </div>
-                <div class="row" style="padding: 0px;margin: 0px;margin-top: 0px;">
-                    <div class="col" style="color: rgba(0,0,0,0.08);padding: 10px 0px;text-align: center;background: #ffffff;border-right: 1px solid rgb(0,0,0) ;"><span style="color: rgb(0,0,0);font-weight: bold;">Consultar Métricas</span></div>
-                    <div class="col" style="padding: 10px 0px;text-align: center;"><span style="color: rgb(0,0,0);">TRUE</span></div>
-                    <div class="col" style="padding: 10px 0px;text-align: center;"><span style="color: rgb(0,0,0);">TRUE</span></div>
-                    <div class="col" style="padding: 10px 0px;text-align: center;"><span style="color: rgb(0,0,0);">TRUE</span></div>
-                    <div class="col" style="padding: 10px;text-align: center;"><span style="color: rgb(0,0,0);">FALSE</span></div>
-                </div>
-                <div class="row" style="padding: 0px;margin: 0px;margin-top: 0px;">
-                    <div class="col" style="color: rgba(0,0,0,0.08);padding: 10px 0px;text-align: center;background: #ffffff;border-right: 1px solid rgb(0,0,0) ;"><span style="color: rgb(0,0,0);font-weight: bold;">Agregar Comentario</span></div>
-                    <div class="col" style="padding: 10px 0px;text-align: center;"><span style="color: rgb(0,0,0);">TRUE</span></div>
-                    <div class="col" style="padding: 10px 0px;text-align: center;"><span style="color: rgb(0,0,0);">TRUE</span></div>
-                    <div class="col" style="padding: 10px 0px;text-align: center;"><span style="color: rgb(0,0,0);">TRUE</span></div>
-                    <div class="col" style="padding: 10px;text-align: center;"><span style="color: rgb(0,0,0);">FALSE</span></div>
-                </div>
-                <div class="row" style="padding: 0px;margin: 0px;margin-top: 0px;">
-                    <div class="col" style="color: rgba(0,0,0,0.08);padding: 10px 0px;text-align: center;background: #ffffff;border-bottom-left-radius: 17px;border-right: 1px solid rgb(0,0,0) ;"><span style="color: rgb(0,0,0);font-weight: bold;">Modificar Estatus Ticket</span></div>
-                    <div class="col" style="padding: 10px 0px;text-align: center;"><span style="color: rgb(0,0,0);">TRUE</span></div>
-                    <div class="col" style="padding: 10px 0px;text-align: center;"><span style="color: rgb(0,0,0);">TRUE</span></div>
-                    <div class="col" style="padding: 10px 0px;text-align: center;"><span style="color: rgb(0,0,0);">TRUE</span></div>
-                    <div class="col" style="padding: 10px;text-align: center;border-bottom-left-radius: 17px;"><span style="color: rgb(0,0,0);">FALSE</span></div>
-                </div>
-            </div>
-        </div>
-        <div class="row" style="padding: 0px;margin: 0px 30px;margin-top: 50px;">
-            <div class="col" style="padding: 15px;text-align: left;border-radius: 17px;box-shadow: 0px 0px 20px rgba(143,143,143,0.5);">
-                <div class="row">
-                    <div class="col">
-                        <h1 style="color: rgb(0,0,0);text-align: left;margin-left: 30px;margin-bottom: 20px;">Crear Nuevo Rol</h1>
-                    </div>
-                </div>
-                <div class="row" style="margin: 0px 30px;border-width: 2px;border-color: var(--bs-red);">
-                    <div class="col" style="padding: 0px;">
-                        <div class="row" style="padding: 0px;margin: 0px;margin-top: 0px;border-width: 5px;border-color: var(--bs-red);margin-left: 0px;">
-                            <div class="col-xxl-2" style="padding: 0px;">
-                                <div class="row" style="padding: 0px;margin: 0px;margin-top: 0px;border-width: 5px;border-color: var(--bs-red);margin-left: 0px;">
-                                    <div class="col" style="padding: 0px;">
-                                        <form>
-                                            <div class="col" style="text-align: right;"><label class="col-form-label" style="color: rgb(0,0,0);font-size: 23px;text-align: right;">Nombre del Rol</label></div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <form>
-                                    <div class="col"><input class="form-control" type="text"></div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="row" style="padding: 0px;margin: 0px;margin-top: 0px;border-width: 5px;border-color: var(--bs-red);">
-                            <div class="col-xxl-3 offset-xxl-9" style="padding: 10px;text-align: right;"><button class="btn btn-primary" type="button" style="background: rgb(0,0,0);">Crear Nuevo Rol<i class="fa fa-plus-square" style="margin-left: 20px;"></i></button></div>
-                        </div>
-                    </div>
-                </div>
+<div class="page-content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                administrar privilegios
             </div>
         </div>
     </div>

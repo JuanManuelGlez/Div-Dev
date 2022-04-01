@@ -28,8 +28,7 @@ exports.getPreguntas = (request, response, next) => {
 
 exports.getPreguntasNuevas = (request, response, next) => {
     const id = request.params.id_tipo_incidencia;
-    id_Ticket=parseInt(request.body.id);
-    Tipo_incidencia.fetchPreguntasNuevas(id, id_Ticket)
+    Tipo_incidencia.fetchPreguntasNuevas(id, request.body.idTicket)
         .then(([rows, fieldData]) => {
             response.status(200).json({preguntas: rows});
         })

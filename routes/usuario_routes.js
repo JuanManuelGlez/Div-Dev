@@ -16,6 +16,4 @@ router.get('/login',usuario_controller.login_get);
 
 router.post('/login',usuario_controller.login_post);
 
-router.get('/lista',usuario_controller.lista);
-
 module.exports = router;
