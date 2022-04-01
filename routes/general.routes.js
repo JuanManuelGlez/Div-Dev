@@ -12,9 +12,7 @@ router.get('/metricas',(request, response, next) =>{
 router.get('/archivo',(request, response, next) =>{
     response.render('archivo');
 });
-router.get('/nuevo_ticket',(request, response, next) =>{
-    response.render('nuevo_ticket');
-});
+
 router.get('/panel',(request, response, next) =>{
     response.render('panel');
 });
@@ -37,8 +35,8 @@ router.get('/lista_usuarios',(request, response, next) =>{
     response.render('lista_usuarios');
 });
 
-router.get('/reporte',(request, response, next) =>{
-    response.render('reporte');
+router.get('/ticket',(request, response, next) =>{
+    response.render('ticket');
 });
 
 

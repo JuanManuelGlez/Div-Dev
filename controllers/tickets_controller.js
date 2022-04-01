@@ -3,8 +3,15 @@ const Ticket = require('../models/ticket');
 const Tipo_incidencia = require('../models/tipo_incidencia');
 
 
-exports.lista = (request, response, next) => {
-    //response.render()
+
+exports.lista = (request, response, next) =>{
+    Ticket.fetchList()
+    .then(([rowsTickets,fielData])=>{
+        response.render('panel_principal',{
+            tickets:rowsTickets,
+        });
+    })
+    .catch(err => console.log(err));
 };
 
 exports.nuevo_get = (request, response, next) => {
@@ -77,7 +84,7 @@ exports.ticket_get=(request,response,next) => {
                                 .then(([rowsLabels,fielDataLabels])=>{
                                     Ticket.fetchOne(request.params.id_ticket)
                                     .then(([rowsTickets,fielData])=>{
-                                        response.render('tickets/ticket_f',{
+                                        response.render('panel_principal',{
                                             tickets:rowsTickets,
                                             prioridades:rowsPrioridades,
                                             labels:rowsLabels,

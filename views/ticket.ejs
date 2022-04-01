@@ -1,4 +1,13 @@
-<div class="row" style="box-shadow: 0px 0px 20px;width: 1200px;height: 1000px;margin-left: 400px;">
+<%- include('includes/header.ejs') %>
+
+<style>
+    ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+</style>
+<div style="display: flex;justify-content: center;width:900px;height: 500px;overflow-y: scroll;margin:80px auto">
+  <!-- <div class="row" style="box-shadow: 0px 0px 20px;width: 1200px;height: 1000px;margin-left: 400px;"> -->
     <div class="col" style="width: 1000px;">
         <div class="card">
             <div class="card-body">
@@ -88,3 +97,5 @@
         </div>
     </div>
 </div>
+
+<%- include('includes/foot.ejs') %>
