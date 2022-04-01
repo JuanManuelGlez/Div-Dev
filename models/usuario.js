@@ -33,6 +33,7 @@ module.exports = class Usuario{
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
+        return db.execute('SELECT Nombre_Usuario, Login FROM usuario');
     }
 
     static findOne(login_usuario) {
