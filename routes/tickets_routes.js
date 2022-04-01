@@ -14,11 +14,12 @@ router.get('/nuevo', tickets_controller.nuevo_get);
 
 router.post('/nuevo', tickets_controller.nuevo_post);
 
+router.get('/panel',tickets_controller.ticket_panel);
+
+
 router.get('/:id_ticket', tickets_controller.ticket_get);
 
 router.post('/:id_ticket',tickets_controller.ticket_post);
-
-router.get('/panel/hola',tickets_controller.ticket_panel);
 
 
 module.exports = router;

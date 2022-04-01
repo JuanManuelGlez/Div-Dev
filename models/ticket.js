@@ -33,14 +33,10 @@ module.exports = class Ticket{
     }
 
     static fetchAll_Progreso(){
-        return db.execute('SELECT ticket.Id_Ticket,ticket.Id_Prioridad,ticket.Id_Tipo_Incidencia,ticket.Asunto FROM ticket, estado_ticket WHERE estado_ticket.Id_Estado=2 AND estado_ticket.Id_Ticket=ticket.Id_Ticket ')
+        return db.execute('SELECT et.Id_Estado, t.Id_Ticket,t.Fecha_Inicio,t.Id_Prioridad,t.Asunto,et.Fecha_y_Hora FROM ticket t, estado_ticket et WHERE et.Id_Ticket=t.Id_Ticket GROUP BY et.Id_Ticket ORDER BY et.Fecha_y_Hora ASC')
     }
 
-    static fetchAll_Completo(){
-        return db.execute('SELECT ticket.Id_Ticket,ticket.Id_Prioridad, ticket.Id_Tipo_Incidencia,ticket.Asunto FROM ticket, estado_ticket WHERE estado_ticket.Id_Estado=1 AND estado_ticket.Id_Ticket=ticket.Id_Ticket')
-    }
-
-
+   
 
 
 
