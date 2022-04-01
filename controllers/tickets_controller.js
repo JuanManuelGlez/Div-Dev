@@ -1,6 +1,10 @@
 const path = require('path');
 const Ticket = require('../models/ticket');
+<<<<<<< HEAD
 const Tipo_incidencia = require('../models/tipo_incidencia');
+=======
+const Comentario = require('../models/comentario');
+>>>>>>> registrar_comentario_Andres
 
 
 
