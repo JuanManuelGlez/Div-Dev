@@ -138,3 +138,38 @@ exports.ticket_post=(request,response,next)=>{
             console.log(err);
         })
 }
+
+exports.getDatosTicket = (request, response, next) => {
+    const id = request.params.id_ticket;
+
+    Ticket.fetchPregunta_Ticket(request.params.id_ticket)
+        .then(([rowsPreguntas,fielDataPregunta])=>{
+                Ticket.fetchEstado_Ticket(request.params.id_ticket)
+                    .then(([rowsEstado,fielDataEstado])=>{
+                        Ticket.fetchLabel_Ticket(request.params.id_ticket)
+                        .then(([rowsLabels,fielDataLabels])=>{
+                            Ticket.fetchOne(request.params.id_ticket)
+                            .then(([rowsTicket,fielData])=>{
+                                response.status(200).json({
+                                    datosGenerales: rowsTicket,
+                                    labels: rowsLabels,
+                                    estado:rowsEstado,
+                                    preguntas:rowsPreguntas
+                                });
+                            })
+                            .catch(err =>{
+                                console.log(err);
+                            });
+                        })     
+                        .catch(err=>{
+                            console.log(err);
+                        });   
+            
+                }) .catch(err=>{
+                    console.log(err);
+            })
+        }).catch(err=>{
+            console.log(err);
+    });
+                
+};
