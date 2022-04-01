@@ -14,7 +14,7 @@ module.exports = class Comentario{
 
     //Este método servirá para guardar de manera persistente el nuevo objeto. 
     comentario_save() {
-        db.execute('INSERT INTO comentario(Id_Usuario, Id_Ticket, Fecha_y_Hora, Texto_Comentario, URL_Archivo) VALUES (?, ?, CURRENT_TIMESTAMP, ?, ?)', 
+        return db.execute('INSERT INTO comentario(Id_Usuario, Id_Ticket, Fecha_y_Hora, Texto_Comentario, URL_Archivo) VALUES (?, ?, CURRENT_TIMESTAMP, ?, ?)', 
             [
                 this.id_usuario_comentario,
                 this.id_ticket_comentario,
@@ -30,6 +30,12 @@ module.exports = class Comentario{
         );
     }
 
+
+    static fetchComentariosTicket(id_ticket_comentario) {
+        return db.execute('SELECT * FROM Comentario  WHERE  C.Id_Ticket = ? ORDER BY Fecha_y_Hora',
+        [id_ticket_comentario]
+        );
+    }
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
     }

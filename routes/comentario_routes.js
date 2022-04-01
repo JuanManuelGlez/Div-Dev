@@ -9,7 +9,9 @@ const router = express.Router();
     
 router.get('/nuevo', comentario_controller.nuevocomentario_get);
 
-router.post('/nuevo', comentario_controller.nuevocomentario_post);
+router.get('/:id_ticket', comentario_controller.comentarios_get);
+
+router.post('/:id_ticket', comentario_controller.nuevocomentario_post);
 
 
 module.exports = router;

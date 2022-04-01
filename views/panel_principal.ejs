@@ -121,10 +121,10 @@
                       </div>
                   </div>
                   <div class="row">
-                    <button type="submit" class="btn btn-primary mt-3" id="enviar">Guardar Cambios</button>
-                      <div class="col" style="margin-right:200px"><img class="rounded-circle" style="width: 80px;height: 80px;" src="/img/WhatsApp%20Image%202021-12-02%20at%206.30.57%20AM.jpeg"></div>
-                      <div class="col"><button class="btn btn-primary" type="button" style="background: rgb(0,0,0);width: 100%;margin-top: 40px;">Actualizar<i class="fa fa-refresh" style="margin-left: 15px;"></i></button></div>
-                      <div class="col"><button class="btn btn-primary" type="button" style="background: rgb(0,0,0);width: 100%;margin-top: 40px;">Comentarios<i class="fa fa-comments-o" style="margin-left: 15px;"></i></button></div>
+                    
+                      <div class="col"  style="margin-right:200px"><img class="rounded-circle" style="width: 80px;height: 80px;" src="/img/WhatsApp%20Image%202021-12-02%20at%206.30.57%20AM.jpeg"></div>
+                      <div class="col"><button type="submit" class="btn btn-primary" id="enviar" type="button" style="background: rgb(0,0,0);width: 100%;margin-top: 40px;">Actualizar<i class="fa fa-refresh" style="margin-left: 15px;"></i></button></div>
+                      <div class="col"><button onclick="window.location.href='/comentario/<%= ticket.Id_Ticket %>'" type="button" style="background: rgb(0,0,0);width: 100%;margin-top: 40px;">Comentarios<i class="fa fa-comments-o" style="margin-left: 15px;"></i></button></div>
                       <div class="col"><button class="btn btn-primary" type="button" style="background: rgb(0,0,0);width: 100%;margin-top: 40px;">Asignación<i class="fa fa-user-plus" style="margin-left: 15px;"></i></button></div>
                   </div>
               </div>
