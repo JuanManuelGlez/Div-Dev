@@ -1,39 +1,37 @@
 <%- include('../includes/head.ejs') %>
 
-<div class = 'container'>
-    <head>TIPO INCIDENCIA</head>
-    <br><br>
-    <% for(let Tipo_Incidencia of Tipo_Incidencias) {%>
-        <br>
-        <head> ID:<%= Tipo_Incidencia.Id_Tipo_Incidencia %>    <%= Tipo_Incidencia.Nombre %>    </head>
-        <br>
-    <% } %>
-</div> <br><br>
+ <div class = 'container'>
+     <head>TIPO INCIDENCIA</head>
+     <br><br>
+     <% for(let Tipo_Incidencia of Tipo_Incidencias) {%>
+         <br>
+         <head> ID:<%= Tipo_Incidencia.Id_Tipo_Incidencia %>    <%= Tipo_Incidencia.Nombre %>    </head>
+         <br>
+     <% } %>
+ </div> <br><br>
 
-<div class="container">
-    <head>CREAR NUEVO TIPO DE INCIDENCIA</head> <br><br>
-    <% for(let Tipo_Incidencia of Tipo_Incidencias) {%>
-    <form id="nuevo_tipo_incidencia" method="POST">
-        <input type="hidden" name="_csrf" value="<%= csrfToken %>"></input>
-        <input type="text" id="nombre_tipo_incidencia" name="nombre_tipo_incidencia" placeholder="Escribe aqui...">
-        <br><br>
-        <input type="number" id="sla_tipo_incidencia" name="sla_tipo_incidencia">
-        <br><br>
-        <button type="submit" class="btn btn-primary mt-3" id="enviar" name="enviar">Submit</button>
-    </form>
-    <br><br>
-</div>
-
-<div class="container">
-    <head>Preguntas de la incidencia</head> <br><br>
-    <form id="nuevo_tipo_incidencia" method="POST">
-        <input type="hidden" name="_csrf" value="<%= csrfToken %>"></input>
-        <input type="text" id="nombre_tipo_incidencia" name="nombre_tipo_incidencia" placeholder="Escribe aqui...">
-        <br><br>
-        <input type="number" id="sla_tipo_incidencia" name="sla_tipo_incidencia">
-        <br><br>
-        <button type="submit" class="btn btn-primary mt-3" id="enviar" name="enviar">Submit</button>
-    </form>
-</div>
-
-<%- include('../includes/foot.ejs') %>
+ <div class="container">
+     <head>CREAR NUEVO TIPO DE INCIDENCIA</head> <br><br>
+     <% for(let Tipo_Incidencia of Tipo_Incidencias) {%>
+     <form id="nuevo_tipo_incidencia" method="POST">
+         <input type="hidden" name="_csrf" value="<%= csrfToken %>"></input>
+         <input type="text" id="nombre_tipo_incidencia" name="nombre_tipo_incidencia" placeholder="Escribe aqui...">
+         <br><br>
+         <input type="number" id="sla_tipo_incidencia" name="sla_tipo_incidencia">
+         <br><br>
+         <button type="submit" class="btn btn-primary mt-3" id="enviar" name="enviar">Submit</button>
+     </form>
+     <br><br>
+ </div>
+ <div class="container">
+     <head>Preguntas de la incidencia</head> <br><br>
+     <form id="nuevo_tipo_incidencia" method="POST">
+         <input type="hidden" name="_csrf" value="<%= csrfToken %>"></input>
+         <input type="text" id="nombre_tipo_incidencia" name="nombre_tipo_incidencia" placeholder="Escribe aqui...">
+         <br><br>
+         <input type="number" id="sla_tipo_incidencia" name="sla_tipo_incidencia">
+         <br><br>
+         <button type="submit" class="btn btn-primary mt-3" id="enviar" name="enviar">Submit</button>
+     </form>
+ </div>
+ <%- include('../includes/foot.ejs') %>
