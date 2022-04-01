@@ -7,7 +7,7 @@ const Tipo_incidencia = require('../models/tipo_incidencia');
 exports.lista = (request, response, next) =>{
     Ticket.fetchList()
     .then(([rowsTickets,fielData])=>{
-        response.render('panel_principal',{
+        response.render('panel_principal_f',{
             tickets:rowsTickets,
         });
     })

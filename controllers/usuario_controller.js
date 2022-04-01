@@ -3,7 +3,7 @@ const Usuario = require('../models/usuario');
 const bcrypt = require('bcryptjs')
 
 exports.signup_get = (request, response, next) => {
-    response.render('usuarios/signup');
+    response.render('signup');
 };
 
 exports.signup_post = (request, response, next) => {
@@ -11,13 +11,13 @@ exports.signup_post = (request, response, next) => {
 
     usuario_nuevo.usuario_save()
         .then(() => {
-            response.redirect('login');
+            response.redirect('/usuario/login');
         })
         .catch(err => console.log(err));
 };
 
 exports.login_get = (request, response, next) => {
-    response.render('usuarios/login', {
+    response.render('login', {
         //login_usuario??
         correo: request.session.correo ? request.session.correo: '',
         info:''
@@ -25,10 +25,11 @@ exports.login_get = (request, response, next) => {
 };
 
 exports.login_post = (request, response, next) => {
+   
     Usuario.findOne(request.body.correo)
             .then(([rows,fielData])=>{
                 if (rows.length<1){
-                    return response.redirect('login');
+                    return response.redirect('usuario/login');
                 }
                 const usuario=new Usuario(rows[0].Nombre_Usuario,rows[0].Login, rows[0]['Contraseña'], '');
                 bcrypt.compare(request.body.contrasenia, usuario.contrasenia_usuario)
@@ -38,17 +39,19 @@ exports.login_post = (request, response, next) => {
                             request.session.usuario=usuario;
                             request.session.correo=usuario.login_usuario;
                             return request.session.save(err=>{
-                                response.redirect('/panelticket');
+                                response.redirect('/archivo');
                             });
                         }
-                        response.redirect('login');
+                        response.redirect('/metricas');
+                        console.log('hi not working');
                     }).catch(err=>{
                         console.log(err);
-                        response.redirect('login');
+                        response.redirect('/metricas');
                     });
             }).catch((error)=>{
                 console.log(error);
             });
+            
 };
 
 exports.logout = (request, response, next) => {
