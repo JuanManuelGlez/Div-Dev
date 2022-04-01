@@ -51,7 +51,7 @@ module.exports = class Ticket{
     }
 
     static fetchEstado(){
-        return db.execute('SELECT * FROM estado WHERE Visibilidad_Estado=1')
+        return db.execute('SELECT * FROM estado')
     }
 
     static fetchPrioridades() {
