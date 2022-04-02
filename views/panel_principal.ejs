@@ -1,9 +1,11 @@
 <%- include('includes/header.ejs') %>
 <%- include('includes/sidebar.ejs') %>
 
-<div id="Ticket" style="display: none;justify-content: center;width:1000px;overflow-y: scroll;margin:80px auto">
+<div id="Ticket" style="position:fixed;display: none;justify-content: center;width:1000px;overflow-y: scroll;margin:80px auto">
     <form id="modify_ticket" method="POST">
-        <input type="hidden" name="_csrf"id="_csrf" value="<%= csrfToken %>">
+        <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>"></input>
+
+        <input type="hidden" name="Id_Ticket" id="Id_Ticket" value="">
     <!-- <div class="row" style="box-shadow: 0px 0px 20px;width: 1200px;height: 1000px;margin-left: 400px;"> -->
       <div class="col" style="width: 1000px;">
           <div class="card">
@@ -89,10 +91,11 @@
                               <div class="col" style="border-right-width: 0px;border-right-style: solid;margin: 0px;padding: 0px;margin-left: 30px;">
                                   <form>
                                       <div class="row">
-                                          <div class="col" id="preguntas" >
-                                              
-                                              
+                                          <div class="col" id="preguntas" > 
+                                          </div> 
+                                          <div class="col" id="preguntas_nuevas" >
                                           </div>
+                                          <input type="hidden" id="numPreguntas" name="numPreguntas" value="0">
                                       </div>
                                   </form>
                               </div>
@@ -102,8 +105,8 @@
                   <div class="row">
                     
                       <div class="col"  style="margin-right:200px"><img class="rounded-circle" style="width: 80px;height: 80px;" src="/img/WhatsApp%20Image%202021-12-02%20at%206.30.57%20AM.jpeg"></div>
-                      <div class="col"><button type="submit" class="btn btn-primary" id="enviar" type="button" style="background: rgb(0,0,0);width: 100%;margin-top: 40px;">Actualizar<i class="fa fa-refresh" style="margin-left: 15px;"></i></button></div>
-                      <div class="col"><button id="boton_comentarios" onclick="" type="button" style="background: rgb(0,0,0);width: 100%;margin-top: 40px;">Comentarios<i class="fa fa-comments-o" style="margin-left: 15px;"></i></button></div>
+                      <div class="col"><button type="button" class="btn btn-primary" id="enviar" type="button" style="background: rgb(0,0,0);width: 100%;margin-top: 40px;">Actualizar<i class="fa fa-refresh" style="margin-left: 15px;"></i></button></div>
+                      <div class="col"><button  class="btn btn-primary" id="boton_comentarios" type="button" style="background: rgb(0,0,0);width: 100%;margin-top: 40px;">Comentarios<i class="fa fa-comments-o" style="margin-left: 15px;"></i></button></div>
                       <div class="col"><button class="btn btn-primary" type="button" style="background: rgb(0,0,0);width: 100%;margin-top: 40px;">Asignación<i class="fa fa-user-plus" style="margin-left: 15px;"></i></button></div>
                   </div>
               </div>
@@ -134,7 +137,7 @@
                                 <button id="boton<%= ticket.Id_Ticket %>" onClick="openTicket(this)"> show </button>
                             </div>
                         </div>
-            
+                    </div>
                     <% }%>
             </div>
         </div>

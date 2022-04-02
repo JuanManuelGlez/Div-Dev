@@ -92,6 +92,7 @@ exports.nuevo_post = (request, response, next) => {
 
 };
 
+//Esto ya creo que no se usa hay que checarlo
 exports.ticket_get=(request,response,next) => {
     Tipo_incidencia.fetchAll()
         .then(([rowsIncidencias,fielDataIncidencias])=>{
@@ -148,15 +149,13 @@ exports.ticket_get=(request,response,next) => {
 };
 
 exports.ticket_post=(request,response,next)=>{
-    Ticket.update(request.params.id_ticket,request.body.estado,request.body.prioridad,request.body.Estado_Actual,request.body.select_tipo_incidencia)
+    Ticket.update(request.params.id_ticket,request.body.estado,request.body.prioridad,request.body.Estado_Actual,request.body.tipo_incidencia)
         .then(()=>{
             for(let i = 0; i < request.body.numPreguntas; i++)
             {
-                let actualP = 'pregunta' + i;
-                let actualR = 'respuesta' + i;
-                Ticket.assignPregunta(request.params.id_ticket, request.body[actualP], request.body[actualR]); //Esto funciona, no se si sea lo mejor
+                Ticket.assignPregunta(request.params.id_ticket, request.body.preguntas[i].pregunta, request.body.preguntas[i].respuesta); //Esto funciona, no se si sea lo mejor
             }
-            response.redirect('/tickets/'+request.params.id_ticket);
+            response.status(200).json({});
         }).catch(err=>{
             console.log(err);
         })
