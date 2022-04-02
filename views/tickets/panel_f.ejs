@@ -2,9 +2,9 @@
 <div class="container">
     <div class="row">
         <div class="col-sm" id="Sin_Asignar">
-            <h2>Sin Asignar:</h2>
+            <h2>Sin Asignar/No Iniciado:</h2>
                 <%for (let ticket of tickets){%>
-                    <%if (ticket.Id_Estado == 6){%>
+                    <%if (ticket.Id_Estado == 6 || ticket.Id_Estado == 3){%>
                     <div>
                         ID: <%=ticket.Id_Ticket%> <br>
                         Asunto: <%=ticket.Asunto%><br>

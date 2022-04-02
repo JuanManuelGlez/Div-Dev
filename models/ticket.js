@@ -33,7 +33,7 @@ module.exports = class Ticket{
     }
 
     static fetchAll_Progreso(){
-        return db.execute('SELECT et.Id_Estado, t.Id_Ticket,t.Fecha_Inicio,t.Id_Prioridad,t.Asunto,et.Fecha_y_Hora FROM ticket t, estado_ticket et WHERE et.Id_Ticket=t.Id_Ticket GROUP BY et.Id_Ticket ORDER BY et.Fecha_y_Hora ASC')
+        return db.execute('SELECT t.Id_Ticket,t.Asunto,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado,t.Fecha_y_Hora FROM ticket_estado_magia t GROUP BY t.Id_Ticket HAVING MAX(t.Fecha_y_Hora)')
     }
 
    
