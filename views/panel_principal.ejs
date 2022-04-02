@@ -1,7 +1,9 @@
 <%- include('includes/header.ejs') %>
 <%- include('includes/sidebar.ejs') %>
 
-<div id="Ticket" style="display: none;justify-content: center;width:1000px;height:700px;overflow-y: scroll;margin:80px auto">
+<div id="Ticket" style="display: none;justify-content: center;width:1000px;overflow-y: scroll;margin:80px auto">
+    <form id="modify_ticket" method="POST">
+        <input type="hidden" name="_csrf"id="_csrf" value="<%= csrfToken %>">
     <!-- <div class="row" style="box-shadow: 0px 0px 20px;width: 1200px;height: 1000px;margin-left: 400px;"> -->
       <div class="col" style="width: 1000px;">
           <div class="card">
@@ -22,26 +24,52 @@
                       </div>
                   </div>
                   <div class="row" style="padding-bottom: 30px;padding-top: 10px;">
-                      <div class="col-xxl-3">
+                      <!-- <div class="col-xxl-3">
                           <div class="dropdown"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="width: 100%;background: rgb(176,176,176);border-width: 0px;border-right-width: 0px;">Dropdown </button>
                               <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
                           </div>
+                      </div> -->
+                      <div class="col">
+                          <h4 style="text-align: left;">Estado</h4>
                       </div>
                       <div class="col">
-                          <h4 style="text-align: right;">Estado</h4>
-                      </div>
-                      <div class="col">
-                          <div class="dropdown"><button class="btn btn-primary dropdown-toggle" id="estado" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="width: 100%;background: #efb22d;border-width: 0px;border-right-width: 0px;">En progreso</button>
+                        <select class="form-select" id="select_estado" name="estado" aria-label="Default select example">
+                            <% for (let estado of estados){%>
+                                <option selected="false" value="<%=estado.Id_Estado%>" id="estado<%=estado.Id_Estado%>"><%=estado.Nombre_Estado %> </option>
+                            <%}%>
+                            <input type="hidden" name="Estado_Actual" id="Estado_Actual" value="">
+                             
+                          </select> 
+                          <!-- <div class="dropdown"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="width: 100%;background: #efb22d;border-width: 0px;border-right-width: 0px;">En progreso</button>
                               <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
-                          </div>
+                          </div> -->
                       </div>
+                      <div class="col">
+                        <h4 style="text-align: left;">Tipo de incidencia</h4>
+                    </div>
+                    <div class="col">
+                        
+                        <select class="form-select" id="select_tipo_incidencia" name="select_tipo_incidencia" aria-label="Default select example">
+                            <% for (let incidencia of incidencias){%>
+                                <option selected="false" value="<%=incidencia.Id_Tipo_Incidencia%>" id="tipo_incidencia<%= incidencia.Id_Tipo_Incidencia %>"><%=incidencia.Nombre_Tipo_Incidencia%></option>
+                            <%}%>
+                          </select>
+                        <!-- <div class="dropdown"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="width: 100%;background: #efb22d;border-width: 0px;border-right-width: 0px;">En progreso</button>
+                            <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
+                        </div> -->
+                    </div>
                       <div class="col" style="text-align: right;">
-                          <h4 style="text-align: right;">Prioridad</h4>
+                          <h4 style="text-align: left;">Prioridad</h4>
                       </div>
                       <div class="col" style="text-align: right;width: 100%;">
-                          <div class="dropdown"><button class="btn btn-primary dropdown-toggle" id="prioridad"  aria-expanded="false" data-bs-toggle="dropdown" type="button" style="width: 100%;background: var(--bs-red);border-width: 0px;border-right-width: 0px;">Urgente</button>
+                        <select class="form-select" id="select_prioridad" name="prioridad" aria-label="Default select example">
+                            <% for (let prioridad of prioridades){%>
+                                <option selected="false" value="<%=prioridad.Id_Prioridad%>" id="prioridad<%= prioridad.Id_Prioridad %>"><%=prioridad.Nombre_Prioridad %> </option>
+                            <%}%>
+                          </select>  
+                        <!-- <div class="dropdown"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="width: 100%;background: var(--bs-red);border-width: 0px;border-right-width: 0px;">Urgente</button>
                               <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
-                          </div>
+                          </div> -->
                       </div>
                   </div>
                   <div class="row">
@@ -72,29 +100,30 @@
                       </div>
                   </div>
                   <div class="row">
-                      <div class="col-xxl-5"><img class="rounded-circle" style="width: 80px;height: 80px;" src="assets/img/WhatsApp%20Image%202021-12-02%20at%206.30.57%20AM.jpeg"></div>
-                      <div class="col"><button class="btn btn-primary" type="button" style="background: rgb(0,0,0);width: 100%;margin-top: 40px;">Actualizar<i class="fa fa-refresh" style="margin-left: 15px;"></i></button></div>
-                      <div class="col"><button class="btn btn-primary" type="button" style="background: rgb(0,0,0);width: 100%;margin-top: 40px;">Comentarios<i class="fa fa-comments-o" style="margin-left: 15px;"></i></button></div>
+                    
+                      <div class="col"  style="margin-right:200px"><img class="rounded-circle" style="width: 80px;height: 80px;" src="/img/WhatsApp%20Image%202021-12-02%20at%206.30.57%20AM.jpeg"></div>
+                      <div class="col"><button type="submit" class="btn btn-primary" id="enviar" type="button" style="background: rgb(0,0,0);width: 100%;margin-top: 40px;">Actualizar<i class="fa fa-refresh" style="margin-left: 15px;"></i></button></div>
+                      <div class="col"><button id="boton_comentarios" onclick="" type="button" style="background: rgb(0,0,0);width: 100%;margin-top: 40px;">Comentarios<i class="fa fa-comments-o" style="margin-left: 15px;"></i></button></div>
                       <div class="col"><button class="btn btn-primary" type="button" style="background: rgb(0,0,0);width: 100%;margin-top: 40px;">Asignación<i class="fa fa-user-plus" style="margin-left: 15px;"></i></button></div>
                   </div>
               </div>
           </div>
       </div>
+    </form>
   </div>
 
-<div class="page-content-wrapper" style="color: var(--bs-teal);">
-    <div class="container-fluid" style="color: transparent;background: var(--bs-indigo);">
-        <div class="row" style="background: var(--bs-red);">
-            <div class="col-sm-12 offset-2 offset-sm-1 offset-md-0 offset-lg-0 offset-xl-0 offset-xxl-0" style="color: var(--bs-purple);background: #FF595A;">
-                <div></div>
-                <h1 style="color: var(--bs-body-bg);margin-left: 50px;">Panel Tickets</h1>
+
+    <div  class="page-content-wrapper" style="color: var(--bs-teal);">
+        <div class="container-fluid" style="color: transparent;background: var(--bs-indigo);">
+            <div class="row" style="background: var(--bs-red);">
+                <div class="col-sm-12 offset-2 offset-sm-1 offset-md-0 offset-lg-0 offset-xl-0 offset-xxl-0" style="color: var(--bs-purple);background: #FF595A;">
+                    <div></div>
+                    <h1 style="color: var(--bs-body-bg);margin-left: 50px;">Panel Tickets</h1>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container">
-        <div class="row" style="margin-top: 30px;">
-            
-
+        <div class="container">
+            <div class="row" style="margin-top: 30px;">
                 <% for(let ticket of tickets) {%>
     
                     <div class="col">
@@ -105,15 +134,12 @@
                                 <button id="boton<%= ticket.Id_Ticket %>" onClick="openTicket(this)"> show </button>
                             </div>
                         </div>
-                    </div>
-         
-                <% }%>
-
-
-  
+            
+                    <% }%>
+            </div>
         </div>
     </div>
-</div>
+
 
 <style>
     ::-webkit-scrollbar {
@@ -129,8 +155,10 @@
   z-index: 9999;
   padding: 10px;
   text-align: center;
-  display: none;
+
     }
+
+  
 </style>
 
 

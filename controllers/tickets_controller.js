@@ -1,15 +1,38 @@
 const path = require('path');
-const Ticket = require('../models/ticket');
+const Ticket = require('../models/ticket')
 const Tipo_incidencia = require('../models/tipo_incidencia');
+const Comentario = require('../models/comentario')
+
 
 
 
 exports.lista = (request, response, next) =>{
     Ticket.fetchList()
     .then(([rowsTickets,fielData])=>{
-        response.render('panel_principal',{
-            tickets:rowsTickets,
-        });
+        Tipo_incidencia.fetchAll()
+        .then(([rowsIncidencias,fielDataIncidencias])=>{
+                Ticket.fetchPrioridades()
+                .then(([rowsPrioridades,fieldDataPrioridades])=>{
+                    Ticket.fetchEstado() 
+                    .then(([rowsEstados,fielDataEstados])=>{
+                            response.render('panel_principal',{
+                                tickets:rowsTickets,
+                                prioridades:rowsPrioridades,
+                                estados:rowsEstados,
+                                incidencias:rowsIncidencias
+                            });
+                    })
+                    .catch(err=>{
+                        console.log(err);
+                    });        
+                })
+                .catch(err=>{
+                    console.log(err);
+                });    
+        })
+        .catch(err=>{
+            console.log(err);
+        })
     })
     .catch(err => console.log(err));
 };
@@ -119,7 +142,7 @@ exports.ticket_get=(request,response,next) => {
         
         }).catch(err=>{
             console.log(err);
-        })
+        });
             
                     
 };
