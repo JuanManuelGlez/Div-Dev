@@ -1,6 +1,8 @@
 const path = require('path');
-const Ticket = require('../models/ticket');
+const Ticket = require('../models/ticket')
 const Tipo_incidencia = require('../models/tipo_incidencia');
+const Comentario = require('../models/comentario')
+
 
 
 exports.lista = (request, response, next) => {

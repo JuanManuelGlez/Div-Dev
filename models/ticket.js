@@ -95,10 +95,17 @@ module.exports = class Ticket{
 
     }
 
+<<<<<<< HEAD
     static async update(id_ticket,id_estado,id_prioridad,Estado_Actual){
         this.assignPrioridad(id_ticket,id_prioridad);
+=======
+    static async update(id_ticket,id_estado,id_prioridad,Estado_Actual,id_incidencia){
+        
+        await this.assignIncidencia(id_ticket,id_incidencia);
+        await this.assignPrioridad(id_ticket,id_prioridad);
+>>>>>>> b37e23e8da6d12adb2bc564b789e6ac146ca315b
             if(id_estado!=Estado_Actual){
-                this.assignEstado(id_ticket,id_estado);
+                await this.assignEstado(id_ticket,id_estado);
                 if(id_estado ==1||5){
                     return db.execute('UPDATE ticket SET Fecha_Fin=CURRENT_TIMESTAMP WHERE Id_Ticket=?',[id_ticket]);
                 }

@@ -1,0 +1,48 @@
+<%- include('../includes/head.ejs') %>
+<div class = 'container'>
+  <head>Ticket</head>
+  <head id = 'id_ticket' nombre = 'id_ticket'> <%= id_ticket_comentario %> </head>
+  <br>
+  <br>
+</div>
+
+<div class="container">
+  <div class="row justify-content-center">
+      <form id="nuevo_comentario" method="POST">
+        <label for="comment">Comentario: </label>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input id="id_ticket" name="id_ticket" type="hidden" value=<%=id_ticket_comentario %> >
+        <input type="text" id="texto_comentario" name="texto_comentario" placeholder="Escribe aqui...">
+        <br><br>
+        <input type="file" id="url_archivo_comentario" name="url_archivo_comentario">
+        <br><br>
+        <button type="submit" class="btn btn-primary mt-3" id="enviar" name="enviar">Submit</button>
+      </form>
+    </div>
+  </div>
+
+<div class = 'container'>
+  <br><br>
+  <head>Comentarios: </head>
+  <br><br>
+  <% for(let Comentario of Comentarios) {%>
+    <head> <%= Comentario.Nombre_Usuario %> : <%= Comentario.Texto_Comentario %>    </head>
+    <% if (Comentario.URL_Archivo != ''){ %>
+        <% if (Comentario.URL_Archivo.includes(".jpg") || Comentario.URL_Archivo.includes(".jpeg") || Comentario.URL_Archivo.includes(".png") || Comentario.URL_Archivo.includes(".gif")){ %>
+          <br><br>
+          <a href="/uploads/<%= Comentario.URL_Archivo %>" download = <%= Comentario.URL_Archivo %>>
+          <img src="/uploads/<%= Comentario.URL_Archivo %>" alt="Download foto adjunto">
+          </a> <br>
+        <% }else{ %>
+          <a href="/uploads/<%= Comentario.URL_Archivo %>" download = <%= Comentario.URL_Archivo %>>
+          <head>        Archivo Adjunto</head>
+          </a> <br>
+        <% } %>
+    <% } %>
+    <br>
+  <% } %>
+</div>
+
+    
+
+<%- include('../includes/foot.ejs') %>
