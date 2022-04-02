@@ -10,6 +10,7 @@ module.exports = class Pregunta{
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
+        
     }
 
 }

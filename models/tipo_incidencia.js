@@ -11,7 +11,6 @@ module.exports = class Tipo_incidencia{
 
     //Este método servirá para guardar de manera persistente el nuevo objeto. 
     tipo_incidencia_save() {
-        console.log(this.nombre_tipo_incidencia, this.SLA_tipo_incidencia, this.visibilidad_tipo_incidencia);
         db.execute('INSERT INTO tipo_incidencia(Nombre, SLA, Visibilidad_Tipo_Incidencia) VALUES (?, ?, ?)', 
             [
                 this.nombre_tipo_incidencia,
@@ -29,7 +28,7 @@ module.exports = class Tipo_incidencia{
     //7.3 ratio precio pizza extra grande
     static fetchPreguntas(id_tipo_incidencia) {
         return db.execute('SELECT p.Id_Pregunta, p.Texto_Pregunta FROM pregunta p, tipo_incidencia_pregunta tip WHERE p.Id_Pregunta = tip.Id_Pregunta AND tip.Id_Tipo_Incidencia = ?',
-        [id_tipo_incidencia]
+        [id_tipo_incidencia] 
         );
     }
 
@@ -37,6 +36,10 @@ module.exports = class Tipo_incidencia{
         return db.execute('SELECT p.Id_Pregunta, p.Texto_Pregunta FROM pregunta p, tipo_incidencia_pregunta tip WHERE p.Id_Pregunta = tip.Id_Pregunta AND tip.Id_Tipo_Incidencia = ? AND p.Id_Pregunta NOT IN (SELECT p.Id_Pregunta FROM pregunta_ticket WHERE Id_Ticket = ?)',
         [id_tipo_incidencia, id_ticket]
         );
+    }
+
+    static fetchAllPreguntas() {
+        return db.execute('SELECT * FROM pregunta P WHERE P.Visibilidad_Pregunta = 1');
     }
 
 }
