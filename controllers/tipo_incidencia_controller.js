@@ -1,8 +1,6 @@
 const path = require('path');
 const Tipo_incidencia = require('../models/tipo_incidencia');
 
-<<<<<<< HEAD
-=======
 exports.getTipo_Incidencia = (request, response, next) => {
     Tipo_incidencia.fetchAll()
         .then(([rowsTipo_Incidencia, fieldDataTipo_Incidencia]) => {
@@ -24,7 +22,6 @@ exports.postTipo_Incidencia = (request, response, next) => {
     tipo_incidencia_nuevo.tipo_incidencia_save();
     response.redirect('/tipo_incidencia');
 }
->>>>>>> bf69774... avance
 
 exports.getPreguntas = (request, response, next) => {
     const id = request.params.id_tipo_incidencia;
