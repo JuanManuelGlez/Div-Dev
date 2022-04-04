@@ -24,7 +24,7 @@ exports.comentarios_get = (request, response, next) => {
 }
 
 exports.nuevocomentario_post = (request, response, next) => {
-    if ('texto_comentario' in request.body){
+    
 
         // url_archivo_comentario = request.file;
         // console.log(url_archivo_comentario);
@@ -48,7 +48,7 @@ exports.nuevocomentario_post = (request, response, next) => {
         });
         // var ruta = '/comentario/'+request.body.id_ticket;
         // response.redirect(ruta);
-    }else{
+    
 
-    }
+    
 };

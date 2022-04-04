@@ -79,7 +79,7 @@ document.getElementById("select_tipo_incidencia").onchange = () =>
         let cont = 0;
         for(let pregunta of response.preguntas)
         {
-            preguntas.innerHTML += '<label for="respuesta' + cont + '">' + pregunta.Texto_Pregunta + ': </label> <input type="text" id="respuesta' + cont + '" name="respuesta' + cont + '"><br> ';
+            preguntas.innerHTML += '<div class="col"> <label for="respuesta' + cont + '">' + pregunta.Texto_Pregunta + ' </label> </div> <div class="col"> <input type="text" id="respuesta' + cont + '" name="respuesta' + cont + '"> </div> <br> ';
             preguntas.innerHTML += '<input type="hidden" id="pregunta' + cont + '" name="pregunta' + cont + '" value="' + pregunta.Id_Pregunta + '">';
             cont++;
         }
