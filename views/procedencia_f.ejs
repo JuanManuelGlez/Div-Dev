@@ -5,12 +5,12 @@
         <div class="row justify-content-center">
             <%for (let procedencia of procedencias){ %>
                 <p>
-                    HOLI
                     <%=procedencia.Nombre_Procedencia %> <br>
                 </p>
             <%}%>
             <form id="nueva_procedencia" method="POST">
-                <div id="Nombre_Procedencia"  style="display: none">
+                <input type="hidden" name="_csrf"id="_csrf" value="<%= csrfToken %>"></input>
+                <div id="Nombre_Procedencia">
                   <label for="Nombre_Procedencia">Nombre de Nueva Procedencia: </label>
                   <input type="text" id="Nombre_Procedencia" name="Nombre_Procedencia" placeholder="assdasdadsqd">
                 <br>

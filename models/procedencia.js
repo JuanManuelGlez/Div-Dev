@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 module.exports = class Procedencia{
 
     constructor(nombre_procedencia) {
-        this.nombre_procedencia;
+        this.nombre_procedencia=nombre_procedencia;
     }
 
     save() {
