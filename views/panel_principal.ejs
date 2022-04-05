@@ -96,17 +96,52 @@
                                     <div class="col"><button class="btn btn-primary" type="button"
                                             style="background: rgb(0,0,0);width: 100%;margin-top: 40px;">Asignación<i
                                                 class="fa fa-user-plus" style="margin-left: 15px;"></i></button></div>
+                                    
                                 </div>
+
+                                
 
 
                             </form>
 
                         </div>
 
-                        <!-- Modal footer -->
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+                    
+
+                        <div id="commentShow" style="display:none;" class="modal-body">
+                            
+                            
                         </div>
+                            <div >
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col">
+                                      <div class="card shadow-0 border" style="background-color: #f0f2f5;">
+                                        <div class="card-body p-4">
+                                          <div class="form-outline mb-4">
+                                            <form id="nuevo_comentario" method="POST">
+                                                <label for="comment">Comentario: </label>
+                                                <input type="hidden" name="_csrff" id="_csrff" value="<%= csrfToken %>"></input>
+                                                <input id="id_ticket" name="id_ticket" type="hidden" value="">
+                                                <input type="text" id="texto_comentario" name="texto_comentario" placeholder="Escribe aqui...">
+                                                <button type="button" class="btn btn-success" id="Agregar"> Agregar Comentario </button>
+                                            </form>
+                                          </div>
+                                        <div id="comentarios"></div>
+                                          
+                                  
+                                         
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+                                <!-- </div> end commentarios -->
+                            </div>
+                            
+                            
+                        </div>
+                        
+                        
 
                     </div>
                 </div>
@@ -126,9 +161,9 @@
                     <div class="row" style="margin-top: 30px;">
                         <% for(let ticket of tickets) {%>
 
-                            <div onClick="openTicket(this)" data-bs-toggle="modal" data-bs-target="#myModal"
-                                id="boton<%= ticket.Id_Ticket %>" class="col" style="cursor:pointer">
-                                <div class="card"
+                            <div  onClick="openTicket(this)" data-bs-toggle="modal" data-bs-target="#myModal"
+                                id="boton<%= ticket.Id_Ticket %>" class="col" style="cursor:pointer;margin-bottom:20px;">
+                                <div class="card h-100"
                                     style="overflow: hidden;margin-top:10px;margin-bottom:10px;box-shadow: 1px 4px 8px rgba(0,0,0,0.46);">
                                     <div class="card-body" style="text-align: left;width: 262px;overflow: hidden;">
                                         <h4 class="card-title"
