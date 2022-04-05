@@ -3,6 +3,40 @@ $(document).ready(function () {
     $('.form-select-label').selectpicker();
 });
 
+$(document).on('keyup', '.form-select-label .bs-searchbox input', function (e) {
+    var input = e.target.value;
+    if(document.getElementsByClassName("no-results").length == 1)
+    {
+        document.getElementsByClassName("no-results")[0].innerHTML = "No se encontro la label " + input;
+
+        if(input.length > 30)
+        {
+            document.getElementsByClassName("no-results")[0].innerHTML += '<button type="button" disabled id="agregaLabel">Agregar</button>';
+        }
+        else
+        {
+            document.getElementsByClassName("no-results")[0].innerHTML += '<button type="button" id="agregaLabel">Agregar</button>';
+        }
+        
+        document.getElementById("agregaLabel").addEventListener('click', function (event) {
+
+            let labels_actuales = document.querySelector('[data-id="select_labels"]').title.split(", ");
+
+            for(label of labels_actuales)
+            {
+                document.getElementById(label).setAttribute('selected', true);
+            }
+
+            let select_labels = document.getElementById("select_labels");
+            
+            select_labels.innerHTML = '<option id=' + input + ' value=' + input + '>' + input + '</option>' + select_labels.innerHTML;
+            $('.form-select-label').selectpicker('refresh');
+            event.stopPropagation();
+        });
+    }
+
+});
+
 document.getElementById("select_tipo_incidencia").onchange = () =>
 {
     let campos = document.getElementById("campos_ticket");
@@ -14,7 +48,6 @@ document.getElementById("select_tipo_incidencia").onchange = () =>
     campos.style.display = "block";
 
     preguntas.innerHTML = '';
-
     fetch(rutaPreguntas, {
         method: 'GET',
         headers: {
@@ -36,3 +69,4 @@ document.getElementById("select_tipo_incidencia").onchange = () =>
     });
     
 }
+

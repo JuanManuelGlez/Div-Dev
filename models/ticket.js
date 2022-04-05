@@ -66,7 +66,18 @@ module.exports = class Ticket{
         return db.execute('SELECT * FROM label WHERE Visibilidad_Label = 1');
     }
 
-    static assignLabel(id_ticket, id_label) {
+    static async assignLabel(id_ticket, id_label) {
+        await db.execute('SELECT * FROM label WHERE Id_Label = ?', [id_label])
+        .then(([rows, fieldData]) =>{
+            if(rows.length == 0)
+            {
+                db.execute('INSERT INTO label VALUES(?, ?)', [id_label, 1])
+                .then()
+                .catch(err => console.log(err));
+            }
+        })
+        .catch(err => console.log(err));
+
         return db.execute('INSERT INTO label_ticket VALUES(?, ?)',
         [id_label, id_ticket])
         .then()

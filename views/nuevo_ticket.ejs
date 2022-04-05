@@ -72,9 +72,9 @@
                             <div class="col">
                                 <div class="dropdown shadow">
                                     <select class="form-select-label" multiple data-live-search="true" id="select_labels" name="labels" aria-label="Default select example">
-                                        <option selected disabled>Labels:</option>
+                                        <option id="Labels:" selected disabled>Labels:</option>
                                         <% for(let label of labels) {%>
-                                          <option value="<%= label.Id_Label %>"><%= label.Id_Label %></option>
+                                          <option id="<%= label.Id_Label %>" value="<%= label.Id_Label %>"><%= label.Id_Label %></option>
                                         <% }%>
                                     </select>
                                 </div>
