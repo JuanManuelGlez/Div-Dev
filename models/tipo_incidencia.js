@@ -3,22 +3,25 @@ const db = require('../util/database');
 module.exports = class Tipo_incidencia{
 
     //Constructor de la clase. Sirve para crear un nuevo objeto, y en él se definen las propiedades del modelo
-    constructor() {
+    constructor(nombre_tipo_incidencia,SLA_tipo_incidencia) {
+        this.nombre_tipo_incidencia = nombre_tipo_incidencia;
+        this.SLA_tipo_incidencia = SLA_tipo_incidencia;
+        this.visibilidad_tipo_incidencia = 1;
     }
 
     //Este método servirá para guardar de manera persistente el nuevo objeto. 
-<<<<<<< HEAD
-    save() {
-=======
     tipo_incidencia_save() {
-        db.execute('INSERT INTO tipo_incidencia(Nombre, SLA, Visibilidad_Tipo_Incidencia) VALUES (?, ?, ?)', 
+        return db.execute('INSERT INTO tipo_incidencia(Nombre, SLA, Visibilidad_Tipo_Incidencia) VALUES (?, ?, ?)', 
             [
                 this.nombre_tipo_incidencia,
                 this.SLA_tipo_incidencia,
                 this.visibilidad_tipo_incidencia
             ]    
         );
->>>>>>> bf69774... avance
+    }
+
+    static fetch_lastinsertion(){
+        return db.execute('SELECT MAX(Id_Tipo_Incidencia) FROM tipo_incidencia');
     }
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.

@@ -20,6 +20,13 @@ exports.postTipo_Incidencia = (request, response, next) => {
     console.log(request.body);
     const tipo_incidencia_nuevo = new Tipo_incidencia(request.body.nombre_tipo_incidencia, request.body.sla_tipo_incidencia);
     tipo_incidencia_nuevo.tipo_incidencia_save();
+    Tipo_incidencia.fetch_lastinsertion()
+        .then(([row_lastinsertion, fieldDatalastinsertion]) => {
+            for(let i = 0; i <= request.body.contador_nuevas; i++){
+                
+            }
+        })
+        .catch(err => console.log(err));
     response.redirect('/tipo_incidencia');
 }
 
