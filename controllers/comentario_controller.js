@@ -37,7 +37,7 @@ exports.nuevocomentario_post = (request, response, next) => {
         // }
         // console.log(url_archivo_comentario);
         url_archivo_comentario = 'no hay archivo';
-        const comentario_nuevo= new Comentario(request.session.usuario, request.body.id_ticket, request.body.texto_comentario, url_archivo_comentario);
+        const comentario_nuevo= new Comentario(10, request.body.id_ticket, request.body.texto_comentario, url_archivo_comentario);
         console.log(comentario_nuevo);
     
         comentario_nuevo.comentario_save()
