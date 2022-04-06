@@ -48,7 +48,8 @@ exports.login_get = (request, response, next) => {
 exports.login_post = (request, response, next) => {
   Usuario.findOne(request.body.correo)
     .then(([rows, fielData]) => {
-      if (rows.length < 1) {
+      if (rows.length < 1) 
+      {
         return response.redirect("usuario/login");
       }
       const usuario = new Usuario(
@@ -57,23 +58,21 @@ exports.login_post = (request, response, next) => {
         rows[0]["Contraseña"],
         ""
       );
-      bcrypt
-        .compare(request.body.contrasenia, usuario.contrasenia_usuario)
+      bcrypt.compare(request.body.contrasenia, usuario.contrasenia_usuario)
         .then((doMatch) => {
           if (doMatch) {
             request.session.isLoggedIn = true;
             request.session.usuario = usuario;
             request.session.correo = usuario.login_usuario;
             return request.session.save((err) => {
-              response.redirect("/archivo");
+              response.redirect("/tickets/lista");
             });
           }
-          response.redirect("/metricas");
-          console.log("hi not working");
+          response.redirect("/usuarios/login");
         })
         .catch((err) => {
           console.log(err);
-          response.redirect("/metricas");
+          response.redirect("/usuarios/login");
         });
     })
     .catch((error) => {

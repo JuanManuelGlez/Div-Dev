@@ -71,17 +71,24 @@ exports.nuevo_post = (request, response, next) => {
     request.body.tipo_incidencia,
     request.body.procedencia
   );
-  ticketNuevo
-    .save()
+  ticketNuevo.save()
     .then((result) => {
       let idNuevo = result[0].insertId; //probablemente una mejor manera de hacer esto
       Ticket.assignEstado(idNuevo, 1);
 
-      for (label of request.body.labels) {
+      for (label of request.body.labels) 
+      {
         Ticket.assignLabel(idNuevo, label);
       }
 
-      for (let i = 0; i < request.body.numPreguntas; i++) {
+      if(request.session.isLoggedIn)
+      {
+        let id_usuario = request.session.usario.getId()[0];
+        Ticket.assignUsuario(id_ticket, id_usuario, "Creador");
+      }
+
+      for (let i = 0; i < request.body.numPreguntas; i++) 
+      {
         let actualP = "pregunta" + i;
         let actualR = "respuesta" + i;
         Ticket.assignPregunta(
