@@ -16,6 +16,6 @@ const DB_DEV = {
     password: '',
 };
 
-const pool = mysql.createPool(DB_ANDRES);
+const pool = mysql.createPool(DB_DEV);
 
 module.exports = pool.promise();
