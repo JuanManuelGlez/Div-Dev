@@ -109,14 +109,19 @@ document.getElementById("boton_comentarios").onclick = () =>
     .then(response => {
         comentarios.innerHTML = '';
         //comentarios_nuevas.innerHTML = '';
-
-        
-
                                               
 
         for(let comentario of response.comentarios)
-        {
-            comentarios.innerHTML += '<div class="card mb-4"> <div class="card-body"> <p>' + comentario.Texto_Comentario + '</p> <div class="d-flex justify-content-between"> <div class="d-flex flex-row align-items-center"> <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp" alt="avatar" width="25" height="25" /> <p class="small mb-0 ms-2">' + comentario.Nombre_Usuario + '</p> </div> <div class="d-flex flex-row align-items-center"> <p class="small text-muted mb-0"> Comentado en: '+ comentario.Fecha_y_Hora +'</p> </div> </div> </div> </div>'
+        {   
+            if(comentario.URL_Archivo != ''){
+                if (comentario.URL_Archivo.includes(".jpg") || comentario.URL_Archivo.includes(".jpeg") || comentario.URL_Archivo.includes(".png") || comentario.URL_Archivo.includes(".gif")){
+                    comentarios.innerHTML += '<div class="card mb-4"> <div class="card-body"> <p>' + comentario.Texto_Comentario + '</p> <a href="/uploads/'+comentario.URL_Archivo+'" download ='+comentario.URL_Archivo+'> <img src="/uploads/'+comentario.URL_Archivo+'" alt="Download foto adjunta"> </a> <div class="d-flex justify-content-between"> <div class="d-flex flex-row align-items-center"> <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp" alt="avatar" width="25" height="25" /> <p class="small mb-0 ms-2">' + comentario.Nombre_Usuario + '</p> </div> <div class="d-flex flex-row align-items-center"> <p class="small text-muted mb-0"> Comentado en: '+ comentario.Fecha_y_Hora +'</p> </div> </div> </div> </div>'
+                }else{
+                    comentarios.innerHTML += '<div class="card mb-4"> <div class="card-body"> <p>' + comentario.Texto_Comentario + '</p> <a href="/uploads/'+comentario.URL_Archivo+'" download = '+comentario.URL_Archivo+' > <p> Archivo Adjunto </p> </a> <div class="d-flex justify-content-between"> <div class="d-flex flex-row align-items-center"> <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp" alt="avatar" width="25" height="25" /> <p class="small mb-0 ms-2">' + comentario.Nombre_Usuario + '</p> </div> <div class="d-flex flex-row align-items-center"> <p class="small text-muted mb-0"> Comentado en: '+ comentario.Fecha_y_Hora +'</p> </div> </div> </div> </div>'
+                }
+            }else{
+                comentarios.innerHTML += '<div class="card mb-4"> <div class="card-body"> <p>' + comentario.Texto_Comentario + '</p> <div class="d-flex justify-content-between"> <div class="d-flex flex-row align-items-center"> <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp" alt="avatar" width="25" height="25" /> <p class="small mb-0 ms-2">' + comentario.Nombre_Usuario + '</p> </div> <div class="d-flex flex-row align-items-center"> <p class="small text-muted mb-0"> Comentado en: '+ comentario.Fecha_y_Hora +'</p> </div> </div> </div> </div>'
+            }
         }
     }).catch(err => {
         console.log(err);
@@ -125,7 +130,6 @@ document.getElementById("boton_comentarios").onclick = () =>
   document.getElementById("commentShow").style.display = "flex";
 
 }
-
 
 document.getElementById("Agregar").onclick = () =>
 { 
