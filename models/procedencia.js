@@ -18,8 +18,13 @@ module.exports = class Procedencia{
 
 
     static fetchProcedencias() {
-        return db.execute('SELECT Nombre_Procedencia FROM procedencia WHERE Visibilidad_Procedencia = 1');
+        return db.execute('SELECT Id_Procedencia,Nombre_Procedencia,Visibilidad_Procedencia FROM procedencia');
     }
+
+    static fetchProcedencia(id_procedencia) {
+        return db.execute('SELECT Id_Procedencia,Nombre_Procedencia,Visibilidad_Procedencia FROM procedencia WHERE Id_Procedencia=?',[id_procedencia]);
+    }
+
 
     static update(id_procedencia,nombre_procedencia,visibilidad_procedencia){
         return db.execute('UPDATE procedencia SET Nombre_Procedencia=?, Visibilidad_Procedencia=? WHERE Id_Procedencia=?',[nombre_procedencia,visibilidad_procedencia,id_procedencia])
