@@ -100,14 +100,12 @@ module.exports = class Ticket{
 
     static assignIncidencia(id_ticket, id_incidencia){
         return db.execute('UPDATE ticket SET Id_Tipo_Incidencia=? WHERE Id_Ticket=?',
-        [id_incidencia,id_ticket])
-        .then()
-        .catch(err => console.log(err));
+        [id_incidencia, id_ticket]);
     }
 
     static assignUsuario(id_ticket, id_usuario, cargo){
-        return db.execute('INSERT INTO ususuario_ticket VALUES(?, ?, ?, CURRENT_TIMESTAMP',
-        [id_ticket, id_usuario, cargo])
+        return db.execute('INSERT INTO usuario_ticket VALUES(?, ?, ?, CURRENT_TIMESTAMP)',
+        [id_usuario, id_ticket, cargo])
         .then()
         .catch(err => console.log(err));
     }
