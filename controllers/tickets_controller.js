@@ -1,6 +1,7 @@
 const path = require("path");
 const Ticket = require("../models/ticket");
 const Tipo_incidencia = require("../models/tipo_incidencia");
+const Usuario = require("../models/usuario");
 const Comentario = require("../models/comentario");
 
 exports.lista = (request, response, next) => {
@@ -71,17 +72,28 @@ exports.nuevo_post = (request, response, next) => {
     request.body.tipo_incidencia,
     request.body.procedencia
   );
-  ticketNuevo
-    .save()
+  ticketNuevo.save()
     .then((result) => {
       let idNuevo = result[0].insertId; //probablemente una mejor manera de hacer esto
       Ticket.assignEstado(idNuevo, 1);
 
-      for (label of request.body.labels) {
+      for (label of request.body.labels) 
+      {
         Ticket.assignLabel(idNuevo, label);
       }
 
-      for (let i = 0; i < request.body.numPreguntas; i++) {
+      if(request.session.isLoggedIn)
+      {
+        let usuarioAct = request.session.usuario;
+        Usuario.getId(usuarioAct.login_usuario, usuarioAct.nombre_usuario)
+        .then(([rows, fieldData]) => {
+          Ticket.assignUsuario(idNuevo, rows[0].Id_Usuario, "Creador");
+        })
+        .catch((err) => {console.log(err)});
+      }
+
+      for (let i = 0; i < request.body.numPreguntas; i++) 
+      {
         let actualP = "pregunta" + i;
         let actualR = "respuesta" + i;
         Ticket.assignPregunta(
