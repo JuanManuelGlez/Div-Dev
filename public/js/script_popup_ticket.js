@@ -127,7 +127,7 @@ document.getElementById("boton_comentarios").onclick = () =>
 }
 
 
-document.getElementById("Agregar").onclick = () =>
+function submitForm()
 { 
   const id_ticket = document.getElementById("Id_Ticket").value;
 
