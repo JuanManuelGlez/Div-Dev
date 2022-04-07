@@ -6,21 +6,14 @@ function openUsuario(element) {
 
 
     let IdUsuarioDiv = document.getElementById("Id_Usuario");
-    let select_rol = document.getElementById("id_rol");
+    let select_rol_ = document.getElementById("id_rol");
     let nombre_usuario = document.getElementById("nombre");
     let url_foto = document.getElementById("foto");
     let login = document.getElementById("login");
-
-    // let asunto = document.getElementById("asunto");
-    // let id_ticket_div = document.getElementById("id_ticket");
-    // let select_estado = document.getElementById("select_estado");
-    // let estado_actual = document.getElementById("Estado_Actual");
-    // let select_tipo_incidencia = document.getElementById("select_tipo_incidencia");
-    // let select_prioridad = document.getElementById("select_prioridad");
-    // let boton_comentarios = document.getElementById("boton_comentarios");
-    // let descripcion = document.getElementById("descripcion");
+    let select_rol = document.getElementById("select_rol");
 
     let rutaUsuarios = '../usuario/datos/' + id_usuario;
+    
 
     fetch(rutaUsuarios, {
         method: 'GET',
@@ -30,12 +23,15 @@ function openUsuario(element) {
     })
     .then(response => response.json())
     .then(response => {
-        //id_usuario_div.innerHTML = id_usuario;
-        //select_rol.namedItem("rol"+response.datosGenerales[0].Id_Rol).selected = true;
+
         IdUsuarioDiv.innerHTML = response.datosGenerales[0].Id_Usuario;
         nombre_usuario.innerHTML = response.datosGenerales[0].Nombre_Usuario;
         url_foto.src = response.datosGenerales[0].URL_Foto;
         login.innerHTML = response.datosGenerales[0].Login;
+        select_rol.namedItem("rol"+response.datosGenerales[0].Id_Rol).selected = true;
+        console.log(response.rol);
+        
+
 
     }).catch(err => {
         console.log(err);
@@ -45,11 +41,30 @@ function openUsuario(element) {
 }
 
 
-// document.getElementById("boton_comentarios").onclick = () =>
-// { 
-//   let ruta = '/comentario/'+document.getElementById("Id_Ticket").value;
-//   window.location.href = ruta;
-// }
+document.getElementById("enviar").onclick = () =>
+{
+    const idUsuario = document.getElementById("Id_Usuario").value;
+    let select_rol = document.getElementById("select_rol");
+    const csrf = document.getElementById('_csrf').value;
+    data = {
+      rol:select_rol.value,
+    }
+
+    fetch(idUsuario, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+          'csrf-token': csrf
+      },
+      body:JSON.stringify(data)
+  })
+  .then(response => {
+      alert("Datos guardados");
+      location.reload();
+  }).catch(err => {
+      console.log(err);
+  });
+}
 
 function closeUsuario() {
   document.getElementById("Profile").style.display = "none";

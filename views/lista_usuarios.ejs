@@ -30,19 +30,39 @@
         
               <!-- Modal body -->
               <div class="modal-body">
-                  <form>
-
-                  </form>
-
-
-                  <div style="display:none" id="Id_Usuario"></div>
-                  <div id="id_rol"></div>
-                  <select class="form-select" id="id_rol" name="id_rol" aria-label="Default select example">
-                      <% for (let rol of rols){%>
-                          <option selected="false" value="<%=rol.Id_Rol%>" id="rol<%= rol.Id_Rol %>"><%=rol.Id_Rol%></option>
-                      <%}%>
-                  </select>
-                  <div id="login"></div>
+                  <h6> Información de usuario:</h6>
+                  <br>
+                  <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>"></input>
+                  <input type="hidden" id="Id_Usuario"></input>
+                    <div class="row">
+                      <div class="col">
+                          Rol:
+                      </div>
+                      <div class="col">
+                        <div id="id_rol"></div>
+                        <select class="form-select" id="select_rol" name="rol" aria-label="Default select example">
+                            <% for (let rol of rols){%>
+                                <option selected="false" value="<%=rol.Id_Rol%>" id="rol<%= rol.Id_Rol %>"> <%=rol.Nombre_Rol%> </option>
+                            <%}%>
+                        </select>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col">
+                          Correo electrónico:
+                      </div>
+                      <div class = "col">
+                        <div id="login"></div>
+                      </div>
+                    </div>
+                    <div class="row">
+                        <button type="button" class="btn btn-primary" id="enviar"
+                                            type="button"
+                                            style="background: rgb(0,0,0);width: 100%;margin-top: 40px;">Actualizar<i
+                                                class="fa fa-refresh" style="margin-left: 15px;"></i></button>
+                    </div>
+                  
               </div>
         
               <!-- Modal footer -->
@@ -69,7 +89,7 @@
                 <div id="<%=usuario.Id_Usuario %>" onClick="openUsuario(this)" data-bs-toggle="modal" data-bs-target="#myModal" class="row" style="cursor: pointer;margin: 20px -12px;border-radius: 5px;box-shadow: 0px 0px 9px rgba(147,147,147,0.55);padding: 5px;">
                     <div class="col" style="font-size: 22px;text-align: center;"><span style="color: rgb(0,0,0);"><%= usuario.Nombre_Usuario %></span></div>
                     <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);"><%= usuario.Login %></span></div>
-                    <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);">Técnico de Soporte</span></div>
+                    <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);"><%= usuario.Nombre_Rol %></span></div>
                     <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);">21</span></div>
                    <!-- // <button id="<%=usuario.Id_Usuario %>" onClick="openUsuario(this)" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
                         Open modal
