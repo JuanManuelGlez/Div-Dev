@@ -31,6 +31,14 @@ module.exports = class Usuario{
         });
     }
 
+    static getId(login, nombre)
+    {
+        return db.execute('SELECT Id_Usuario FROM usuario WHERE Login=? AND Nombre_Usuario=?',
+            [login, nombre])
+        .then()
+        .catch((err) => {console.log(err);});
+    }
+
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
         return db.execute('SELECT * FROM usuario u, rol r WHERE r.Id_Rol = u.Id_Rol');
