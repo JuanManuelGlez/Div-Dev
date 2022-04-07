@@ -95,20 +95,27 @@ exports.getDatosUsuario = (request, response, next) => {
 
   Usuario.fetchOne(request.params.id_usuario)
     .then(([rowsUsuario, fielData]) => {
-      Usuario.fetchRolUsuario(request.params.id_usuario)
-      .then(([rowsRol, fielData]) => {
-        response.status(200).json({
-          datosGenerales: rowsUsuario,
-          rol : rowsRol
-        });
-      })
+      Usuario.countActiveTickets(request.params.id_usuario)
+      .then(([rowsTickets, fielData]) => {
+        Usuario.fetchRolUsuario(request.params.id_usuario)
+        .then(([rowsRol, fielData]) => {
+          response.status(200).json({
+            datosGenerales: rowsUsuario,
+            rol : rowsRol,
+            total : rowsTickets
+          });
+        })
+      .catch((err) => {
+        console.log(err);
+      });
+    })
     .catch((err) => {
       console.log(err);
     });
-  })
+    })
     .catch((err) => {
       console.log(err);
-    });
+  });
 };
 
 exports.usuario_post = (request, response, next) => {

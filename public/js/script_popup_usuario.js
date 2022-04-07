@@ -11,6 +11,7 @@ function openUsuario(element) {
     let url_foto = document.getElementById("foto");
     let login = document.getElementById("login");
     let select_rol = document.getElementById("select_rol");
+    let total= document.getElementById("total_tickets");
 
     let rutaUsuarios = '../usuario/datos/' + id_usuario;
     
@@ -30,6 +31,8 @@ function openUsuario(element) {
         login.innerHTML = response.datosGenerales[0].Login;
         select_rol.namedItem("rol"+response.datosGenerales[0].Id_Rol).selected = true;
         console.log(response.rol);
+
+        total.innerHTML = response.total[0].Total;
         
 
 

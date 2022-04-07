@@ -34,6 +34,7 @@
                   <br>
                   <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>"></input>
                   <input type="hidden" id="Id_Usuario"></input>
+                  
                     <div class="row">
                       <div class="col">
                           Rol:
@@ -54,6 +55,15 @@
                       </div>
                       <div class = "col">
                         <div id="login"></div>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col">
+                        Total de Tickets Asignados:
+                      </div>
+                      <div class="col">
+                        <div id="total_tickets"> </div>
                       </div>
                     </div>
                     <div class="row">
@@ -90,7 +100,7 @@
                     <div class="col" style="font-size: 22px;text-align: center;"><span style="color: rgb(0,0,0);"><%= usuario.Nombre_Usuario %></span></div>
                     <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);"><%= usuario.Login %></span></div>
                     <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);"><%= usuario.Nombre_Rol %></span></div>
-                    <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);">21</span></div>
+                    <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);"><%= usuario.Total %></span></div>
                    <!-- // <button id="<%=usuario.Id_Usuario %>" onClick="openUsuario(this)" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
                         Open modal
                       </button> -->
