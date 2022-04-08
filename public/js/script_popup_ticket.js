@@ -131,17 +131,11 @@ document.getElementById("boton_comentarios").onclick = () =>
 
 }
 
-<<<<<<< HEAD
-
-function submitForm()
-=======
-document.getElementById("Agregar").onclick = () =>
->>>>>>> 6b59fc287088ce1299d6a6238095584e2c6e9cf5
-{ 
+function submitForm(){
   const id_ticket = document.getElementById("Id_Ticket").value;
 
   //document.getElementById("Id_Ticket").value = id_ticket;
-    const csrf = document.getElementById("_csrff").value;
+    const csrf = document.getElementById("_csrf").value;
 
     let comentarios = document.getElementById("comentarios");
     let comentarios_nuevos = document.getElementById("nuevoComentario");
@@ -229,4 +223,5 @@ document.getElementById("enviar").onclick = () =>
 
 function closeTicket() {
   document.getElementById("Ticket").style.display = "none";
+  document.getElementById("commentShow").style.display = "none";
 }

@@ -88,85 +88,46 @@ exports.logout = (request, response, next) => {
 
 // MODIFICAR USUARIO CU - EN PROCESO
 
-// //Esto ya creo que no se usa hay que checarlo
-// exports.usuario_get=(request,response,next) => {
-//     Tipo_incidencia.fetchAll()
-//         .then(([rowsIncidencias,fielDataIncidencias])=>{
-//             Ticket.fetchPregunta_Ticket(request.params.id_ticket)
-//             .then(([rowsPreguntas,fielDataPregunta])=>{
-//                 Ticket.fetchPrioridades()
-//                 .then(([rowsPrioridades,fieldDataPrioridades])=>{
-//                     Ticket.fetchEstado()
-//                     .then(([rowsEstados,fielDataEstados])=>{
-//                         Ticket.fetchEstado_Ticket(request.params.id_ticket)
-//                             .then(([rowsEstado,fielDataEstado])=>{
-//                                 Ticket.fetchLabel_Ticket(request.params.id_ticket)
-//                                 .then(([rowsLabels,fielDataLabels])=>{
-//                                     Ticket.fetchOne(request.params.id_ticket)
-//                                     .then(([rowsTickets,fielData])=>{
-//                                         response.render('panel_principal',{
-//                                             tickets:rowsTickets,
-//                                             prioridades:rowsPrioridades,
-//                                             labels:rowsLabels,
-//                                             estado:rowsEstado,
-//                                             estados:rowsEstados,
-//                                             preguntas:rowsPreguntas,
-//                                             incidencias:rowsIncidencias
-//                                         });
-//                                     })
-//                                     .catch(err =>{
-//                                         console.log(err);
-//                                     });
-//                             })
-//                             .catch(err=>{
-//                                 console.log(err);
-//                             });
 
-//                             }).catch(err=>{
-//                                 console.log(err);
-//                             });
-//                     })
-//                     .catch(err=>{
-//                         console.log(err);
-//                     });
-
-//                 }) .catch(err=>{
-//                     console.log(err);
-//                 })
-//             }).catch(err=>{
-//                 console.log(err);
-//             })
-
-//         }).catch(err=>{
-//             console.log(err);
-//         });
-
-// };
-
-// exports.usuario_post=(request,response,next)=>{
-//     Ticket.update(request.params.id_ticket,request.body.estado,request.body.prioridad,request.body.Estado_Actual,request.body.tipo_incidencia)
-//         .then(()=>{
-//             for(let i = 0; i < request.body.numPreguntas; i++)
-//             {
-//                 Ticket.assignPregunta(request.params.id_ticket, request.body.preguntas[i].pregunta, request.body.preguntas[i].respuesta); //Esto funciona, no se si sea lo mejor
-//             }
-//             response.status(200).json({});
-//         }).catch(err=>{
-//             console.log(err);
-//         })
-// }
 
 exports.getDatosUsuario = (request, response, next) => {
   const id = request.params.id_usuario;
 
   Usuario.fetchOne(request.params.id_usuario)
-    .then(([rowsTicket, fielData]) => {
-        console.log(rowsTicket);
-      response.status(200).json({
-        datosGenerales: rowsTicket,
+    .then(([rowsUsuario, fielData]) => {
+      Usuario.countActiveTickets(request.params.id_usuario)
+      .then(([rowsTickets, fielData]) => {
+        Usuario.fetchRolUsuario(request.params.id_usuario)
+        .then(([rowsRol, fielData]) => {
+          response.status(200).json({
+            datosGenerales: rowsUsuario,
+            rol : rowsRol,
+            total : rowsTickets
+          });
+        })
+      .catch((err) => {
+        console.log(err);
       });
     })
     .catch((err) => {
       console.log(err);
     });
+    })
+    .catch((err) => {
+      console.log(err);
+  });
 };
+
+exports.usuario_post = (request, response, next) => {
+  Usuario.update(
+    request.params.id_usuario,
+    request.body.rol,
+  )
+    .then(() => {
+      response.status(200).json({});
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+

@@ -72,7 +72,7 @@
                         <br>
 
                         <h6>Preguntas:  </h6>
-                        <form>
+               
                             <div class="row">
                                 <div class="row" id="preguntas">
                                     </div>
@@ -80,7 +80,7 @@
                                         </div>
                                         <input type="hidden" id="numPreguntas" name="numPreguntas" value="0">
                                     </div>
-                                </form>
+                            
 
                                 <div class="row">
 
@@ -111,55 +111,41 @@
 
                         <div id="commentShow" style="display:none;" class="modal-body">
                             
-                            
-                        </div>
-                            <div >
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col">
-                                      <div class="card shadow-0 border" style="background-color: #f0f2f5;">
-                                        <div class="card-body p-4">
-                                          <div class="form-outline mb-4">
-                                            
-                                                <label for="comment">Comentario: </label>
-                                                <input type="hidden" name="_csrff" id="_csrff" value="<%= csrfToken %>"></input>
-                                                <input id="id_ticket" name="id_ticket" type="hidden" value="">
-                                                <input type="text" id="texto_comentario" name="texto_comentario" placeholder="Escribe aqui...">
-                                               
-                                                <button onClick="submitForm()" type="button" class="btn btn-success" id="Agregar"> Agregar Comentario </button>
-                                                
-                                                <script>
-                                                    var input = document.getElementById("texto_comentario");
-                                                    input.addEventListener("keyup", function(event) {
-                                                      if (event.keyCode === 13) {
-                                                       event.preventDefault();
-                                                       console.log("hi");
-                                                       document.getElementById("Agregar").click();
-                                                      }
-                                                    });
-                                                    </script>
-                                                <button type="button" class="btn btn-success" id="Agregar"> Agregar Comentario </button>
-                                                <input type="file" id="url_archivo_comentario" name="url_archivo_comentario">
-                                            
-                                          </div>
-
-                                        
-                                        <div id="comentarios"></div>
-                                          
-                                  
-                                         
+                                <div >
+                                    <div class="row d-flex justify-content-center">
+                                        <div class="col">
+                                            <div class="card shadow-0 border" style="background-color: #f0f2f5;">
+                                                <div class="card-body p-4">
+                                                    <div class="form-outline mb-4">
+                                                        <!-- <form id="nuevo_comentario" method="POST" enctype="multipart/form-data"> -->
+                                                            <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>"></input>
+                                                            <label for="comment">Comentario: </label>
+                                                            <input id="id_ticket" name="id_ticket" type="hidden" value="">
+                                                            <input type="text" id="texto_comentario" name="texto_comentario" placeholder="Escribe aqui...">
+                                                        
+                                                            <button onClick="submitForm()"  type="button" class="btn btn-success" id="Agregar"> Agregar Comentario </button>
+                                                            <input type="file" id="url_archivo_comentario" name="url_archivo_comentario">
+                                                            <script>
+                                                                var input = document.getElementById("texto_comentario");
+                                                                input.addEventListener("keyup", function(event) {
+                                                                if (event.keyCode === 13) {
+                                                                event.preventDefault();
+                                                                console.log("hi");
+                                                                document.getElementById("Agregar").click();
+                                                                }
+                                                                });
+                                                            </script> 
+                                                        <!-- </form> -->
+                                                                                            
+                                                    </div> <div id="comentarios"></div>    
+                                                </div>
+                                            </div>
                                         </div>
-                                      </div>
                                     </div>
-                                </div>
-                                <!-- </div> end commentarios -->
+                                </div>                       
                             </div>
-                            
-                            
                         </div>
-                        
-                        
-
-                    </div>
+                    
                 </div>
             </div>
 

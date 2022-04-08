@@ -41,12 +41,17 @@ module.exports = class Usuario{
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
-        return db.execute('SELECT * FROM usuario');
+        return db.execute('SELECT R.Id_Rol, R.Nombre_Rol, U.Id_Rol, U.URL_Foto, U.Id_Usuario, U.Login, U.Contraseña, U.Nombre_Usuario, COUNT(T.Id_Ticket) AS "Total" FROM rol R, usuario_ticket T, usuario U WHERE R.Id_Rol = U.Id_Rol AND T.Id_Usuario = U.Id_Usuario GROUP BY U.Id_Usuario;');
     }
 
     static findOne(login_usuario) {
         return db.execute('SELECT * FROM usuario WHERE Login=?',
             [login_usuario]);
+    }
+
+    static countActiveTickets(id_usuario) {
+        return db.execute('SELECT COUNT(T.Id_Ticket) as "Total" FROM usuario_ticket T WHERE T.Id_Usuario = ? ',
+            [id_usuario]);
     }
 
     static fetchOne(id_usuario) {
@@ -58,20 +63,15 @@ module.exports = class Usuario{
         return db.execute('SELECT * FROM rol');
     }
 
+    static fetchRolUsuario(id_usuario){
+        return db.execute('SELECT * FROM rol r, usuario u WHERE u.Id_Rol = r.Id_Rol AND u.Id_Usuario=?',
+        [id_usuario]);
+    }
     //CU MODIFICAR USUARIO // EN PROCESO
     //ID USUARIO - ID ROL - NOMBRE_USUARIO - LOGIN - CONTASEÑA - URL FOTO
-    static async update(id_ticket,id_estado,id_prioridad,Estado_Actual,id_incidencia){
-        
-        await this.assignIncidencia(id_ticket,id_incidencia);
-        await this.assignPrioridad(id_ticket,id_prioridad);
-            if(id_estado!=Estado_Actual){
-                await this.assignEstado(id_ticket,id_estado);
-                if(id_estado ==1||5){
-                    return db.execute('UPDATE ticket SET Fecha_Fin=CURRENT_TIMESTAMP WHERE Id_Ticket=?',[id_ticket]);
-                }
-                           
-            }          
-        
+    static async update(id_usuario,id_rol){
+            return db.execute('UPDATE usuario SET Id_Rol=? WHERE Id_Usuario=?',[id_rol,id_usuario]);
+          
     }
 
 }
