@@ -1,0 +1,21 @@
+<table class="table table-bordered" >
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nombre</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% for(let estado of estados) {%>
+    <tr>
+        <td><%= estado.Id_Estado %></td>
+        <td><%= estado.Nombre_Estado %></td>
+    </tr>
+    <% }%>
+    </tbody>
+</table>
+<button class="btn btn-primary" type="button" style="background: rgb(0,0,0);width: 100%;margin-top: 40px;">Crear Nuevo Estado<i class="fa fa-user-plus" style="margin-left: 15px;"></i></button>
+    <div class="row" style="padding: 15px 0px;">
+        <div class="col-xxl-4"><label  class="col-form-label text-dark">Asunto</label></div>
+    <div class="col"><input id="asunto" name="asunto" class="form-control" type="text"></div>
+    <div class="col"><button class="btn btn-success">  Agregar </button></div>

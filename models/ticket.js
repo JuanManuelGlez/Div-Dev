@@ -66,7 +66,18 @@ module.exports = class Ticket{
         return db.execute('SELECT * FROM label WHERE Visibilidad_Label = 1');
     }
 
-    static assignLabel(id_ticket, id_label) {
+    static async assignLabel(id_ticket, id_label) {
+        await db.execute('SELECT * FROM label WHERE Id_Label = ?', [id_label])
+        .then(([rows, fieldData]) =>{
+            if(rows.length == 0)
+            {
+                db.execute('INSERT INTO label VALUES(?, ?)', [id_label, 1])
+                .then()
+                .catch(err => console.log(err));
+            }
+        })
+        .catch(err => console.log(err));
+
         return db.execute('INSERT INTO label_ticket VALUES(?, ?)',
         [id_label, id_ticket])
         .then()
@@ -80,16 +91,21 @@ module.exports = class Ticket{
         .catch(err => console.log(err));
     }
 
-    static assignPrioridad(id_ticket,id_prioridad){
+    static assignPrioridad(id_ticket, id_prioridad){
         return db.execute('UPDATE ticket SET Id_Prioridad=? WHERE Id_Ticket=?',
         [id_prioridad,id_ticket])
         .then()
         .catch(err => console.log(err));
     }
 
-    static assignIncidencia(id_ticket,id_incidencia){
+    static assignIncidencia(id_ticket, id_incidencia){
         return db.execute('UPDATE ticket SET Id_Tipo_Incidencia=? WHERE Id_Ticket=?',
-        [id_incidencia,id_ticket])
+        [id_incidencia, id_ticket]);
+    }
+
+    static assignUsuario(id_ticket, id_usuario, cargo){
+        return db.execute('INSERT INTO usuario_ticket VALUES(?, ?, ?, CURRENT_TIMESTAMP)',
+        [id_usuario, id_ticket, cargo])
         .then()
         .catch(err => console.log(err));
     }
@@ -107,14 +123,15 @@ module.exports = class Ticket{
     }
 
     static UsuarioEncargado (id_ticket){
-        db.execute("SELECT u.Nombre_Usuario, u.URL_Foto, COUNT(*) AS 'Tickets_Activos' FROM usuario_ticket ut, estado_ticket et, usuario u WHERE ut.Id_Ticket = et.Id_Ticket AND u.Id_Usuario = ut.Id_Usuario AND ut.Cargo = 'Encargado' AND (et.Id_Estado = 2 OR et.Id_Estado = 3 OR et.Id_Estado = 4) GROUP BY u.Nombre_Usuario, u.URL_Foto ORDER BY COUNT('Tickets_Activos')");
+       return db.execute('SELECT UT.Id_Usuario, U.Nombre_Usuario, Cargo FROM usuario_ticket UT, usuario U WHERE UT.Id_Usuario = U.Id_Usuario AND UT.Id_Ticket = ? AND UT.Cargo = "Encargado" ORDER BY Fecha_Asignacion DESC ',[id_ticket]);
+        
     }
 
     
 
 
 
-    static async update(id_ticket,id_estado,id_prioridad,Estado_Actual){
+    static async update(id_ticket, id_estado, id_prioridad, Estado_Actual, id_incidencia){
         
         await this.assignIncidencia(id_ticket,id_incidencia);
         await this.assignPrioridad(id_ticket,id_prioridad);

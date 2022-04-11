@@ -1,6 +1,6 @@
 
 function openTicket(element) {
-
+    document.getElementById("commentShow").style.display = "none";
     const id_ticket = element.id.match(/\d+/g);
 
     document.getElementById("Id_Ticket").value = id_ticket;
@@ -73,7 +73,6 @@ document.getElementById("select_tipo_incidencia").onchange = () =>
         },
         body:JSON.stringify(data)
     })
-    
     .then(response => response.json())
     .then(response => {
         let cont = 0;
@@ -93,8 +92,88 @@ document.getElementById("select_tipo_incidencia").onchange = () =>
 
 document.getElementById("boton_comentarios").onclick = () =>
 { 
-  let ruta = '/comentario/'+document.getElementById("Id_Ticket").value;
-  window.location.href = ruta;
+  const id_ticket = document.getElementById("Id_Ticket").value;
+
+  //document.getElementById("Id_Ticket").value = id_ticket;
+
+    let comentarios = document.getElementById("comentarios");
+    let rutaPreguntas = '../comentario/datos/' + id_ticket;
+
+    fetch(rutaPreguntas, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(response => {
+        comentarios.innerHTML = '';
+        //comentarios_nuevas.innerHTML = '';
+                                              
+
+        for(let comentario of response.comentarios)
+        {   
+            if(comentario.URL_Archivo != ''){
+                if (comentario.URL_Archivo.includes(".jpg") || comentario.URL_Archivo.includes(".jpeg") || comentario.URL_Archivo.includes(".png") || comentario.URL_Archivo.includes(".gif")){
+                    comentarios.innerHTML += '<div class="card mb-4"> <div class="card-body"> <p>' + comentario.Texto_Comentario + '</p> <a href="/uploads/'+comentario.URL_Archivo+'" download ='+comentario.URL_Archivo+'> <img src="/uploads/'+comentario.URL_Archivo+'" alt="Download foto adjunta"> </a> <div class="d-flex justify-content-between"> <div class="d-flex flex-row align-items-center"> <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp" alt="avatar" width="25" height="25" /> <p class="small mb-0 ms-2">' + comentario.Nombre_Usuario + '</p> </div> <div class="d-flex flex-row align-items-center"> <p class="small text-muted mb-0"> Comentado en: '+ comentario.Fecha_y_Hora +'</p> </div> </div> </div> </div>'
+                }else{
+                    comentarios.innerHTML += '<div class="card mb-4"> <div class="card-body"> <p>' + comentario.Texto_Comentario + '</p> <a href="/uploads/'+comentario.URL_Archivo+'" download = '+comentario.URL_Archivo+' > <p> Archivo Adjunto </p> </a> <div class="d-flex justify-content-between"> <div class="d-flex flex-row align-items-center"> <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp" alt="avatar" width="25" height="25" /> <p class="small mb-0 ms-2">' + comentario.Nombre_Usuario + '</p> </div> <div class="d-flex flex-row align-items-center"> <p class="small text-muted mb-0"> Comentado en: '+ comentario.Fecha_y_Hora +'</p> </div> </div> </div> </div>'
+                }
+            }else{
+                comentarios.innerHTML += '<div class="card mb-4"> <div class="card-body"> <p>' + comentario.Texto_Comentario + '</p> <div class="d-flex justify-content-between"> <div class="d-flex flex-row align-items-center"> <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp" alt="avatar" width="25" height="25" /> <p class="small mb-0 ms-2">' + comentario.Nombre_Usuario + '</p> </div> <div class="d-flex flex-row align-items-center"> <p class="small text-muted mb-0"> Comentado en: '+ comentario.Fecha_y_Hora +'</p> </div> </div> </div> </div>'
+            }
+        }
+    }).catch(err => {
+        console.log(err);
+    });
+
+  document.getElementById("commentShow").style.display = "flex";
+
+}
+
+function submitForm(){
+  const id_ticket = document.getElementById("Id_Ticket").value;
+
+  //document.getElementById("Id_Ticket").value = id_ticket;
+    const csrf = document.getElementById("_csrf").value;
+
+    let comentarios = document.getElementById("comentarios");
+    let comentarios_nuevos = document.getElementById("nuevoComentario");
+    let rutaPreguntas = '../comentario/nuevo/' + id_ticket;
+    let id_tickett = document.getElementById("id_ticket");
+    id_tickett.value = id_ticket;
+    let texto_comentario = document.getElementById("texto_comentario");
+
+
+    data = {
+        id_ticket:id_tickett.value,
+        texto_comentario:texto_comentario.value
+      }
+      
+      fetch(rutaPreguntas, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'csrf-token': csrf
+        },
+        body:JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(response => {
+        alert("Datos guardados");
+        console.log(response);
+        comentarios.innerHTML = "";
+        for(let comentario of response.comentarios)
+        {
+            comentarios.innerHTML += '<div class="card mb-4"> <div class="card-body"> <p>' + comentario.Texto_Comentario + '</p> <div class="d-flex justify-content-between"> <div class="d-flex flex-row align-items-center"> <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp" alt="avatar" width="25" height="25" /> <p class="small mb-0 ms-2">' + comentario.Nombre_Usuario + '</p> </div> <div class="d-flex flex-row align-items-center"> <p class="small text-muted mb-0"> Comentado en: '+ comentario.Fecha_y_Hora +'</p> </div> </div> </div> </div>'
+        }
+        document.getElementById("commentShow").style.display = "flex";
+    }).catch(err => {
+        console.log(err);
+    });
+
+  
+
 }
 
 document.getElementById("enviar").onclick = () =>
@@ -144,4 +223,5 @@ document.getElementById("enviar").onclick = () =>
 
 function closeTicket() {
   document.getElementById("Ticket").style.display = "none";
+  document.getElementById("commentShow").style.display = "none";
 }

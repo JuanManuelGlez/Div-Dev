@@ -25,7 +25,7 @@ module.exports = class Comentario{
     }
 
     static fetchcomentarios(id_ticket_comentario) {
-        return db.execute('SELECT * FROM Comentario C, Usuario U WHERE U.Id_Usuario = C.Id_Usuario AND C.Id_Ticket = ? ORDER BY Fecha_y_Hora',
+        return db.execute('SELECT * FROM Comentario C, Usuario U WHERE U.Id_Usuario = C.Id_Usuario AND C.Id_Ticket = ? ORDER BY Fecha_y_Hora DESC',
         [id_ticket_comentario]
         );
     }

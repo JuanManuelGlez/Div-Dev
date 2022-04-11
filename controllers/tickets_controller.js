@@ -1,8 +1,8 @@
 const path = require("path");
 const Ticket = require("../models/ticket");
 const Tipo_incidencia = require("../models/tipo_incidencia");
+const Usuario = require("../models/usuario");
 const Comentario = require("../models/comentario");
-const Usuario = require('../models/usuario');
 
 exports.lista = (request, response, next) => {
   Ticket.fetchList()
@@ -72,17 +72,28 @@ exports.nuevo_post = (request, response, next) => {
     request.body.tipo_incidencia,
     request.body.procedencia
   );
-  ticketNuevo
-    .save()
+  ticketNuevo.save()
     .then((result) => {
       let idNuevo = result[0].insertId; //probablemente una mejor manera de hacer esto
       Ticket.assignEstado(idNuevo, 1);
 
-      for (label of request.body.labels) {
+      for (label of request.body.labels) 
+      {
         Ticket.assignLabel(idNuevo, label);
       }
 
-      for (let i = 0; i < request.body.numPreguntas; i++) {
+      if(request.session.isLoggedIn)
+      {
+        let usuarioAct = request.session.usuario;
+        Usuario.getId(usuarioAct.login_usuario, usuarioAct.nombre_usuario)
+        .then(([rows, fieldData]) => {
+          Ticket.assignUsuario(idNuevo, rows[0].Id_Usuario, "Creador");
+        })
+        .catch((err) => {console.log(err)});
+      }
+
+      for (let i = 0; i < request.body.numPreguntas; i++) 
+      {
         let actualP = "pregunta" + i;
         let actualR = "respuesta" + i;
         Ticket.assignPregunta(
@@ -211,7 +222,7 @@ exports.getDatosTicket = (request, response, next) => {
 };
 
 exports.usuarios_get=(request,response,next)=>{
-    Usuario.UsuarioEncargado(request.params.id_ticket)
+    Ticket.UsuarioEncargado(request.params.id_ticket)
     .then(([rows_encargado,fielData_encargado])=>{
         Usuario.fetchAll_AsignarTicket()
             .then(([rows,fielData])=>{
@@ -223,9 +234,13 @@ exports.usuarios_get=(request,response,next)=>{
 }
 
 
-exports.asignar_usuario=(request,response,next)=>{
-
+exports.asignar_usuario= async (request,response,next)=>{
+  
+   await Ticket.assignUsuario(request.params.id_ticket, request.body.elegir_usuario, "Encargado");
+   response.redirect("/tickets/lista")
+   
 }
+
 
 /* Desasignar:
 exports.desasignar_usuario=(request,response,next)=>{
