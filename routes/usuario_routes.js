@@ -16,4 +16,10 @@ router.get('/login',usuario_controller.login_get);
 
 router.post('/login',usuario_controller.login_post);
 
+router.get('/lista',usuario_controller.lista);
+
+router.get('/datos/:id_usuario', usuario_controller.getDatosUsuario);
+
+
+
 module.exports = router;

@@ -1,0 +1,8 @@
+<%- include('includes/header.ejs') %>
+<%- include('includes/sidebar.ejs') %>
+
+<% for(let comentario of comentarios) {%>
+<div> <%= comentario.Texto_Comentario %> </div>
+    <% }%>
+
+<%- include('includes/foot.ejs') %>

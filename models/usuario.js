@@ -37,12 +37,41 @@ module.exports = class Usuario{
     }*/ 
 
     static fetchAll_AsignarTicket(){
-        return db.execute("SELECT u.Nombre_Usuario, u.URL_Foto, COUNT(*) AS 'Tickets_Activos' FROM usuario_ticket ut, estado_ticket et, usuario u WHERE ut.Id_Ticket = et.Id_Ticket AND u.Id_Usuario = ut.Id_Usuario AND ut.Cargo = 'Encargado' AND (et.Id_Estado = 2 OR et.Id_Estado = 3 OR et.Id_Estado = 4) GROUP BY u.Nombre_Usuario, u.URL_Foto ORDER BY COUNT('Tickets_Activos')");
+        return db.execute("SELECT u.Nombre_Usuario, u.URL_Foto, COUNT(*) AS 'Tickets_Activos' FROM usuario_ticket ut, estado_ticket et, usuario u WHERE ut.Id_Ticket = et.Id_Ticket AND u.Id_Usuario = ut.Id_Usuario AND ut.Cargo = 'Encargado' AND (et.Id_Estado = 2 OR et.Id_Estado = 3 OR et.Id_Estado = 4) GROUP BY u.Nombre_Usuario, u.URL_Foto ORDER BY COUNT('Tickets_Activos')");}
+
+        
+    static fetchAll() {
+        return db.execute('SELECT * FROM usuario');
     }
 
     static findOne(login_usuario) {
         return db.execute('SELECT * FROM usuario WHERE Login=?',
             [login_usuario]);
+    }
+
+    static fetchOne(id_usuario) {
+        return db.execute('SELECT * FROM usuario WHERE Id_Usuario=?',
+            [id_usuario]);
+    }
+
+    static fetchEstado(){
+        return db.execute('SELECT * FROM rol');
+    }
+
+    //CU MODIFICAR USUARIO // EN PROCESO
+    //ID USUARIO - ID ROL - NOMBRE_USUARIO - LOGIN - CONTASEÑA - URL FOTO
+    static async update(id_ticket,id_estado,id_prioridad,Estado_Actual,id_incidencia){
+        
+        await this.assignIncidencia(id_ticket,id_incidencia);
+        await this.assignPrioridad(id_ticket,id_prioridad);
+            if(id_estado!=Estado_Actual){
+                await this.assignEstado(id_ticket,id_estado);
+                if(id_estado ==1||5){
+                    return db.execute('UPDATE ticket SET Fecha_Fin=CURRENT_TIMESTAMP WHERE Id_Ticket=?',[id_ticket]);
+                }
+                           
+            }          
+        
     }
 
 }
