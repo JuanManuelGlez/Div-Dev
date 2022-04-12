@@ -36,8 +36,6 @@ function openTicket(element) {
 
         select_prioridad.namedItem("prioridad"+response.datosGenerales[0].Id_Prioridad).selected = true;
 
-        
-
         descripcion.innerHTML = response.datosGenerales[0].Descripcion;
         preguntas.innerHTML = '';
         preguntas_nuevas.innerHTML = '';

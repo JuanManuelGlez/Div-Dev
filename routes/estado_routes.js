@@ -7,5 +7,7 @@ const estado_controller = require('../controllers/estado_controller');
 
 const router = express.Router();
     
-router.get('/estados', estado_controller.lista);
+router.get('/getAll', estado_controller.getAllEstados);
+
+
 module.exports = router;
