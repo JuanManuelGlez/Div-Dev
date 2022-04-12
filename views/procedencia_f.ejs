@@ -1,0 +1,67 @@
+<%- include('includes/head.ejs') %>
+<!--CUALQUIER COSA QUE SE ROMPA ME AVISAS PQ SI ESTA BIEN DESASTROSO-->
+    <h1>Estas son unas procedencia</h1>
+    <div class="container">
+        <div class="row justify-content-center">
+            <form id="modificar_procedencia" action="/procedencia/procedencia_f/update" method="POST">
+            <input type="hidden" name="_csrf"id="_csrf" value="<%= csrfToken %>"></input>
+            <%var count=1 %>
+            <%for (let procedencia of procedencias){ %>
+                <p>
+                    <%=procedencia.Nombre_Procedencia %> <br>
+                    <input name="<%=count%>" value="<%=procedencia.Nombre_Procedencia%>"></input>
+                    <% let visibile = ""; %>
+                    <% let visibile2 = []; %>
+                    <% count=count +1 %>
+                    <% if (procedencia.Visibilidad_Procedencia[0] == 1) { %>
+                        <% visibile = "Visible"; %>
+                        <% visibile2 = ["No visible", 0]; %>
+                    <% } else if(procedencia.Visibilidad_Procedencia[0] == 0) { %>
+                        <% visibile = "No Visible"; %>
+                        <% visibile2 = ["Visible", 1]; %>
+                    <% } %>
+                    <select class="form-select" id="visibilidad" name="<%=procedencia.Id_Procedencia%>" aria-label="Default select example"> 
+                        <option selected value="<%=procedencia.Visibilidad_Procedencia[0]%>"><%=visibile%>
+                        </option> <option value="<%=visibile2[1]%>"> <%=visibile2[0]%></option>
+                    </select>
+            
+                </p>
+                <button type="submit" class="btn btn-primary mt-3" id="enviar">Submit</button>
+         
+            <%}%>
+            <%count =count-1%>
+            <input type="hidden" name="length" value="<%=count%>"></input>
+              </form>
+            <h3>Nueva Procedencia</h3>
+            <form id="nueva_procedencia" method="POST">
+                <input type="hidden" name="_csrf"id="_csrf" value="<%= csrfToken %>"></input>
+                <div id="Nombre_Procedencia">
+                  <label for="Nombre_Procedencia">Nombre de Nueva Procedencia: </label>
+                  <input type="text" id="Nombre_Procedencia" name="Nombre_Procedencia" placeholder="assdasdadsqd">
+                <br>
+                </div>
+            <button type="submit" class="btn btn-primary mt-3" id="enviar">Submit</button>
+            </form>
+            <!--
+            <h3>Modificar Procedencia</h3>
+            <form id="modificar_procedencia" action="/procedencia/procedencia_f/update" method="POST">
+                <input type="hidden" name="_csrf"id="_csrf" value="<%= csrfToken %>"></input>
+                <select class="form-select" id="procedencia" name="procedencia" aria-label="Default select example">
+                    <option selected disabled>Seleccione Procedencia</option>   
+                    <% for (let procedencia of procedencias){%>
+                        <option value="<%=procedencia.Id_Procedencia%>"><%=procedencia.Nombre_Procedencia %> </option>  
+                    <%}%>  
+                  </select> 
+                <br>                      
+            <div id="cambiar_procedencia"></div>
+            <button type="submit" class="btn btn-primary mt-3" id="enviar">Submit</button>
+            </form>-->
+        </div>
+    </div>
+
+
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/js/script_modificar_procedencia.js"></script>
+    <div>
+<%- include('includes/foot.ejs') %>

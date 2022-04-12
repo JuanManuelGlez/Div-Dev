@@ -77,9 +77,12 @@ exports.nuevo_post = (request, response, next) => {
       let idNuevo = result[0].insertId; //probablemente una mejor manera de hacer esto
       Ticket.assignEstado(idNuevo, 1);
 
-      for (label of request.body.labels) 
+      if(typeof request.body.labels[0] !== 'undefined')
       {
-        Ticket.assignLabel(idNuevo, label);
+        for (label of request.body.labels) 
+        {
+          Ticket.assignLabel(idNuevo, label);
+        }
       }
 
       if(request.session.isLoggedIn)

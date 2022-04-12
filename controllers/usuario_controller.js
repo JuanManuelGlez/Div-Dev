@@ -131,3 +131,7 @@ exports.usuario_post = (request, response, next) => {
     });
 };
 
+exports.panel_admin = (request, response, next) => {
+  response.render('panel_administrativo')
+};
+

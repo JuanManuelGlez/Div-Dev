@@ -1,12 +1,10 @@
 const path = require('path');
 const Estado = require('../models/estado');
 
-exports.lista = (request, response, next) => {
+exports.getAllEstados = (request, response, next) => {
    Estado.fetchAll()
         .then(([rowsEstados, fieldDataEstados]) => {
-            response.render('nuevo_tipo_incidencia', {
-                estados: rowsEstados,
-            });
+            response.status(200).json({estados: rowsEstados});
         })
         .catch(err => console.log(err));
 };
