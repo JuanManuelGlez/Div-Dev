@@ -76,10 +76,9 @@ exports.nuevo_post = (request, response, next) => {
     .then((result) => {
       let idNuevo = result[0].insertId; //probablemente una mejor manera de hacer esto
       Ticket.assignEstado(idNuevo, 1);
-      
+
       if(typeof request.body.labels[0] !== 'undefined')
       {
-        console.log("AAAAAAAAAAAAAAAAAAA");
         for (label of request.body.labels) 
         {
           Ticket.assignLabel(idNuevo, label);
