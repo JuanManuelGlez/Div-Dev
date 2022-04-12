@@ -26,8 +26,7 @@ module.exports = class Ticket{
                 ]    
         );
     }
-
-
+    
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
     }

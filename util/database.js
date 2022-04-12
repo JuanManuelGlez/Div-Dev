@@ -13,7 +13,7 @@ const DB_DEV = {
     host: 'localhost',
     user: 'root',
     database: 'divdev',
-    password: '',
+    password: ''
 };
 
 const pool = mysql.createPool(DB_DEV);
