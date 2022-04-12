@@ -29,6 +29,10 @@ $(document).on('keyup', '.form-select-label .bs-searchbox input', function (e) {
             let select_preguntas = document.getElementById("select_preguntas");
             
             select_preguntas.innerHTML = '<option id=' + input + ' value=' + input + '>' + input + '</option>' + select_preguntas.innerHTML;
+            document.getElementById(input).setAttribute('selected', true);
+            e.target.value = "";
+
+            
             $('.form-select-label').selectpicker('refresh');
             event.stopPropagation();
         });
