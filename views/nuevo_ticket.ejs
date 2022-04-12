@@ -45,7 +45,7 @@
                             <div class="col">
                                 <div class="dropdown shadow">
                                     <select class="form-select" id="select_prioridad" name="prioridad" aria-label="Default select example" required>
-                                        <option selected disabled>Prioridad de la incidencia:</option>
+                                        <option value="" selected disabled>Prioridad de la incidencia:</option>
                                         <% for(let prioridad of prioridades) {%>
                                           <option value="<%= prioridad.Id_Prioridad %>"><%= prioridad.Nombre_Prioridad %></option>
                                         <% }%>
@@ -58,7 +58,7 @@
                             <div class="col">
                                 <div class="dropdown shadow">
                                     <select class="form-select" id="select_procedencia" name="procedencia" aria-label="Default select example" required>
-                                        <option selected disabled>Procedencia:</option>
+                                        <option value="" selected disabled>Procedencia:</option>
                                         <% for(let procedencia of procedencias) {%>
                                           <option value="<%= procedencia.Id_Procedencia %>"><%= procedencia.Nombre_Procedencia %></option>
                                         <% }%>
@@ -72,7 +72,7 @@
                             <div class="col">
                                 <div class="dropdown shadow">
                                     <select class="form-select-label" multiple data-live-search="true" id="select_labels" name="labels" aria-label="Default select example">
-                                        <option id="Labels:" disabled>Labels:</option>
+                                        <option value="" id="Labels:" disabled>Labels:</option>
                                         <% for(let label of labels) {%>
                                           <option id="<%= label.Id_Label %>" value="<%= label.Id_Label %>"><%= label.Id_Label %></option>
                                         <% }%>
