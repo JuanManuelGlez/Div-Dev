@@ -22,14 +22,18 @@ $(document).on('keyup', '.form-select-label .bs-searchbox input', function (e) {
 
             let labels_actuales = document.querySelector('[data-id="select_labels"]').title.split(", ");
 
-            for(label of labels_actuales)
+            if(labels_actuales[0] !== 'Nothing selected')
             {
-                document.getElementById(label).setAttribute('selected', true);
+                for(label of labels_actuales)
+                {
+                    document.getElementById(label).setAttribute('selected', true);
+                }
             }
 
             let select_labels = document.getElementById("select_labels");
-            
-            select_labels.innerHTML = '<option id=' + input + ' value=' + input + '>' + input + '</option>' + select_labels.innerHTML;
+
+            select_labels.innerHTML = '<option id=' + input.replace(/ /g, '_') + ' value="' + input + '">' + input + '</option>' + select_labels.innerHTML;
+            console.log(document.getElementById(input.replace(/ /g, '_')).value);
             $('.form-select-label').selectpicker('refresh');
             event.stopPropagation();
         });
