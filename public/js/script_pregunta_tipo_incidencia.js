@@ -23,13 +23,13 @@ $(document).on('keyup', '.form-select-label .bs-searchbox input', function (e) {
 
             for(pregunta of preguntas_actuales)
             {
-                document.getElementById(pregunta).setAttribute('selected', true);
+                document.getElementById(pregunta.replace(/\s/g,'_')).setAttribute('selected', true);
             }
 
             let select_preguntas = document.getElementById("select_preguntas");
             
-            select_preguntas.innerHTML = '<option id=' + input + ' value=' + input + '>' + input + '</option>' + select_preguntas.innerHTML;
-            document.getElementById(input).setAttribute('selected', true);
+            select_preguntas.innerHTML = '<option id=' + input.replace(/\s/g,'_') + ' value=' + input.replace(/\s/g,'_') + '>' + input + '</option>' + select_preguntas.innerHTML;
+            document.getElementById(input.replace(/\s/g,'_')).setAttribute('selected', true);
             e.target.value = "";
 
             

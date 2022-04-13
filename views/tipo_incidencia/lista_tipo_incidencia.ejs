@@ -6,7 +6,7 @@
     <br><br>
     <% for(let Tipo_Incidencia of Tipo_Incidencias) {%>
         <br>
-        <head> ID:<%= Tipo_Incidencia.Id_Tipo_Incidencia %>    <%= Tipo_Incidencia.Nombre %>    </head>
+        <head> ID:<%= Tipo_Incidencia.Id_Tipo_Incidencia %>    <%= Tipo_Incidencia.Nombre_Tipo_Incidencia %>    </head>
         <br>
     <% } %>
 </div> <br><br>
@@ -24,7 +24,7 @@
         <select class="form-select-label" multiple data-live-search="true" id="select_preguntas" name="preguntas" aria-label="Default select example">
             <option id="Preguntas:" selected disabled>Preguntas:</option>
             <% for(let pregunta of Preguntas) {%>
-                <option id="<%= pregunta.Texto_Pregunta %>" value="<%= pregunta.Texto_Pregunta %>"><%= pregunta.Texto_Pregunta %></option>
+                <option id="<%= pregunta.Texto_Pregunta.replace(/\s/g,'_') %>" value="<%= pregunta.Texto_Pregunta.replace(/\s/g,'_') %>"><%= pregunta.Texto_Pregunta.replace(/_/g, ' ') %></option>
             <% }%>
         </select><br>
         <button type="submit" class="btn btn-primary mt-3" id="enviar" name="enviar">Submit</button>
