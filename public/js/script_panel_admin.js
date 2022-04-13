@@ -97,7 +97,7 @@ document.getElementById('abreLabels').addEventListener('mousedown', async functi
         <input type="hidden" id="__csrf" name="_csrf" value="<%= csrfToken %>">
         <div class="row" style="padding: 15px 0px;">
             <div class="col-xxl-4"><label  class="col-form-label text-dark">Agregar</label></div>
-        <div class="col"><input id="input_label" name="input_label" class="form-control" type="text"></div>
+        <div class="col"><input id="input_label" name="input_label" class="form-control" type="text" maxlength="30"></div>
         <div class="col"><button type="button" id="agrega_label" class="btn btn-success">  Agregar </button></div>
         <input type="hidden" id="existeLabel" name="existeLabel" value="0"></form>`;
 
