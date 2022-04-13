@@ -21,18 +21,27 @@ $(document).on('keyup', '.form-select-label .bs-searchbox input', function (e) {
         document.getElementById("agregaLabel").addEventListener('click', function (event) {
 
             let labels_actuales = document.querySelector('[data-id="select_labels"]').title.split(", ");
+            console.log(labels_actuales);
 
             if(labels_actuales[0] !== 'Nothing selected')
             {
-                for(label of labels_actuales)
-                {
-                    document.getElementById(label).setAttribute('selected', true);
-                }
+                let labels_totales = document.querySelectorAll('.opcionLabel');
+
+                labels_totales.forEach(element => {
+                    if(labels_actuales.includes(element.id))
+                    {
+                        element.setAttribute('selected', true);
+                    }
+                    else
+                    {
+                        element.removeAttribute('selected'); //Creo que si no lo tiene no pasa nada pero creo que hay que revisar
+                    }
+                });
             }
 
             let select_labels = document.getElementById("select_labels");
 
-            select_labels.innerHTML = '<option id=' + input.replace(/ /g, '_') + ' value="' + input + '">' + input + '</option>' + select_labels.innerHTML;
+            select_labels.innerHTML = '<option class="opcionLabel" id=' + input.replace(/ /g, '_') + ' value="' + input + '">' + input + '</option>' + select_labels.innerHTML;
             
             $('.form-select-label').selectpicker('refresh');
             event.stopPropagation();

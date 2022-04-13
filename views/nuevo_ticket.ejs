@@ -74,7 +74,7 @@
                                     <select class="form-select-label" multiple data-live-search="true" id="select_labels" name="labels" aria-label="Default select example">
                                         <option value="" id="Labels:" disabled>Labels:</option>
                                         <% for(let label of labels) {%>
-                                          <option id="<%= label.Id_Label.replace('/ /g', '_') %>" value="<%= label.Id_Label %>"><%= label.Id_Label %></option>
+                                          <option class="opcionLabel" id="<%= label.Id_Label.replace('/ /g', '_') %>" value="<%= label.Id_Label %>"><%= label.Id_Label %></option>
                                         <% }%>
                                     </select>
                                 </div>
