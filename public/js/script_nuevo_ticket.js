@@ -33,7 +33,7 @@ $(document).on('keyup', '.form-select-label .bs-searchbox input', function (e) {
             let select_labels = document.getElementById("select_labels");
 
             select_labels.innerHTML = '<option id=' + input.replace(/ /g, '_') + ' value="' + input + '">' + input + '</option>' + select_labels.innerHTML;
-            console.log(document.getElementById(input.replace(/ /g, '_')).value);
+            
             $('.form-select-label').selectpicker('refresh');
             event.stopPropagation();
         });
