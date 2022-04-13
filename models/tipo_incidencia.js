@@ -29,6 +29,12 @@ module.exports = class Tipo_incidencia{
         return db.execute('SELECT * FROM tipo_incidencia WHERE Visibilidad_Tipo_Incidencia = 1');
     }
 
+    static fetchtipo_incidencia(id){
+        return db.execute('SELECT T.Nombre_Tipo_Incidencia, T.SLA FROM tipo_incidencia t WHERE Id_Tipo_Incidencia = ?',
+            [id]
+        );
+    }
+
     //6.4 ratio pizza precio de 300 varod dominos
     //7.3 ratio precio pizza extra grande
     static fetchPreguntas(id_tipo_incidencia) {

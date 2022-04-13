@@ -7,6 +7,7 @@
     <% for(let Tipo_Incidencia of Tipo_Incidencias) {%>
         <br>
         <head> ID:<%= Tipo_Incidencia.Id_Tipo_Incidencia %>    <%= Tipo_Incidencia.Nombre_Tipo_Incidencia %>    </head>
+        <a href="/tipo_incidencia/modificar/<%= Tipo_Incidencia.Id_Tipo_Incidencia %>">Modificar</a>
         <br>
     <% } %>
 </div> <br><br>
@@ -16,9 +17,9 @@
     <form id="nuevo_tipo_incidencia" method="POST">
         <input type="hidden" name="_csrf" value="<%= csrfToken %>"></input>
 
-        <input type="text" id="nombre_tipo_incidencia" name="nombre_tipo_incidencia" placeholder="Escribe aqui...">
+        <input type="text" id="nombre_tipo_incidencia" name="nombre_tipo_incidencia" placeholder="Escribe aqui..." required>
         <br><br>
-        <input type="number" id="sla_tipo_incidencia" name="sla_tipo_incidencia">
+        <input type="number" id="sla_tipo_incidencia" name="sla_tipo_incidencia" required>
         <br><br>
         <head> Preguntas de la incidencia</head> <br>
         <select class="form-select-label" multiple data-live-search="true" id="select_preguntas" name="preguntas" aria-label="Default select example">
