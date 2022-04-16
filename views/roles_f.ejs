@@ -1,0 +1,33 @@
+<%- include('includes/header.ejs') %>
+    <%- include('includes/sidebar.ejs') %>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let rol of roles) { %>
+                    <tr>
+                        <td>
+                            <%= rol.Id_Rol %>
+                        </td>
+                        <td>
+                            <%= rol.Nombre_Rol %>
+                        </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+
+        <form method="post">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <div class="row" style="padding: 15px 0px;">
+                <div class="col-xxl-4"><label class="col-form-label text-dark">Nombre Nuevo Rol:</label></div>
+                <div class="col"><input id="Nuevo_Nombre" name="Nuevo_Nombre" class="form-control" type="text"></div>
+                <div class="col"><button id="agrega_rol" type="submit" class="btn btn-success"> Agregar </button></div>
+        </form>
+
+        <%- include('includes/foot.ejs') %>

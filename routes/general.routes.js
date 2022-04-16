@@ -12,7 +12,6 @@ router.get('/metricas',(request, response, next) =>{
 router.get('/archivo',(request, response, next) =>{
     response.render('archivo');
 });
-
 router.get('/panel',(request, response, next) =>{
     response.render('panel');
 });
@@ -34,7 +33,6 @@ router.get('/nuevo_tipo_incidencia',(request, response, next) =>{
 router.get('/lista_usuarios',(request, response, next) =>{
     response.render('lista_usuarios');
 });
-
 router.get('/ticket',(request, response, next) =>{
     response.render('ticket');
 });

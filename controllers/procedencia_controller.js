@@ -30,7 +30,6 @@ exports.post_procedencia=(request,response,next)=>{
         .catch((err)=>{
             console.log(err);
         })
-
 }
 exports.update_procedencia=(request,response,next)=>{
     for(let i=1;i<=request.body.length;i++){
