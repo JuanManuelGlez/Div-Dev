@@ -26,8 +26,7 @@ module.exports = class Ticket{
                 ]    
         );
     }
-
-
+    
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
     }
@@ -66,7 +65,22 @@ module.exports = class Ticket{
         return db.execute('SELECT * FROM label WHERE Visibilidad_Label = 1');
     }
 
-    static assignLabel(id_ticket, id_label) {
+    static crearLabel(id_label){
+        return db.execute('SELECT * FROM label WHERE Id_Label = ?', [id_label])
+        .then(([rows, fieldData]) =>{
+            if(rows.length == 0)
+            {
+                db.execute('INSERT INTO label VALUES(?, ?)', [id_label, 1])
+                .then()
+                .catch(err => console.log(err));
+            }
+        })
+        .catch(err => console.log(err));
+    }
+
+    static async assignLabel(id_ticket, id_label) {
+        await this.crearLabel(id_label);
+
         return db.execute('INSERT INTO label_ticket VALUES(?, ?)',
         [id_label, id_ticket])
         .then()
@@ -80,16 +94,21 @@ module.exports = class Ticket{
         .catch(err => console.log(err));
     }
 
-    static assignPrioridad(id_ticket,id_prioridad){
+    static assignPrioridad(id_ticket, id_prioridad){
         return db.execute('UPDATE ticket SET Id_Prioridad=? WHERE Id_Ticket=?',
         [id_prioridad,id_ticket])
         .then()
         .catch(err => console.log(err));
     }
 
-    static assignIncidencia(id_ticket,id_incidencia){
+    static assignIncidencia(id_ticket, id_incidencia){
         return db.execute('UPDATE ticket SET Id_Tipo_Incidencia=? WHERE Id_Ticket=?',
-        [id_incidencia,id_ticket])
+        [id_incidencia, id_ticket]);
+    }
+
+    static assignUsuario(id_ticket, id_usuario, cargo){
+        return db.execute('INSERT INTO usuario_ticket VALUES(?, ?, ?, CURRENT_TIMESTAMP)',
+        [id_usuario, id_ticket, cargo])
         .then()
         .catch(err => console.log(err));
     }
@@ -106,7 +125,7 @@ module.exports = class Ticket{
 
     }
 
-    static async update(id_ticket,id_estado,id_prioridad,Estado_Actual,id_incidencia){
+    static async update(id_ticket, id_estado, id_prioridad, Estado_Actual, id_incidencia){
         
         await this.assignIncidencia(id_ticket,id_incidencia);
         await this.assignPrioridad(id_ticket,id_prioridad);

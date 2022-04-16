@@ -14,6 +14,8 @@ router.get('/nuevo', tickets_controller.nuevo_get);
 
 router.post('/nuevo', tickets_controller.nuevo_post);
 
+router.get('/datos/:id_ticket', tickets_controller.getDatosTicket);
+
 router.get('/:id_ticket', tickets_controller.ticket_get);
 
 router.post('/:id_ticket',tickets_controller.ticket_post);

@@ -12,8 +12,6 @@
     <div class="container" style="margin-top:30px;">
         <form id="form_nuevo_ticket" method="POST" style="margin-right: 30px;margin-left: 30px;margin-bottom: 100px;">
         <div class="row">
-            
-                <input type="hidden" name="_csrf" value="<%= csrfToken %>"></input>
             <div class="col-9 col-sm-9 col-lg-5 col-xl-5 col-xxl-5 offset-3 offset-sm-9 offset-lg-0 offset-xxl-0" style="margin-left: 40px;margin-bottom:80px;padding:30px;box-shadow: 0px 0px 17px rgb(145,145,145);">
                     <div class="row">
                         <div class="col" style="padding: 30px 0px;">
@@ -36,18 +34,18 @@
                     <div id="campos_ticket" style="display: none">
                         <div class="row" style="padding: 15px 0px;">
                             <div class="col-xxl-4"><label  class="col-form-label text-dark">Asunto</label></div>
-                            <div class="col"><input id="asunto" name="asunto" class="form-control" type="text"></div>
+                            <div class="col"><input id="asunto" name="asunto" class="form-control" type="text" maxlength="50" required></div>
                         </div>
                         <div class="row" style="padding: 15px 0px;">
                             <div class="col-xxl-4"><label  class="col-form-label text-dark">Descripción</label></div>
-                            <div class="col"><input id="descripcion" name="descripcion" class="form-control" type="text"></div>
+                            <div class="col"><input id="descripcion" name="descripcion" class="form-control" type="text" maxlength="255" required></div>
                         </div>
                         <div class="row" style="padding: 15px 0px;">
                             <div class="col-xxl-4"><label class="col-form-label text-dark">Prioridad</label></div>
                             <div class="col">
                                 <div class="dropdown shadow">
-                                    <select class="form-select" id="select_prioridad" name="prioridad" aria-label="Default select example">
-                                        <option selected disabled>Prioridad de la incidencia:</option>
+                                    <select class="form-select" id="select_prioridad" name="prioridad" aria-label="Default select example" required>
+                                        <option value="" selected disabled>Prioridad de la incidencia:</option>
                                         <% for(let prioridad of prioridades) {%>
                                           <option value="<%= prioridad.Id_Prioridad %>"><%= prioridad.Nombre_Prioridad %></option>
                                         <% }%>
@@ -59,8 +57,8 @@
                             <div class="col-xxl-4"><label class="col-form-label text-dark">Procedencia</label></div>
                             <div class="col">
                                 <div class="dropdown shadow">
-                                    <select class="form-select" id="select_procedencia" name="procedencia" aria-label="Default select example">
-                                        <option selected disabled>Procedencia:</option>
+                                    <select class="form-select" id="select_procedencia" name="procedencia" aria-label="Default select example" required>
+                                        <option value="" selected disabled>Procedencia:</option>
                                         <% for(let procedencia of procedencias) {%>
                                           <option value="<%= procedencia.Id_Procedencia %>"><%= procedencia.Nombre_Procedencia %></option>
                                         <% }%>
@@ -74,9 +72,9 @@
                             <div class="col">
                                 <div class="dropdown shadow">
                                     <select class="form-select-label" multiple data-live-search="true" id="select_labels" name="labels" aria-label="Default select example">
-                                        <option selected disabled>Labels:</option>
+                                        <option value="" id="Labels:" disabled>Labels:</option>
                                         <% for(let label of labels) {%>
-                                          <option value="<%= label.Id_Label %>"><%= label.Id_Label %></option>
+                                          <option class="opcionLabel" id="<%= label.Id_Label.replace('/ /g', '_') %>" value="<%= label.Id_Label %>"><%= label.Id_Label %></option>
                                         <% }%>
                                     </select>
                                 </div>
@@ -92,7 +90,8 @@
             </div>
         
             <div class="col-9 col-lg-5 col-xl-5 col-xxl-5 offset-3 offset-sm-3 offset-lg-1 offset-xl-1 offset-xxl-1" style="padding-left: 12px;padding:30px;margin-bottom:80px;box-shadow: 0px 0px 20px rgb(162,162,162);">
-                <form style="margin-right: 30px;margin-left: 30px;margin-bottom: 100px;">
+                <form style="margin-right: 30px;margin-left: 30px;margin-bottom: 100px;" method="POST">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <div class="row">
                         <div class="col" style="padding: 30px 0px;">
                             <h1 class="text-dark" style="background: rgba(255,89,90,0);text-align: center;border-radius: 20px;">Información Adicional</h1>

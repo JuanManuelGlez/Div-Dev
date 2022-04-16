@@ -11,6 +11,14 @@ router.get('/preguntas/:id_tipo_incidencia', tipo_incidencia_controller.getPregu
 
 router.post('/preguntasNuevas/:id_tipo_incidencia', tipo_incidencia_controller.getPreguntasNuevas);
 
+router.get('/', tipo_incidencia_controller.getTipo_Incidencia);
+
+router.post('/',tipo_incidencia_controller.postTipo_Incidencia);
+
+router.get('/modificar/:id_tipo_incidencia',tipo_incidencia_controller.getModficarTipo_Incidencia);
+
+router.post('/modificar/:id_tipo_incidencia',tipo_incidencia_controller.getModficarTipo_Incidencia);
+
 
 
 
