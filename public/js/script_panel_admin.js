@@ -243,12 +243,12 @@ document.getElementById('abreEstados').addEventListener('mousedown', async funct
         contenido.innerHTML += `
         </tbody>
         </table>
-        <button class="btn btn-primary" type="button" style="background: rgb(0,0,0);width: 100%;margin-top: 40px;">Crear Nuevo Estado<i class="fa fa-user-plus" style="margin-left: 15px;"></i></button>
+        
         <form id="form_nuevo_estado method="POST">
         <input type="hidden" id="__csrf" name="_csrf" value="<%= csrfToken %>">
         <div class="row" style="padding: 15px 0px;">
-            <div class="col-xxl-4"><label  class="col-form-label text-dark">Asunto</label></div>
-        <div class="col"><input id="input_estado" name="input_estado" class="form-control" type="text"></div>
+            <div class="col-xxl-4"><label  class="col-form-label text-dark">Nuevo Estado</label></div>
+        <div class="col"><input id="input_estado" name="input_estado" class="form-control" type="text" maxlength="30" ></div>
         <div class="col"><button type="button" id="agrega_estado" class="btn btn-success">  Agregar </button></div>
         <input type="hidden" id="existeEstado" name="existeEstado" value="0">
         </form>`;

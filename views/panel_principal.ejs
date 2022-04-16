@@ -122,9 +122,10 @@
                                                             <label for="comment">Comentario: </label>
                                                             <input id="id_ticket" name="id_ticket" type="hidden" value="">
                                                             <input type="text" id="texto_comentario" name="texto_comentario" placeholder="Escribe aqui...">
-                                                        
                                                             <button onClick="submitForm()"  type="button" class="btn btn-success" id="Agregar"> Agregar Comentario </button>
+                                                            
                                                             <input type="file" id="url_archivo_comentario" name="url_archivo_comentario">
+                                                            
                                                             <script>
                                                                 var input = document.getElementById("texto_comentario");
                                                                 input.addEventListener("keyup", function(event) {
