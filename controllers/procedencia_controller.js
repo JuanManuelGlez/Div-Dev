@@ -33,20 +33,21 @@ exports.post_procedencia=(request,response,next)=>{
 
 }
 exports.update_procedencia=(request,response,next)=>{
-    for(let i=1;i<=request.body.length;i++){
-        if(request.body[i][1]==1){
+
+    console.log(request.body.procedencia)
+    console.log(request.body.nombre)
+    console.log(request.body.visibilidad)
+        if(request.body.visibilidad==1){
             visibilidad=1;
-        }else if (request.body[i][1]==0){
+        }else if (request.visibilidad==0){
             visibilidad=0;
         }
-        //console.log(request.body.count)
-        Procedencia.update(i,request.body[i][0],visibilidad)
+        Procedencia.update(request.body.procedencia,request.body.nombre,visibilidad)
         .then(()=>{
         })
         .catch((err)=>{
             console.log(err);
         })
         
-    }
     response.redirect('/procedencia_f');
 }
