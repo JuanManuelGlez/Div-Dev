@@ -25,7 +25,16 @@ function filtraLabels() {
             if(nuevaLabel == label.Id_label)
                 document.getElementById("existeLabel").value = 1;
 
-            document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '</td></tr>';
+            if(label.Visibilidad_Label.data[0] == 1)
+            {
+                document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '</td><td>Si</td>';
+            }
+            else
+            {
+                document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '</td><td>No</td>';
+            }
+            
+            document.getElementById("tablaLabels").innerHTML += '</tr>';
         }
     }).catch(err => {
         console.log(err);
@@ -54,7 +63,7 @@ function agregaLabel() {
 
         if(document.getElementById("existeLabel").value == "0")
         {
-            document.getElementById("tablaLabels").innerHTML += '<tr><td>' + nuevaLabel +  '</td></tr>';
+            document.getElementById("tablaLabels").innerHTML += '<tr><td>' + nuevaLabel +  '</td><td>Si</td></tr>';
             document.getElementById("existeLabel").value = 1;
         }
         
@@ -82,24 +91,35 @@ document.getElementById('abreLabels').addEventListener('mousedown', async functi
         <thead>
         <tr>
             <th scope="col">Nombre</th>
+            <th scope="col">Visible?</th>
         </tr>
         </thead>
         <tbody id="tablaLabels">
         `;
         for(label of response.labels)
         {
-            document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '</td></tr>';
+            if(label.Visibilidad_Label.data[0] == 1)
+            {
+                document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '</td><td>Si</td>';
+            }
+            else
+            {
+                document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '</td><td>No</td>';
+            }
+            
+            document.getElementById("tablaLabels").innerHTML += '</tr>';
         }
         contenido.innerHTML += `
         </tbody>
         </table>
-        <form id="form_nuevo_label method="POST">
+        <form id="form_nuevo_label" method="POST">
         <input type="hidden" id="__csrf" name="_csrf" value="<%= csrfToken %>">
         <div class="row" style="padding: 15px 0px;">
             <div class="col-xxl-4"><label  class="col-form-label text-dark">Agregar</label></div>
         <div class="col"><input id="input_label" name="input_label" class="form-control" type="text" maxlength="30"></div>
         <div class="col"><button type="button" id="agrega_label" class="btn btn-success">  Agregar </button></div>
-        <input type="hidden" id="existeLabel" name="existeLabel" value="0"></form>`;
+        <input type="hidden" id="existeLabel" name="existeLabel" value="0">
+        </form>`;
 
         document.getElementById('input_label').onkeyup = filtraLabels;
         document.getElementById('agrega_label').onclick = agregaLabel;
@@ -135,7 +155,16 @@ function filtraEstados() {
             if(nuevoEstado == estado.Nombre_Estado)
                 document.getElementById("existeEstado").value = 1;
 
-            document.getElementById("tablaEstados").innerHTML += '<tr><td>' + estado.Id_Estado +  '</td>' + '<td>' + estado.Nombre_Estado +  '</td></tr>';
+                if(estado.Visibilidad_Estado == 1)
+                {
+                    document.getElementById("tablaEstados").innerHTML += '<tr><td>' + estado.Nombre_Estado +  '</td><td>Si</td>';
+                }
+                else
+                {
+                    document.getElementById("tablaEstados").innerHTML += '<tr><td>' + estado.Nombre_Estado +  '</td><td>No</td>';
+                }
+                
+                document.getElementById("tablaEstados").innerHTML += '</tr>';
         }
 
     }).catch(err => {
@@ -165,7 +194,7 @@ function agregaEstado() {
 
         if(document.getElementById("existeEstado").value == "0")
         {
-            document.getElementById("tablaEstados").innerHTML += '<tr><td>' + response.idNuevo +  '</td>' + '<td>' + nuevoEstado +  '</td></tr>';
+            document.getElementById("tablaEstados").innerHTML += '<tr><td>' + nuevoEstado +  '</td>' + '<td>Si</td></tr>';
             document.getElementById("existeEstado").value = 1;
         }
         
@@ -192,15 +221,24 @@ document.getElementById('abreEstados').addEventListener('mousedown', async funct
         <table class="table table-bordered" >
         <thead>
         <tr>
-            <th scope="col">ID</th>
             <th scope="col">Nombre</th>
+            <th scope="col">Visible?</th>
         </tr>
         </thead>
         <tbody id="tablaEstados">
         `;
         for(estado of response.estados)
         {
-            document.getElementById("tablaEstados").innerHTML += '<tr><td>' + estado.Id_Estado +  '</td>' + '<td>' + estado.Nombre_Estado +  '</td></tr>';
+            if(estado.Visibilidad_Estado == 1)
+            {
+                document.getElementById("tablaEstados").innerHTML += '<tr><td>' + estado.Nombre_Estado +  '</td><td>Si</td>';
+            }
+            else
+            {
+                document.getElementById("tablaEstados").innerHTML += '<tr><td>' + estado.Nombre_Estado +  '</td><td>No</td>';
+            }
+            
+            document.getElementById("tablaEstados").innerHTML += '</tr>';
         }
         contenido.innerHTML += `
         </tbody>
@@ -212,7 +250,8 @@ document.getElementById('abreEstados').addEventListener('mousedown', async funct
             <div class="col-xxl-4"><label  class="col-form-label text-dark">Asunto</label></div>
         <div class="col"><input id="input_estado" name="input_estado" class="form-control" type="text"></div>
         <div class="col"><button type="button" id="agrega_estado" class="btn btn-success">  Agregar </button></div>
-        <input type="hidden" id="existeEstado" name="existeEstado" value="0"></form>`;
+        <input type="hidden" id="existeEstado" name="existeEstado" value="0">
+        </form>`;
 
         document.getElementById('input_estado').onkeyup = filtraEstados;
         document.getElementById('agrega_estado').onclick = agregaEstado;

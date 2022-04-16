@@ -18,7 +18,7 @@ exports.getLike = (request, response, next) => {
 };
 
 exports.getAll = (request, response, next) => {
-  Ticket.fetchLabels()
+  Label.fetchAll()
   .then(([rows, fieldData]) => {
       response.status(200).json({
           labels:rows

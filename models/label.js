@@ -10,6 +10,9 @@ module.exports = class Label{
     save() {
     }
 
+    static fetchAll(texto_ingresado) {
+        return db.execute('SELECT * FROM label');
+    }
 
     static fetchLike(texto_ingresado) {
         return db.execute('SELECT * FROM label WHERE Visibilidad_Label = 1 AND Id_Label LIKE ?', ['%' + texto_ingresado + '%']);

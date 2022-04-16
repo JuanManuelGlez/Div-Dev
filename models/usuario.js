@@ -59,7 +59,7 @@ module.exports = class Usuario{
             [id_usuario]);
     }
 
-    static fetchEstado(){
+    static fetchEstado(){ //?
         return db.execute('SELECT * FROM rol');
     }
 

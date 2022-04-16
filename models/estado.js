@@ -13,9 +13,8 @@ module.exports = class Estado{
         );
     }
 
-    //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
-        return db.execute('SELECT * FROM estado WHERE Visibilidad_Estado = 1'
+        return db.execute('SELECT * FROM estado'
         );
     }
 
