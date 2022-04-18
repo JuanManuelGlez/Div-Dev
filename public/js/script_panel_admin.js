@@ -227,7 +227,7 @@ function agregarProcedencia() {
     const csrf = document.getElementById('_csrf').value;
     const nuevaProcedencia = document.getElementById("Nombre_Procedencia").value
     let rutaAgregar = '../procedencia/procedencia_f';
-    console.log("holi")
+    console.log(document.getElementById("Nombre_Procedencia"))
     data = {
         Nombre_Procedencia: nuevaProcedencia
     }
@@ -242,7 +242,7 @@ function agregarProcedencia() {
     })
     .then(response => response.json())
     .then(response => {
-
+        document.getElementById("procedencia").innerHTML+='<option value="'+Nombre_Procedencia+'</option>'
            
         
     }).catch(err => {
@@ -257,9 +257,8 @@ function modificarProcedencia() {
     let rutaAgregar = '../procedencia/procedencia_f/update';
     const nuevoNombre = document.getElementById("nombre").value
     const nuevaVisibilidad=document.getElementById("visibilidad").value
-    console.log(nuevoNombre)
+    console.log(nuevoNombre);
     data = {
-        Nombre_Procedencia: nuevaProcedencia,
         procedencia:  nuevaProcedencia,
         nombre: nuevoNombre,
         visibilidad: nuevaVisibilidad
@@ -271,14 +270,13 @@ function modificarProcedencia() {
             'Content-Type': 'application/json',
             'csrf-token': csrf
         },
-        body:JSON.stringify(data)
+        body: JSON.stringify(data)
     })
     .then(response => response.json())
     .then(response => {
-
            
         
-    }).catch(err => {
+    }).catch((err) => {
         console.log(err);
     });
 };
@@ -302,12 +300,13 @@ document.getElementById('abreProcedencia').addEventListener('mousedown', async f
         
         <form id="nueva_procedencia" method="POST">
         <input type="hidden" id="__csrf" name="_csrf" value="<%= csrfToken %>"></input>
-        <div id="Nombre_Procedencia">
+        <div id="Nombre_Procedenciaa">
             <label for="Nombre_Procedencia">Nombre de Nueva Procedencia: </label>
             <input type="text" id="Nombre_Procedencia" name="Nombre_Procedencia" placeholder="assdasdasdsa">
         </div>    
-        <button type="button" id="agrega_procedencia" class="btn btn-success">Agregar </button>
+        <button type="button" id="agrega_procedencia" class="btn btn-success" onclick="agregarProcedencia()">Agregar </button>
         </form>`;
+        console.log(document.getElementById("agrega_procedencia"))
         document.getElementById("agrega_procedencia").onclick = agregarProcedencia;
         
 

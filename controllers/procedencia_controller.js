@@ -26,7 +26,8 @@ exports.post_procedencia=(request,response,next)=>{
     const procedencianueva= new Procedencia(request.body.Nombre_Procedencia);
     procedencianueva.save()
         .then(()=>{
-            response.redirect('/procedencia_f')
+            response.status(200).json({});
+
         })
         .catch((err)=>{
             console.log(err);
@@ -38,7 +39,7 @@ exports.update_procedencia=(request,response,next)=>{
     console.log(request.body.procedencia)
     console.log(request.body.nombre)
     console.log(request.body.visibilidad)
-    let visibilidad = 1;
+    let visibilidad= 0;
         if(request.body.visibilidad==1){
              visibilidad=1;
         }else if (request.visibilidad==0){
@@ -51,5 +52,5 @@ exports.update_procedencia=(request,response,next)=>{
             console.log(err);
         })
         
-    response.redirect('/procedencia_f');
+    response.status(200).json({});
 }
