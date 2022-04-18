@@ -222,6 +222,118 @@ document.getElementById('abreEstados').addEventListener('mousedown', async funct
     });
 }, true);
 
+
+function agregarProcedencia() {
+    const csrf = document.getElementById('_csrf').value;
+    const nuevaProcedencia = document.getElementById("Nombre_Procedencia").value
+    let rutaAgregar = '../procedencia/procedencia_f';
+    console.log("holi")
+    data = {
+        Nombre_Procedencia: nuevaProcedencia
+    }
+
+    fetch(rutaAgregar, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'csrf-token': csrf
+        },
+        body:JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(response => {
+
+           
+        
+    }).catch(err => {
+        console.log(err);
+    });
+};
+
+
+function modificarProcedencia() {
+    const csrf = document.getElementById('_csrf').value;
+    const nuevaProcedencia = document.getElementById("procedencia").value
+    let rutaAgregar = '../procedencia/procedencia_f/update';
+    const nuevoNombre = document.getElementById("nombre").value
+    const nuevaVisibilidad=document.getElementById("visibilidad").value
+    console.log(nuevoNombre)
+    data = {
+        Nombre_Procedencia: nuevaProcedencia,
+        procedencia:  nuevaProcedencia,
+        nombre: nuevoNombre,
+        visibilidad: nuevaVisibilidad
+    }
+
+    fetch(rutaAgregar, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'csrf-token': csrf
+        },
+        body:JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(response => {
+
+           
+        
+    }).catch(err => {
+        console.log(err);
+    });
+};
+
+document.getElementById('abreProcedencia').addEventListener('mousedown', async function (e) { //Esto no se v a aquedar asi pero no se como arreglar un problema con el collapse
+    let contenido = document.getElementById("contenido_procedencia");
+    $('#accordionExample').css('height', 'auto');
+    let rutaProcedencia = '../procedencia/procedencia_f';
+        
+    contenido.innerHTML = '';
+    await fetch(rutaProcedencia, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(response => {
+        console.log(response.procedencias)
+        contenido.innerHTML += `
+        
+        <form id="nueva_procedencia" method="POST">
+        <input type="hidden" id="__csrf" name="_csrf" value="<%= csrfToken %>"></input>
+        <div id="Nombre_Procedencia">
+            <label for="Nombre_Procedencia">Nombre de Nueva Procedencia: </label>
+            <input type="text" id="Nombre_Procedencia" name="Nombre_Procedencia" placeholder="assdasdasdsa">
+        </div>    
+        <button type="button" id="agrega_procedencia" class="btn btn-success">Agregar </button>
+        </form>`;
+        document.getElementById("agrega_procedencia").onclick = agregarProcedencia;
+        
+
+        contenido.innerHTML += `
+            <form id="modificar_procedencia" action="/procedencia/procedencia_f/update" method="POST">
+            <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>"></input>
+            <select class="form-select" id="procedencia" name="procedencia" aria-label="Default select example">
+                <option selected disabled>Seleccion Procedencia</option>`;
+
+                 for ( procedencia of response.procedencias){
+                       document.getElementById('procedencia').innerHTML+='<option value="'+procedencia.Id_Procedencia+'">'+procedencia.Nombre_Procedencia+'</option>';
+                    }
+        contenido.innerHTML+=
+            `</select>
+            <div id="cambiar_procedencia"></div>
+            <button type="button" id="modificar_procedencias" class="btn btn-success"> Enviar </button>
+            </form>
+        `;
+        document.getElementById('procedencia').onchange = Modificacion;
+        document.getElementById('modificar_procedencias').onclick = modificarProcedencia;
+        
+    }).catch(err => {
+        console.log(err);
+    });
+}, true);
+
 /*
 document.getElementById('collapseThree').addEventListener('show.bs.collapse', async function (e) {
     let contenido = document.getElementById("contenido_estados");

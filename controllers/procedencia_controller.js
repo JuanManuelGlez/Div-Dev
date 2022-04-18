@@ -14,7 +14,7 @@ exports.get_procedencia=(request,response,next)=>{
 exports.get_All_Procedencia=(request,response,next) =>{
     Procedencia.fetchProcedencias()
     .then(([rowsProcedencias, fieldData])=>{
-        response.render('procedencia_f',{
+        response.status(200).json({
             procedencias: rowsProcedencias,
         });
     })
@@ -22,6 +22,7 @@ exports.get_All_Procedencia=(request,response,next) =>{
 }
 
 exports.post_procedencia=(request,response,next)=>{
+    console.log(request.body.Nombre_Procedencia)
     const procedencianueva= new Procedencia(request.body.Nombre_Procedencia);
     procedencianueva.save()
         .then(()=>{
@@ -37,10 +38,11 @@ exports.update_procedencia=(request,response,next)=>{
     console.log(request.body.procedencia)
     console.log(request.body.nombre)
     console.log(request.body.visibilidad)
+    let visibilidad = 1;
         if(request.body.visibilidad==1){
-            visibilidad=1;
+             visibilidad=1;
         }else if (request.visibilidad==0){
-            visibilidad=0;
+             visibilidad=0;
         }
         Procedencia.update(request.body.procedencia,request.body.nombre,visibilidad)
         .then(()=>{

@@ -1,5 +1,5 @@
 
-document.getElementById("procedencia").onchange = () =>
+function Modificacion()
 {
     let cambiar_procedencia = document.getElementById("cambiar_procedencia");
     let idProcedencia = document.getElementById("procedencia").value; 
