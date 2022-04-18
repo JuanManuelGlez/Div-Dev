@@ -35,6 +35,12 @@ module.exports = class Tipo_incidencia{
         );
     }
 
+    static async pregunta_check_tp(p_id, tp_id){
+        return db.execute('SELECT EXISTS(SELECT * FROM tipo_incidencia_pregunta p WHERE p.Id_Pregunta = ? AND p.Id_Tipo_Incidencia = ?) AS E',
+            [p_id, tp_id]
+        );
+    }
+
     //6.4 ratio pizza precio de 300 varod dominos
     //7.3 ratio precio pizza extra grande
     static fetchPreguntas(id_tipo_incidencia) {
@@ -51,6 +57,21 @@ module.exports = class Tipo_incidencia{
 
     static fetchAllPreguntas() {
         return db.execute('SELECT * FROM pregunta P WHERE P.Visibilidad_Pregunta = 1');
+    }
+
+    static eliminarPregunta(id_p, id_t){
+        return db.execute('DELETE FROM tipo_incidencia_pregunta WHERE Id_Pregunta = ? AND Id_Tipo_Incidencia = ?',
+            [id_p, id_t]
+        );
+    }
+
+    static modificar_tipo_incidencia(id_tp, nuevo_tp, nuevo_SLA){
+        return db.execute('UPDATE tipo_incidencia SET Nombre_Tipo_Incidencia = ?, SLA = ? WHERE Id_Tipo_Incidencia = ?',
+        [
+            nuevo_tp,
+            nuevo_SLA,
+            id_tp
+        ])
     }
 
 }
