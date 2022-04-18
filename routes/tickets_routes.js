@@ -25,4 +25,6 @@ router.post('/:id_ticket',tickets_controller.ticket_post);
 router.post('/archivar/:id_ticket',tickets_controller.ticket_archivar);
 
 
+
+
 module.exports = router;

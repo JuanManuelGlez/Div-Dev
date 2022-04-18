@@ -222,14 +222,15 @@ document.getElementById("enviar").onclick = () =>
 document.getElementById("archivar").onclick = () =>
 {
     const idTicket = document.getElementById("Id_Ticket").value;
-
     const csrf = document.getElementById('_csrf').value;
-    let ruta = '../ticket/archivar/' + id_ticket;
+    let ruta = '../tickets/archivar/' + idTicket;
+    const archivar = 1;
+    const bool_archivar = document.getElementById("Bool").value;
     data = {
-      Archivado : 1
+      Archivado : bool_archivar
     }
 
-    fetch(idTicket, {
+    fetch(ruta, {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',
@@ -245,6 +246,7 @@ document.getElementById("archivar").onclick = () =>
       console.log(err);
   });
 }
+
 
 function closeTicket() {
   document.getElementById("Ticket").style.display = "none";
