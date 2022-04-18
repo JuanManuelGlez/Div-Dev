@@ -11,6 +11,7 @@ exports.lista = (request, response, next) => {
     .then(([rowsRols, fieldDataRows]) => {
       Usuario.fetchAll()
         .then(([rowsUsuarios, fieldData]) => {
+          console.log(rowsUsuarios);
           response.render("lista_usuarios", {
             usuarios: rowsUsuarios,
             rols: rowsRols,
@@ -132,6 +133,6 @@ exports.usuario_post = (request, response, next) => {
 };
 
 exports.panel_admin = (request, response, next) => {
-  response.render('panel_administrativo')
+  response.render('panel_administrativo');
 };
 

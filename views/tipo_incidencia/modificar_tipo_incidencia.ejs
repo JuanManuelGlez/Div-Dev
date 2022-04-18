@@ -1,0 +1,8 @@
+<head>ID: <%= Id_Tipo_Incidencia%> </head><br>
+<head>Nombre: <%= Tipo_Incidencia[0].Nombre_Tipo_Incidencia %> </head><br>
+<head>SLA: <%= Tipo_Incidencia[0].SLA %> </head><br><br>
+
+<head>Preguntas:</head><br><br>
+<% for(pregunta of Preguntas){ %>
+    <head> ID: <%= pregunta.Id_Pregunta %> <%= pregunta.Texto_Pregunta %> </head><br>
+<% } %>

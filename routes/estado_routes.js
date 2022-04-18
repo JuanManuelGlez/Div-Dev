@@ -9,5 +9,9 @@ const router = express.Router();
     
 router.get('/getAll', estado_controller.getAllEstados);
 
+router.post('/getLike', estado_controller.getLike);
+
+router.post('/nuevoEstado', estado_controller.nuevoEstado);
+
 
 module.exports = router;

@@ -22,15 +22,28 @@ $(document).on('keyup', '.form-select-label .bs-searchbox input', function (e) {
 
             let labels_actuales = document.querySelector('[data-id="select_labels"]').title.split(", ");
 
-            for(label of labels_actuales)
+            if(labels_actuales[0] !== 'Nothing selected')
             {
-                document.getElementById(label).setAttribute('selected', true);
+                let labels_totales = document.querySelectorAll('.opcionLabel');
+
+                labels_totales.forEach(element => {
+                    if(labels_actuales.includes(element.id))
+                    {
+                        element.setAttribute('selected', true);
+                    }
+                    else
+                    {
+                        element.removeAttribute('selected'); //Creo que si no lo tiene no pasa nada pero creo que hay que revisar
+                    }
+                });
             }
 
             let select_labels = document.getElementById("select_labels");
+
+            select_labels.innerHTML = '<option class="opcionLabel" id=' + input.replace(/ /g, '_') + ' value="' + input + '">' + input + '</option>' + select_labels.innerHTML;
             
-            select_labels.innerHTML = '<option id=' + input + ' value=' + input + '>' + input + '</option>' + select_labels.innerHTML;
             $('.form-select-label').selectpicker('refresh');
+            e.target.value = '';
             event.stopPropagation();
         });
     }
