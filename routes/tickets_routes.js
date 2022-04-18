@@ -9,6 +9,8 @@ const router = express.Router();
 
 
 router.use('/lista', tickets_controller.lista);
+
+router.use('/archivo', tickets_controller.lista_archivo);
     
 router.get('/nuevo', tickets_controller.nuevo_get);
 
@@ -20,6 +22,7 @@ router.get('/:id_ticket', tickets_controller.ticket_get);
 
 router.post('/:id_ticket',tickets_controller.ticket_post);
 
+router.post('/archivar/:id_ticket',tickets_controller.ticket_archivar);
 
 
 module.exports = router;

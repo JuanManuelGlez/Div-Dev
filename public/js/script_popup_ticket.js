@@ -219,6 +219,33 @@ document.getElementById("enviar").onclick = () =>
   });
 }
 
+document.getElementById("archivar").onclick = () =>
+{
+    const idTicket = document.getElementById("Id_Ticket").value;
+
+    const csrf = document.getElementById('_csrf').value;
+    let ruta = '../ticket/archivar/' + id_ticket;
+    data = {
+      Archivado : 1
+    }
+
+    fetch(idTicket, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+          'csrf-token': csrf
+      },
+      body:JSON.stringify(data)
+  })
+  .then(response => {
+      alert("Datos guardados");
+      closeTicket();
+      openTicket(document.getElementById("boton"+idTicket));
+  }).catch(err => {
+      console.log(err);
+  });
+}
+
 function closeTicket() {
   document.getElementById("Ticket").style.display = "none";
   document.getElementById("commentShow").style.display = "none";

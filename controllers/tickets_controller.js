@@ -35,6 +35,39 @@ exports.lista = (request, response, next) => {
     .catch((err) => console.log(err));
 };
 
+exports.lista_archivo = (request, response, next) => {
+  Ticket.fetchListArchivo()
+    .then(([rowsTickets, fielData]) => {
+      Tipo_incidencia.fetchAll()
+        .then(([rowsIncidencias, fielDataIncidencias]) => {
+          Ticket.fetchPrioridades()
+            .then(([rowsPrioridades, fieldDataPrioridades]) => {
+              Ticket.fetchEstado()
+                .then(([rowsEstados, fielDataEstados]) => {
+                  response.render("archivo", {
+                    tickets: rowsTickets,
+                    prioridades: rowsPrioridades,
+                    estados: rowsEstados,
+                    incidencias: rowsIncidencias,
+                  });
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => console.log(err));
+};
+
+
+
 exports.nuevo_get = (request, response, next) => {
   //debe de haber una manera mejor de hacer esto pero aja creo que sirve por ahora
   Tipo_incidencia.fetchAll()
@@ -187,6 +220,17 @@ exports.ticket_post = (request, response, next) => {
     .catch((err) => {
       console.log(err);
     });
+};
+
+exports.ticket_archivar = (request, response, next) => {
+  Ticket.archivar(
+    request.params.id_ticket
+  )
+  .then(()=>{
+  })
+  .catch((err)=>{
+      console.log(err);
+  })
 };
 
 exports.getDatosTicket = (request, response, next) => {

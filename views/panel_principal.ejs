@@ -96,7 +96,9 @@
                                     <div class="col"><button class="btn btn-primary" type="button"
                                             style="background: rgb(0,0,0);width: 100%;margin-top: 40px;">Asignación<i
                                                 class="fa fa-user-plus" style="margin-left: 15px;"></i></button></div>
-                                    
+                                    <div class="col"><button class="btn btn-primary" id="archivar" type="button"
+                                        style="background: rgb(0,0,0);width: 100%;margin-top: 40px;border-width: 0px;"> Archivar <i
+                                            class="fa fa-archive" style="margin-left: 15px;"></i></button></div>
                                 </div>
 
                                 
@@ -155,14 +157,14 @@
                         <div class="col-sm-12 offset-2 offset-sm-1 offset-md-0 offset-lg-0 offset-xl-0 offset-xxl-0"
                             style="color: var(--bs-purple);background: #FF595A;">
                             <div></div>
-                            <h1 style="color: var(--bs-body-bg);margin-left: 50px;">Panel Tickets</h1>
+                            <h1 style="color: var(--bs-body-bg);margin-left: 50px;"> Backlog </h1>
                         </div>
                     </div>
                 </div>
                 <div class="container">
                     <div class="row" style="margin-top: 30px;">
                         <% for(let ticket of tickets) {%>
-
+                         <% if(ticket.Id_Estado == 1) {%>
                             <div  onClick="openTicket(this)" data-bs-toggle="modal" data-bs-target="#myModal"
                                 id="boton<%= ticket.Id_Ticket %>" class="col" style="cursor:pointer;margin-bottom:20px;">
                                 <div class="card h-100"
@@ -176,8 +178,10 @@
                                             style="overflow: hidden;color: rgb(0,0,0);">
                                             <%= ticket.Asunto %>
                                         </h6>
+                                        
                                         <i class="fa fa-circle"
-                                            style="overflow: hidden;color: rgb(159,159,159);"></i>
+                                            style="<%= ticket.Id_Estado == 1 ? 'color: grey' : ticket.Id_Estado == 2 ? 'color: yellow' : ticket.Id_Estado == 3 ? 'color: green' : ticket.Id_Estado == 4 ? 'color: red' : ticket.Id_Estado == 5 ? 'color: purple' : ' ' %>" ></i>
+                                        
                                             <span
                                             style="overflow: hidden;margin-left: 10px;color: rgb(136,136,136);">Creado
                                             el <%= ticket.Fecha_Inicio %></span>
@@ -189,6 +193,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <% }%>
                             <% }%>
                     </div>
                 </div>

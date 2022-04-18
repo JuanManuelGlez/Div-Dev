@@ -33,9 +33,11 @@ module.exports = class Ticket{
     }
 
     static fetchList(){
-        return db.execute('SELECT Asunto, Fecha_Inicio, Id_Ticket FROM ticket');
+        return db.execute('SELECT t.Id_Ticket,t.Asunto,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado,t.Fecha_y_Hora FROM ticket_archivo_magia t WHERE t.Archivado = 0 GROUP BY t.Id_Ticket HAVING MAX(t.Fecha_y_Hora) ORDER BY t.Fecha_y_Hora DESC');
     }
-
+    static fetchListArchivo(){
+        return db.execute('SELECT t.Id_Ticket,t.Asunto,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado,t.Fecha_y_Hora FROM ticket_archivo_magia t WHERE t.Archivado = 1 GROUP BY t.Id_Ticket HAVING MAX(t.Fecha_y_Hora) ORDER BY t.Fecha_y_Hora DESC');
+    }
     static fetchOne(id_ticket){
         return db.execute('SELECT Id_Ticket,ticket.Id_Procedencia,ticket.Id_Tipo_Incidencia,ticket.Id_Prioridad,Fecha_Inicio,Fecha_Fin,Descripcion,Asunto,prioridad.Nombre_Prioridad,procedencia.Nombre_Procedencia,tipo_incidencia.Nombre_Tipo_Incidencia FROM ticket, prioridad,procedencia,tipo_incidencia WHERE Id_Ticket=? AND ticket.Id_Prioridad=prioridad.Id_Prioridad AND ticket.Id_Procedencia=procedencia.Id_Procedencia AND ticket.Id_Tipo_Incidencia=tipo_incidencia.Id_Tipo_Incidencia ',[id_ticket]);
         //return db.execute('SELECT *,Nombre_Prioridad FROM ticket, prioridad,procedencia,tipo_incidencia WHERE Id_Ticket=? AND ticket.Id_Prioridad=prioridad.Id_Prioridad AND ticket.Id_Procedencia=procedencia.Id_Procedencia AND ticket.Id_Tipo_Incidencia=tipo_incidencia.Id_Tipo_Incidencia',[id_ticket]);
@@ -138,5 +140,11 @@ module.exports = class Ticket{
                            
             }          
         
+    }
+
+    static async update(id_ticket){
+        
+        return db.execute('UPDATE ticket SET Archivado=1 WHERE Id_Ticket=?',[id_ticket]);
+       
     }
 }
