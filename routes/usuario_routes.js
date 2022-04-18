@@ -18,6 +18,8 @@ router.post('/login',usuario_controller.login_post);
 
 router.get('/lista',usuario_controller.lista);
 
+router.get('/datos',usuario_controller.datos);
+
 router.get('/panelAdmin',usuario_controller.panel_admin);
 
 router.get('/datos/:id_usuario', usuario_controller.getDatosUsuario);

@@ -6,6 +6,15 @@ exports.signup_get = (request, response, next) => {
   response.render("signup");
 };
 
+exports.datos = (request, response, next) => {
+    
+    response.status(200).json({
+      datos:request.session.usuario
+
+    });
+    console.log(request.session)
+};
+
 exports.lista = (request, response, next) => {
   Usuario.fetchEstado()
     .then(([rowsRols, fieldDataRows]) => {
@@ -21,6 +30,7 @@ exports.lista = (request, response, next) => {
     })
     .catch((err) => console.log(err));
 };
+
 
 exports.signup_post = (request, response, next) => {
   const usuario_nuevo = new Usuario(
@@ -57,7 +67,7 @@ exports.login_post = (request, response, next) => {
         rows[0].Nombre_Usuario,
         rows[0].Login,
         rows[0]["Contraseña"],
-        ""
+        rows[0].URL_Foto
       );
       bcrypt.compare(request.body.contrasenia, usuario.contrasenia_usuario)
         .then((doMatch) => {
@@ -65,8 +75,9 @@ exports.login_post = (request, response, next) => {
             request.session.isLoggedIn = true;
             request.session.usuario = usuario;
             request.session.correo = usuario.login_usuario;
+            //console.log(request.session.usuario);
             return request.session.save((err) => {
-              response.redirect("/tickets/lista");
+              response.redirect("/");
             });
           }
           response.redirect("/usuarios/login");
