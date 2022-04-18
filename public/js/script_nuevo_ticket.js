@@ -1,6 +1,7 @@
 
 $(document).ready(function () {
     $('.form-select-label').selectpicker();
+    $('.form-select-label .bs-searchbox input').attr('maxlength','30');
 });
 
 $(document).on('keyup', '.form-select-label .bs-searchbox input', function (e) {
@@ -40,7 +41,7 @@ $(document).on('keyup', '.form-select-label .bs-searchbox input', function (e) {
 
             let select_labels = document.getElementById("select_labels");
 
-            select_labels.innerHTML = '<option class="opcionLabel" id=' + input.replace(/ /g, '_') + ' value="' + input + '">' + input + '</option>' + select_labels.innerHTML;
+            select_labels.innerHTML = '<option class="opcionLabel" id=' + input.replace(/ /g, '_') + ' value="' + input + '" selected="true">' + input + '</option>' + select_labels.innerHTML;
             
             $('.form-select-label').selectpicker('refresh');
             e.target.value = '';

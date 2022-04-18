@@ -1,3 +1,5 @@
+const db = require('../util/database');
+
 module.exports = class Rol{
 
     //Constructor de la clase. Sirve para crear un nuevo objeto, y en él se definen las propiedades del modelo
