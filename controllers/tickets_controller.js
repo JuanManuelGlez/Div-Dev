@@ -223,15 +223,20 @@ exports.ticket_post = (request, response, next) => {
 };
 
 exports.ticket_archivar = (request, response, next) => {
+  console.log(request.body.Archivado);
   Ticket.archivar(
+    request.body.Archivado,
     request.params.id_ticket
   )
   .then(()=>{
+    response.status(200).json()
   })
   .catch((err)=>{
       console.log(err);
   })
 };
+
+
 
 exports.getDatosTicket = (request, response, next) => {
   const id = request.params.id_ticket;

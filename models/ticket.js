@@ -141,9 +141,11 @@ module.exports = class Ticket{
         
     }
 
-    static async update(id_ticket){
-        
-        return db.execute('UPDATE ticket SET Archivado=1 WHERE Id_Ticket=?',[id_ticket]);
+    static async archivar(archivado,id_ticket){ 
+        console.log(archivado);
+        return db.execute('UPDATE ticket SET Archivado=? WHERE Id_Ticket=?',[archivado,id_ticket]);
        
     }
+
+    
 }

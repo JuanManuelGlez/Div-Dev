@@ -87,18 +87,19 @@
 
                                     <div class="col"><button type="button" class="btn btn-primary" id="enviar"
                                             type="button"
-                                            style="background: rgb(0,0,0);width: 100%;margin-top: 40px;">Actualizar<i
+                                            style="background: rgb(0,0,0);width: 100%;margin-top: 40px;border-width: 0px">Actualizar<i
                                                 class="fa fa-refresh" style="margin-left: 15px;"></i></button></div>
                                     <div class="col"><button class="btn btn-primary" id="boton_comentarios"
                                             type="button"
-                                            style="background: rgb(0,0,0);width: 100%;margin-top: 40px;">Comentarios<i
+                                            style="background: rgb(0,0,0);width: 100%;margin-top: 40px;border-width: 0px">Comentarios<i
                                                 class="fa fa-comments-o" style="margin-left: 15px;"></i></button></div>
                                     <div class="col"><button class="btn btn-primary" type="button"
-                                            style="background: rgb(0,0,0);width: 100%;margin-top: 40px;">Asignación<i
+                                            style="background: rgb(0,0,0);width: 100%;margin-top: 40px;border-width: 0px">Asignación<i
                                                 class="fa fa-user-plus" style="margin-left: 15px;"></i></button></div>
                                     <div class="col"><button class="btn btn-primary" id="archivar" type="button"
                                         style="background: rgb(0,0,0);width: 100%;margin-top: 40px;border-width: 0px;"> Archivar <i
                                             class="fa fa-archive" style="margin-left: 15px;"></i></button></div>
+                                    
                                 </div>
 
                                 
@@ -124,10 +125,9 @@
                                                             <label for="comment">Comentario: </label>
                                                             <input id="id_ticket" name="id_ticket" type="hidden" value="">
                                                             <input type="text" id="texto_comentario" name="texto_comentario" placeholder="Escribe aqui...">
+                                                        
                                                             <button onClick="submitForm()"  type="button" class="btn btn-success" id="Agregar"> Agregar Comentario </button>
-                                                            
                                                             <input type="file" id="url_archivo_comentario" name="url_archivo_comentario">
-                                                            
                                                             <script>
                                                                 var input = document.getElementById("texto_comentario");
                                                                 input.addEventListener("keyup", function(event) {
@@ -159,13 +159,14 @@
                             style="color: var(--bs-purple);background: #FF595A;">
                             <div></div>
                             <h1 style="color: var(--bs-body-bg);margin-left: 50px;"> Backlog </h1>
+                            <div style="display:none"> <input type="number" id="Bool" value="1">  </div>
                         </div>
                     </div>
                 </div>
                 <div class="container">
                     <div class="row" style="margin-top: 30px;">
                         <% for(let ticket of tickets) {%>
-                         <% if(ticket.Id_Estado == 1) {%>
+                            <% if(true) {%>
                             <div  onClick="openTicket(this)" data-bs-toggle="modal" data-bs-target="#myModal"
                                 id="boton<%= ticket.Id_Ticket %>" class="col" style="cursor:pointer;margin-bottom:20px;">
                                 <div class="card h-100"
