@@ -25,9 +25,9 @@ exports.post_procedencia=(request,response,next)=>{
     console.log(request.body.Nombre_Procedencia)
     const procedencianueva= new Procedencia(request.body.Nombre_Procedencia);
     procedencianueva.save()
-        .then(()=>{
-            response.status(200).json({});
-
+        .then((result)=>{
+            let idNuevo = result[0].insertId;
+            response.status(200).json({id_nueva_procedencia: idNuevo});
         })
         .catch((err)=>{
             console.log(err);

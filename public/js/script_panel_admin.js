@@ -242,9 +242,13 @@ function agregarProcedencia() {
     })
     .then(response => response.json())
     .then(response => {
-        document.getElementById("procedencia").innerHTML+='<option value="'+Nombre_Procedencia+'</option>'
+        let opt = document.createElement('option');
+        opt.value = response.id_nueva_procedencia;
+        opt.innerHTML = nuevaProcedencia;
+        console.log(opt);
+        document.getElementById("procedencia").appendChild(opt);
+        document.getElementById("Nombre_Procedencia").value = '';
            
-        
     }).catch(err => {
         console.log(err);
     });
@@ -302,7 +306,7 @@ document.getElementById('abreProcedencia').addEventListener('mousedown', async f
         <input type="hidden" id="__csrf" name="_csrf" value="<%= csrfToken %>"></input>
         <div id="Nombre_Procedenciaa">
             <label for="Nombre_Procedencia">Nombre de Nueva Procedencia: </label>
-            <input type="text" id="Nombre_Procedencia" name="Nombre_Procedencia" placeholder="assdasdasdsa">
+            <input type="text" id="Nombre_Procedencia" name="Nombre_Procedencia" placeholder="assdasdasdsa" minlength="3">
         </div>    
         <button type="button" id="agrega_procedencia" class="btn btn-success" onclick="agregarProcedencia()">Agregar </button>
         </form>`;
