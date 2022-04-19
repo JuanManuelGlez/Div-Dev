@@ -13,5 +13,8 @@ router.post('/getLike', estado_controller.getLike);
 
 router.post('/nuevoEstado', estado_controller.nuevoEstado);
 
+router.get('/:id_estado',estado_controller.get_estado);
+
+router.post('/update',estado_controller.update);
 
 module.exports = router;

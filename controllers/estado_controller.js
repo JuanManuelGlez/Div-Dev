@@ -28,3 +28,30 @@ exports.nuevoEstado = (request, response, next) => {
     .catch(err => console.log(err));
   };
 
+exports.get_estado=(request,response,next)=>{
+    const id=request.params.id_estado;
+    id_Estado=parseInt(id);
+    Estado.fetchEstado(id_Estado)
+    .then(([rows,fielData])=>{
+        response.status(200).json({estados:rows});
+    })
+    .catch(err => console.log(err))
+}
+
+
+exports.update=(request,response,next)=>{
+    let visibilidad=0;
+    if(request.body.visibilidad==1){
+        visibilidad=1;
+    }else if (request.visibilidad==0){
+        visibilidad=0;
+    }
+    Estado.update(request.body.estado,request.body.nombre,visibilidad)
+    .then(()=>{
+
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
+    response.status(200).json({});
+}

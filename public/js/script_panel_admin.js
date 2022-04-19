@@ -203,6 +203,36 @@ function agregaEstado() {
     });
 };
 
+function modificarEstado() {
+    const csrf = document.getElementById('_csrf').value;
+    const nuevoEstado = document.getElementById("estado").value
+    let rutaAgregar = '../estado/update';
+    const nuevoNombre = document.getElementById("nombre").value
+    const nuevaVisibilidad=document.getElementById("visibilidad").value
+    console.log(nuevoNombre);
+    data = {
+        estado:  nuevoEstado,
+        nombre: nuevoNombre,
+        visibilidad: nuevaVisibilidad
+    }
+
+    fetch(rutaAgregar, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'csrf-token': csrf
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(response => {
+           
+        
+    }).catch((err) => {
+        console.log(err);
+    });
+};
+
 document.getElementById('abreEstados').addEventListener('mousedown', async function (e) { //Esto no se v a aquedar asi pero no se como arreglar un problema con el collapse
     let contenido = document.getElementById("contenido_estados");
     $('#accordionExample').css('height', 'auto');
@@ -253,9 +283,29 @@ document.getElementById('abreEstados').addEventListener('mousedown', async funct
         <input type="hidden" id="existeEstado" name="existeEstado" value="0">
         </form>`;
 
+
+        contenido.innerHTML+=`
+        <form id="modificar_estado" action="/estado/update" method="POST">
+            <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>"></input>
+            <select class="form-select" id="estado" name="estado" aria-label="Default select example">
+                <option selected disabled>Seleccion Estado</option>`;
+
+                 for ( estado of response.estados){
+                       document.getElementById('estado').innerHTML+='<option value="'+estado.Id_Estado+'">'+estado.Nombre_Estado+'</option>';
+                    }
+        contenido.innerHTML+=
+            `</select>
+            <div id="cambiar_estado"></div>
+            <button type="button" id="modificar_estados" class="btn btn-success"> Enviar </button>
+            </form>
+        `;
+        document.getElementById('estado').onchange=ModificacionEstado;
+        document.getElementById('modificar_estados').onclick=modificarEstado;
+        
         document.getElementById('input_estado').onkeyup = filtraEstados;
         document.getElementById('agrega_estado').onclick = agregaEstado;
         
+       
     }).catch(err => {
         console.log(err);
     });

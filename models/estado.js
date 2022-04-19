@@ -22,4 +22,12 @@ module.exports = class Estado{
         return db.execute('SELECT * FROM estado WHERE Visibilidad_Estado = 1 AND Nombre_Estado LIKE ?', ['%' + texto_ingresado + '%']);
     }
 
+    static fetchEstado(id_estado){
+        return db.execute('SELECT Id_Estado,Nombre_Estado,Visibilidad_Estado FROM estado WHERE Id_Estado=?',[id_estado]);
+    }
+
+    static update(id_estado,nombre_estado,visibilidad_estado){
+        return db.execute('UPDATE estado SET Nombre_Estado=?, Visibilidad_Estado=? WHERE Id_Estado=?',[nombre_estado,visibilidad_estado,id_estado]);
+    }
+
 }
