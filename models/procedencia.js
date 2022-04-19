@@ -27,6 +27,6 @@ module.exports = class Procedencia{
 
 
     static update(id_procedencia,nombre_procedencia,visibilidad_procedencia){
-        return db.execute('UPDATE procedencia SET Nombre_Procedencia=?, Visibilidad_Procedencia=? WHERE Id_Procedencia=?',[nombre_procedencia,visibilidad_procedencia,id_procedencia])
+        return db.execute('UPDATE procedencia SET Nombre_Procedencia=?, Visibilidad_Procedencia=? WHERE Id_Procedencia=?',[nombre_procedencia,visibilidad_procedencia,id_procedencia]);
     }
 }
