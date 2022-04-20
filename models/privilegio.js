@@ -8,9 +8,6 @@ module.exports = class Privilegio{
 
     //Este método servirá para guardar de manera persistente el nuevo objeto. 
     save() {
-        return db.execute('INSERT INTO privilegio (Nombre_Privilegio, Visibilidad_Privilegio) VALUES (?,?)', 
-            [this.nombre_privilegio, 1]
-        );
     }
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.

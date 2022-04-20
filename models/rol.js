@@ -17,5 +17,4 @@ module.exports = class Rol{
     static fetchAll() {
         return db.execute('SELECT * FROM rol');
     }
-
 }

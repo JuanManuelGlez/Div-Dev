@@ -30,12 +30,4 @@
             </tbody>
         </table>
 
-        <form method="post">
-            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            <div class="row" style="padding: 15px 0px;">
-                <div class="col-xxl-4"><label class="col-form-label text-dark">Nombre Nuevo Privilegio:</label></div>
-                <div class="col"><input id="Nuevo_Nombre" name="Nuevo_Nombre" class="form-control" type="text"></div>
-                <div class="col"><button id="agrega_privilegio" type="submit" class="btn btn-success"> Agregar </button></div>
-        </form>
-
         <%- include('includes/foot.ejs') %>

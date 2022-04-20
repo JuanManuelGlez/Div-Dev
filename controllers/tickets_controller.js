@@ -167,6 +167,7 @@ exports.ticket_get = (request, response, next) => {
 };
 
 exports.ticket_post = (request, response, next) => {
+  
   Ticket.update(
     request.params.id_ticket,
     request.body.estado,
