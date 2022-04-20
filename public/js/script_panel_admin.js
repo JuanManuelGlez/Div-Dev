@@ -129,6 +129,172 @@ document.getElementById('abreLabels').addEventListener('mousedown', async functi
     });
 }, true);
 
+
+document.getElementById('abrePreguntas').addEventListener('mousedown', async function (e) {
+    let contenido = document.getElementById("contenido_preguntas");
+    $('#accordionExample').css('height', 'auto');
+    let rutaPreguntas = '../pregunta/preguntas_getAll';
+        
+    contenido.innerHTML = '';
+    await fetch(rutaPreguntas, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(response => {
+        contenido.innerHTML += `
+        <table class="table table-bordered" >
+        <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Visible?</th>
+        </tr>
+        </thead>
+        <tbody id="tablaPreguntas">
+        `;
+        for(pregunta of response.preguntas)
+        {
+            if(pregunta.Visibilidad_Pregunta.data[0] == 1)
+            {
+                document.getElementById("tablaPreguntas").innerHTML += '<tr><td>' + pregunta.Texto_Pregunta +  '</td><td>Si      <button type="button" id="elimina_pregunta" action = "eliminaPregunta("agrega",1)" class="btn btn-success">  x </button> </td>';
+            }
+            else
+            {
+                document.getElementById("tablaPreguntas").innerHTML += '<tr><td>' + pregunta.Texto_Pregunta +  '</td><td>No      <button type="button" id="elimina_pregunta" action = "eliminaPregunta('+pregunta.Texto_Pregunta,pregunta.Visibilidad_Pregunta+')" class="btn btn-success">  x </button> </td>';
+            }
+            
+            document.getElementById("tablaPreguntas").innerHTML += '</tr>';
+        }
+        contenido.innerHTML += `
+        </tbody>
+        </table>
+        <form id="form_nuevo_pregunta" method="POST">
+        <input type="hidden" id="__csrf" name="_csrf" value="<%= csrfToken %>">
+        <div class="row" style="padding: 15px 0px;">
+            <div class="col-xxl-4"><label  class="col-form-label text-dark">Agregar</label></div>
+        <div class="col"><input id="input_pregunta" name="input_pregunta" class="form-control" type="text" maxlength="30"></div>
+        <div class="col"><button type="button" id="agrega_pregunta" class="btn btn-success">  Agregar </button></div>
+        <input type="hidden" id="existePregunta" name="existePregunta" value="0">
+        </form>`;
+
+        document.getElementById('input_pregunta').onkeyup = filtraPregunta;
+        document.getElementById('agrega_pregunta').onclick = agregaPregunta;
+        
+    }).catch(err => {
+        console.log(err);
+    });
+}, true);
+
+function eliminaPregunta(text_pregunta, visibilidad){
+    console.log("ENTRO")
+    const csrf = document.getElementById('_csrf').value;
+    let rutaEliminar = '../pregunta/eliminarPreguntaPanel';
+
+    data = {
+        Pregunta: text_pregunta,
+        Visibilidad: visibilidad
+    }
+
+    fetch(rutaEliminar, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'csrf-token': csrf
+        },
+        body:JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(response => {
+        
+    }).catch(err => {
+        console.log(err);
+    });
+
+
+
+}
+
+function agregaPregunta() {
+    const csrf = document.getElementById('_csrf').value;
+    const nuevaPregunta = document.getElementById("input_pregunta").value
+    let rutaAgregar = '../pregunta/nuevaPregunta_panel';
+
+    data = {
+        Pregunta: nuevaPregunta
+    }
+
+    fetch(rutaAgregar, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'csrf-token': csrf
+        },
+        body:JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(response => {
+
+        if(document.getElementById("existePregunta").value == "0")
+        {
+            document.getElementById("tablaPreguntas").innerHTML += '<tr><td>' + nuevaPregunta +  '</td><td>Si</td></tr>';
+            document.getElementById("existePregunta").value = 1;
+        }
+
+        window.alert("Pregunta nueva agregada")
+
+        document.getElementById("input_pregunta").value = "";
+        filtraPregunta();
+        
+    }).catch(err => {
+        console.log(err);
+    });
+};
+
+
+function filtraPregunta() {
+    const csrf = document.getElementById('_csrf').value;
+    const nuevaPregunta = document.getElementById("input_pregunta").value
+    let rutaPreguntas = '../pregunta/getLike_Pregunta';
+
+    data = {
+        buscaPregunta: nuevaPregunta
+    }
+
+    fetch(rutaPreguntas, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'csrf-token': csrf
+        },
+        body:JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(response => {
+        document.getElementById("tablaPreguntas").innerHTML = '';
+        document.getElementById("existePregunta").value = 0;
+        for(pregunta of response.preguntas)
+        {
+            if(nuevaPregunta == pregunta.Texto_Pregunta)
+                document.getElementById("existePregunta").value = 1;
+
+            if(pregunta.Visibilidad_Pregunta.data[0] == 1)
+            {
+                document.getElementById("tablaPreguntas").innerHTML += '<tr><td>' + pregunta.Texto_Pregunta +  '</td><td>Si</td>';
+            }
+            else
+            {
+                document.getElementById("tablaPreguntas").innerHTML += '<tr><td>' + pregunta.Texto_Pregunta +  '</td><td>No</td>';
+            }
+            
+            document.getElementById("tablaPreguntas").innerHTML += '</tr>';
+        }
+    }).catch(err => {
+        console.log(err);
+    });
+};
+
 function filtraEstados() {
     const csrf = document.getElementById('_csrf').value;
     const nuevoEstado = document.getElementById("input_estado").value

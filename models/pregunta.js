@@ -11,12 +11,20 @@ module.exports = class Pregunta{
 
     //Este método servirá para guardar de manera persistente el nuevo objeto. 
     pregunta_save() {
-        return db.execute('INSERT INTO pregunta(Texto_Pregunta, Visibilidad_Pregunta) VALUES (?,?)',
-            [
-                this.pregunta_texto_pregunta,
-                this.pregunta_visibilidad
-            ]
-        );
+        return db.execute('SELECT * FROM pregunta WHERE Texto_Pregunta = ?', [this.pregunta_texto_pregunta])
+            .then(([rows, fieldData]) =>{
+                if(rows.length == 0)
+                {
+                    db.execute('INSERT INTO pregunta(Texto_Pregunta, Visibilidad_Pregunta) VALUES (?,?)',
+                    [
+                        this.pregunta_texto_pregunta,
+                        this.pregunta_visibilidad
+                    ])
+                    .then()
+                    .catch(err => console.log(err));
+                }
+            })
+        .catch(err => console.log(err));
     }
 
     static async pregunta_check(texto_pregunta){
@@ -37,7 +45,11 @@ module.exports = class Pregunta{
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
-        
+        return db.execute('SELECT * FROM pregunta');
+    }
+
+    static fetchLike(texto_ingresado) {
+        return db.execute('SELECT * FROM pregunta WHERE Visibilidad_Pregunta = 1 AND Texto_Pregunta LIKE ?', ['%' + texto_ingresado + '%']);
     }
 
     static agregaPregunta(id_pregunta,id_tipo_incidencia) {
@@ -47,6 +59,20 @@ module.exports = class Pregunta{
                 id_tipo_incidencia
             ]
         );
+    }
+    
+    static cambiaVisibilidad(P, V){
+        if(V == 1){
+            return db.execute('UPDATE pregunta SET Visibilidad_Pregunta = 0 WHERE Texto_Pregunta = ?',
+            [
+                P
+            ]);
+        }else{
+            return db.execute('UPDATE pregunta SET Visibilidad_Pregunta = 1 WHERE Texto_Pregunta = ?',
+            [
+                P
+            ]);
+        }
     }
 
 }
