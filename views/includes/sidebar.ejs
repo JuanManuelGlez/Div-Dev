@@ -2,7 +2,7 @@
     <div id="wrapper">
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <li class="sidebar-brand"> <div style="margin-top:30px"> <img id="foto_sidebar" data-bs-toggle="modal" data-bs-target="#myModalSidebar" class="rounded-circle"  style="width: 70px;height: 70px;margin-left: 65px;"> </div>    </li>
+                <li class="sidebar-brand"> <div style="margin-top:30px"> <img id="foto_sidebar" data-bs-toggle="modal" data-bs-target="#myModalSidebar" class="rounded-circle"  style="cursor:pointer;width: 70px;height: 70px;margin-left: 65px;"> </div>    </li>
                 <li> <h4  style="color:white;margin-left:-20px;margin-top:20px;text-align: center;" id="username_sidebar"> </h4> </li>
                 <li id="divisor"><span class="span1" style="margin-left: 0px;font-weight: bold;font-size: 15px;color: var(--bs-red);">General</span> </li>
                 <li> <a class="list1" href="/metricas"><i class="fa fa-pie-chart" style="margin-left: -20px;"></i><span class="span1" style="margin-left: 20px;">Métricas</span></a></li>
@@ -33,9 +33,9 @@
         
               <!-- Modal Header -->
               <div class="modal-header">
-                <div class="image-upload">
+                <div  class="image-upload">
                   <label for="file-input">
-                    <img id="foto_user" style="width:60px;height: 60px;border-radius: 50%;margin-right:20px;"/>
+                    <img id="foto_user" style="width:60px;cursor:pointer;height: 60px;border-radius: 50%;margin-right:20px;"/>
                   </label>
                   <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>"></input>
                   <input onchange="loadFile(event)" id="file-input" type="file" />
