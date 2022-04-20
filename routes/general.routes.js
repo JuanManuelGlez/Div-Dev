@@ -2,40 +2,41 @@ const express = require('express');
 const router = express.Router();
 const filesystem = require('fs');
 const path = require('path');
+const isAuth = require('../util/is-auth.js');
 
-router.get('/',(request, response, next) =>{
+router.get('/', isAuth,(request, response, next) =>{
     response.render('metricas');
 });
-router.get('/metricas',(request, response, next) =>{
+router.get('/metricas', isAuth,(request, response, next) =>{
     response.render('metricas');
 });
-router.get('/archivo',(request, response, next) =>{
+router.get('/archivo', isAuth,(request, response, next) =>{
     response.render('archivo');
 });
 
-router.get('/panel',(request, response, next) =>{
+router.get('/panel', isAuth,(request, response, next) =>{
     response.render('panel');
 });
-router.get('/ayuda',(request, response, next) =>{
+router.get('/ayuda', isAuth,(request, response, next) =>{
     response.render('ayuda');
 });
-router.get('/login',(request, response, next) =>{
+router.get('/login', isAuth,(request, response, next) =>{
     response.render('login');
 });
-router.get('/signup',(request, response, next) =>{
+router.get('/signup', isAuth,(request, response, next) =>{
     response.render('signup');
 });
-router.get('/administrar_privilegios',(request, response, next) =>{
+router.get('/administrar_privilegios', isAuth,(request, response, next) =>{
     response.render('administrar_privilegios');
 });
-router.get('/nuevo_tipo_incidencia',(request, response, next) =>{
+router.get('/nuevo_tipo_incidencia', isAuth,(request, response, next) =>{
     response.render('nuevo_tipo_incidencia');
 });
-router.get('/lista_usuarios',(request, response, next) =>{
+router.get('/lista_usuarios', isAuth,(request, response, next) =>{
     response.render('lista_usuarios');
 });
 
-router.get('/ticket',(request, response, next) =>{
+router.get('/ticket', isAuth,(request, response, next) =>{
     response.render('ticket');
 });
 

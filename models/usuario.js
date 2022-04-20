@@ -49,6 +49,11 @@ module.exports = class Usuario{
             [login_usuario]);
     }
 
+    static findProfile(login_usuario) {
+        return db.execute('SELECT R.Id_Rol, R.Nombre_Rol, U.Id_Rol, U.URL_Foto, U.Id_Usuario, U.Login, U.Contraseña, U.Nombre_Usuario, COUNT(T.Id_Ticket) AS "Total" FROM rol R, usuario_ticket T, usuario U WHERE R.Id_Rol = U.Id_Rol AND T.Id_Usuario = U.Id_Usuario AND U.Login = ?',
+            [login_usuario]);
+    }
+
     static countActiveTickets(id_usuario) {
         return db.execute('SELECT COUNT(T.Id_Ticket) as "Total" FROM usuario_ticket T WHERE T.Id_Usuario = ?',
             [id_usuario]);
@@ -72,6 +77,11 @@ module.exports = class Usuario{
     static async update(id_usuario,id_rol){
             return db.execute('UPDATE usuario SET Id_Rol=? WHERE Id_Usuario=?',[id_rol,id_usuario]);
           
+    }
+
+    static async profile_update(name,id_usuario){
+        
+        return db.execute('UPDATE usuario SET Nombre_Usuario = ? WHERE Id_Usuario=?',[name,id_usuario]);
     }
 
 }

@@ -2,7 +2,8 @@
     <div id="wrapper">
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <li class="sidebar-brand"> <a href="#"><img data-bs-toggle="modal" data-bs-target="#myModalSidebar" class="rounded-circle" src="/img/perfil%20esteban.jpg" style="width: 35px;height: 35px;margin-left: -10px;"></a></li>
+                <li class="sidebar-brand"> <div style="margin-top:30px"> <img id="foto_sidebar" data-bs-toggle="modal" data-bs-target="#myModalSidebar" class="rounded-circle"  style="width: 70px;height: 70px;margin-left: 65px;"> </div>    </li>
+                <li> <h4  style="color:white;margin-left:-20px;margin-top:20px;text-align: center;" id="username_sidebar"> </h4> </li>
                 <li id="divisor"><span class="span1" style="margin-left: 0px;font-weight: bold;font-size: 15px;color: var(--bs-red);">General</span> </li>
                 <li> <a class="list1" href="/metricas"><i class="fa fa-pie-chart" style="margin-left: -20px;"></i><span class="span1" style="margin-left: 20px;">Métricas</span></a></li>
                 <li> <a class="list1" href="/tickets/lista"><i class="fa fa-th" style="margin-left: -20px;"></i><span class="span1" style="margin-left: 20px;">Backlog</span></a></li>
@@ -32,12 +33,31 @@
         
               <!-- Modal Header -->
               <div class="modal-header">
-                <img id="foto_user" style="width:40px;height: 40px;border-radius: 50%;margin-right:20px;"> <h4> <span id="username">  </span></h4>
+                <div class="image-upload">
+                  <label for="file-input">
+                    <img id="foto_user" style="width:60px;height: 60px;border-radius: 50%;margin-right:20px;"/>
+                  </label>
+                  <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>"></input>
+                  <input onchange="loadFile(event)" id="file-input" type="file" />
+                </div>
+                  
+                 
+               
+                
+                 <h4><input type=text id="username" class="form-control" required/> </span></h4>
+                
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
               </div>
         
               <!-- Modal body -->
+             <style>
+              .image-upload>input {
+                display: none;
+              } 
 
+             </style>
+              
+              <div id="Id_Usuario" style = "display:none"></div>
               <div class="modal-body">
                 <div class="row">
                   <div class="col">
@@ -55,19 +75,35 @@
                     <div id="email_user"></div>
                   </div>
                 </div>
-                <br><div class="row">
+                <!-- <br><div class="row">
                   <div class="col">
                       Contraseña:
                   </div>
                   <div class = "col">
                     <div id="pass_user"></div>
                   </div>
+                </div> -->
+                <br><div class="row">
+                  <div class="col">
+                      Tickets Historicos:
+                  </div>
+                  <div class = "col">
+                    <div id="total"></div>
+                  </div>
+                </div>
+                <br><div class="row">
+                  <div class="col">
+                      Tickets Actuales:
+                  </div>
+                  <div class = "col">
+                    <div style="color:red"> No implementado </div>
+                  </div>
                 </div>
                 
               </div>
               <!-- Modal footer -->
               <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="Actualizar_Perfil" class="btn btn-success">Guardar Cambios</button>
               </div>
         
             </div>
