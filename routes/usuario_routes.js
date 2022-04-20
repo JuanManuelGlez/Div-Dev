@@ -16,19 +16,19 @@ router.get('/login',usuario_controller.login_get);
 
 router.post('/login',usuario_controller.login_post);
 
-router.get('/lista',usuario_controller.lista);
+router.get('/lista', isAuth,usuario_controller.lista);
 
-router.get('/datos',usuario_controller.datos);
+router.get('/datos', isAuth,usuario_controller.datos);
 
-router.post('/profile_update',usuario_controller.profile_update);
+router.post('/profile_update', isAuth,usuario_controller.profile_update); // ?
 
-router.post('/profile_image',usuario_controller.profile_image);
+router.post('/profile_image', isAuth,usuario_controller.profile_image); // ?
 
-router.get('/panelAdmin',usuario_controller.panel_admin);
+router.get('/panelAdmin', isAuth,usuario_controller.panel_admin);
 
-router.get('/datos/:id_usuario', usuario_controller.getDatosUsuario);
+router.get('/datos/:id_usuario', isAuth, usuario_controller.getDatosUsuario);
 
-router.post('/:id_usuario',usuario_controller.usuario_post);
+router.post('/:id_usuario', isAuth,usuario_controller.usuario_post);
 
 
 
