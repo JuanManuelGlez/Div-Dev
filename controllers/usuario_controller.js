@@ -80,11 +80,11 @@ exports.login_post = (request, response, next) => {
               response.redirect("/");
             });
           }
-          response.redirect("/usuarios/login");
+          response.redirect("/usuario/login");
         })
         .catch((err) => {
           console.log(err);
-          response.redirect("/usuarios/login");
+          response.redirect("/usuario/login");
         });
     })
     .catch((error) => {
@@ -94,7 +94,7 @@ exports.login_post = (request, response, next) => {
 
 exports.logout = (request, response, next) => {
   request.session.destroy(() => {
-    response.redirect("/usuarios/login");
+    response.redirect("/usuario/login");
   });
 };
 
