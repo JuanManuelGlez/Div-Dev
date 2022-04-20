@@ -2,27 +2,27 @@ const filesystem = require('fs');
 const path = require('path');
 const express = require('express');
 const app = express();
-
+const isAuth = require('../util/is-auth.js');
 const tickets_controller = require('../controllers/tickets_controller');
 
 const router = express.Router();
 
 
-router.use('/lista', tickets_controller.lista);
+router.use('/lista', isAuth, tickets_controller.lista);
 
-router.use('/archivo', tickets_controller.lista_archivo);
+router.use('/archivo',  isAuth,tickets_controller.lista_archivo);
     
-router.get('/nuevo', tickets_controller.nuevo_get);
+router.get('/nuevo',  isAuth,tickets_controller.nuevo_get);
 
-router.post('/nuevo', tickets_controller.nuevo_post);
+router.post('/nuevo',  isAuth,tickets_controller.nuevo_post);
 
-router.get('/datos/:id_ticket', tickets_controller.getDatosTicket);
+router.get('/datos/:id_ticket',  isAuth,tickets_controller.getDatosTicket);
 
-router.get('/:id_ticket', tickets_controller.ticket_get);
+router.get('/:id_ticket', isAuth, tickets_controller.ticket_get);
 
-router.post('/:id_ticket',tickets_controller.ticket_post);
+router.post('/:id_ticket', isAuth,tickets_controller.ticket_post);
 
-router.post('/archivar/:id_ticket',tickets_controller.ticket_archivar);
+router.post('/archivar/:id_ticket', isAuth,tickets_controller.ticket_archivar);
 
 
 
