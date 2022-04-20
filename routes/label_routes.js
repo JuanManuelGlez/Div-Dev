@@ -9,6 +9,8 @@ const router = express.Router();
     
 router.post('/nuevaLabel', label_controller.nuevaLabel);
 
+router.post('/actualizaLabel', label_controller.actualizaLabel);
+
 router.post('/getLike', label_controller.getLike);
 
 router.get('/getAll', label_controller.getAll);

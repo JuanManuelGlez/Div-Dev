@@ -72,6 +72,49 @@ function agregaLabel() {
     });
 };
 
+function eliminaLabel(element) {
+    const csrf = document.getElementById('_csrf').value;
+    let rutaActualiza = '../label/actualizaLabel';
+    
+    let label = element.id.substring(7);
+    let nuevaVis = 0;
+
+    if(element.parentNode.innerHTML.substring(0, 2) == 'No')
+    {
+        nuevaVis = 1;
+    }
+
+    data = {
+        Id_Label: label,
+        nuevaVisibilidad: nuevaVis
+    }
+    fetch(rutaActualiza, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'csrf-token': csrf
+        },
+        body:JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(response => {
+        
+        if(nuevaVis == 0)
+        {
+            element.parentNode.innerHTML = "No" + element.parentNode.innerHTML.substring(2);
+            $('body').find('#' + element.id).html('O');
+        }
+        else
+        {
+            element.parentNode.innerHTML = "Si" + element.parentNode.innerHTML.substring(2);
+            $('body').find('#' + element.id).html('X');
+        }
+        
+    }).catch(err => {
+        console.log(err);
+    });
+};
+
 document.getElementById('abreLabels').addEventListener('mousedown', async function (e) {
     let contenido = document.getElementById("contenido_labels");
     $('#accordionExample').css('height', 'auto');
@@ -98,13 +141,13 @@ document.getElementById('abreLabels').addEventListener('mousedown', async functi
         `;
         for(label of response.labels)
         {
-            if(label.Visibilidad_Label.data[0] == 1)
+            if(label.Visibilidad_Label == 1)
             {
-                document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '</td><td>Si</td>';
+                document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '</td><td>Si <button id="elimina' + label.Id_Label + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaLabel(this)">X</button></td>';
             }
             else
             {
-                document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '</td><td>No</td>';
+                document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '</td><td>No <button id="elimina' + label.Id_Label + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaLabel(this)">O</button></td>';
             }
             
             document.getElementById("tablaLabels").innerHTML += '</tr>';
