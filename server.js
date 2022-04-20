@@ -13,6 +13,7 @@ const tipo_incidencia_routes = require('./routes/tipo_incidencia_routes');
 const comentario_routes = require('./routes/comentario_routes');
 const estado_routes = require('./routes/estado_routes');
 const label_routes = require('./routes/label_routes');
+const pregunta_routes = require('./routes/preguntas_routes');
 
 const procedencia_routes=require('./routes/procedencia_routes');
 const multer = require('multer');
@@ -93,6 +94,8 @@ app.use('/estado', estado_routes);
 app.use('/procedencia',procedencia_routes);
 
 app.use('/label', label_routes);
+
+app.use('/pregunta', pregunta_routes);
 
 app.use((request, response, next) => {
     response.status(404);

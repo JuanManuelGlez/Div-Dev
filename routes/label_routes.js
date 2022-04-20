@@ -13,6 +13,8 @@ router.get('/getAll', isAuth, label_controller.getAll);
 
 router.post('/nuevaLabel',isAuth, label_controller.nuevaLabel);
 
+router.post('/actualizaLabel', label_controller.actualizaLabel);
+
 router.post('/getLike',isAuth, label_controller.getLike);
 
 //router.get('/getAll', label_controller.getAll);

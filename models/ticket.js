@@ -76,6 +76,12 @@ module.exports = class Ticket{
                 .then()
                 .catch(err => console.log(err));
             }
+            else if(rows[0].Visibilidad_Label == 0)
+            {
+                db.execute('UPDATE label SET Visibilidad_Label = 1 WHERE Id_Label =?', [id_label])
+                .then()
+                .catch(err => console.log(err));
+            }
         })
         .catch(err => console.log(err));
     }

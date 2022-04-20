@@ -43,12 +43,26 @@ exports.signup_post = (request, response, next) => {
     "https://tanzolymp.com/images/default-non-user-no-photo-1.jpg"
   );
 
-  usuario_nuevo
-    .usuario_save()
-    .then(() => {
-      response.redirect("/usuario/login");
-    })
-    .catch((err) => console.log(err));
+  Usuario.findOne(request.body.correo)
+        .then(([rows, fieldData]) => {
+            if(rows.length == 0)
+            {
+              usuario_nuevo
+              .usuario_save()
+              .then(() => {
+                response.redirect("/usuario/login");
+              })
+              .catch((err) => console.log(err));
+            }
+            else
+            {
+              response.redirect("/usuario/signup");
+            }
+        })
+        .catch((err) =>{    
+            console.log(err);
+        });
+        
 };
 
 exports.login_get = (request, response, next) => {
@@ -83,11 +97,11 @@ exports.login_post = (request, response, next) => {
               response.redirect("/");
             });
           }
-          response.redirect("/usuarios/login");
+          response.redirect("/usuario/login");
         })
         .catch((err) => {
           console.log(err);
-          response.redirect("/usuarios/login");
+          response.redirect("/usuario/login");
         });
     })
     .catch((error) => {
@@ -97,7 +111,7 @@ exports.login_post = (request, response, next) => {
 
 exports.logout = (request, response, next) => {
   request.session.destroy(() => {
-    response.redirect("/usuarios/login");
+    response.redirect("/usuario/login");
   });
 };
 
