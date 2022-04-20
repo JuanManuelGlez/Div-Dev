@@ -19,13 +19,13 @@ module.exports = class Pregunta{
         );
     }
 
-    static pregunta_check(texto_pregunta){
+    static async pregunta_check(texto_pregunta){
         return db.execute('SELECT EXISTS(SELECT * FROM pregunta p WHERE p.Texto_Pregunta = ?) AS E',
             [texto_pregunta]
         );
     }
 
-    static pregunta_getId(texto_pregunta){
+    static async pregunta_getId(texto_pregunta){
         return db.execute('SELECT p.Id_Pregunta FROM pregunta p WHERE p.Texto_Pregunta = ?',
             [texto_pregunta]
         );
@@ -41,7 +41,7 @@ module.exports = class Pregunta{
     }
 
     static agregaPregunta(id_pregunta,id_tipo_incidencia) {
-        db.execute('INSERT INTO tipo_incidencia_pregunta(Id_Pregunta, Id_Tipo_Incidencia) VALUES (?,?)',
+        return db.execute('INSERT INTO tipo_incidencia_pregunta(Id_Pregunta, Id_Tipo_Incidencia) VALUES (?,?)',
             [
                 id_pregunta,
                 id_tipo_incidencia

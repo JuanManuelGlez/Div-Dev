@@ -14,7 +14,7 @@ exports.get_procedencia=(request,response,next)=>{
 exports.get_All_Procedencia=(request,response,next) =>{
     Procedencia.fetchProcedencias()
     .then(([rowsProcedencias, fieldData])=>{
-        response.render('procedencia_f',{
+        response.status(200).json({
             procedencias: rowsProcedencias,
         });
     })
@@ -22,10 +22,12 @@ exports.get_All_Procedencia=(request,response,next) =>{
 }
 
 exports.post_procedencia=(request,response,next)=>{
+    console.log(request.body.Nombre_Procedencia)
     const procedencianueva= new Procedencia(request.body.Nombre_Procedencia);
     procedencianueva.save()
-        .then(()=>{
-            response.redirect('/procedencia_f')
+        .then((result)=>{
+            let idNuevo = result[0].insertId;
+            response.status(200).json({id_nueva_procedencia: idNuevo});
         })
         .catch((err)=>{
             console.log(err);
@@ -33,20 +35,22 @@ exports.post_procedencia=(request,response,next)=>{
 
 }
 exports.update_procedencia=(request,response,next)=>{
-    for(let i=1;i<=request.body.length;i++){
-        if(request.body[i][1]==1){
-            visibilidad=1;
-        }else if (request.body[i][1]==0){
-            visibilidad=0;
+
+    console.log(request.body.procedencia)
+    console.log(request.body.nombre)
+    console.log(request.body.visibilidad)
+    let visibilidad= 0;
+        if(request.body.visibilidad==1){
+             visibilidad=1;
+        }else if (request.visibilidad==0){
+             visibilidad=0;
         }
-        //console.log(request.body.count)
-        Procedencia.update(i,request.body[i][0],visibilidad)
+        Procedencia.update(request.body.procedencia,request.body.nombre,visibilidad)
         .then(()=>{
         })
         .catch((err)=>{
             console.log(err);
         })
         
-    }
-    response.redirect('/procedencia_f');
+    response.status(200).json({});
 }
