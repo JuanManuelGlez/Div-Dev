@@ -20,6 +20,10 @@ router.get('/lista',usuario_controller.lista);
 
 router.get('/datos',usuario_controller.datos);
 
+router.post('/profile_update',usuario_controller.profile_update);
+
+router.post('/profile_image',usuario_controller.profile_image);
+
 router.get('/panelAdmin',usuario_controller.panel_admin);
 
 router.get('/datos/:id_usuario', usuario_controller.getDatosUsuario);

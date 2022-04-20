@@ -7,12 +7,15 @@ exports.signup_get = (request, response, next) => {
 };
 
 exports.datos = (request, response, next) => {
-    
+  console.log(request.session.usuario)
+  Usuario.findProfile(request.session.usuario.login_usuario)
+  .then(([rowsUsuarios, fieldData]) => {
+    console.log(rowsUsuarios);
     response.status(200).json({
-      datos:request.session.usuario
-
+      datos: rowsUsuarios,
     });
-    console.log(request.session)
+  })
+  .catch((err) => console.log(err));
 };
 
 exports.lista = (request, response, next) => {
@@ -141,6 +144,38 @@ exports.usuario_post = (request, response, next) => {
     .catch((err) => {
       console.log(err);
     });
+};
+
+
+exports.profile_update = (request, response, next) => {
+  console.log(request.body.name,
+    request.body.id_usuario)
+  Usuario.profile_update(
+     request.body.name,
+     request.body.id_usuario
+  )
+    .then(() => {
+      response.status(200).json({hola:"jaks"});
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+exports.profile_image = (request, response, next) => {
+  image = request.file.filename;
+  console.log("ESTE ES EL URL")
+  console.log(request.file.filename)
+//   Usuario.profile_update(
+//      request.body.image_url,
+//      request.body.id_usuario
+//   )
+//     .then(() => {
+//       response.status(200).json({hola:"jaks"});
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
 };
 
 exports.panel_admin = (request, response, next) => {
