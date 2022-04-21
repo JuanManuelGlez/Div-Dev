@@ -548,16 +548,47 @@ document.getElementById('abreProcedencia').addEventListener('mousedown', async f
     .then(response => response.json())
     .then(response => {
         console.log(response.procedencias)
+        
+        contenido.innerHTML += `
+        <table class="table table-bordered" >
+        <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Visible?</th>
+        </tr>
+        </thead>
+        <tbody id="tablaProcedencias">
+        `;
+        for(procedencia of response.procedencias)
+        {
+            if(procedencia.Visibilidad_Procedencia == 1)
+            {
+                document.getElementById("tablaProcedencias").innerHTML += '<tr><td>' + procedencia.Nombre_Procedencia +  '</td><td>Si </td>';
+            }
+            else
+            {
+                document.getElementById("tablaProcedencias").innerHTML += '<tr><td>' + procedencia.Nombre_Procedencia +  '</td><td>No </td>';
+            }
+            
+            document.getElementById("tablaProcedencias").innerHTML += '</tr>';
+        }
+        contenido.innerHTML += `
+        </tbody>
+        </table>`
+        
+        
         contenido.innerHTML += `
         
         <form id="nueva_procedencia" method="POST">
         <input type="hidden" id="__csrf" name="_csrf" value="<%= csrfToken %>"></input>
-        <div id="Nombre_Procedenciaa">
-            <label for="Nombre_Procedencia">Nombre de Nueva Procedencia: </label>
-            <input type="text" id="Nombre_Procedencia" name="Nombre_Procedencia" placeholder="assdasdasdsa" minlength="3">
-        </div>    
-        <button type="button" id="agrega_procedencia" class="btn btn-success" onclick="agregarProcedencia()">Agregar </button>
-        </form>`;
+        <div id="Nombre_Procedenciaa" class="row" stlye="padding: 15px 0px">
+            <div class="col-xxl-4"><label class="col-form-label text-dark" for="Nombre_Procedencia">Nombre de Nueva Procedencia: </label></div>
+            <div class="col"><input type="text" id="Nombre_Procedencia" name="Nombre_Procedencia" placeholder="assdasdasdsa" minlength="3"></div>
+            
+        <div class="col"><button type="button" id="agrega_procedencia" class="btn btn-success" onclick="agregarProcedencia()">Agregar </button></div>
+        </div>
+        </form>
+        <br>`;
         console.log(document.getElementById("agrega_procedencia"))
         document.getElementById("agrega_procedencia").onclick = agregarProcedencia;
         
@@ -566,7 +597,7 @@ document.getElementById('abreProcedencia').addEventListener('mousedown', async f
             <form id="modificar_procedencia" action="/procedencia/procedencia_f/update" method="POST">
             <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>"></input>
             <select class="form-select" id="procedencia" name="procedencia" aria-label="Default select example">
-                <option selected disabled>Seleccion Procedencia</option>`;
+                <option selected disabled>Seleccion Procedencia a Modificar</option>`;
 
                  for ( procedencia of response.procedencias){
                        document.getElementById('procedencia').innerHTML+='<option value="'+procedencia.Id_Procedencia+'">'+procedencia.Nombre_Procedencia+'</option>';
