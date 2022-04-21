@@ -27,7 +27,7 @@ module.exports = class Label{
     }
 
     static fetchLike(texto_ingresado) {
-        return db.execute('SELECT * FROM label WHERE Visibilidad_Label = 1 AND Id_Label LIKE ?', ['%' + texto_ingresado + '%']);
+        return db.execute('SELECT * FROM label WHERE Id_Label LIKE ?', ['%' + texto_ingresado + '%']);
     }
 
 }
