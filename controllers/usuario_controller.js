@@ -90,8 +90,6 @@ exports.login_post = (request, response, next) => {
         })
         .catch((err) => {
           console.log(err);
-          let error=true;
-          response.status(200).json({errores:error});;
         });
     })
     .catch((error) => {
