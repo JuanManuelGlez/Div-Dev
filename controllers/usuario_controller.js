@@ -74,7 +74,9 @@ exports.login_post = (request, response, next) => {
       );
       bcrypt.compare(request.body.contrasenia, usuario.contrasenia_usuario)
         .then((doMatch) => {
+          let error=true;
           if (doMatch) {
+            error=false;
             request.session.isLoggedIn = true;
             request.session.usuario = usuario;
             request.session.correo = usuario.login_usuario;
@@ -83,11 +85,13 @@ exports.login_post = (request, response, next) => {
               response.redirect("/");
             });
           }
-          response.redirect("/usuario/login");
+          response.status(200).json({errores:error});
+          
         })
         .catch((err) => {
           console.log(err);
-          response.redirect("/usuario/login");
+          let error=true;
+          response.status(200).json({errores:error});;
         });
     })
     .catch((error) => {
