@@ -252,3 +252,9 @@ function closeTicket() {
   document.getElementById("Ticket").style.display = "none";
   document.getElementById("commentShow").style.display = "none";
 }
+
+$('#Ticket').on('hidden.bs.modal', function () {
+    console.log(":(")
+    document.location.reload();
+    
+  })
