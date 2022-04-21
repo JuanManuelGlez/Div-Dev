@@ -25,13 +25,13 @@ function filtraLabels() {
             if(nuevaLabel == label.Id_label)
                 document.getElementById("existeLabel").value = 1;
 
-            if(label.Visibilidad_Label.data[0] == 1)
+            if(label.Visibilidad_Label == 1)
             {
-                document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '</td><td>Si</td>';
+                document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '</td><td>Si <button id="elimina' + label.Id_Label + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaLabel(this)">X</button></td>';
             }
             else
             {
-                document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '</td><td>No</td>';
+                document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '</td><td>No <button id="elimina' + label.Id_Label + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaLabel(this)">O</button></td>';
             }
             
             document.getElementById("tablaLabels").innerHTML += '</tr>';
@@ -63,7 +63,7 @@ function agregaLabel() {
 
         if(document.getElementById("existeLabel").value == "0")
         {
-            document.getElementById("tablaLabels").innerHTML += '<tr><td>' + nuevaLabel +  '</td><td>Si</td></tr>';
+            document.getElementById("tablaLabels").innerHTML += '<tr><td>' + nuevaLabel +  '</td><td>Si <button id="elimina' + label.Id_Label + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaLabel(this)">X</button></td></tr>';
             document.getElementById("existeLabel").value = 1;
         }
         
