@@ -5,7 +5,7 @@
     let email = document.getElementById("email_user");
     //let pass = document.getElementById("pass_user");
     let url_foto = document.getElementById("foto_user")
-    let rutaUsuario = '../usuario/datos'
+    let rutaUsuario = '../../../usuario/datos'
     let total = document.getElementById("total")
     let Id_Usuario = document.getElementById("Id_Usuario")
     let foto_sidebar = document.getElementById("foto_sidebar")

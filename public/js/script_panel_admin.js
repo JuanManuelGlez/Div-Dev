@@ -25,13 +25,13 @@ function filtraLabels() {
             if(nuevaLabel == label.Id_label)
                 document.getElementById("existeLabel").value = 1;
 
-            if(label.Visibilidad_Label.data[0] == 1)
+            if(label.Visibilidad_Label == 1)
             {
-                document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '</td><td>Si</td>';
+                document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '</td><td>Si <button id="elimina' + label.Id_Label + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaLabel(this)">X</button></td>';
             }
             else
             {
-                document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '</td><td>No</td>';
+                document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '</td><td>No <button id="elimina' + label.Id_Label + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaLabel(this)">O</button></td>';
             }
             
             document.getElementById("tablaLabels").innerHTML += '</tr>';
@@ -63,8 +63,51 @@ function agregaLabel() {
 
         if(document.getElementById("existeLabel").value == "0")
         {
-            document.getElementById("tablaLabels").innerHTML += '<tr><td>' + nuevaLabel +  '</td><td>Si</td></tr>';
+            document.getElementById("tablaLabels").innerHTML += '<tr><td>' + nuevaLabel +  '</td><td>Si <button id="elimina' + label.Id_Label + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaLabel(this)">X</button></td></tr>';
             document.getElementById("existeLabel").value = 1;
+        }
+        
+    }).catch(err => {
+        console.log(err);
+    });
+};
+
+function eliminaLabel(element) {
+    const csrf = document.getElementById('_csrf').value;
+    let rutaActualiza = '../label/actualizaLabel';
+    
+    let label = element.id.substring(7);
+    let nuevaVis = 0;
+
+    if(element.parentNode.innerHTML.substring(0, 2) == 'No')
+    {
+        nuevaVis = 1;
+    }
+
+    data = {
+        Id_Label: label,
+        nuevaVisibilidad: nuevaVis
+    }
+    fetch(rutaActualiza, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'csrf-token': csrf
+        },
+        body:JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(response => {
+        
+        if(nuevaVis == 0)
+        {
+            element.parentNode.innerHTML = "No" + element.parentNode.innerHTML.substring(2);
+            $('body').find('#' + element.id).html('O');
+        }
+        else
+        {
+            element.parentNode.innerHTML = "Si" + element.parentNode.innerHTML.substring(2);
+            $('body').find('#' + element.id).html('X');
         }
         
     }).catch(err => {
@@ -98,13 +141,13 @@ document.getElementById('abreLabels').addEventListener('mousedown', async functi
         `;
         for(label of response.labels)
         {
-            if(label.Visibilidad_Label.data[0] == 1)
+            if(label.Visibilidad_Label == 1)
             {
-                document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '</td><td>Si</td>';
+                document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '</td><td>Si <button id="elimina' + label.Id_Label + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaLabel(this)">X</button></td>';
             }
             else
             {
-                document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '</td><td>No</td>';
+                document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '</td><td>No <button id="elimina' + label.Id_Label + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaLabel(this)">O</button></td>';
             }
             
             document.getElementById("tablaLabels").innerHTML += '</tr>';
@@ -128,6 +171,172 @@ document.getElementById('abreLabels').addEventListener('mousedown', async functi
         console.log(err);
     });
 }, true);
+
+
+document.getElementById('abrePreguntas').addEventListener('mousedown', async function (e) {
+    let contenido = document.getElementById("contenido_preguntas");
+    $('#accordionExample').css('height', 'auto');
+    let rutaPreguntas = '../pregunta/preguntas_getAll';
+        
+    contenido.innerHTML = '';
+    await fetch(rutaPreguntas, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(response => {
+        contenido.innerHTML += `
+        <table class="table table-bordered" >
+        <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Visible?</th>
+        </tr>
+        </thead>
+        <tbody id="tablaPreguntas">
+        `;
+        for(pregunta of response.preguntas)
+        {
+            if(pregunta.Visibilidad_Pregunta.data[0] == 1)
+            {
+                document.getElementById("tablaPreguntas").innerHTML += '<tr><td>' + pregunta.Texto_Pregunta +  '</td><td>Si      <button type="button" id="elimina_pregunta" action = "eliminaPregunta("agrega",1)" class="btn btn-success">  x </button> </td>';
+            }
+            else
+            {
+                document.getElementById("tablaPreguntas").innerHTML += '<tr><td>' + pregunta.Texto_Pregunta +  '</td><td>No      <button type="button" id="elimina_pregunta" action = "eliminaPregunta('+pregunta.Texto_Pregunta,pregunta.Visibilidad_Pregunta+')" class="btn btn-success">  x </button> </td>';
+            }
+            
+            document.getElementById("tablaPreguntas").innerHTML += '</tr>';
+        }
+        contenido.innerHTML += `
+        </tbody>
+        </table>
+        <form id="form_nuevo_pregunta" method="POST">
+        <input type="hidden" id="__csrf" name="_csrf" value="<%= csrfToken %>">
+        <div class="row" style="padding: 15px 0px;">
+            <div class="col-xxl-4"><label  class="col-form-label text-dark">Agregar</label></div>
+        <div class="col"><input id="input_pregunta" name="input_pregunta" class="form-control" type="text" maxlength="30"></div>
+        <div class="col"><button type="button" id="agrega_pregunta" class="btn btn-success">  Agregar </button></div>
+        <input type="hidden" id="existePregunta" name="existePregunta" value="0">
+        </form>`;
+
+        document.getElementById('input_pregunta').onkeyup = filtraPregunta;
+        document.getElementById('agrega_pregunta').onclick = agregaPregunta;
+        
+    }).catch(err => {
+        console.log(err);
+    });
+}, true);
+
+function eliminaPregunta(text_pregunta, visibilidad){
+    console.log("ENTRO")
+    const csrf = document.getElementById('_csrf').value;
+    let rutaEliminar = '../pregunta/eliminarPreguntaPanel';
+
+    data = {
+        Pregunta: text_pregunta,
+        Visibilidad: visibilidad
+    }
+
+    fetch(rutaEliminar, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'csrf-token': csrf
+        },
+        body:JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(response => {
+        
+    }).catch(err => {
+        console.log(err);
+    });
+
+
+
+}
+
+function agregaPregunta() {
+    const csrf = document.getElementById('_csrf').value;
+    const nuevaPregunta = document.getElementById("input_pregunta").value
+    let rutaAgregar = '../pregunta/nuevaPregunta_panel';
+
+    data = {
+        Pregunta: nuevaPregunta
+    }
+
+    fetch(rutaAgregar, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'csrf-token': csrf
+        },
+        body:JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(response => {
+
+        if(document.getElementById("existePregunta").value == "0")
+        {
+            document.getElementById("tablaPreguntas").innerHTML += '<tr><td>' + nuevaPregunta +  '</td><td>Si</td></tr>';
+            document.getElementById("existePregunta").value = 1;
+        }
+
+        window.alert("Pregunta nueva agregada")
+
+        document.getElementById("input_pregunta").value = "";
+        filtraPregunta();
+        
+    }).catch(err => {
+        console.log(err);
+    });
+};
+
+
+function filtraPregunta() {
+    const csrf = document.getElementById('_csrf').value;
+    const nuevaPregunta = document.getElementById("input_pregunta").value
+    let rutaPreguntas = '../pregunta/getLike_Pregunta';
+
+    data = {
+        buscaPregunta: nuevaPregunta
+    }
+
+    fetch(rutaPreguntas, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'csrf-token': csrf
+        },
+        body:JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(response => {
+        document.getElementById("tablaPreguntas").innerHTML = '';
+        document.getElementById("existePregunta").value = 0;
+        for(pregunta of response.preguntas)
+        {
+            if(nuevaPregunta == pregunta.Texto_Pregunta)
+                document.getElementById("existePregunta").value = 1;
+
+            if(pregunta.Visibilidad_Pregunta.data[0] == 1)
+            {
+                document.getElementById("tablaPreguntas").innerHTML += '<tr><td>' + pregunta.Texto_Pregunta +  '</td><td>Si</td>';
+            }
+            else
+            {
+                document.getElementById("tablaPreguntas").innerHTML += '<tr><td>' + pregunta.Texto_Pregunta +  '</td><td>No</td>';
+            }
+            
+            document.getElementById("tablaPreguntas").innerHTML += '</tr>';
+        }
+    }).catch(err => {
+        console.log(err);
+    });
+};
 
 function filtraEstados() {
     const csrf = document.getElementById('_csrf').value;
@@ -339,16 +548,47 @@ document.getElementById('abreProcedencia').addEventListener('mousedown', async f
     .then(response => response.json())
     .then(response => {
         console.log(response.procedencias)
+        
+        contenido.innerHTML += `
+        <table class="table table-bordered" >
+        <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Visible?</th>
+        </tr>
+        </thead>
+        <tbody id="tablaProcedencias">
+        `;
+        for(procedencia of response.procedencias)
+        {
+            if(procedencia.Visibilidad_Procedencia == 1)
+            {
+                document.getElementById("tablaProcedencias").innerHTML += '<tr><td>' + procedencia.Nombre_Procedencia +  '</td><td>Si </td>';
+            }
+            else
+            {
+                document.getElementById("tablaProcedencias").innerHTML += '<tr><td>' + procedencia.Nombre_Procedencia +  '</td><td>No </td>';
+            }
+            
+            document.getElementById("tablaProcedencias").innerHTML += '</tr>';
+        }
+        contenido.innerHTML += `
+        </tbody>
+        </table>`
+        
+        
         contenido.innerHTML += `
         
         <form id="nueva_procedencia" method="POST">
         <input type="hidden" id="__csrf" name="_csrf" value="<%= csrfToken %>"></input>
-        <div id="Nombre_Procedenciaa">
-            <label for="Nombre_Procedencia">Nombre de Nueva Procedencia: </label>
-            <input type="text" id="Nombre_Procedencia" name="Nombre_Procedencia" placeholder="assdasdasdsa" minlength="3">
-        </div>    
-        <button type="button" id="agrega_procedencia" class="btn btn-success" onclick="agregarProcedencia()">Agregar </button>
-        </form>`;
+        <div id="Nombre_Procedenciaa" class="row" stlye="padding: 15px 0px">
+            <div class="col-xxl-4"><label class="col-form-label text-dark" for="Nombre_Procedencia">Nombre de Nueva Procedencia: </label></div>
+            <div class="col"><input type="text" id="Nombre_Procedencia" name="Nombre_Procedencia" placeholder="assdasdasdsa" minlength="3"></div>
+            
+        <div class="col"><button type="button" id="agrega_procedencia" class="btn btn-success" onclick="agregarProcedencia()">Agregar </button></div>
+        </div>
+        </form>
+        <br>`;
         console.log(document.getElementById("agrega_procedencia"))
         document.getElementById("agrega_procedencia").onclick = agregarProcedencia;
         
@@ -357,7 +597,7 @@ document.getElementById('abreProcedencia').addEventListener('mousedown', async f
             <form id="modificar_procedencia" action="/procedencia/procedencia_f/update" method="POST">
             <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>"></input>
             <select class="form-select" id="procedencia" name="procedencia" aria-label="Default select example">
-                <option selected disabled>Seleccion Procedencia</option>`;
+                <option selected disabled>Seleccion Procedencia a Modificar</option>`;
 
                  for ( procedencia of response.procedencias){
                        document.getElementById('procedencia').innerHTML+='<option value="'+procedencia.Id_Procedencia+'">'+procedencia.Nombre_Procedencia+'</option>';
