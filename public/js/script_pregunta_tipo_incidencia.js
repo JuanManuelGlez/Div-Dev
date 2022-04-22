@@ -20,11 +20,16 @@ $(document).on('keyup', '.form-select-label .bs-searchbox input', function (e) {
         document.getElementById("agregaPregunta").addEventListener('click', function (event) {
 
             let preguntas_actuales = document.querySelector('[data-id="select_preguntas"]').title.split(", ");
-
+            console.log(preguntas_actuales);
+            
             if(preguntas_actuales[0] !== 'Nothing selected')
             {
+                console.log(11111);
+
                 let preguntas_totales = document.querySelectorAll('.opcionPregunta');
 
+                console.log(preguntas_totales);
+                
                 preguntas_totales.forEach(element => {
                     console.log((element.id).replace(/_/g,' '));
                     if(preguntas_actuales.includes((element.id).replace(/_/g,' ')))

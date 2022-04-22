@@ -23,15 +23,13 @@ $(document).on('keyup', '.form-select-label .bs-searchbox input', function (e) {
 
             let preguntas_actuales = document.querySelector('[data-id="select_preguntas"]').title.split(", ");
 
-            console.log(preguntas_actuales);
-
 
             if(preguntas_actuales[0] !== 'Nothing selected')
             {
                 let preguntas_totales = document.querySelectorAll('.opcionPregunta');
 
                 preguntas_totales.forEach(element => {
-                    console.log((element.id).replace(/_/g,' '));
+                    console.log(typeof(element.id).replace(/_/g,' '));
                     if(preguntas_actuales.includes((element.id).replace(/_/g,' ')))
                     {
                         element.setAttribute('selected', true);

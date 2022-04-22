@@ -198,13 +198,13 @@ document.getElementById('abrePreguntas').addEventListener('mousedown', async fun
         `;
         for(pregunta of response.preguntas)
         {
-            if(pregunta.Visibilidad_Pregunta.data[0] == 1)
+            if(pregunta.Visibilidad_Pregunta == 1)
             {
-                document.getElementById("tablaPreguntas").innerHTML += '<tr><td>' + pregunta.Texto_Pregunta +  '</td><td>Si      <button type="button" id="elimina_pregunta" action = "eliminaPregunta("agrega",1)" class="btn btn-success">  x </button> </td>';
+                document.getElementById("tablaPreguntas").innerHTML += '<tr><td>' + pregunta.Texto_Pregunta +  '</td><td>Si      <button id="elimina' + pregunta.Texto_Pregunta + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaPregunta(this)">X</button></td>';
             }
             else
             {
-                document.getElementById("tablaPreguntas").innerHTML += '<tr><td>' + pregunta.Texto_Pregunta +  '</td><td>No      <button type="button" id="elimina_pregunta" action = "eliminaPregunta('+pregunta.Texto_Pregunta,pregunta.Visibilidad_Pregunta+')" class="btn btn-success">  x </button> </td>';
+                document.getElementById("tablaPreguntas").innerHTML += '<tr><td>' + pregunta.Texto_Pregunta +  '</td><td>No      <button id="elimina' + pregunta.Texto_Pregunta + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaPregunta(this)">0</button></td>';
             }
             
             document.getElementById("tablaPreguntas").innerHTML += '</tr>';
@@ -229,17 +229,23 @@ document.getElementById('abrePreguntas').addEventListener('mousedown', async fun
     });
 }, true);
 
-function eliminaPregunta(text_pregunta, visibilidad){
-    console.log("ENTRO")
+function eliminaPregunta(element){
     const csrf = document.getElementById('_csrf').value;
-    let rutaEliminar = '../pregunta/eliminarPreguntaPanel';
+    let rutaActualiza = '../pregunta/actualizaPregunta';
+    
+    let pregunta = element.id.substring(7);
+    let nuevaVis = 0;
 
-    data = {
-        Pregunta: text_pregunta,
-        Visibilidad: visibilidad
+    if(element.parentNode.innerHTML.substring(0, 2) == 'No')
+    {
+        nuevaVis = 1;
     }
 
-    fetch(rutaEliminar, {
+    data = {
+        Pregunta: pregunta,
+        nuevaVisibilidad: nuevaVis
+    }
+    fetch(rutaActualiza, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -250,13 +256,21 @@ function eliminaPregunta(text_pregunta, visibilidad){
     .then(response => response.json())
     .then(response => {
         
+        if(nuevaVis == 0)
+        {
+            element.parentNode.innerHTML = "No" + element.parentNode.innerHTML.substring(2);
+            $('body').find('#' + element.id).html('O');
+        }
+        else
+        {
+            element.parentNode.innerHTML = "Si" + element.parentNode.innerHTML.substring(2);
+            $('body').find('#' + element.id).html('X');
+        }
+        
     }).catch(err => {
         console.log(err);
     });
-
-
-
-}
+};
 
 function agregaPregunta() {
     const csrf = document.getElementById('_csrf').value;
@@ -321,13 +335,13 @@ function filtraPregunta() {
             if(nuevaPregunta == pregunta.Texto_Pregunta)
                 document.getElementById("existePregunta").value = 1;
 
-            if(pregunta.Visibilidad_Pregunta.data[0] == 1)
+            if(pregunta.Visibilidad_Pregunta == 1)
             {
-                document.getElementById("tablaPreguntas").innerHTML += '<tr><td>' + pregunta.Texto_Pregunta +  '</td><td>Si</td>';
+                document.getElementById("tablaPreguntas").innerHTML += '<tr><td>' + pregunta.Texto_Pregunta +  '</td><td>Si <button id="elimina' + pregunta.Texto_Pregunta + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaPregunta(this)">X</button></td></td>';
             }
             else
             {
-                document.getElementById("tablaPreguntas").innerHTML += '<tr><td>' + pregunta.Texto_Pregunta +  '</td><td>No</td>';
+                document.getElementById("tablaPreguntas").innerHTML += '<tr><td>' + pregunta.Texto_Pregunta +  '</td><td>No <button id="elimina' + pregunta.Texto_Pregunta + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaPregunta(this)">X</button></td></td>';
             }
             
             document.getElementById("tablaPreguntas").innerHTML += '</tr>';

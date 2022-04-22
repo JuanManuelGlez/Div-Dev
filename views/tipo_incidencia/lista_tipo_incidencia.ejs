@@ -39,7 +39,7 @@
                                 <select data-width="100%" data-style="btn-warning" class="form-select-label" multiple data-live-search="true" id="select_preguntas" name="preguntas" aria-label="Default select example">
                                     <option id="Preguntas:" selected disabled>Preguntas (Selecicona todas las que quieras agregar a la categoría) </option>
                                     <% for(let pregunta of Preguntas) {%>
-                                        <option id="<%= pregunta.Texto_Pregunta.replace(/\s/g,'_') %>" value="<%= pregunta.Texto_Pregunta.replace(/\s/g,'_') %>"><%= pregunta.Texto_Pregunta.replace(/_/g, ' ') %></option>
+                                        <option class="opcionPregunta" id="<%= pregunta.Texto_Pregunta.replace(/\s/g,'_') %>" value="<%= pregunta.Texto_Pregunta.replace(/\s/g,'_') %>"><%= pregunta.Texto_Pregunta.replace(/_/g, ' ') %></option>
                                     <% }%>
                                 </select>
                                 <br><br>
