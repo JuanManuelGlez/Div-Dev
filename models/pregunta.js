@@ -11,30 +11,28 @@ module.exports = class Pregunta{
 
     //Este método servirá para guardar de manera persistente el nuevo objeto. 
     pregunta_save() {
-        db.execute('SELECT * FROM pregunta WHERE Texto_Pregunta = ?', [this.pregunta_texto_pregunta])
+        return db.execute('SELECT * FROM pregunta WHERE Texto_Pregunta = ?', [this.pregunta_texto_pregunta])
             .then(([rows, fieldData]) =>{
                 if(rows.length == 0)
                 {
-                    return db.execute('INSERT INTO pregunta(Texto_Pregunta, Visibilidad_Pregunta) VALUES (?,?)',
+                    db.execute('INSERT INTO pregunta(Texto_Pregunta, Visibilidad_Pregunta) VALUES (?,?)',
                     [
                         this.pregunta_texto_pregunta,
                         this.pregunta_visibilidad
-                    ])
-                    .then()
-                    .catch(err => console.log(err));
+                    ]);
                 }
             })
         .catch(err => console.log(err));
     }
 
-    async pregunta_check(texto_pregunta){
+    static pregunta_check(texto_pregunta){
         return db.execute('SELECT EXISTS(SELECT * FROM pregunta p WHERE p.Texto_Pregunta = ?) AS E',
             [texto_pregunta]
         );
     }
 
    static pregunta_getId(texto_pregunta){
-        return db.execute('SELECT p.Id_Pregunta FROM pregunta p WHERE p.Texto_Pregunta = ?',
+        return db.execute('SELECT Id_Pregunta FROM pregunta WHERE Texto_Pregunta = ?',
             [texto_pregunta]
         );
    }

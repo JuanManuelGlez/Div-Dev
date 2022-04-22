@@ -1,5 +1,12 @@
 //const { append } = require("express/lib/response");
 
+document.addEventListener("keypress", function(e) {
+        if (e.key === "Enter") {  
+            document.getElementById('credencial').click();
+            e.stopImmediatePropagation();
+        }
+});
+
 document.getElementById("credencial").onclick=()=>{
     let rutaProcedencia = '../usuario/login';
     let mensaje_error = document.getElementById("mensaje_error");

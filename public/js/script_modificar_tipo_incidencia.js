@@ -82,7 +82,7 @@ function borrar (id_B, id_T, N_P, N_T){
     }
 }
 function cambio(){
-    document.getElementById("button_cambios").innerHTML = '<button type="submit"> Guardar cambios</button><br><br>'
+    document.getElementById("button_cambios").style.display = 'block';
 }
 
 function select_preguntas(select_p){

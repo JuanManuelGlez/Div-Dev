@@ -33,13 +33,16 @@ exports.postTipo_Incidencia =  async (request, response, next) => {
                             .then(([rowcheck, fieldDatacheck]) => {
                                 if(rowcheck[0].E == 0){
                                     const pregunta_nuevo = new Pregunta(pregunta.replace(/_/g, ' '));
-                                    pregunta_nuevo.pregunta_save();
-                                    Pregunta.pregunta_getId(pregunta.replace(/_/g, ' '))
-                                        .then(([rowidPregunta, fieldDataidPregunta]) => {
-                                            Pregunta.agregaPregunta(rowidPregunta[0].Id_Pregunta, rowLastTipoIncidencia[0].L)
-                                            .then()
-                                            .catch(err => console.log(err));
-                                        }).catch(err => console.log(err));
+                                    pregunta_nuevo.pregunta_save()
+                                    .then(() => {
+                                        Pregunta.pregunta_getId(pregunta.replace(/_/g, ' '))
+                                            .then(([rowidPregunta, fieldDataidPregunta]) => {
+                                                Pregunta.agregaPregunta(rowidPregunta[0].Id_Pregunta, rowLastTipoIncidencia[0].L)
+                                                .then()
+                                                .catch(err => console.log(err));
+                                            }).catch(err => console.log(err));
+                                    })
+                                    .catch(err => console.log(err));
                                 }
                                 if(rowcheck[0].E == 1){
                                     Pregunta.pregunta_getId(pregunta.replace(/_/g, ' '))
