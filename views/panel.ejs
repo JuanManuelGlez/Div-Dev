@@ -195,7 +195,7 @@
                                     style="overflow: hidden;margin-top:10px;margin-bottom:-10px;box-shadow: 1px 4px 8px rgba(0,0,0,0.46);">
                                     <div class="card-body" style="text-align: left;width: 262px;overflow: hidden;">
                                         <h4 class="card-title"
-                                        style="overflow: hidden;color: rgb(0,0,0);text-align: left;"> #<%= ticket.Id_Ticket %>: <%= ticket.Asunto %>
+                                        style="overflow: hidden;color: rgb(0,0,0);text-align: left;"> #<%= ticket.Id_Ticket %>: <%= ticket.Asunto.substring(0, 20)%>...
                                         </h4>
                                         <h6 class="text-muted card-subtitle mb-2"
                                             style="overflow: hidden;color: rgb(0,0,0);">
@@ -207,7 +207,7 @@
                                         
                                             <span
                                             style="overflow: hidden;margin-left: 10px;color: rgb(136,136,136);">Creado
-                                            el <%= ticket.Fecha_Inicio %></span>
+                                            el <%= (ticket.Fecha_Inicio.toString()).substring(4, 21) %></span>
                                             
                                             <!-- <img class="rounded-circle"
                                             style="width: 35px;height: 35px;margin-left: 15px;"
@@ -237,7 +237,7 @@
                                     style="overflow: hidden;margin-top:10px;margin-bottom:-10px;box-shadow: 1px 4px 8px rgba(0,0,0,0.46);">
                                     <div class="card-body" style="text-align: left;width: 262px;overflow: hidden;">
                                         <h4 class="card-title"
-                                        style="overflow: hidden;color: rgb(0,0,0);text-align: left;"> #<%= ticket.Id_Ticket %>: <%= ticket.Asunto %>
+                                        style="overflow: hidden;color: rgb(0,0,0);text-align: left;"> #<%= ticket.Id_Ticket %>: <%= ticket.Asunto.substring(0, 20)%>...
                                         </h4>
                                         <h6 class="text-muted card-subtitle mb-2"
                                             style="overflow: hidden;color: rgb(0,0,0);">
@@ -249,7 +249,7 @@
                                         
                                             <span
                                             style="overflow: hidden;margin-left: 10px;color: rgb(136,136,136);">Creado
-                                            el <%= ticket.Fecha_Inicio %></span>
+                                            el <%= (ticket.Fecha_Inicio.toString()).substring(4, 21) %></span>
                                             
                                             <!-- <img class="rounded-circle"
                                             style="width: 35px;height: 35px;margin-left: 15px;"
@@ -277,7 +277,7 @@
                                     style="overflow: hidden;margin-top:10px;margin-bottom:-10px;box-shadow: 1px 4px 8px rgba(0,0,0,0.46);">
                                     <div class="card-body" style="text-align: left;width: 262px;overflow: hidden;">
                                         <h4 class="card-title"
-                                        style="overflow: hidden;color: rgb(0,0,0);text-align: left;"> #<%= ticket.Id_Ticket %>: <%= ticket.Asunto %>
+                                        style="overflow: hidden;color: rgb(0,0,0);text-align: left;"> #<%= ticket.Id_Ticket %>: <%= ticket.Asunto.substring(0, 20)%>...
                                         </h4>
                                         <h6 class="text-muted card-subtitle mb-2"
                                             style="overflow: hidden;color: rgb(0,0,0);">
@@ -289,7 +289,7 @@
                                         
                                             <span
                                             style="overflow: hidden;margin-left: 10px;color: rgb(136,136,136);">Creado
-                                            el <%= ticket.Fecha_Inicio %></span>
+                                            el <%= (ticket.Fecha_Inicio.toString()).substring(4, 21) %></span>
                                             
                                             <!-- <img class="rounded-circle"
                                             style="width: 35px;height: 35px;margin-left: 15px;"
@@ -317,7 +317,7 @@
                             style="overflow: hidden;margin-top:10px;margin-bottom:-10px;box-shadow: 1px 4px 8px rgba(0,0,0,0.46);">
                             <div class="card-body" style="text-align: left;width: 262px;overflow: hidden;">
                                 <h4 class="card-title"
-                                style="overflow: hidden;color: rgb(0,0,0);text-align: left;"> #<%= ticket.Id_Ticket %>: <%= ticket.Asunto %>
+                                style="overflow: hidden;color: rgb(0,0,0);text-align: left;"> #<%= ticket.Id_Ticket %>: <%= ticket.Asunto.substring(0, 20)%>...
                                 </h4>
                                 <h6 class="text-muted card-subtitle mb-2"
                                     style="overflow: hidden;color: rgb(0,0,0);">
@@ -329,7 +329,7 @@
                                 
                                     <span
                                     style="overflow: hidden;margin-left: 10px;color: rgb(136,136,136);">Creado
-                                    el <%= ticket.Fecha_Inicio %></span>
+                                    el <%= (ticket.Fecha_Inicio.toString()).substring(4, 21) %></span>
                                     
                                     <!-- <img class="rounded-circle"
                                     style="width: 35px;height: 35px;margin-left: 15px;"
