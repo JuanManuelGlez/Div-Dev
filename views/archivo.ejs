@@ -181,7 +181,7 @@
                             <div  onClick="openTicket(this)" data-bs-toggle="modal" data-bs-target="#myModal"
                                 id="boton<%= ticket.Id_Ticket %>" class="col-3" style="cursor:pointer;margin-bottom:20px;">
                                 <div class="card h-100"
-                                    style="overflow: hidden;margin-top:10px;margin-bottom:10px;box-shadow: 1px 4px 8px rgba(0,0,0,0.46);">
+                                    style="overflow: hidden;margin-top:10px;margin-bottom:-10px;box-shadow: 1px 4px 8px rgba(0,0,0,0.46);">
                                     <div class="card-body" style="text-align: left;width: 262px;overflow: hidden;">
                                         <h4 class="card-title"
                                         style="overflow: hidden;color: rgb(0,0,0);text-align: left;"> #<%= ticket.Id_Ticket %>: <%= ticket.Asunto %>
@@ -196,7 +196,7 @@
                                         
                                             <span
                                             style="overflow: hidden;margin-left: 10px;color: rgb(136,136,136);">Creado
-                                            el <%= ticket.Fecha_Inicio %></span>
+                                            el <%=(ticket.Fecha_Inicio.toString()).substring(4,21) %></span>
                                             
                                             <!-- <img class="rounded-circle"
                                             style="width: 35px;height: 35px;margin-left: 15px;"
