@@ -45,7 +45,6 @@ function agregaLabel() {
     const csrf = document.getElementById('_csrf').value;
     const nuevaLabel = document.getElementById("input_label").value
     let rutaAgregar = '../label/nuevaLabel';
-
     data = {
         Id_Label: nuevaLabel
     }
