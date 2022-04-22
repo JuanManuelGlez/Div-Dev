@@ -82,10 +82,11 @@ exports.login_post = (request, response, next) => {
             request.session.correo = usuario.login_usuario;
             //console.log(request.session.usuario);
             return request.session.save((err) => {
-              response.redirect("/");
+              response.status(200).json({errores:error});
             });
+          }else{
+            response.status(200).json({errores:error});
           }
-          response.status(200).json({errores:error});
           
         })
         .catch((err) => {

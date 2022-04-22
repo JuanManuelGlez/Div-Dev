@@ -26,11 +26,12 @@ document.getElementById("credencial").onclick=()=>{
     })
     .then(response => response.json())
     .then(response => {
-        if (response.errores=true){
-            mensaje_error.innerHTML += 'Usuario y/o contraseña erroneo';
+        if (response.errores==true){
+            //alert("Usuario y/o Contraseña Incorrecots");
+            mensaje_error.innerHTML += '<p class="text-center text-danger"> Usuario y/o contraseña erroneo </p>';
 
-        }else if(response.errores=false){
-            boton.click()
+        }else if(response.errores==false){
+            window.location.href="/"
             
         }
        
