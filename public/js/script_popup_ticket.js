@@ -16,9 +16,9 @@ function openTicket(element) {
     let boton_comentarios = document.getElementById("boton_comentarios");
     let descripcion = document.getElementById("descripcion");
 
-    let rutaPreguntas = '../tickets/datos/' + id_ticket;
+    let rutaDatos = '../tickets/datos/' + id_ticket;
 
-    fetch(rutaPreguntas, {
+    fetch(rutaDatos, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'

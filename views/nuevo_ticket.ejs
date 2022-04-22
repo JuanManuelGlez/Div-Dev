@@ -71,7 +71,7 @@
                             <div class="col-xxl-4"><label class="col-form-label text-dark">Labels</label></div>
                             <div class="col">
                                 <div class="dropdown shadow">
-                                    <select class="form-select-label" multiple data-live-search="true" id="select_labels" name="labels" aria-label="Default select example">
+                                    <select class="form-select-label" multiple data-live-search="true" id="select_labels" data-width="100%" name="labels" aria-label="Default select example">
                                         <option value="" id="Labels:" disabled>Labels:</option>
                                         <% for(let label of labels) {%>
                                           <option class="opcionLabel" id="<%= label.Id_Label.replace('/ /g', '_') %>" value="<%= label.Id_Label %>"><%= label.Id_Label %></option>

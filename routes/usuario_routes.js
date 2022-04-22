@@ -30,6 +30,7 @@ router.get('/datos/:id_usuario', isAuth, usuario_controller.getDatosUsuario);
 
 router.post('/:id_usuario', isAuth,usuario_controller.usuario_post);
 
+router.get('/logout',usuario_controller.logout);
 
 
 module.exports = router;
