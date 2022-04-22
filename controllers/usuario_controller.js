@@ -166,14 +166,12 @@ exports.usuario_post = (request, response, next) => {
 
 
 exports.profile_update = (request, response, next) => {
-  console.log(request.body.name,
-    request.body.id_usuario)
   Usuario.profile_update(
      request.body.name,
      request.body.id_usuario
   )
     .then(() => {
-      response.status(200).json({hola:"jaks"});
+      response.status(200).json({});
     })
     .catch((err) => {
       console.log(err);
@@ -182,8 +180,6 @@ exports.profile_update = (request, response, next) => {
 
 exports.profile_image = (request, response, next) => {
   image = request.file.filename;
-  console.log("ESTE ES EL URL")
-  console.log(request.file.filename)
 //   Usuario.profile_update(
 //      request.body.image_url,
 //      request.body.id_usuario
