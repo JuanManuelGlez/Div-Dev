@@ -605,7 +605,7 @@ document.getElementById('abreProcedencia').addEventListener('mousedown', async f
         contenido.innerHTML+=
             `</select>
             <div id="cambiar_procedencia"></div>
-            <button type="button" id="modificar_procedencias" class="btn btn-success"> Enviar </button>
+            <button type="button" id="modificar_procedencias" class="btn btn-success" href="/"> Enviar </button>
             </form>
         `;
         document.getElementById('procedencia').onchange = Modificacion;

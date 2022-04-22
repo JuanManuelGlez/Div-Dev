@@ -1,6 +1,7 @@
 const path = require("path");
 const Usuario = require("../models/usuario");
 const bcrypt = require("bcryptjs");
+const { getUnpackedSettings } = require("http2");
 
 exports.signup_get = (request, response, next) => {
   response.render("signup");
