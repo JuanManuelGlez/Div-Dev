@@ -272,3 +272,25 @@ exports.getDatosTicket = (request, response, next) => {
       console.log(err);
     });
 };
+
+
+exports.ticket_panel=(request,response,next)=>{
+            Ticket.fetchEstado()
+                .then(([rowsEstado,fielDataEstado])=>{
+                    Ticket.fetchAll_Progreso()
+                        .then(([rowsProgreso,fielDataProgreso])=>{
+                          console.log(rowsProgreso)
+                            response.render('panel',{
+                            tickets:rowsProgreso,
+                            estados:rowsEstado
+                        });
+                    })
+                        .catch(err=>{
+                        console.log(err);
+                        })
+                    })  
+                .catch(err=>{
+                    console.log(err);
+                })    
+                                   
+}
