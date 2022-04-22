@@ -292,22 +292,33 @@ exports.getDatosTicket = (request, response, next) => {
 
 
 exports.ticket_panel=(request,response,next)=>{
-            Ticket.fetchEstado()
-                .then(([rowsEstado,fielDataEstado])=>{
-                    Ticket.fetchAll_Progreso()
-                        .then(([rowsProgreso,fielDataProgreso])=>{
-                          console.log(rowsProgreso)
-                            response.render('panel',{
-                            tickets:rowsProgreso,
-                            estados:rowsEstado
-                        });
-                    })
-                        .catch(err=>{
-                        console.log(err);
-                        })
-                    })  
-                .catch(err=>{
-                    console.log(err);
-                })    
+      Ticket.fetchAll_Progreso()
+    .then(([rowsTickets, fielData]) => {
+      Tipo_incidencia.fetchAll()
+        .then(([rowsIncidencias, fielDataIncidencias]) => {
+          Ticket.fetchPrioridades()
+            .then(([rowsPrioridades, fieldDataPrioridades]) => {
+              Ticket.fetchEstado()
+                .then(([rowsEstados, fielDataEstados]) => {
+                  response.render("panel", {
+                    tickets: rowsTickets,
+                    prioridades: rowsPrioridades,
+                    estados: rowsEstados,
+                    incidencias: rowsIncidencias,
+                  });
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => console.log(err));   
                                    
 }
