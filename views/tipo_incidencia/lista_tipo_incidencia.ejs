@@ -10,37 +10,80 @@
             </div>
         </div>
     </div>
-<div class = "container">
-    <head>TIPO INCIDENCIA</head>
-    <br><br>
-    <% for(let Tipo_Incidencia of Tipo_Incidencias) {%>
-        <br>
-        <head> ID:<%= Tipo_Incidencia.Id_Tipo_Incidencia %>    <%= Tipo_Incidencia.Nombre_Tipo_Incidencia %>    </head>
-        <a href="/tipo_incidencia/modificar/<%= Tipo_Incidencia.Id_Tipo_Incidencia %>">Modificar</a>
-        <br>
-    <% } %>
-</div> <br><br>
 
-<div class="container">
-    <head>CREAR NUEVO TIPO DE INCIDENCIA</head> <br><br>
-    <form id="nuevo_tipo_incidencia" method="POST">
-        <input type="hidden" name="_csrf" value="<%= csrfToken %>"></input>
+    <div style="margin-top:30px" class="container">
+        <div class="row" style="color:black;margin: 0px 25px;margin-top: 24px;">
+            <div class="col" style="padding: 15px;text-align: left;border-radius: 17px;box-shadow: 0px 0px 20px rgba(143,143,143,0.5);">
+                <div class="row">
+                    <div class="col">
+                        <h3 style="color: rgb(0,0,0);text-align: left;margin-left: 30px;margin-bottom: 20px;"> Crear nueva categoría </h3>
+                    </div>
+                </div>
+                <div class="row" style="margin: 0px 30px;border-width: 2px;border-color: var(--bs-red);">
+                    <div class="col" style="padding: 0px;">
+                        <div class="row" style="padding: 0px;margin: 0px;margin-top: 0px;border-width: 5px;border-color: var(--bs-red);margin-left: 0px;">
+                            <form id="nuevo_tipo_incidencia" method="POST">
+                                <div class="row"> 
+                                    <div class="col"> Nombre: </div>
+                                    <div class="col-xxl-5"><input class="form-control" type="text" id="nombre_tipo_incidencia" name="nombre_tipo_incidencia" placeholder="Escribe el nombre.." required></div>
+                                    <div class="col"> SLA: </div>
+                                    <div class="col-xxl-5"><input class="form-control" type="number" id="sla_tipo_incidencia" name="sla_tipo_incidencia" placeholder="Ingresa el SLA.." required required></div>
+                                </div>
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>"></input>
+                               <!-- <script>
+                                   $('select_preguntas').tagsinput({
+                                    confirmKeys: [13]
+                                    });
+                               </script> -->
+                               <br>
+                                <select data-width="100%" data-style="btn-warning" class="form-select-label" multiple data-live-search="true" id="select_preguntas" name="preguntas" aria-label="Default select example">
+                                    <option id="Preguntas:" selected disabled>Preguntas (Selecicona todas las que quieras agregar a la categoría) </option>
+                                    <% for(let pregunta of Preguntas) {%>
+                                        <option id="<%= pregunta.Texto_Pregunta.replace(/\s/g,'_') %>" value="<%= pregunta.Texto_Pregunta.replace(/\s/g,'_') %>"><%= pregunta.Texto_Pregunta.replace(/_/g, ' ') %></option>
+                                    <% }%>
+                                </select>
+                                <br><br>
+                                <button class="btn btn-primary" type="submit" name="enviar" id="enviar" style="background: rgb(0,0,0);">Crear Nueva Categoría<i class="fa fa-plus-square" style="margin-left: 20px;"></i></button>
+                
+                            </form>
+                        </div>
+        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="container">
+        <div class="row" style="margin: 0px 25px;margin-top: 24px;">
+            <div class="col">
+                <div class="row">
+                    <div class="col" style="text-align: center;padding: 12px 0px;background: transparent;"><span style="color: rgb(0,0,0);text-align: center;font-weight: bold;font-size: 21px;">ID</span></div>
+                    <div class="col" style="text-align: center;padding: 12px 0px;background: transparent;"><span style="color: rgb(0,0,0);font-weight: bold;font-size: 21px;">Categoría</span></div>
+                    <div class="col" style="text-align: center;padding: 12px 0px;background: transparent;"><span style="color: rgb(0,0,0);font-weight: bold;font-size: 21px;">Modificar</span></div>
+                    
+                </div>
 
-        <input type="text" id="nombre_tipo_incidencia" name="nombre_tipo_incidencia" placeholder="Escribe aqui..." required>
-        <br><br>
-        <input type="number" id="sla_tipo_incidencia" name="sla_tipo_incidencia" required>
-        <br><br>
-        <head> Preguntas de la incidencia</head> <br>
-        <select class="form-select-label" multiple data-live-search="true" id="select_preguntas" name="preguntas" aria-label="Default select example">
-            <option id="Preguntas:" selected disabled>Preguntas:</option>
-            <% for(let pregunta of Preguntas) {%>
-                <option id="<%= pregunta.Texto_Pregunta.replace(/\s/g,'_') %>" value="<%= pregunta.Texto_Pregunta.replace(/\s/g,'_') %>"><%= pregunta.Texto_Pregunta.replace(/_/g, ' ') %></option>
-            <% }%>
-        </select><br>
-        <button type="submit" class="btn btn-primary mt-3" id="enviar" name="enviar">Submit</button>
-    </form>
-    <br><br>
-</div>
+                <% for(let Tipo_Incidencia of Tipo_Incidencias) {%>
+
+                  
+                <div class="row" style="cursor: pointer;margin: 20px -12px;border-radius: 5px;box-shadow: 0px 0px 9px rgba(147,147,147,0.55);padding: 5px;">
+                    <div class="col" style="font-size: 22px;text-align: center;"><span style="color: rgb(0,0,0);"><%= Tipo_Incidencia.Id_Tipo_Incidencia %></span></div>
+                    <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);"><%= Tipo_Incidencia.Nombre_Tipo_Incidencia %></span></div>
+                    <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);"><button class="btn btn-success" onclick="window.location.href='/tipo_incidencia/modificar/<%= Tipo_Incidencia.Id_Tipo_Incidencia %>'"> <i class="fa fa-pencil" aria-hidden="true"></i> </button></span></div>
+                </div>
+                <% }%>
+                
+            </div>
+        </div>
+    </div>
+
+
+    
+        
+
+
 </div>
 </div>
 
