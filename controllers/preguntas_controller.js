@@ -15,6 +15,14 @@ exports.preguntas_getAll = (request, response, next) => {
   .catch(err => console.log(err));
 };
 
+exports.actualizaPregunta = (request, response, next) => {
+  Pregunta.update_visibilidad(request.body.Pregunta, request.body.nuevaVisibilidad)
+  .then(() => {
+    response.status(200).json({});
+  })
+  .catch(err => console.log(err));
+};
+
 exports.nueva_panel = (request, response, next) => {
   pregunta_nueva = new Pregunta(request.body.Pregunta);
   pregunta_nueva.pregunta_save();

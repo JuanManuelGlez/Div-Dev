@@ -27,17 +27,17 @@ module.exports = class Pregunta{
         .catch(err => console.log(err));
     }
 
-    static async pregunta_check(texto_pregunta){
+    async pregunta_check(texto_pregunta){
         return db.execute('SELECT EXISTS(SELECT * FROM pregunta p WHERE p.Texto_Pregunta = ?) AS E',
             [texto_pregunta]
         );
     }
 
-    static async pregunta_getId(texto_pregunta){
+   static pregunta_getId(texto_pregunta){
         return db.execute('SELECT p.Id_Pregunta FROM pregunta p WHERE p.Texto_Pregunta = ?',
             [texto_pregunta]
         );
-    }
+   }
 
     static pregunta_fetch_lastinsertion(){
         return db.execute('SELECT (SELECT MAX(Id_Pregunta) FROM pregunta p WHERE p.Visibilidad_Pregunta = 1) AS L');
@@ -52,7 +52,7 @@ module.exports = class Pregunta{
         return db.execute('SELECT * FROM pregunta WHERE Visibilidad_Pregunta = 1 AND Texto_Pregunta LIKE ?', ['%' + texto_ingresado + '%']);
     }
 
-    static async agregaPregunta(id_pregunta,id_tipo_incidencia) {
+    static agregaPregunta(id_pregunta,id_tipo_incidencia) {
         return db.execute('INSERT INTO tipo_incidencia_pregunta(Id_Pregunta, Id_Tipo_Incidencia) VALUES (?,?)',
             [
                 id_pregunta,
@@ -61,18 +61,11 @@ module.exports = class Pregunta{
         );
     }
     
-    static cambiaVisibilidad(P, V){
-        if(V == 1){
-            return db.execute('UPDATE pregunta SET Visibilidad_Pregunta = 0 WHERE Texto_Pregunta = ?',
-            [
-                P
-            ]);
-        }else{
-            return db.execute('UPDATE pregunta SET Visibilidad_Pregunta = 1 WHERE Texto_Pregunta = ?',
-            [
-                P
-            ]);
-        }
+    static update_visibilidad(P, V){
+        return db.execute('UPDATE pregunta SET Visibilidad_Pregunta = ? WHERE Texto_Pregunta = ?',
+        [
+            V,P
+        ]);
     }
 
 }

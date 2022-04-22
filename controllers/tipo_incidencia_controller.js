@@ -40,7 +40,7 @@ exports.postTipo_Incidencia =  async (request, response, next) => {
                                             .then()
                                             .catch(err => console.log(err));
                                         }).catch(err => console.log(err));
-                                    }
+                                }
                                 if(rowcheck[0].E == 1){
                                     Pregunta.pregunta_getId(pregunta.replace(/_/g, ' '))
                                         .then(([rowidPregunta, fieldDataidPregunta]) => {
@@ -55,6 +55,7 @@ exports.postTipo_Incidencia =  async (request, response, next) => {
             }).catch(err => console.log(err))
         })
         .catch(err => console.log(err));
+        response.redirect('/tipo_incidencia');
     }
 
 exports.getModficarTipo_Incidencia = (request,response,next) => {

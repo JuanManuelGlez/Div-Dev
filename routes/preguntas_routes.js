@@ -15,4 +15,6 @@ router.post('/nuevaPregunta_panel', preguntas_controller.nueva_panel);
 
 router.post('/eliminarPreguntaPanel', preguntas_controller.eliminarP_panel)
 
+router.post('/actualizaPregunta', preguntas_controller.actualizaPregunta)
+
 module.exports = router;
