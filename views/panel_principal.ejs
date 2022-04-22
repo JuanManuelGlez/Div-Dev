@@ -166,15 +166,16 @@
                         <div class="col-sm-12 offset-2 offset-sm-1 offset-md-0 offset-lg-0 offset-xl-0 offset-xxl-0"
                             style="color: var(--bs-purple);background: #FF595A;">
                             <div></div>
-                            <h1 style="color: var(--bs-body-bg);margin-left: 50px;"> Backlog </h1>
+                             <h1 style="color: var(--bs-body-bg);margin-left: 50px;"> Backlog <input style="width:50px" id="filtro" name="filtro" class="form-control" type="number" min="1" max="6" value="1" required/> <button id="filtrar" class="btn btn-success"> FILTRAR </button> </h1>  
                             <div style="display:none"> <input type="number" id="Bool" value="1">  </div>
                         </div>
                     </div>
                 </div>
                 <div class="container">
-                    <div class="row" style="margin-top: 30px;">
+                    <div id="filtro_ver" class="row" style="margin-top: 30px;">
+                        
                         <% for(let ticket of tickets) {%>
-                            <% if(true) {%>
+                         
                             <div  onClick="openTicket(this)" data-bs-toggle="modal" data-bs-target="#myModal"
                                 id="boton<%= ticket.Id_Ticket %>" class="col" style="cursor:pointer;margin-bottom:20px;">
                                 <div class="card h-100"
@@ -202,7 +203,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <% }%>
+                        
                             <% }%>
                     </div>
                 </div>

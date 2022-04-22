@@ -222,8 +222,25 @@ exports.ticket_post = (request, response, next) => {
     });
 };
 
+exports.filtros = (request, response, next) => {
+
+  Ticket.fetchListFiltrarEstado(
+    request.body.estado
+  )
+  .then(([rowsTickets, fielDataLabels])=>{
+    
+    response.status(200).json({
+      tickets: rowsTickets
+    } 
+    )
+  })
+  .catch((err)=>{
+      console.log(err);
+  })
+};
+
 exports.ticket_archivar = (request, response, next) => {
-  console.log(request.body.Archivado);
+
   Ticket.archivar(
     request.body.Archivado,
     request.params.id_ticket
