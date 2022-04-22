@@ -170,6 +170,8 @@
             <div class="col offset-2 offset-sm-1 offset-md-0" style="color: var(--bs-purple);background: #ff595a;">
                 <div></div>
                 <h1 style="color: var(--bs-body-bg);margin-left: 20px;">Panel Ticket</h1>
+                <div style="display:none"> <input type="number" id="Bool" value="1">  
+
             </div>
         </div>
     </div>
@@ -181,12 +183,12 @@
     <div class="row"  style="margin-top: 30px;color:black">
         <div class="col" id="Sin_Asignar">
             <div class="row text-center">
-                <span class="badge bg-danger " style="font-size: 23px;text-align: center;background: #827f77;--bs-primary: #827f77;--bs-primary-rgb: 130,127,119;">Sin Iniciar</span>
+                <span class="badge" style="margin-left:auto;margin-right:auto;width:70%;font-size: 23px;text-align: center;background: grey">Sin Iniciar</span>
             </div>
             <div class="row">
                 
                 <%for (let ticket of tickets){%>
-                    <%if (ticket.Id_Estado == 6 || ticket.Id_Estado == 3){%>
+                    <%if ( ticket.Id_Estado == 1){%>
                         <div  onClick="openTicket(this)" data-bs-toggle="modal" data-bs-target="#myModal"
                                 id="boton<%= ticket.Id_Ticket %>" class="col" style="cursor:pointer;margin-bottom:20px;">
                                 <div class="card h-100"
@@ -224,7 +226,7 @@
 
         <div class="col" id="Progreso">
             <div class="row text-center">
-                <span class="badge bg-info " style="font-size: 23px;text-align: center;background: #828277;--bs-primary: #827f77;--bs-primary-rgb: 130,127,119;">Progreso</span>
+                <span class="badge bg-warning" style="margin-left:auto;margin-right:auto;width:70%;font-size: 23px;text-align: center;background: yellow;">Progreso</span>
             </div>
             <div class="row">
                 <%for (let ticket of tickets){%>
@@ -264,7 +266,7 @@
 
         <div class="col" id="Bloqueado">
             <div class="row text-center">
-                <span class="badge bg-info " style="font-size: 23px;text-align: center;background: #828277;--bs-primary: #827f77;--bs-primary-rgb: 130,127,119;"> Bloqueado </span>
+                <span class="badge " style="margin-left:auto;margin-right:auto;width:70%;font-size: 23px;text-align: center;background: red"> Bloqueado </span>
             </div>
             <div class="row">
                 <%for (let ticket of tickets){%>
@@ -304,11 +306,11 @@
 
         <div class="col" id="Completo">
             <div class="row text-center">
-                <span class="badge bg-success " style="font-size: 23px;text-align: center;background: #827f77;--bs-primary: #827f77;--bs-primary-rgb: 130,127,119;">Completo</span>
+                <span class="badge bg-success " style="margin-left:auto;margin-right:auto;width:70%;font-size: 23px;text-align: center;background: #827f77;--bs-primary: #827f77;--bs-primary-rgb: 130,127,119;">Completo</span>
             </div>
             <div class="row">    
                 <%for (let ticket of tickets){%>
-                    <%if (ticket.Id_Estado == 1){%>
+                    <%if (ticket.Id_Estado == 3){%>
                         <div  onClick="openTicket(this)" data-bs-toggle="modal" data-bs-target="#myModal"
                         id="boton<%= ticket.Id_Ticket %>" class="col" style="cursor:pointer;margin-bottom:20px;">
                         <div class="card h-100"

@@ -179,7 +179,7 @@
                         <% for(let ticket of tickets) {%>
                         
                             <div  onClick="openTicket(this)" data-bs-toggle="modal" data-bs-target="#myModal"
-                                id="boton<%= ticket.Id_Ticket %>" class="col" style="cursor:pointer;margin-bottom:20px;">
+                                id="boton<%= ticket.Id_Ticket %>" class="col-3" style="cursor:pointer;margin-bottom:20px;">
                                 <div class="card h-100"
                                     style="overflow: hidden;margin-top:10px;margin-bottom:10px;box-shadow: 1px 4px 8px rgba(0,0,0,0.46);">
                                     <div class="card-body" style="text-align: left;width: 262px;overflow: hidden;">
@@ -216,4 +216,5 @@
 
 
             <script src="/js/script_popup_ticket.js"></script>
+            <script src="/js/script_filtros.js"></script>
             <%- include('includes/foot.ejs') %>
