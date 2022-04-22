@@ -43,7 +43,7 @@ module.exports = class Ticket{
         return db.execute('SELECT t.Id_Ticket,t.Asunto,t.Fecha_Inicio,t.Descripcion, t.Id_Prioridad,t.Id_Estado,t.Fecha_y_Hora FROM ticket_archivo_magia t WHERE t.Archivado = 1 GROUP BY t.Id_Ticket HAVING MAX(t.Fecha_y_Hora) ORDER BY t.Fecha_y_Hora DESC');
     }
     static fetchAll_Progreso(){
-        return db.execute('SELECT t.Id_Ticket,t.Descripcion,t.Asunto,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado,t.Fecha_y_Hora FROM ticket_archivo_magia t GROUP BY t.Id_Ticket HAVING MAX(t.Fecha_y_Hora)')
+        return db.execute('SELECT t.Id_Ticket,t.Descripcion,t.Asunto,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado,t.Fecha_y_Hora FROM ticket_archivo_magia t WHERE t.Archivado = 0 GROUP BY t.Id_Ticket HAVING MAX(t.Fecha_y_Hora)')
     }
 
    
