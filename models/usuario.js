@@ -33,10 +33,10 @@ module.exports = class Usuario{
 
     }
 
-    static getId(login, nombre)
+    static getId(login)
     {
-        return db.execute('SELECT Id_Usuario FROM usuario WHERE Login=? AND Nombre_Usuario=?',
-            [login, nombre])
+        return db.execute('SELECT Id_Usuario FROM usuario WHERE Login=?',
+            [login])
         .then()
         .catch((err) => {console.log(err);});
     }

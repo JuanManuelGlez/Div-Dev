@@ -121,7 +121,7 @@ exports.nuevo_post = (request, response, next) => {
       if(request.session.isLoggedIn)
       {
         let usuarioAct = request.session.usuario;
-        Usuario.getId(usuarioAct.login_usuario, usuarioAct.nombre_usuario)
+        Usuario.getId(usuarioAct.login_usuario)
         .then(([rows, fieldData]) => {
           Ticket.assignUsuario(idNuevo, rows[0].Id_Usuario, "Creador");
         })
