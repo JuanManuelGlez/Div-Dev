@@ -15,6 +15,7 @@ function openTicket(element) {
     let select_prioridad = document.getElementById("select_prioridad");
     let boton_comentarios = document.getElementById("boton_comentarios");
     let descripcion = document.getElementById("descripcion");
+    let labels= document.getElementById("label_display");
 
     let rutaDatos = '../tickets/datos/' + id_ticket;
 
@@ -38,10 +39,15 @@ function openTicket(element) {
 
         descripcion.innerHTML = response.datosGenerales[0].Descripcion;
         preguntas.innerHTML = '';
+        labels.innerHTML = 'Labels:';
         preguntas_nuevas.innerHTML = '';
         for(let pregunta of response.preguntas)
         {
             preguntas.innerHTML += '<div class="row"><div class="col"><label class="col-form-label">' + pregunta.Pregunta + '</label></div></div><div class="row"><div class="col">' + pregunta.Respuesta + '</div></div>';
+        }
+        for(let label of response.labels)
+        {
+            labels.innerHTML +=  '<span class="badge bg-secondary m-2">' + label.Id_Label  + '</span>';
         }
     }).catch(err => {
         console.log(err);
