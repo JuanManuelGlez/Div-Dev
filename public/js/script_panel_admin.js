@@ -366,11 +366,11 @@ function filtraEstados() {
 
                 if(estado.Visibilidad_Estado == 1)
                 {
-                    document.getElementById("tablaEstados").innerHTML += '<tr><td>' + estado.Nombre_Estado +  '</td><td>Si</td>';
+                    document.getElementById("tablaEstados").innerHTML += '<tr><td id="estado' + estado.Id_Estado + '">' + estado.Nombre_Estado +  '</td><td>Si <button id="elimina' + estado.Id_Estado + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaEstado(this)">X</button></td>';
                 }
                 else
                 {
-                    document.getElementById("tablaEstados").innerHTML += '<tr><td>' + estado.Nombre_Estado +  '</td><td>No</td>';
+                    document.getElementById("tablaEstados").innerHTML += '<tr><td id="estado' + estado.Id_Estado + '">' + estado.Nombre_Estado +  '</td><td>No <button id="elimina' + estado.Id_Estado + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaEstado(this)">O</button></td>';
                 }
                 
                 document.getElementById("tablaEstados").innerHTML += '</tr>';
@@ -403,8 +403,52 @@ function agregaEstado() {
 
         if(document.getElementById("existeEstado").value == "0")
         {
-            document.getElementById("tablaEstados").innerHTML += '<tr><td>' + nuevoEstado +  '</td>' + '<td>Si</td></tr>';
+            document.getElementById("tablaEstados").innerHTML += '<tr><td id="estado' + response.idNuevo + '">' + nuevoEstado +  '</td>' + '<td>Si <button id="elimina' + response.idNuevo + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaEstado(this)">X</button></td></tr>';
             document.getElementById("existeEstado").value = 1;
+        }
+        
+    }).catch(err => {
+        console.log(err);
+    });
+};
+
+function eliminaEstado(element) {
+    const csrf = document.getElementById('_csrf').value;
+    let rutaActualiza = '../estado/actualizaEstado';
+
+    let estado = element.id.substring(7);
+
+    let nuevaVis = 0;
+
+    if(element.parentNode.innerHTML.substring(0, 2) == 'No')
+    {
+        nuevaVis = 1;
+    }
+
+    data = {
+        Id_Estado: estado,
+        nuevaVisibilidad: nuevaVis
+    }
+    fetch(rutaActualiza, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'csrf-token': csrf
+        },
+        body:JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(response => {
+        
+        if(nuevaVis == 0)
+        {
+            element.parentNode.innerHTML = "No" + element.parentNode.innerHTML.substring(2);
+            $('body').find('#' + element.id).html('O');
+        }
+        else
+        {
+            element.parentNode.innerHTML = "Si" + element.parentNode.innerHTML.substring(2);
+            $('body').find('#' + element.id).html('X');
         }
         
     }).catch(err => {
@@ -440,11 +484,11 @@ document.getElementById('abreEstados').addEventListener('mousedown', async funct
         {
             if(estado.Visibilidad_Estado == 1)
             {
-                document.getElementById("tablaEstados").innerHTML += '<tr><td>' + estado.Nombre_Estado +  '</td><td>Si</td>';
+                document.getElementById("tablaEstados").innerHTML += '<tr><td id="estado' + estado.Id_Estado + '">' + estado.Nombre_Estado +  '</td><td>Si <button id="elimina' + estado.Id_Estado + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaEstado(this)">X</button></td>';
             }
             else
             {
-                document.getElementById("tablaEstados").innerHTML += '<tr><td>' + estado.Nombre_Estado +  '</td><td>No</td>';
+                document.getElementById("tablaEstados").innerHTML += '<tr><td id="estado' + estado.Id_Estado + '">' + estado.Nombre_Estado +  '</td><td>No <button id="elimina' + estado.Id_Estado + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaEstado(this)">O</button></td>';
             }
             
             document.getElementById("tablaEstados").innerHTML += '</tr>';

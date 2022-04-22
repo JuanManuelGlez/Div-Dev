@@ -1,5 +1,6 @@
 const path = require('path');
 const Comentario = require('../models/comentario');
+const Usuario = require('../models/usuario');
 
 exports.nuevocomentario_get = (request, response, next) => {
     Comentario.fetchcomentarios(3)
@@ -48,20 +49,27 @@ exports.nuevocomentario_post = (request, response, next) => {
         // }
         // console.log(url_archivo_comentario);
         url_archivo_comentario = 'no hay archivo';
-        const comentario_nuevo= new Comentario(10, request.body.id_ticket, request.body.texto_comentario, url_archivo_comentario);
-        console.log(comentario_nuevo);
+        let usuarioAct = request.session.usuario;
+
+        Usuario.getId(usuarioAct.login_usuario, usuarioAct.nombre_usuario)
+        .then(([rows, fieldData]) => {
+          let idAct = rows[0].Id_Usuario;
+          const comentario_nuevo= new Comentario(idAct, request.body.id_ticket, request.body.texto_comentario, url_archivo_comentario);
+            console.log(comentario_nuevo);
     
-        comentario_nuevo.comentario_save()
-        .then(() => {
-            Comentario.fetchcomentarios(request.body.id_ticket)
-            .then(([rowsComentarios, filedData])=> {
-                response.status(200).json({
-                    comentarios: rowsComentarios
-                });
-            }).catch(err=>console.log(err));
+            comentario_nuevo.comentario_save()
+            .then(() => {
+                Comentario.fetchcomentarios(request.body.id_ticket)
+                .then(([rowsComentarios, filedData])=> {
+                    response.status(200).json({
+                        comentarios: rowsComentarios
+                    });
+                }).catch(err=>console.log(err));
             
+            })
+            .catch(err => console.log(err));
         })
-        .catch(err => console.log(err));
+        .catch((err) => {console.log(err)});
         
         // var ruta = '/comentario/'+request.body.id_ticket;
         // response.redirect(ruta);
@@ -70,7 +78,7 @@ exports.nuevocomentario_post = (request, response, next) => {
     
 };
 
-exports.nuevocomentario_postData = (request, response, next) => {
+exports.nuevocomentario_postData = async (request, response, next) => {
     
 
     url_archivo_comentario = request.file;
@@ -79,7 +87,17 @@ exports.nuevocomentario_postData = (request, response, next) => {
     }else{
         url_archivo_comentario = request.file.filename;
     }
-    const comentario_nuevo= new Comentario(10, request.body.id_ticket, request.body.texto_comentario, url_archivo_comentario);
+
+    let usuarioAct = request.session.usuario;
+    let idAct = 0;
+
+    await Usuario.getId(usuarioAct.login_usuario)
+        .then(([rows, fieldData]) => {
+          idAct = rows[0].Id_Usuario;
+        })
+        .catch((err) => {console.log(err)});
+
+    const comentario_nuevo= new Comentario(idAct, request.body.id_ticket, request.body.texto_comentario, url_archivo_comentario);
     console.log(comentario_nuevo);
     comentario_nuevo.comentario_save()
         .then(() => {
