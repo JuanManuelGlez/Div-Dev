@@ -7,7 +7,6 @@
 <header>SLA: </header><input id="SLA"  type="number" step="1" min="0" name="SLA" value="<%= Tipo_Incidencia[0].SLA %>" onchange = "cambio ()" required><br><br>
 
 <select class="form-select-label" multiple data-live-search="true" id="select_preguntas" name="preguntas" aria-label="Default select example" onchange = "cambio ()">
-    <option id="Preguntas:" selected disabled>Preguntas:</option>
     <% for(let pregunta of Preguntas_all) { %>
         <% let selected = false; %>
         <% for(let pregunta2 of Preguntas_act){ %>

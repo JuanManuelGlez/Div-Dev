@@ -17,33 +17,45 @@ exports.getTipo_Incidencia = (request, response, next) => {
         .catch(err => console.log(err));
 }
 
-exports.postTipo_Incidencia = (request, response, next) => {
+exports.postTipo_Incidencia =  async (request, response, next) => {
+
+    if (!Array.isArray(request.body.preguntas))
+    request.body.preguntas = [request.body.preguntas];
 
     const tipo_incidencia_nuevo = new Tipo_incidencia(request.body.nombre_tipo_incidencia, request.body.sla_tipo_incidencia);
-    tipo_incidencia_nuevo.tipo_incidencia_save();
-    Tipo_incidencia.tipo_incidencia_fetch_lastinsertion().then(([rowLastTipoIncidencia, fieldDatalasttipoincidencia]) => {
-        if((typeof(request.body.preguntas) != "undefined")){
-            for(let pregunta of request.body.preguntas){
-                Pregunta.pregunta_check(pregunta.replace(/_/g, ' ')).then(([rowcheck, fieldDatacheck]) => {
-                    if(rowcheck[0].E == 0){
-                        const pregunta_nuevo = new Pregunta(pregunta.replace(/_/g, ' '));
-                        pregunta_nuevo.pregunta_save();
-                        Pregunta.pregunta_getId(pregunta.replace(/_/g, ' ')).then(([rowidPregunta, fieldDataidPregunta]) => {
-                            Pregunta.agregaPregunta(rowidPregunta[0].Id_Pregunta, rowLastTipoIncidencia[0].L);
-                        })
-                    }else{
-                        if(rowcheck[0].E == 1){
-                            Pregunta.pregunta_getId(pregunta.replace(/_/g, ' ')).then(([rowidPregunta, fieldDataidPregunta]) => {
-                                Pregunta.agregaPregunta(rowidPregunta[0].Id_Pregunta, rowLastTipoIncidencia[0].L);
-                            })
-                        }
+    tipo_incidencia_nuevo.tipo_incidencia_save()
+        .then( () => {
+            Tipo_incidencia.tipo_incidencia_fetch_lastinsertion()
+            .then(([rowLastTipoIncidencia, fieldDatalasttipoincidencia]) => {
+                if((typeof(request.body.preguntas) != "undefined")){
+                    for(let pregunta of request.body.preguntas){
+                        Pregunta.pregunta_check(pregunta.replace(/_/g, ' '))
+                            .then(([rowcheck, fieldDatacheck]) => {
+                                if(rowcheck[0].E == 0){
+                                    const pregunta_nuevo = new Pregunta(pregunta.replace(/_/g, ' '));
+                                    pregunta_nuevo.pregunta_save();
+                                    Pregunta.pregunta_getId(pregunta.replace(/_/g, ' '))
+                                        .then(([rowidPregunta, fieldDataidPregunta]) => {
+                                            Pregunta.agregaPregunta(rowidPregunta[0].Id_Pregunta, rowLastTipoIncidencia[0].L)
+                                            .then()
+                                            .catch(err => console.log(err));
+                                        }).catch(err => console.log(err));
+                                    }
+                                if(rowcheck[0].E == 1){
+                                    Pregunta.pregunta_getId(pregunta.replace(/_/g, ' '))
+                                        .then(([rowidPregunta, fieldDataidPregunta]) => {
+                                            Pregunta.agregaPregunta(rowidPregunta[0].Id_Pregunta, rowLastTipoIncidencia[0].L)
+                                                .then()
+                                                .catch(err => console.log(err));
+                                        }).catch(err => console.log(err));
+                                }   
+                            }).catch(err => console.log(err));
                     }
-                })
-            }
-        }
-    })
-    response.redirect('/tipo_incidencia');
-}
+                }
+            }).catch(err => console.log(err))
+        })
+        .catch(err => console.log(err));
+    }
 
 exports.getModficarTipo_Incidencia = (request,response,next) => {
     const id =request.params.id_tipo_incidencia;
@@ -95,7 +107,6 @@ exports.postModficarTipo_Incidencia = async (request,response,next) => {
             Pregunta.pregunta_check(pregunta.replace(/_/g, ' '))
                 .then(([rowcheck, fieldDatacheck]) => {
                     if(rowcheck[0].E == 0 && pregunta.replace(/_/g, ' ') != "Preguntas:"){
-                        console.log("0 " + pregunta.replace(/_/g, ' '));
                         const pregunta_nuevo = new Pregunta(pregunta.replace(/_/g, ' '));
                         pregunta_nuevo.pregunta_save();
                         Pregunta.pregunta_getId(pregunta.replace(/_/g, ' '))
@@ -106,7 +117,6 @@ exports.postModficarTipo_Incidencia = async (request,response,next) => {
                             }).catch(err => console.log(err));
                     }else{
                         if(rowcheck[0].E == 1){
-                            console.log("1 " + pregunta.replace(/_/g, ' '));
                             Pregunta.pregunta_getId(pregunta.replace(/_/g, ' '))
                                 .then(([rowidPregunta, fieldDataidPregunta]) => {
                                     Tipo_incidencia.pregunta_check_tp(rowidPregunta[0].Id_Pregunta, id)

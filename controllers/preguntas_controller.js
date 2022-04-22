@@ -1,5 +1,9 @@
+const { resolve } = require("path");
 const path = require("path");
+const Estado = require("../models/estado");
+const Label = require("../models/label");
 const Pregunta = require("../models/pregunta");
+const { fetchProcedencias } = require("../models/ticket");
 
 exports.preguntas_getAll = (request, response, next) => {
   Pregunta.fetchAll()
@@ -31,6 +35,4 @@ exports.eliminarP_panel = (request, response, next) => {
   Pregunta.cambiaVisibilidad(request.body.Pregunta,request.body.Visibilidad);
   response.status(200).json({});
 };
-
-exports
 

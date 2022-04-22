@@ -32,7 +32,6 @@
         <br><br>
         <head> Preguntas de la incidencia</head> <br>
         <select class="form-select-label" multiple data-live-search="true" id="select_preguntas" name="preguntas" aria-label="Default select example">
-            <option id="Preguntas:" selected disabled>Preguntas:</option>
             <% for(let pregunta of Preguntas) {%>
                 <option id="<%= pregunta.Texto_Pregunta.replace(/\s/g,'_') %>" value="<%= pregunta.Texto_Pregunta.replace(/\s/g,'_') %>"><%= pregunta.Texto_Pregunta.replace(/_/g, ' ') %></option>
             <% }%>
