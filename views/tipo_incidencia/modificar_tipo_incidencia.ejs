@@ -1,35 +1,74 @@
 <%- include('../includes/header.ejs') %>
 <%- include('../includes/sidebar.ejs') %>
 
+<div class="page-content-wrapper" style="color: var(--bs-teal);">
+    <div class="container-fluid" style="color: transparent;background: var(--bs-indigo);">
+        <div class="row" style="background: var(--bs-red);">
+            <div class="col" style="color: var(--bs-purple);background: #FF595A;">
+                <div></div>
+                <h1 style="color: var(--bs-white);margin-left: 20px;">Modificar Tipo de Incidencia: <%= Id_Tipo_Incidencia%> </h1>
+            </div>
+        </div>
+    </div>
 
-<header>ID: <%= Id_Tipo_Incidencia%></header><br><br>
-<header>Nombre: </header><input id="Nombre_Tipo_Incidencia" type="text" name="Nombre_Tipo_Incidencia" value="<%= Tipo_Incidencia[0].Nombre_Tipo_Incidencia %>" onkeyup = "cambio()" required><br>
-<header>SLA: </header><input id="SLA"  type="number" step="1" min="0" name="SLA" value="<%= Tipo_Incidencia[0].SLA %>" onchange = "cambio ()" required><br><br>
+    <div style="margin-top:30px" class="container">
+        <div class="row" style="color:black;margin: 0px 25px;margin-top: 24px;">
+            <div class="col">
+                <div class="row">
+                    <h6>Nombre: </h6>
+                    <input class="form-control" id="Nombre_Tipo_Incidencia" type="text" name="Nombre_Tipo_Incidencia" value="<%= Tipo_Incidencia[0].Nombre_Tipo_Incidencia %>" onkeyup = "cambio()" required><br>
+                </div>
+                <br>
+                <div class="row">
+                    <h6>SLA: </h6>  
+                    <input class="form-control" id="SLA"  type="number" step="1" min="0" name="SLA" value="<%= Tipo_Incidencia[0].SLA %>" onchange = "cambio ()" required><br><br>        
+                </div>
+                <br>
+                <div class="row">
+                    <h6>Preguntas</h6>
 
-<select class="form-select-label" multiple data-live-search="true" id="select_preguntas" name="preguntas" aria-label="Default select example" onchange = "cambio ()">
-    <% for(let pregunta of Preguntas_all) { %>
-        <% let selected = false; %>
-        <% for(let pregunta2 of Preguntas_act){ %>
-            <% if(pregunta.Texto_Pregunta.replace(/\s/g,'_') == pregunta2.Texto_Pregunta.replace(/\s/g,'_')){ %>
-                <% selected = true; %>
+                    <select data-width="100%"  class="form-select-label" multiple data-live-search="true" id="select_preguntas" name="preguntas" aria-label="Default select example" onchange = "cambio ()">
+                        <% for(let pregunta of Preguntas_all) { %>
+                            <% let selected = false; %>
+                            <% for(let pregunta2 of Preguntas_act){ %>
+                                <% if(pregunta.Texto_Pregunta.replace(/\s/g,'_') == pregunta2.Texto_Pregunta.replace(/\s/g,'_')){ %>
+                                    <% selected = true; %>
+                                <% } %>
+                            <% } %>
+                            <option class="opcionPregunta" <%= selected ? "selected" : "" %> id="<%= pregunta.Texto_Pregunta.replace(/\s/g,'_') %>" value="<%= pregunta.Texto_Pregunta.replace(/\s/g,'_') %>"><%= pregunta.Texto_Pregunta.replace(/_/g, ' ') %></option>
+                                    
+                        <% }%>
+                    </select>
+                </div>
+                <br>
+                <div class="row">
+                    <button style="width:25%" class="btn btn-success" id="button_cambios"> Guardar Cambios </button>
+                </div>
+            </div>
+
+            
+
+
+            <br>
+
+            
+
+            <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>">
+            <input type="hidden" name="id_tp" id="id_tp" value="<%= Id_Tipo_Incidencia%>">
+
+            <% let cont = 0%>
+            <% for(let pregunta2 of Preguntas_act){ %>
+                <input type="hidden" name="ACT_<%=cont%>" id="ACT_<%=cont%>" value="<%= pregunta2.Texto_Pregunta.replace(/\s/g,'_') %>">
+                <% cont++ %>
             <% } %>
-        <% } %>
-        <option class="opcionPregunta" <%= selected ? "selected" : "" %> id="<%= pregunta.Texto_Pregunta.replace(/\s/g,'_') %>" value="<%= pregunta.Texto_Pregunta.replace(/\s/g,'_') %>"><%= pregunta.Texto_Pregunta.replace(/_/g, ' ') %></option>
-                
-    <% }%>
-</select><br>
+            <input type="hidden" name="cont" id="cont" value="<%= cont-1 %>">
+            <br>
+            
+            
+    </div>
+    
+   </div>
 
-<div id="button_cambios"></div>
-
-<input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>">
-<input type="hidden" name="id_tp" id="id_tp" value="<%= Id_Tipo_Incidencia%>">
-
-<% let cont = 0%>
-<% for(let pregunta2 of Preguntas_act){ %>
-    <input type="hidden" name="ACT_<%=cont%>" id="ACT_<%=cont%>" value="<%= pregunta2.Texto_Pregunta.replace(/\s/g,'_') %>">
-    <% cont++ %>
-<% } %>
-<input type="hidden" name="cont" id="cont" value="<%= cont-1 %>">
 </div>
 </div>
 
