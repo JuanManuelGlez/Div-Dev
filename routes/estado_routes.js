@@ -13,5 +13,7 @@ router.post('/getLike',  isAuth,estado_controller.getLike);
 
 router.post('/nuevoEstado',  isAuth,estado_controller.nuevoEstado);
 
+router.post('/actualizaEstado',  isAuth,estado_controller.actualizaEstado);
+
 
 module.exports = router;

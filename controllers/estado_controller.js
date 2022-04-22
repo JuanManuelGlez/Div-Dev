@@ -10,12 +10,21 @@ exports.getAllEstados = (request, response, next) => {
 };
 
 exports.nuevoEstado = (request, response, next) => {
-    let estado_nuevo = new Estado(request.body.Nombre_Estado);
+    let estado_nuevo = new Estado(request.body.Nombre_Estado, 1);
 
     estado_nuevo.save()
     .then((result) => {
         response.status(200).json({ idNuevo: result[0].insertId});
     })
+  };
+
+  exports.actualizaEstado = (request, response, next) => {
+  
+    Estado.updateVisibilidad(request.body.Id_Estado, request.body.nuevaVisibilidad)
+    .then(() => {
+      response.status(200).json({});
+    })
+    .catch(err => console.log(err));
   };
   
   exports.getLike = (request, response, next) => {

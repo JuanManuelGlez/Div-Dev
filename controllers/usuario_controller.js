@@ -1,6 +1,7 @@
 const path = require("path");
 const Usuario = require("../models/usuario");
 const bcrypt = require("bcryptjs");
+const { getUnpackedSettings } = require("http2");
 
 exports.signup_get = (request, response, next) => {
   response.render("signup");
@@ -88,20 +89,24 @@ exports.login_post = (request, response, next) => {
       );
       bcrypt.compare(request.body.contrasenia, usuario.contrasenia_usuario)
         .then((doMatch) => {
+          console.log("ya llegue");
+          let error=true;
           if (doMatch) {
+            error=false;
             request.session.isLoggedIn = true;
             request.session.usuario = usuario;
             request.session.correo = usuario.login_usuario;
             //console.log(request.session.usuario);
             return request.session.save((err) => {
-              response.redirect("/");
+              response.status(200).json({errores:error});
             });
+          }else{
+            response.status(200).json({errores:error});
           }
-          response.redirect("/usuario/login");
+          
         })
         .catch((err) => {
           console.log(err);
-          response.redirect("/usuario/login");
         });
     })
     .catch((error) => {
@@ -162,14 +167,12 @@ exports.usuario_post = (request, response, next) => {
 
 
 exports.profile_update = (request, response, next) => {
-  console.log(request.body.name,
-    request.body.id_usuario)
   Usuario.profile_update(
      request.body.name,
      request.body.id_usuario
   )
     .then(() => {
-      response.status(200).json({hola:"jaks"});
+      response.status(200).json({});
     })
     .catch((err) => {
       console.log(err);
@@ -178,8 +181,6 @@ exports.profile_update = (request, response, next) => {
 
 exports.profile_image = (request, response, next) => {
   image = request.file.filename;
-  console.log("ESTE ES EL URL")
-  console.log(request.file.filename)
 //   Usuario.profile_update(
 //      request.body.image_url,
 //      request.body.id_usuario

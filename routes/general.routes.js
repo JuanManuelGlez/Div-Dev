@@ -3,6 +3,7 @@ const router = express.Router();
 const filesystem = require('fs');
 const path = require('path');
 const isAuth = require('../util/is-auth.js');
+const tick_panel= require('../controllers/tickets_controller');
 
 router.get('/', isAuth,(request, response, next) =>{
     response.render('metricas');
@@ -14,9 +15,8 @@ router.get('/archivo', isAuth,(request, response, next) =>{
     response.render('archivo');
 });
 
-router.get('/panel', isAuth,(request, response, next) =>{
-    response.render('panel');
-});
+router.get('/panel', isAuth,tick_panel.ticket_panel
+);
 router.get('/ayuda', isAuth,(request, response, next) =>{
     response.render('ayuda');
 });
