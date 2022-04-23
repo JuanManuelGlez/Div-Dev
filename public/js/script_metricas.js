@@ -6,27 +6,26 @@ function allByEstado()
     fetch(rutaTickets, {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json',
-            'csrf-token': csrf
+            'Content-Type': 'application/json'
         }
     })
     .then(response => response.json())
     .then(response => {
         let datosTickets = [];
         let labels = [];
+        let bg = ['#059589', '#3ca195', '#5aaca2', '#74b8af', '#8cc4bc', '#a3d0c9', '#badbd6', '#d1e7e4', '#e8f3f1', '#ffffff'];
 
         for(dato of response.datos)
         {
-            labels.push(dato[0]);
-            datosTickets.push(dato[1]);
+            labels.push(dato.Estado);
+            datosTickets.push(dato.Tickets);
         }
         
         const data = {
             labels: labels,
             datasets: [{
               label: 'Tickets por estado',
-              backgroundColor: 'rgb(255, 99, 132)',
-              borderColor: 'rgb(255, 99, 132)',
+              backgroundColor: bg.slice(0, labels.length),
               data: datosTickets,
             }]
         };
@@ -34,11 +33,15 @@ function allByEstado()
         const config = {
             type: 'bar',
             data: data,
-            options: {}
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',                    
+            }
         };
         
-        const myChart = new Chart(
-            document.getElementById('myChart'),
+        const porEstados = new Chart(
+            document.getElementById('porEstados'),
             config
         );
 
@@ -46,3 +49,5 @@ function allByEstado()
         console.log(err);
     });
 }
+
+allByEstado();
