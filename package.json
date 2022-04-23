@@ -25,7 +25,6 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.2",
-    "chart.js": "^3.7.1",
     "concurrently": "^7.0.0",
     "cookie-parser": "^1.4.6",
     "csurf": "^1.11.0",
