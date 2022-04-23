@@ -9,3 +9,11 @@ exports.getByStatusAll = (request, response, next) => {
         .catch(err => console.log(err));
 }
 
+exports.getByProcedenciaAll = (request, response, next) => {
+    Metricas.getByProcedenciaAll()
+        .then(([rows, fieldData]) => {
+            response.status(200).json({datos: rows});
+        })
+        .catch(err => console.log(err));
+}
+

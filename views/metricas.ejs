@@ -2,6 +2,8 @@
 <%- include('includes/sidebar.ejs') %>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 
 
 <div class="page-content-wrapper" style="color: var(--bs-teal);">
@@ -136,8 +138,11 @@
     -->
 
     <div>
-        <div class="chart-container" style="position: relative; height:500px; width:50%">
+        <div class="chart-container" style="position: relative; height:500px; width:48%; float:left;margin-left:2em">
             <canvas id="porEstados"></canvas>
+        </div>
+        <div class="chart-container" style="position: relative; height:500px; width:48%; float:right; margin-right:2em">
+            <canvas id="porProcedencia"></canvas>
         </div>
       </div>
     </div>

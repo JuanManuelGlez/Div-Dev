@@ -24,9 +24,13 @@ function allByEstado()
         const data = {
             labels: labels,
             datasets: [{
-              label: 'Tickets por estado',
-              backgroundColor: bg.slice(0, labels.length),
-              data: datosTickets,
+                label: 'Tickets por estado',
+                backgroundColor: bg.slice(0, labels.length),
+                borderColor: bg.slice(0, labels.length),
+                data: datosTickets,
+                borderWidth: 2,
+                borderRadius: 5,
+                borderSkipped: false,
             }]
         };
         
@@ -50,4 +54,60 @@ function allByEstado()
     });
 }
 
+function allByProcedencia()
+{
+    let rutaTickets = '../metricas/getByProcedenciaAll';
+
+    fetch(rutaTickets, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(response => {
+        let datosTickets = [];
+        let labels = [];
+        let bg = ['#a900d3', '#b53ad8', '#c158de', '#cc72e3', '#d68be8', '#dfa2ed','#e8b9f2', '#f0d1f6', '#f8e8fb', '#ffffff'];
+
+        for(dato of response.datos)
+        {
+            labels.push(dato.Procedencia);
+            datosTickets.push(dato.Tickets);
+        }
+        
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'Tickets por procedencia',
+                backgroundColor: bg.slice(0, labels.length),
+                borderColor: bg.slice(0, labels.length),
+                data: datosTickets,
+                borderWidth: 2,
+                borderRadius: 5,
+                borderSkipped: false,
+            }]
+        };
+        
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',                 
+            }
+        };
+        
+        const porEstados = new Chart(
+            document.getElementById('porProcedencia'),
+            config
+        );
+
+    }).catch(err => {
+        console.log(err);
+    });
+}
+
 allByEstado();
+allByProcedencia();
