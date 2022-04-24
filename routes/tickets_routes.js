@@ -11,7 +11,7 @@ const router = express.Router();
 router.use('/lista', isAuth, tickets_controller.lista);
 
 router.use('/archivo',  isAuth,tickets_controller.lista_archivo);
-    
+
 router.get('/nuevo',  isAuth,tickets_controller.nuevo_get);
 
 router.post('/nuevo',  isAuth,tickets_controller.nuevo_post);

@@ -18,17 +18,21 @@
     })
     .then(response => response.json())
     .then(response => {
-        console.log("llegaron los datos")
+
         console.log(response.datos)
         username.value = response.datos[0].Nombre_Usuario;
         username_sidebar.innerHTML = response.datos[0].Nombre_Usuario;
         rol.innerHTML = response.datos[0].Id_Rol;
+        if(response.datos[0].Id_Rol==4){
+            document.getElementById("divisor-2").style.display=""
+        }
         //pass.innerHTML = response.datos[0].Contraseña;
         email.innerHTML = response.datos[0].Login
         url_foto.src = response.datos[0].URL_Foto;
         total.innerHTML = response.datos[0].Total;
         Id_Usuario.innerHTML = response.datos[0].Id_Usuario;
         foto_sidebar.src = response.datos[0].URL_Foto;
+
 
 
     }).catch(err => {

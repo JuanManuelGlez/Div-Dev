@@ -36,6 +36,7 @@ exports.lista = (request, response, next) => {
 };
 
 exports.lista_archivo = (request, response, next) => {
+  if( 7 in request.session.privilegios){
   Ticket.fetchListArchivo()
     .then(([rowsTickets, fielData]) => {
       Tipo_incidencia.fetchAll()
@@ -64,12 +65,17 @@ exports.lista_archivo = (request, response, next) => {
         });
     })
     .catch((err) => console.log(err));
+  }else{
+    response.redirect("/");
+  }
 };
 
 
 
 exports.nuevo_get = (request, response, next) => {
   //debe de haber una manera mejor de hacer esto pero aja creo que sirve por ahora
+  console.log(request.session);
+  if (1 in request.session.privilegios){
   Tipo_incidencia.fetchAll()
     .then(([rowsTipoIncidencia, fieldDataTipoIncidencia]) => {
       Ticket.fetchPrioridades()
@@ -92,6 +98,9 @@ exports.nuevo_get = (request, response, next) => {
         .catch((err) => console.log(err));
     })
     .catch((err) => console.log(err));
+  }else{
+    response.redirect("/");
+  }
 };
 
 exports.nuevo_post = (request, response, next) => {
