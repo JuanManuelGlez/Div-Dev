@@ -5,7 +5,8 @@ const Usuario = require("../models/usuario");
 const Comentario = require("../models/comentario");
 
 exports.lista = (request, response, next) => {
-  Ticket.fetchList()
+  if(14 in request.session.privilegios){
+    Ticket.fetchList()
     .then(([rowsTickets, fielData]) => {
       Tipo_incidencia.fetchAll()
         .then(([rowsIncidencias, fielDataIncidencias]) => {
@@ -33,10 +34,14 @@ exports.lista = (request, response, next) => {
         });
     })
     .catch((err) => console.log(err));
+  }else{
+    response.redirect("/");
+  }
+  
 };
 
 exports.lista_archivo = (request, response, next) => {
-  if( 7 in request.session.privilegios){
+  if( 8 in request.session.privilegios){
   Ticket.fetchListArchivo()
     .then(([rowsTickets, fielData]) => {
       Tipo_incidencia.fetchAll()
@@ -301,7 +306,7 @@ exports.getDatosTicket = (request, response, next) => {
 
 
 exports.ticket_panel=(request,response,next)=>{
-      Ticket.fetchAll_Progreso()
+    Ticket.fetchAll_Progreso()
     .then(([rowsTickets, fielData]) => {
       Tipo_incidencia.fetchAll()
         .then(([rowsIncidencias, fielDataIncidencias]) => {
@@ -329,5 +334,6 @@ exports.ticket_panel=(request,response,next)=>{
         });
     })
     .catch((err) => console.log(err));   
-                                   
+                           
+             
 }

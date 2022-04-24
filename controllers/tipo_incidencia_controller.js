@@ -3,18 +3,23 @@ const Tipo_incidencia = require('../models/tipo_incidencia');
 const Pregunta = require('../models/pregunta');
 
 exports.getTipo_Incidencia = (request, response, next) => {
+    console.log(request.session.privilegios);
+    if(4 in request.session.privilegios){   
     Tipo_incidencia.fetchAll()
-        .then(([rowsTipo_Incidencia, fieldDataTipo_Incidencia]) => {
-            Tipo_incidencia.fetchAllPreguntas()
-                .then(([rowsPreguntas, fieldDataPreguntas]) => {
-                    response.render('tipo_incidencia/lista_tipo_incidencia', {
-                        Tipo_Incidencias: rowsTipo_Incidencia,
-                        Preguntas: rowsPreguntas
-                    });
-                })
-                .catch(err => console.log(err));
+    .then(([rowsTipo_Incidencia, fieldDataTipo_Incidencia]) => {
+        Tipo_incidencia.fetchAllPreguntas()
+            .then(([rowsPreguntas, fieldDataPreguntas]) => {
+                response.render('tipo_incidencia/lista_tipo_incidencia', {
+                    Tipo_Incidencias: rowsTipo_Incidencia,
+                    Preguntas: rowsPreguntas
+                });
             })
-        .catch(err => console.log(err));
+            .catch(err => console.log(err));
+        })
+    .catch(err => console.log(err));
+    }else{
+        response.redirect("/")
+    }
 }
 
 exports.postTipo_Incidencia =  async (request, response, next) => {

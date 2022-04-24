@@ -20,7 +20,7 @@ exports.datos = (request, response, next) => {
 };
 
 exports.lista = (request, response, next) => {
-  if(15 in request.session.privilegios){
+  if(16 in request.session.privilegios){
   Usuario.fetchEstado()
     .then(([rowsRols, fieldDataRows]) => {
       Usuario.fetchAll()
@@ -107,7 +107,7 @@ exports.login_post = (request, response, next) => {
               .then(([rowsprivilegios, fielData])=>{
                 let privilegios=[];
                 for (let privilegio in rowsprivilegios){
-                  privilegios.push(privilegio);
+                  privilegios.push(rowsprivilegios[privilegio].Id_Privilegio);
                 }
                 request.session.privilegios=privilegios;
               return request.session.save((err) => {
@@ -138,7 +138,7 @@ exports.login_post = (request, response, next) => {
 
 exports.logout = (request, response, next) => {
 
-  if (0 in request.session.privilegios){
+  if (1 in request.session.privilegios){
   request.session.destroy(() => {
     response.redirect("/usuario/login");
   });
@@ -221,7 +221,7 @@ exports.profile_image = (request, response, next) => {
 };
 
 exports.panel_admin = (request, response, next) => {
-  if (3 in request.session.privilegios){
+  if (4 in request.session.privilegios){
   response.render('panel_administrativo');
   }else{
     response.redirect("/");
