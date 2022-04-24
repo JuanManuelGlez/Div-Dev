@@ -30,7 +30,11 @@ function openUsuario(element) {
         url_foto.src = response.datosGenerales[0].URL_Foto;
         login.innerHTML = response.datosGenerales[0].Login;
         select_rol.namedItem("rol"+response.datosGenerales[0].Id_Rol).selected = true;
-        console.log(response.rol);
+        
+        if(!response.privilegios.includes(15)){
+            document.getElementById("select_rol").style.display="none";
+            document.getElementById("Usuario_Rol").innerHTML=response.rol[0].Nombre_Rol;
+        }
 
         total.innerHTML = response.total[0].Total;
         

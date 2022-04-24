@@ -14,13 +14,15 @@ exports.datos = (request, response, next) => {
     console.log(rowsUsuarios);
     response.status(200).json({
       datos: rowsUsuarios,
+      privilegios: request.session.privilegios
     });
   })
   .catch((err) => console.log(err));
 };
 
 exports.lista = (request, response, next) => {
-  if(16 in request.session.privilegios){
+  console.log(request.session.privilegios);
+  if(request.session.privilegios.includes(16)){
   Usuario.fetchEstado()
     .then(([rowsRols, fieldDataRows]) => {
       Usuario.fetchAll()
@@ -163,7 +165,8 @@ exports.getDatosUsuario = (request, response, next) => {
           response.status(200).json({
             datosGenerales: rowsUsuario,
             rol : rowsRol,
-            total : rowsTickets
+            total : rowsTickets,
+            privilegios:request.session.privilegios
           });
         })
       .catch((err) => {
