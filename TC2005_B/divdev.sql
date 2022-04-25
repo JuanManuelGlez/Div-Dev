@@ -1041,7 +1041,7 @@ INSERT INTO `usuario_ticket` (`Id_Usuario`, `Id_Ticket`, `Cargo`, `Fecha_Asignac
 --
 DROP TABLE IF EXISTS `ticket_archivo_magia`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ticket_archivo_magia`  AS SELECT `t`.`Id_Ticket` AS `Id_Ticket`, `t`.`Archivado` AS `Archivado`, `et`.`Id_Estado` AS `Id_Estado`, `t`.`Fecha_Inicio` AS `Fecha_Inicio`, `t`.`Id_Prioridad` AS `Id_Prioridad`, `t`.`Asunto` AS `Asunto`, `et`.`Fecha_y_Hora` AS `Fecha_y_Hora`, `t`.`Descripcion` AS `Descripcion` FROM (`ticket` `t` join `estado_ticket` `et`) WHERE `et`.`Id_Ticket` = `t`.`Id_Ticket` GROUP BY `t`.`Id_Ticket`, `et`.`Id_Estado` ORDER BY `t`.`Id_Ticket` ASC, `et`.`Fecha_y_Hora` DESC ;
+CREATE ALGORITHM=UNDEFINED CURRENT_USER=`root`@`localhost` SQL SECURITY CURRENT_USER VIEW `ticket_archivo_magia`  AS SELECT `t`.`Id_Ticket` AS `Id_Ticket`, `t`.`Archivado` AS `Archivado`, `et`.`Id_Estado` AS `Id_Estado`, `t`.`Fecha_Inicio` AS `Fecha_Inicio`, `t`.`Id_Prioridad` AS `Id_Prioridad`, `t`.`Asunto` AS `Asunto`, `et`.`Fecha_y_Hora` AS `Fecha_y_Hora`, `t`.`Descripcion` AS `Descripcion` FROM (`ticket` `t` join `estado_ticket` `et`) WHERE `et`.`Id_Ticket` = `t`.`Id_Ticket` GROUP BY `t`.`Id_Ticket`, `et`.`Id_Estado` ORDER BY `t`.`Id_Ticket` ASC, `et`.`Fecha_y_Hora` DESC ;
 
 -- --------------------------------------------------------
 
@@ -1050,7 +1050,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `ticket_estado_magia`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ticket_estado_magia`  AS SELECT `t`.`Id_Ticket` AS `Id_Ticket`, `et`.`Id_Estado` AS `Id_Estado`, `t`.`Fecha_Inicio` AS `Fecha_Inicio`, `t`.`Id_Prioridad` AS `Id_Prioridad`, `t`.`Asunto` AS `Asunto`, `et`.`Fecha_y_Hora` AS `Fecha_y_Hora` FROM (`ticket` `t` join `estado_ticket` `et`) WHERE `et`.`Id_Ticket` = `t`.`Id_Ticket` GROUP BY `t`.`Id_Ticket`, `et`.`Id_Estado` ORDER BY `t`.`Id_Ticket` ASC, `et`.`Fecha_y_Hora` DESC ;
+CREATE ALGORITHM=UNDEFINED CURRENT_USER=`root`@`localhost` SQL SECURITY CURRENT_USER VIEW `ticket_estado_magia`  AS SELECT `t`.`Id_Ticket` AS `Id_Ticket`, `et`.`Id_Estado` AS `Id_Estado`, `t`.`Fecha_Inicio` AS `Fecha_Inicio`, `t`.`Id_Prioridad` AS `Id_Prioridad`, `t`.`Asunto` AS `Asunto`, `et`.`Fecha_y_Hora` AS `Fecha_y_Hora` FROM (`ticket` `t` join `estado_ticket` `et`) WHERE `et`.`Id_Ticket` = `t`.`Id_Ticket` GROUP BY `t`.`Id_Ticket`, `et`.`Id_Estado` ORDER BY `t`.`Id_Ticket` ASC, `et`.`Fecha_y_Hora` DESC ;
 
 --
 -- Índices para tablas volcadas
