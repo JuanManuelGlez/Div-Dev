@@ -28,4 +28,7 @@ router.post('/archivar/:id_ticket', isAuth,tickets_controller.ticket_archivar);
 
 router.get('/paneles',isAuth,tickets_controller.ticket_panel);
 
+router.get('/panel', isAuth,tickets_controller.ticket_panel
+);
+
 module.exports = router;
