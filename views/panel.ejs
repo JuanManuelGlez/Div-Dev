@@ -72,12 +72,12 @@
                         </div>
                                 
                         <br>
+                        <p id="fecha_fin"></p>
                         <h6 id="label_display">Labels: </h6>
 
                         <h6>Descripción: </h6>
                             <p class="border-primary" id="descripcion"  style="border-radius: 18px;padding: 0px;border-right: 0px solid rgb(0,0,0);">
                             </p>
-
                         <br>
 
                         <h6>Preguntas:  </h6>
@@ -232,7 +232,7 @@
             </div>
             <div class="row">
                 <%for (let ticket of tickets){%>
-                    <%if (ticket.Id_Estado == 2){%>
+                    <%if (ticket.Id_Estado == 2 || ticket.Id_Estado == 3 || ticket.Id_Estado ==5){%>
                         <div  onClick="openTicket(this)" data-bs-toggle="modal" data-bs-target="#myModal"
                                 id="boton<%= ticket.Id_Ticket %>" class="col" style="cursor:pointer;margin-bottom:20px;">
                                 <div class="card h-100"
@@ -312,7 +312,7 @@
             </div>
             <div class="row">    
                 <%for (let ticket of tickets){%>
-                    <%if (ticket.Id_Estado == 3){%>
+                    <%if (ticket.Id_Estado == 6){%>
                         <div  onClick="openTicket(this)" data-bs-toggle="modal" data-bs-target="#myModal"
                         id="boton<%= ticket.Id_Ticket %>" class="col" style="cursor:pointer;margin-bottom:20px;">
                         <div class="card h-100"
@@ -331,7 +331,7 @@
                                 
                                     <span
                                     style="overflow: hidden;margin-left: 10px;color: rgb(136,136,136);">Creado
-                                    el <%= (ticket.Fecha_Inicio.toString()).substring(4, 21) %></span>
+                                    el <%= (ticket.Fecha_Inicio.toString()).substring(4, 21)  %></span>
                                     
                                     <!-- <img class="rounded-circle"
                                     style="width: 35px;height: 35px;margin-left: 15px;"
