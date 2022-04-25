@@ -17,3 +17,11 @@ exports.getByProcedenciaAll = (request, response, next) => {
         .catch(err => console.log(err));
 }
 
+exports.getByTipoIncidenciaAll = (request, response, next) => {
+    Metricas.getByTipoIncidenciaAll()
+        .then(([rows, fieldData]) => {
+            response.status(200).json({datos: rows});
+        })
+        .catch(err => console.log(err));
+}
+

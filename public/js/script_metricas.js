@@ -109,5 +109,60 @@ function allByProcedencia()
     });
 }
 
+function allByTipoIncidencia()
+{
+    let rutaTickets = '../metricas/getByTipoIncidenciaAll';
+
+    fetch(rutaTickets, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(response => {
+        let datosTickets = [];
+        let labels = [];
+        let bg = '#1D5EAD';
+
+        for(dato of response.datos)
+        {
+            labels.push(dato.Tipo_Incidencia);
+            datosTickets.push(dato.Tickets);
+        }
+        
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'Tickets por Tipo de incidencia',
+                backgroundColor: bg,
+                borderColor: bg,
+                data: datosTickets,
+                borderWidth: 2,
+                borderRadius: 5,
+                borderSkipped: false,
+            }]
+        };
+        
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false                
+            }
+        };
+        
+        const porEstados = new Chart(
+            document.getElementById('porTipoIncidencia'),
+            config
+        );
+
+    }).catch(err => {
+        console.log(err);
+    });
+}
+
 allByEstado();
 allByProcedencia();
+allByTipoIncidencia();

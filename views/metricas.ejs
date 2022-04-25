@@ -1,6 +1,42 @@
 <%- include('includes/header.ejs') %>
 <%- include('includes/sidebar.ejs') %>
 
+<style>
+    .chartMenu {
+      width: 100vw;
+      height: 40px;
+    }
+    .chartMenu p {
+      padding: 10px;
+      font-size: 20px;
+    }
+    .chartCard {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .chartBox {
+      width: 700px;
+      height: 500px;
+      -webkit-box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.62); 
+      box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.62);
+      border-radius: 20px;
+      background: white;
+      border-color: black;
+    }
+
+    .chartBoxFull {
+      width: 100%;
+      height: 500px;
+      -webkit-box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.62); 
+      box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.62);
+      border-radius: 20px;
+      background: white;
+      border-color: black;
+    }
+  </style>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
@@ -136,16 +172,26 @@
             </div>
         </div>
     -->
-
-    <div>
-        <div class="chart-container" style="position: relative; height:500px; width:48%; float:left;margin-left:2em">
-            <canvas id="porEstados"></canvas>
+    <div class="container">
+        <div class="chartMenu">
         </div>
-        <div class="chart-container" style="position: relative; height:500px; width:48%; float:right; margin-right:2em">
-            <canvas id="porProcedencia"></canvas>
-        </div>
-      </div>
+          <div class="chartCard">
+            <div class="chartBox p-4">
+                <canvas id="porEstados"></canvas>
+            </div>
+            <div class="chartBox p-4 offset-sm-1">
+                <canvas id="porProcedencia"></canvas>
+            </div>
+          </div>
+          <br>
+          <div class="chartCard">
+            <div class="chartBoxFull">
+                <canvas id="porTipoIncidencia"></canvas>
+            </div>
+          </div>
     </div>
+</div>
+
 </div>
 
 <script src="/js/script_metricas.js"></script>
