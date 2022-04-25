@@ -230,7 +230,7 @@
             </div>
             <div class="row">
                 <%for (let ticket of tickets){%>
-                    <%if (ticket.Id_Estado == 2){%>
+                    <%if (ticket.Id_Estado == 2){%>rs
                         <div  onClick="openTicket(this)" data-bs-toggle="modal" data-bs-target="#myModal"
                                 id="boton<%= ticket.Id_Ticket %>" class="col" style="cursor:pointer;margin-bottom:20px;">
                                 <div class="card h-100"

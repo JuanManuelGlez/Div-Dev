@@ -154,10 +154,9 @@ module.exports = class Ticket{
         await this.assignPrioridad(id_ticket,id_prioridad);
             if(id_estado!=Estado_Actual){
                 await this.assignEstado(id_ticket,id_estado);
-                if(id_estado ==1||5){
+                if(id_estado == 4 || id_estado == 6){
                     return db.execute('UPDATE ticket SET Fecha_Fin=CURRENT_TIMESTAMP WHERE Id_Ticket=?',[id_ticket]);
                 }
-                           
             }          
         
     }

@@ -640,7 +640,7 @@ document.getElementById('abreProcedencia').addEventListener('mousedown', async f
         <input type="hidden" id="__csrf" name="_csrf" value="<%= csrfToken %>"></input>
         <div id="Nombre_Procedenciaa" class="row" stlye="padding: 15px 0px">
             <div class="col-xxl-4"><label class="col-form-label text-dark" for="Nombre_Procedencia">Nombre de Nueva Procedencia: </label></div>
-            <div class="col"><input type="text" id="Nombre_Procedencia" name="Nombre_Procedencia" placeholder="assdasdasdsa" minlength="3"></div>
+            <div class="col"><input type="text" id="Nombre_Procedencia" name="Nombre_Procedencia" placeholder="Luuna" minlength="3"></div>
             
         <div class="col"><button type="button" id="agrega_procedencia" class="btn btn-success" onclick="agregarProcedencia()">Agregar </button></div>
         </div>
