@@ -33,6 +33,9 @@
             document.getElementById("divisor-2").style.display="none"
             document.getElementById("archivo").style.display="none"
             document.getElementById("backlog").style.display="none"
+           
+        }
+        if(!response.privilegios.includes(11)){
             document.getElementById("metricas").style.display="none"
         }
 
