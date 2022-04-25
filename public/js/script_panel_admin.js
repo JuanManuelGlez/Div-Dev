@@ -78,25 +78,26 @@ function eliminaLabel(element) {
         Id_Label: label,
         nuevaVisibilidad: nuevaVis
     }
-    fetch(rutaActualiza, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'csrf-token': csrf
-        },
-        body:JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(response => {
-        if (confirm('Seguro que quieres eliminar la label ' + label + '? Los tickets con esta label se mantendrán de la misma forma')) {
+    if (confirm('Seguro que quieres eliminar la label ' + label + '? Los tickets con esta label se mantendrán de la misma forma')) {
+        fetch(rutaActualiza, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'csrf-token': csrf
+            },
+            body:JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(response => {
             element.parentNode.remove();
-        } else {
-            //Pues nada no se si poner algo aqui
-        }
-        
-    }).catch(err => {
-        console.log(err);
-    });
+
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+    else {
+        //Pues nada no se si poner algo aqui
+    }
 };
 
 document.getElementById('abreLabels').addEventListener('mousedown', async function (e) {
@@ -409,25 +410,26 @@ function eliminaEstado(element) {
         Id_Estado: estado,
         nuevaVisibilidad: nuevaVis
     }
-    fetch(rutaActualiza, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'csrf-token': csrf
-        },
-        body:JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(response => {
-        if (confirm('Seguro que quieres eliminar el estado ' + estado + '? Los tickets con este estado se mantendrán de la misma forma')) {
+
+    if (confirm('Seguro que quieres eliminar el estado ' + estado + '? Los tickets con este estado se mantendrán de la misma forma')) {
+        fetch(rutaActualiza, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'csrf-token': csrf
+            },
+            body:JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(response => {
             element.parentNode.remove();
-        } else {
-            //Pues nada no se si poner algo aqui
-        }
-        
-    }).catch(err => {
-        console.log(err);
-    });
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+    else {
+        //Pues nada no se si poner algo aqui
+    }
 };
 
 document.getElementById('abreEstados').addEventListener('mousedown', async function (e) { //Esto no se v a aquedar asi pero no se como arreglar un problema con el collapse

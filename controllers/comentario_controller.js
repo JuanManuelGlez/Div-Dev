@@ -27,7 +27,6 @@ exports.comentarios_get = (request, response, next) => {
 exports.comentarios_getData = (request, response, next) => {
     Comentario.fetchcomentarios(request.params.id_ticket)
     .then(([rowsComentarios, fieldDataComentarios]) => {
-        console.log(rowsComentarios);
         response.status(200).json({
             comentarios: rowsComentarios
         });
@@ -55,7 +54,6 @@ exports.nuevocomentario_post = (request, response, next) => {
         .then(([rows, fieldData]) => {
           let idAct = rows[0].Id_Usuario;
           const comentario_nuevo= new Comentario(idAct, request.body.id_ticket, request.body.texto_comentario, url_archivo_comentario);
-            console.log(comentario_nuevo);
     
             comentario_nuevo.comentario_save()
             .then(() => {
@@ -98,7 +96,6 @@ exports.nuevocomentario_postData = async (request, response, next) => {
         .catch((err) => {console.log(err)});
 
     const comentario_nuevo= new Comentario(idAct, request.body.id_ticket, request.body.texto_comentario, url_archivo_comentario);
-    console.log(comentario_nuevo);
     comentario_nuevo.comentario_save()
         .then(() => {
             Comentario.fetchcomentarios(request.body.id_ticket)
