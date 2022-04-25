@@ -17,7 +17,7 @@ const DB_DEV = {
 };
 
 const DB_DEV_EC = {
-    host: 'ec2-34-214-126-148.us-west-2.compute.amazonaws.com',
+    host: 'localhost',
     user: 'divdev',
     database: 'divdev',
     password: 'Jorgito@22',
