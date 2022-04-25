@@ -105,7 +105,7 @@ document.getElementById("select_tipo_incidencia").onchange = () =>
     });
     
 }
-
+// Comentarios
 document.getElementById("boton_comentarios").onclick = () =>
 { 
   const id_ticket = document.getElementById("Id_Ticket").value;
@@ -205,7 +205,6 @@ function submitForm(){
 document.getElementById("enviar").onclick = () =>
 {
     const idTicket = document.getElementById("Id_Ticket").value;
-
     let preguntas = document.getElementById("preguntas");
     let select_estado = document.getElementById("select_estado");
     let estado_actual = document.getElementById("Estado_Actual");
