@@ -14,17 +14,19 @@ exports.datos = (request, response, next) => {
     console.log(rowsUsuarios);
     response.status(200).json({
       datos: rowsUsuarios,
+      privilegios: request.session.privilegios
     });
   })
   .catch((err) => console.log(err));
 };
 
 exports.lista = (request, response, next) => {
+  console.log(request.session.privilegios);
+  if(request.session.privilegios.includes(16)){
   Usuario.fetchEstado()
     .then(([rowsRols, fieldDataRows]) => {
       Usuario.fetchAll()
         .then(([rowsUsuarios, fieldData]) => {
-          console.log(rowsUsuarios);
           response.render("lista_usuarios", {
             usuarios: rowsUsuarios,
             rols: rowsRols,
@@ -33,6 +35,9 @@ exports.lista = (request, response, next) => {
         .catch((err) => console.log(err));
     })
     .catch((err) => console.log(err));
+  }else{
+    response.redirect("/");
+  }
 };
 
 
@@ -97,9 +102,28 @@ exports.login_post = (request, response, next) => {
             request.session.usuario = usuario;
             request.session.correo = usuario.login_usuario;
             //console.log(request.session.usuario);
-            return request.session.save((err) => {
-              response.status(200).json({errores:error});
-            });
+            Usuario.getId(request.session.correo)
+            .then(([rowsid, fieldData])=>{
+              request.session.id_usuario=rowsid[0].Id_Usuario;
+              Usuario.fetchRolUsuario(request.session.id_usuario)
+              .then(([rowsprivilegios, fielData])=>{
+                let privilegios=[];
+                for (let privilegio in rowsprivilegios){
+                  privilegios.push(rowsprivilegios[privilegio].Id_Privilegio);
+                }
+                request.session.privilegios=privilegios;
+              return request.session.save((err) => {
+                response.status(200).json({errores:error});
+              });
+              })
+              .catch((err)=>{
+                console.log(err);
+              })
+            })
+            .catch((err)=>{
+              console.log(err);
+            })
+           
           }else{
             response.status(200).json({errores:error});
           }
@@ -115,9 +139,14 @@ exports.login_post = (request, response, next) => {
 };
 
 exports.logout = (request, response, next) => {
+
+  if (request.session.privilegios.includes(1)){
   request.session.destroy(() => {
     response.redirect("/usuario/login");
   });
+  }else{
+    response.redirect("/");
+  }
 };
 
 // MODIFICAR USUARIO CU - EN PROCESO
@@ -136,7 +165,8 @@ exports.getDatosUsuario = (request, response, next) => {
           response.status(200).json({
             datosGenerales: rowsUsuario,
             rol : rowsRol,
-            total : rowsTickets
+            total : rowsTickets,
+            privilegios:request.session.privilegios
           });
         })
       .catch((err) => {
@@ -194,6 +224,10 @@ exports.profile_image = (request, response, next) => {
 };
 
 exports.panel_admin = (request, response, next) => {
+  if (request.session.privilegios.includes(4)){
   response.render('panel_administrativo');
+  }else{
+    response.redirect("/");
+  }
 };
 

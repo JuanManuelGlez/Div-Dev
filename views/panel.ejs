@@ -37,7 +37,7 @@
                                         <option selected="false" value="<%=incidencia.Id_Tipo_Incidencia%>" id="tipo_incidencia<%= incidencia.Id_Tipo_Incidencia %>"> <%=incidencia.Nombre_Tipo_Incidencia%> </option>
                                     <%}%>
                                 </select>
-                            </div>
+                            </div><div id="Usuario_Tipo"></div>
                         </div>
 
                         <br>
@@ -51,7 +51,8 @@
                                     <% for (let estado of estados){%>
                                         <option selected="false" value="<%=estado.Id_Estado%>" id="estado<%=estado.Id_Estado%>"> <%=estado.Nombre_Estado %> </option>
                                     <%}%>
-                                    <input type="hidden" name="Estado_Actual" id="Estado_Actual" value="">
+                                    <input type="hidden"name="Estado_Actual" id="Estado_Actual" value="">
+                                    <div id="Usuario_Estado"></div>
                                 </select>
                             </div>
 
@@ -64,7 +65,8 @@
                                     <% for (let prioridad of prioridades){%>
                                         <option selected="false" value="<%=prioridad.Id_Prioridad%>" id="prioridad<%= prioridad.Id_Prioridad %>"> <%=prioridad.Nombre_Prioridad %> </option>
                                     <%}%>
-                                </select>
+                                    
+                                </select><div id="Usuario_Prioridad"></div>
                             </div>
 
                         </div>
