@@ -78,25 +78,26 @@ function eliminaLabel(element) {
         Id_Label: label,
         nuevaVisibilidad: nuevaVis
     }
-    fetch(rutaActualiza, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'csrf-token': csrf
-        },
-        body:JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(response => {
-        if (confirm('Seguro que quieres eliminar la label ' + label + '? Los tickets con esta label se mantendrán de la misma forma')) {
+    if (confirm('Seguro que quieres eliminar la label ' + label + '? Los tickets con esta label se mantendrán de la misma forma')) {
+        fetch(rutaActualiza, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'csrf-token': csrf
+            },
+            body:JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(response => {
             element.parentNode.remove();
-        } else {
-            //Pues nada no se si poner algo aqui
-        }
-        
-    }).catch(err => {
-        console.log(err);
-    });
+
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+    else {
+        //Pues nada no se si poner algo aqui
+    }
 };
 
 document.getElementById('abreLabels').addEventListener('mousedown', async function (e) {
@@ -171,7 +172,6 @@ document.getElementById('abrePreguntas').addEventListener('mousedown', async fun
         <thead>
         <tr>
             <th scope="col">Nombre</th>
-            <th scope="col">Visible?</th>
         </tr>
         </thead>
         <tbody id="tablaPreguntas">
@@ -180,7 +180,7 @@ document.getElementById('abrePreguntas').addEventListener('mousedown', async fun
         {
             if(pregunta.Visibilidad_Pregunta == 1)
             {
-                document.getElementById("tablaPreguntas").innerHTML += '<tr><td>' + pregunta.Texto_Pregunta +  '<button id="elimina' + pregunta.Texto_Pregunta + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaPregunta(this)">X</button></td>';
+                document.getElementById("tablaPreguntas").innerHTML += '<tr><td>' + pregunta.Texto_Pregunta +  '<button id="elimina' + pregunta.Texto_Pregunta + '" type="button" class="btn btn-danger btn-sm float-end" style="height: 30px;" onclick="eliminaPregunta(this)">Eliminar</button></td>';
             }
             
             document.getElementById("tablaPreguntas").innerHTML += '</tr>';
@@ -206,46 +206,37 @@ document.getElementById('abrePreguntas').addEventListener('mousedown', async fun
 }, true);
 
 function eliminaPregunta(element){
+
     const csrf = document.getElementById('_csrf').value;
     let rutaActualiza = '../pregunta/actualizaPregunta';
     
     let pregunta = element.id.substring(7);
     let nuevaVis = 0;
-
-    if(element.parentNode.innerHTML.substring(0, 2) == 'No')
-    {
-        nuevaVis = 1;
+    
+    if (confirm('Seguro que quieres eliminar la pregunta? Los tickets con esta pregunta se mantendrán de la misma forma')) {
+        data = {
+            Pregunta: pregunta,
+            nuevaVisibilidad: nuevaVis
+        }
+        fetch(rutaActualiza, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'csrf-token': csrf
+            },
+            body:JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(response => {
+            element.parentNode.remove();
+        }).catch(err => {
+            console.log(err);
+        });
+    } else {
+        //Pues nada no se si poner algo aqui
     }
 
-    data = {
-        Pregunta: pregunta,
-        nuevaVisibilidad: nuevaVis
-    }
-    fetch(rutaActualiza, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'csrf-token': csrf
-        },
-        body:JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(response => {
-        
-        if(nuevaVis == 0)
-        {
-            element.parentNode.innerHTML = "No" + element.parentNode.innerHTML.substring(2);
-            $('body').find('#' + element.id).html('O');
-        }
-        else
-        {
-            element.parentNode.innerHTML = "Si" + element.parentNode.innerHTML.substring(2);
-            $('body').find('#' + element.id).html('X');
-        }
-        
-    }).catch(err => {
-        console.log(err);
-    });
+    
 };
 
 function agregaPregunta() {
@@ -313,11 +304,7 @@ function filtraPregunta() {
 
             if(pregunta.Visibilidad_Pregunta == 1)
             {
-                document.getElementById("tablaPreguntas").innerHTML += '<tr><td>' + pregunta.Texto_Pregunta +  '</td><td>Si <button id="elimina' + pregunta.Texto_Pregunta + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaPregunta(this)">X</button></td></td>';
-            }
-            else
-            {
-                document.getElementById("tablaPreguntas").innerHTML += '<tr><td>' + pregunta.Texto_Pregunta +  '</td><td>No <button id="elimina' + pregunta.Texto_Pregunta + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaPregunta(this)">X</button></td></td>';
+                document.getElementById("tablaPreguntas").innerHTML += '<tr><td>' + pregunta.Texto_Pregunta +  '<button id="elimina' + pregunta.Texto_Pregunta + '" type="button" class="btn btn-danger btn-sm float-end" style="height: 30px;" onclick="eliminaPregunta(this)">Eliminar</button></td>';
             }
             
             document.getElementById("tablaPreguntas").innerHTML += '</tr>';
@@ -409,25 +396,26 @@ function eliminaEstado(element) {
         Id_Estado: estado,
         nuevaVisibilidad: nuevaVis
     }
-    fetch(rutaActualiza, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'csrf-token': csrf
-        },
-        body:JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(response => {
-        if (confirm('Seguro que quieres eliminar el estado ' + estado + '? Los tickets con este estado se mantendrán de la misma forma')) {
+
+    if (confirm('Seguro que quieres eliminar el estado ' + estado + '? Los tickets con este estado se mantendrán de la misma forma')) {
+        fetch(rutaActualiza, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'csrf-token': csrf
+            },
+            body:JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(response => {
             element.parentNode.remove();
-        } else {
-            //Pues nada no se si poner algo aqui
-        }
-        
-    }).catch(err => {
-        console.log(err);
-    });
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+    else {
+        //Pues nada no se si poner algo aqui
+    }
 };
 
 document.getElementById('abreEstados').addEventListener('mousedown', async function (e) { //Esto no se v a aquedar asi pero no se como arreglar un problema con el collapse

@@ -207,6 +207,7 @@ function submitForm(){
 
 document.getElementById("enviar").onclick = () =>
 {
+    
     const idTicket = document.getElementById("Id_Ticket").value;
     let preguntas = document.getElementById("preguntas");
     let select_estado = document.getElementById("select_estado");
@@ -231,8 +232,8 @@ document.getElementById("enviar").onclick = () =>
       preguntas:preguntas_nuevas,
       numPreguntas:numPreguntas_
     }
-
-    fetch(idTicket, {
+    ruta = '../tickets/' + idTicket
+    fetch(ruta, {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',

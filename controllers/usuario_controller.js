@@ -11,7 +11,6 @@ exports.datos = (request, response, next) => {
   console.log(request.session.usuario)
   Usuario.findProfile(request.session.usuario.login_usuario)
   .then(([rowsUsuarios, fieldData]) => {
-    console.log(rowsUsuarios);
     response.status(200).json({
       datos: rowsUsuarios,
       privilegios: request.session.privilegios
@@ -94,7 +93,6 @@ exports.login_post = (request, response, next) => {
       );
       bcrypt.compare(request.body.contrasenia, usuario.contrasenia_usuario)
         .then((doMatch) => {
-          console.log("ya llegue");
           let error=true;
           if (doMatch) {
             error=false;
