@@ -25,12 +25,12 @@ module.exports = class Estado{
     }
 
     static fetchAll() {
-        return db.execute('SELECT * FROM estado'
+        return db.execute('SELECT * FROM estado WHERE Visibilidad_Estado = 1'
         );
     }
 
     static fetchLike(texto_ingresado) {
-        return db.execute('SELECT * FROM estado WHERE Nombre_Estado LIKE ?', ['%' + texto_ingresado + '%']);
+        return db.execute('SELECT * FROM estado WHERE Visibilidad_Estado = 1 AND Nombre_Estado LIKE ?', ['%' + texto_ingresado + '%']);
     }
 
 }

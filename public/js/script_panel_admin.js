@@ -27,11 +27,7 @@ function filtraLabels() {
 
             if(label.Visibilidad_Label == 1)
             {
-                document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '</td><td>Si <button id="elimina' + label.Id_Label + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaLabel(this)">X</button></td>';
-            }
-            else
-            {
-                document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '</td><td>No <button id="elimina' + label.Id_Label + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaLabel(this)">O</button></td>';
+                document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '<button id="elimina' + label.Id_Label + '" type="button" class="btn btn-danger btn-sm float-end" style="height: 30px;" onclick="eliminaLabel(this)">Eliminar</button></td>';
             }
             
             document.getElementById("tablaLabels").innerHTML += '</tr>';
@@ -62,7 +58,7 @@ function agregaLabel() {
 
         if(document.getElementById("existeLabel").value == "0")
         {
-            document.getElementById("tablaLabels").innerHTML += '<tr><td>' + nuevaLabel +  '</td><td>Si <button id="elimina' + label.Id_Label + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaLabel(this)">X</button></td></tr>';
+            document.getElementById("tablaLabels").innerHTML += '<tr><td>' + nuevaLabel +  '<button id="elimina' + label.Id_Label + '" type="button" class="btn btn-danger btn-sm float-end" style="height: 30px;" onclick="eliminaLabel(this)">Eliminar</button></td></tr>';
             document.getElementById("existeLabel").value = 1;
         }
         
@@ -78,11 +74,6 @@ function eliminaLabel(element) {
     let label = element.id.substring(7);
     let nuevaVis = 0;
 
-    if(element.parentNode.innerHTML.substring(0, 2) == 'No')
-    {
-        nuevaVis = 1;
-    }
-
     data = {
         Id_Label: label,
         nuevaVisibilidad: nuevaVis
@@ -97,16 +88,10 @@ function eliminaLabel(element) {
     })
     .then(response => response.json())
     .then(response => {
-        
-        if(nuevaVis == 0)
-        {
-            element.parentNode.innerHTML = "No" + element.parentNode.innerHTML.substring(2);
-            $('body').find('#' + element.id).html('O');
-        }
-        else
-        {
-            element.parentNode.innerHTML = "Si" + element.parentNode.innerHTML.substring(2);
-            $('body').find('#' + element.id).html('X');
+        if (confirm('Seguro que quieres eliminar la label ' + label + '? Los tickets con esta label se mantendrán de la misma forma')) {
+            element.parentNode.remove();
+        } else {
+            //Pues nada no se si poner algo aqui
         }
         
     }).catch(err => {
@@ -132,8 +117,7 @@ document.getElementById('abreLabels').addEventListener('mousedown', async functi
         <table class="table table-bordered" >
         <thead>
         <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Visible?</th>
+            <th scope="col">Labels</th>
         </tr>
         </thead>
         <tbody id="tablaLabels">
@@ -142,11 +126,7 @@ document.getElementById('abreLabels').addEventListener('mousedown', async functi
         {
             if(label.Visibilidad_Label == 1)
             {
-                document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '</td><td>Si <button id="elimina' + label.Id_Label + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaLabel(this)">X</button></td>';
-            }
-            else
-            {
-                document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '</td><td>No <button id="elimina' + label.Id_Label + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaLabel(this)">O</button></td>';
+                document.getElementById("tablaLabels").innerHTML += '<tr><td>' + label.Id_Label +  '<button id="elimina' + label.Id_Label + '" type="button" class="btn btn-danger btn-sm float-end" style="height: 30px;" onclick="eliminaLabel(this)">Eliminar</button></td>';
             }
             
             document.getElementById("tablaLabels").innerHTML += '</tr>';
@@ -200,11 +180,7 @@ document.getElementById('abrePreguntas').addEventListener('mousedown', async fun
         {
             if(pregunta.Visibilidad_Pregunta == 1)
             {
-                document.getElementById("tablaPreguntas").innerHTML += '<tr><td>' + pregunta.Texto_Pregunta +  '</td><td>Si      <button id="elimina' + pregunta.Texto_Pregunta + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaPregunta(this)">X</button></td>';
-            }
-            else
-            {
-                document.getElementById("tablaPreguntas").innerHTML += '<tr><td>' + pregunta.Texto_Pregunta +  '</td><td>No      <button id="elimina' + pregunta.Texto_Pregunta + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaPregunta(this)">0</button></td>';
+                document.getElementById("tablaPreguntas").innerHTML += '<tr><td>' + pregunta.Texto_Pregunta +  '<button id="elimina' + pregunta.Texto_Pregunta + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaPregunta(this)">X</button></td>';
             }
             
             document.getElementById("tablaPreguntas").innerHTML += '</tr>';
@@ -379,11 +355,7 @@ function filtraEstados() {
 
                 if(estado.Visibilidad_Estado == 1)
                 {
-                    document.getElementById("tablaEstados").innerHTML += '<tr><td id="estado' + estado.Id_Estado + '">' + estado.Nombre_Estado +  '</td><td>Si <button id="elimina' + estado.Id_Estado + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaEstado(this)">X</button></td>';
-                }
-                else
-                {
-                    document.getElementById("tablaEstados").innerHTML += '<tr><td id="estado' + estado.Id_Estado + '">' + estado.Nombre_Estado +  '</td><td>No <button id="elimina' + estado.Id_Estado + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaEstado(this)">O</button></td>';
+                    document.getElementById("tablaEstados").innerHTML += '<tr><td id="estado' + estado.Id_Estado + '">' + estado.Nombre_Estado +  '<button id="elimina' + estado.Id_Estado + '" type="button" class="btn btn-danger btn-sm float-end" style="height: 30px;" onclick="eliminaEstado(this)">Eliminar</button></td>';
                 }
                 
                 document.getElementById("tablaEstados").innerHTML += '</tr>';
@@ -416,7 +388,7 @@ function agregaEstado() {
 
         if(document.getElementById("existeEstado").value == "0")
         {
-            document.getElementById("tablaEstados").innerHTML += '<tr><td id="estado' + response.idNuevo + '">' + nuevoEstado +  '</td>' + '<td>Si <button id="elimina' + response.idNuevo + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaEstado(this)">X</button></td></tr>';
+            document.getElementById("tablaEstados").innerHTML += '<tr><td id="estado' + response.idNuevo + '">' + nuevoEstado +  '<button id="elimina' + response.idNuevo + '" type="button" class="btn btn-danger btn-sm float-end" style="height: 30px;" onclick="eliminaEstado(this)">Eliminar</button></td></tr>';
             document.getElementById("existeEstado").value = 1;
         }
         
@@ -433,11 +405,6 @@ function eliminaEstado(element) {
 
     let nuevaVis = 0;
 
-    if(element.parentNode.innerHTML.substring(0, 2) == 'No')
-    {
-        nuevaVis = 1;
-    }
-
     data = {
         Id_Estado: estado,
         nuevaVisibilidad: nuevaVis
@@ -452,16 +419,10 @@ function eliminaEstado(element) {
     })
     .then(response => response.json())
     .then(response => {
-        
-        if(nuevaVis == 0)
-        {
-            element.parentNode.innerHTML = "No" + element.parentNode.innerHTML.substring(2);
-            $('body').find('#' + element.id).html('O');
-        }
-        else
-        {
-            element.parentNode.innerHTML = "Si" + element.parentNode.innerHTML.substring(2);
-            $('body').find('#' + element.id).html('X');
+        if (confirm('Seguro que quieres eliminar el estado ' + estado + '? Los tickets con este estado se mantendrán de la misma forma')) {
+            element.parentNode.remove();
+        } else {
+            //Pues nada no se si poner algo aqui
         }
         
     }).catch(err => {
@@ -488,7 +449,6 @@ document.getElementById('abreEstados').addEventListener('mousedown', async funct
         <thead>
         <tr>
             <th scope="col">Nombre</th>
-            <th scope="col">Visible?</th>
         </tr>
         </thead>
         <tbody id="tablaEstados">
@@ -497,11 +457,7 @@ document.getElementById('abreEstados').addEventListener('mousedown', async funct
         {
             if(estado.Visibilidad_Estado == 1)
             {
-                document.getElementById("tablaEstados").innerHTML += '<tr><td id="estado' + estado.Id_Estado + '">' + estado.Nombre_Estado +  '</td><td>Si <button id="elimina' + estado.Id_Estado + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaEstado(this)">X</button></td>';
-            }
-            else
-            {
-                document.getElementById("tablaEstados").innerHTML += '<tr><td id="estado' + estado.Id_Estado + '">' + estado.Nombre_Estado +  '</td><td>No <button id="elimina' + estado.Id_Estado + '" type="button" class="btn btn-secondary btn-sm float-end" style="height: 30px;" onclick="eliminaEstado(this)">O</button></td>';
+                document.getElementById("tablaEstados").innerHTML += '<tr><td id="estado' + estado.Id_Estado + '">' + estado.Nombre_Estado +  '<button id="elimina' + estado.Id_Estado + '" type="button" class="btn btn-danger btn-sm float-end" style="height: 30px;" onclick="eliminaEstado(this)">Eliminar</button></td>';
             }
             
             document.getElementById("tablaEstados").innerHTML += '</tr>';
