@@ -20,7 +20,8 @@ const DB_DEV_EC = {
     host: 'ec2-34-214-126-148.us-west-2.compute.amazonaws.com',
     user: 'divdev',
     database: 'divdev',
-    password: 'Jorgito@22'
+    password: 'Jorgito@22',
+    port: 3306
 };
 
 const pool = mysql.createPool(DB_DEV_EC);
