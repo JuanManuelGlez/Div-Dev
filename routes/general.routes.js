@@ -9,11 +9,12 @@ router.get('/', isAuth,tick_panel.ticket_panel
 );
 
 router.get('/metricas', isAuth,(request, response, next) =>{
-    if(  11 in request.session.privilegios){
-        response.render('metricas'); 
+    console.log(request.session.privilegios);
+    if(request.session.privilegios.includes(11)){
+        response.render('metricas')
     }else{
-        response.redirect('/');
-    }   
+        response.redirect('/')
+    } 
 
 });
 router.get('/archivo', isAuth,(request, response, next) =>{
