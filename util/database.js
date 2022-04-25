@@ -16,7 +16,6 @@ const DB_DEV = {
     password: ''
 };
 
-<<<<<<< HEAD
 const DB_DEV_EC = {
     host: 'ec2-34-214-126-148.us-west-2.compute.amazonaws.com',
     user: 'divdev',
@@ -26,8 +25,5 @@ const DB_DEV_EC = {
 };
 
 const pool = mysql.createPool(DB_DEV_EC);
-=======
-const pool = mysql.createPool(DB_ANDRES);
->>>>>>> eliminar_pregunta
 
 module.exports = pool.promise();
