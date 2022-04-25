@@ -119,7 +119,7 @@ INSERT INTO `estado` (`Id_Estado`, `Nombre_Estado`, `Visibilidad_Estado`) VALUES
 (3, 'En Pausa', 1),
 (4, 'Cancelado', 1),
 (5, 'En Espera de Revisión', 1),
-(9, 'Completado', 1);
+(6, 'Completado', 1);
 
 -- --------------------------------------------------------
 
