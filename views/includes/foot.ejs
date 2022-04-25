@@ -14,33 +14,21 @@
   function convertHTMLToPDF()
   {
 
-  // let pdfContent = document.querySelector("#content");
-  // let reporteHTML = "<div style='background-color:#dcdcdc;padding: 20px;font-family: Arial, Helvetica, sans-serif;'> Reporte de Métrocas </div><h1 style='color: black;font-family: Arial, Helvetica, sans-serif;font-family: Arial, Helvetica, sans-serif;'>Reporte de Métricas</h1> <p style='color: black;font-family: Arial, Helvetica, sans-serif;font-family: Arial, Helvetica, sans-serif;'>Reporte de métricas de la mesa de soporte generadas el 30 de marzo de 2022, a las 17:43hrs. Filtros aplicados: periodo de tiempo comprendido entre el 15 de febrero de 2022 y el 15 de marzo de 2022</p>"
-  // var div = document.createElement('div');
-  // div.innerHTML = 'j';
-  
-  // var reporte = document.createElement('div');
-  // reporte.innerHTML = pdfContent;
-  //LEER MÁS DE JSPDF + HTML2CANVAS
 
-
+  var doc = new jsPDF("l", "mm", "a4");
+  var pdfWidth = doc.internal.pageSize.width;
+  var pdfHeight = doc.internal.pageSize.height; 
   html2canvas(document.querySelector("#content"),{
    onrendered:function(canvas){
-
-  
-
-
-   var img=canvas.toDataURL("image/png");
-   var doc = new jsPDF("p", "mm", "a4");
-   var pdfWidth = doc.internal.pageSize.width;
-   var pdfHeight = doc.internal.pageSize.height;
-   doc.text(20, 20, 'Reporte de Métricas');
-   doc.addImage(img, 'PNG', 0, 20, pdfWidth, pdfHeight-20);
-   doc.save('Reporte_de_Métricas.pdf');
+   var img = canvas.toDataURL("image/png");
+   doc.addImage(img, 'PNG', 0, 20, pdfWidth-50, pdfHeight)
    }
-
+   
    });
 
+   
+   
+   doc.save('Reporte_de_Métricas.pdf');
   }
   </script>
 </html>
