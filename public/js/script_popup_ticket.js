@@ -51,7 +51,7 @@ function openTicket(element) {
         {
             labels.innerHTML +=  '<span class="badge bg-secondary m-2">' + label.Id_Label  + '</span>';
         }
-        if (!response.privilegios.includes(4)){
+        if (!response.privilegios.includes(3)){
             document.getElementById("select_estado").style.display="none";
             document.getElementById("Usuario_Estado").innerHTML=response.estado[0].Nombre_Estado;
             document.getElementById("select_prioridad").style.display="none";

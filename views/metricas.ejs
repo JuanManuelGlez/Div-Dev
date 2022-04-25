@@ -1,6 +1,45 @@
 <%- include('includes/header.ejs') %>
 <%- include('includes/sidebar.ejs') %>
 
+<style>
+    .chartMenu {
+      width: 100vw;
+      height: 40px;
+    }
+    .chartMenu p {
+      padding: 10px;
+      font-size: 20px;
+    }
+    .chartCard {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .chartBox {
+      width: 700px;
+      height: 500px;
+      -webkit-box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.62); 
+      box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.62);
+      border-radius: 20px;
+      background: white;
+      border-color: black;
+    }
+
+    .chartBoxFull {
+      width: 100%;
+      height: 500px;
+      -webkit-box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.62); 
+      box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.62);
+      border-radius: 20px;
+      background: white;
+      border-color: black;
+    }
+  </style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 
 
 <div class="page-content-wrapper" style="color: var(--bs-teal);">
@@ -13,6 +52,7 @@
             <div class="col-sm-5 col-md-5 col-lg-4 col-xl-3 offset-3 offset-sm-1 offset-md-0 offset-lg-0" style="color: var(--bs-purple);background: #FF595A;"><button class="btn btn-primary" type="button" style="--bs-primary: #000000;--bs-primary-rgb: 0,0,0;background: rgb(0,0,0);margin-top: 10px; border-width: 0px;" onClick="convertHTMLToPDF()">Obtener Reporte<i class="fa fa-file-o" style="margin-left: 15px;"></i></button></div>
         </div>
     </div>
+    <!--
     <div class="container" id="content">
         <div class="row" style="margin-top: 0px;">
             <div class="col offset-sm-1 offset-lg-0" style="text-align: center;">
@@ -49,6 +89,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="row">
             <div class="col offset-2 offset-sm-1 offset-lg-0">
                 <div class="row" style="margin-top: 30px;">
@@ -130,6 +171,29 @@
                 </div>
             </div>
         </div>
+    -->
+    <div class="container">
+        <div class="chartMenu">
+        </div>
+          <div class="chartCard">
+            <div class="chartBox p-4">
+                <canvas id="porEstados"></canvas>
+            </div>
+            <div class="chartBox p-4 offset-sm-1">
+                <canvas id="porProcedencia"></canvas>
+            </div>
+          </div>
+          <br>
+          <div class="chartCard">
+            <div class="chartBoxFull">
+                <canvas id="porTipoIncidencia"></canvas>
+            </div>
+          </div>
     </div>
 </div>
+
+</div>
+
+<script src="/js/script_metricas.js"></script>
+
 <%- include('includes/foot.ejs') %>

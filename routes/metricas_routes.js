@@ -10,5 +10,9 @@ const router = express.Router();
     
 router.get('/getByStatusAll', isAuth, metricas_controller.getByStatusAll);
 
+router.get('/getByProcedenciaAll', isAuth, metricas_controller.getByProcedenciaAll);
+
+router.get('/getByTipoIncidenciaAll', isAuth, metricas_controller.getByTipoIncidenciaAll);
+
 
 module.exports = router;

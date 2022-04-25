@@ -90,7 +90,7 @@ app.use('/usuario', usuario_routes);
 app.use('/tipo_incidencia', tipo_incidencia_routes);
 app.use('/comentario', comentario_routes);
 app.use('/estado', estado_routes);
-app.use('/metrica', metricas_routes);
+app.use('/metricas', metricas_routes);
 app.use('/procedencia',procedencia_routes);
 
 app.use('/label', label_routes);
@@ -102,4 +102,4 @@ app.use((request, response, next) => {
     response.send('<!DOCTYPE html><html><head><meta charset="utf-8"><title>Not found</title></head><body><h1 id="principal">404, esta página no existe</h1></body>');
 });
 
-app.listen(5000);
+app.listen(8080);
