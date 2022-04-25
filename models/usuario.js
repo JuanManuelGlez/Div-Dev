@@ -71,7 +71,7 @@ module.exports = class Usuario{
     }
 
     static fetchRolUsuario(id_usuario){
-        return db.execute('SELECT * FROM rol r, usuario u WHERE u.Id_Rol = r.Id_Rol AND u.Id_Usuario=?',
+        return db.execute('SELECT rp.Id_Privilegio, r.Nombre_Rol FROM rol r, usuario u, rol_privilegio rp WHERE u.Id_Rol = r.Id_Rol AND u.Id_Usuario=? AND rp.Id_Rol=r.Id_Rol',
         [id_usuario]);
     }
     //CU MODIFICAR USUARIO // EN PROCESO

@@ -27,12 +27,14 @@ function openTicket(element) {
     })
     .then(response => response.json())
     .then(response => {
+        console.log(response.privilegios);
+        
         asunto.innerHTML = response.datosGenerales[0].Asunto;
         id_ticket_div.innerHTML = id_ticket;
 
         select_estado.namedItem("estado"+response.estado[0].Id_Estado).selected = true;
         estado_actual.value = response.estado[0].Id_Estado;
-
+        console.log(response.estado[0].Nombre_Estado);
         select_tipo_incidencia.namedItem("tipo_incidencia"+response.datosGenerales[0].Id_Tipo_Incidencia).selected = true;
 
         select_prioridad.namedItem("prioridad"+response.datosGenerales[0].Id_Prioridad).selected = true;
@@ -49,6 +51,16 @@ function openTicket(element) {
         {
             labels.innerHTML +=  '<span class="badge bg-secondary m-2">' + label.Id_Label  + '</span>';
         }
+        if (!response.privilegios.includes(4)){
+            document.getElementById("select_estado").style.display="none";
+            document.getElementById("Usuario_Estado").innerHTML=response.estado[0].Nombre_Estado;
+            document.getElementById("select_prioridad").style.display="none";
+            document.getElementById("Usuario_Prioridad").innerHTML=response.datosGenerales[0].Nombre_Prioridad;
+            document.getElementById("select_tipo_incidencia").style.display="none";
+            document.getElementById("Usuario_Tipo").innerHTML=response.datosGenerales[0].Nombre_Tipo_Incidencia;
+        }else{
+        }
+        
     }).catch(err => {
         console.log(err);
     });
@@ -93,7 +105,7 @@ document.getElementById("select_tipo_incidencia").onchange = () =>
     });
     
 }
-
+// Comentarios
 document.getElementById("boton_comentarios").onclick = () =>
 { 
   const id_ticket = document.getElementById("Id_Ticket").value;
@@ -193,7 +205,6 @@ function submitForm(){
 document.getElementById("enviar").onclick = () =>
 {
     const idTicket = document.getElementById("Id_Ticket").value;
-
     let preguntas = document.getElementById("preguntas");
     let select_estado = document.getElementById("select_estado");
     let estado_actual = document.getElementById("Estado_Actual");

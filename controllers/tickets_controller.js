@@ -5,7 +5,8 @@ const Usuario = require("../models/usuario");
 const Comentario = require("../models/comentario");
 
 exports.lista = (request, response, next) => {
-  Ticket.fetchList()
+  if(14 in request.session.privilegios){
+    Ticket.fetchList()
     .then(([rowsTickets, fielData]) => {
       Tipo_incidencia.fetchAll()
         .then(([rowsIncidencias, fielDataIncidencias]) => {
@@ -33,9 +34,14 @@ exports.lista = (request, response, next) => {
         });
     })
     .catch((err) => console.log(err));
+  }else{
+    response.redirect("/");
+  }
+  
 };
 
 exports.lista_archivo = (request, response, next) => {
+  if( 8 in request.session.privilegios){
   Ticket.fetchListArchivo()
     .then(([rowsTickets, fielData]) => {
       Tipo_incidencia.fetchAll()
@@ -64,12 +70,17 @@ exports.lista_archivo = (request, response, next) => {
         });
     })
     .catch((err) => console.log(err));
+  }else{
+    response.redirect("/");
+  }
 };
 
 
 
 exports.nuevo_get = (request, response, next) => {
   //debe de haber una manera mejor de hacer esto pero aja creo que sirve por ahora
+  console.log(request.session);
+  if (2 in request.session.privilegios){
   Tipo_incidencia.fetchAll()
     .then(([rowsTipoIncidencia, fieldDataTipoIncidencia]) => {
       Ticket.fetchPrioridades()
@@ -92,6 +103,9 @@ exports.nuevo_get = (request, response, next) => {
         .catch((err) => console.log(err));
     })
     .catch((err) => console.log(err));
+  }else{
+    response.redirect("/");
+  }
 };
 
 exports.nuevo_post = (request, response, next) => {
@@ -167,7 +181,7 @@ exports.ticket_get = (request, response, next) => {
                                 estado: rowsEstado,
                                 estados: rowsEstados,
                                 preguntas: rowsPreguntas,
-                                incidencias: rowsIncidencias,
+                                incidencias: rowsIncidencias
                               });
                             })
                             .catch((err) => {
@@ -271,6 +285,7 @@ exports.getDatosTicket = (request, response, next) => {
                     labels: rowsLabels,
                     estado: rowsEstado,
                     preguntas: rowsPreguntas,
+                    privilegios:request.session.privilegios
                   });
                 })
                 .catch((err) => {
@@ -292,7 +307,7 @@ exports.getDatosTicket = (request, response, next) => {
 
 
 exports.ticket_panel=(request,response,next)=>{
-      Ticket.fetchAll_Progreso()
+    Ticket.fetchAll_Progreso()
     .then(([rowsTickets, fielData]) => {
       Tipo_incidencia.fetchAll()
         .then(([rowsIncidencias, fielDataIncidencias]) => {
@@ -320,5 +335,6 @@ exports.ticket_panel=(request,response,next)=>{
         });
     })
     .catch((err) => console.log(err));   
-                                   
+                           
+             
 }
