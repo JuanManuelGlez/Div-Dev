@@ -3,8 +3,7 @@ const Tipo_incidencia = require('../models/tipo_incidencia');
 const Pregunta = require('../models/pregunta');
 
 exports.getTipo_Incidencia = (request, response, next) => {
-    console.log(request.session.privilegios);
-    if(4 in request.session.privilegios){   
+    if(request.session.privilegios.includes(4)){   
     Tipo_incidencia.fetchAll()
     .then(([rowsTipo_Incidencia, fieldDataTipo_Incidencia]) => {
         Tipo_incidencia.fetchAllPreguntas()
@@ -67,22 +66,27 @@ exports.postTipo_Incidencia =  async (request, response, next) => {
     }
 
 exports.getModficarTipo_Incidencia = (request,response,next) => {
-    const id =request.params.id_tipo_incidencia;
-    Tipo_incidencia.fetchtipo_incidencia(id)
-        .then(([rowsTipo_Incidencia,fieldDataTipo_Incidencia]) => {
-            Tipo_incidencia.fetchPreguntas(id)
-                .then(([rowsPreguntasAct, fieldDataPreguntas]) => {
-                    Tipo_incidencia.fetchAllPreguntas()
-                        .then(([rowsPreguntasAll, fieldDataPreguntasAll]) =>{
-                            response.render('tipo_incidencia/modificar_tipo_incidencia', {
-                                Id_Tipo_Incidencia: id,
-                                Tipo_Incidencia: rowsTipo_Incidencia,
-                                Preguntas_act: rowsPreguntasAct,
-                                Preguntas_all: rowsPreguntasAll
-                            });
-                        })
-                })
-        })
+    if(request.session.privilegios.includes(4)){
+        const id =request.params.id_tipo_incidencia;
+        Tipo_incidencia.fetchtipo_incidencia(id)
+            .then(([rowsTipo_Incidencia,fieldDataTipo_Incidencia]) => {
+                Tipo_incidencia.fetchPreguntas(id)
+                    .then(([rowsPreguntasAct, fieldDataPreguntas]) => {
+                        Tipo_incidencia.fetchAllPreguntas()
+                            .then(([rowsPreguntasAll, fieldDataPreguntasAll]) =>{
+                                response.render('tipo_incidencia/modificar_tipo_incidencia', {
+                                    Id_Tipo_Incidencia: id,
+                                    Tipo_Incidencia: rowsTipo_Incidencia,
+                                    Preguntas_act: rowsPreguntasAct,
+                                    Preguntas_all: rowsPreguntasAll
+                                });
+                            })
+                    })
+            })
+    }else{
+        response.redirect('/')
+    }
+    
 }
 
 exports.postModficarTipo_Incidencia = async (request,response,next) => {

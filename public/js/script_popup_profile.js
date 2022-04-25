@@ -9,7 +9,6 @@
     let total = document.getElementById("total")
     let Id_Usuario = document.getElementById("Id_Usuario")
     let foto_sidebar = document.getElementById("foto_sidebar")
-
     fetch(rutaUsuario, {
         method: 'GET',
         headers: {
@@ -19,13 +18,10 @@
     .then(response => response.json())
     .then(response => {
 
-        console.log(response.datos)
         username.value = response.datos[0].Nombre_Usuario;
         username_sidebar.innerHTML = response.datos[0].Nombre_Usuario;
         rol.innerHTML = response.datos[0].Id_Rol;
-        if(response.datos[0].Id_Rol==4){
-            document.getElementById("divisor-2").style.display=""
-        }
+        
         //pass.innerHTML = response.datos[0].Contraseña;
         email.innerHTML = response.datos[0].Login
         url_foto.src = response.datos[0].URL_Foto;
@@ -33,7 +29,12 @@
         Id_Usuario.innerHTML = response.datos[0].Id_Usuario;
         foto_sidebar.src = response.datos[0].URL_Foto;
 
-
+        if(!response.privilegios.includes(4) ){
+            document.getElementById("divisor-2").style.display="none"
+            document.getElementById("archivo").style.display="none"
+            document.getElementById("backlog").style.display="none"
+            document.getElementById("metricas").style.display="none"
+        }
 
     }).catch(err => {
         console.log(err);

@@ -80,7 +80,7 @@ exports.lista_archivo = (request, response, next) => {
 exports.nuevo_get = (request, response, next) => {
   //debe de haber una manera mejor de hacer esto pero aja creo que sirve por ahora
   console.log(request.session);
-  if (1 in request.session.privilegios){
+  if (2 in request.session.privilegios){
   Tipo_incidencia.fetchAll()
     .then(([rowsTipoIncidencia, fieldDataTipoIncidencia]) => {
       Ticket.fetchPrioridades()
@@ -181,7 +181,7 @@ exports.ticket_get = (request, response, next) => {
                                 estado: rowsEstado,
                                 estados: rowsEstados,
                                 preguntas: rowsPreguntas,
-                                incidencias: rowsIncidencias,
+                                incidencias: rowsIncidencias
                               });
                             })
                             .catch((err) => {
@@ -285,6 +285,7 @@ exports.getDatosTicket = (request, response, next) => {
                     labels: rowsLabels,
                     estado: rowsEstado,
                     preguntas: rowsPreguntas,
+                    privilegios:request.session.privilegios
                   });
                 })
                 .catch((err) => {
