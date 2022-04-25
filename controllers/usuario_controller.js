@@ -140,7 +140,7 @@ exports.login_post = (request, response, next) => {
 
 exports.logout = (request, response, next) => {
 
-  if (1 in request.session.privilegios){
+  if (request.session.privilegios.includes(1)){
   request.session.destroy(() => {
     response.redirect("/usuario/login");
   });
@@ -224,7 +224,7 @@ exports.profile_image = (request, response, next) => {
 };
 
 exports.panel_admin = (request, response, next) => {
-  if (4 in request.session.privilegios){
+  if (request.session.privilegios.includes(4)){
   response.render('panel_administrativo');
   }else{
     response.redirect("/");
