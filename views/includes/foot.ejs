@@ -6,6 +6,9 @@
 <script src="/js/Bootstrap-DataTables.js"></script>
 <script src="/js/Sidebar-Menu.js"></script>
 <script src="/js/Table-with-search.js"></script>
+<script src="//code.jquery.com/jquery-3.2.1.js"></script>
+<link rel="stylesheet" href="dist/jquery.gridstrap.min.css"> 
+<script src="dist/jquery.gridstrap.min.js"></script>
 
 </body>
 <!-- <script type="text/javascript" src="html2canvas.js"></script>
@@ -18,13 +21,13 @@
   var doc = new jsPDF("l", "mm", "a4");
   var pdfWidth = doc.internal.pageSize.width;
   var pdfHeight = doc.internal.pageSize.height; 
-  html2canvas(document.querySelector("#content"),{
-   onrendered:function(canvas){
-   var img = canvas.toDataURL("image/png");
-   doc.addImage(img, 'PNG', 0, 20, pdfWidth-50, pdfHeight)
-   }
-   
-   });
+      html2canvas(document.querySelector("#content"),{
+      onrendered:function(canvas){
+      var img = canvas.toDataURL("image/png");
+      doc.addImage(img, 'PNG', 0, 20, pdfWidth-50, pdfHeight)
+      }
+      
+      });
 
    
    
