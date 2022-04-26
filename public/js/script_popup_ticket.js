@@ -41,8 +41,8 @@ function openTicket(element) {
 
         descripcion.innerHTML = response.datosGenerales[0].Descripcion;
         console.log(response.datosGenerales[0]);
-        let fecha_fin = "";
-        document.getElementById("fecha_fin").innerHTML='Fecha que se termino: '+response.datosGenerales[0].Fecha_Fin;
+        let fecha_fin = new Date(response.datosGenerales[0].Fecha_Fin);
+        document.getElementById("fecha_fin").innerHTML = 'Fecha que se termino: ' + (fecha_fin.toString()).substring(4,21);
         preguntas.innerHTML = '';
         labels.innerHTML = 'Labels:';
         preguntas_nuevas.innerHTML = '';

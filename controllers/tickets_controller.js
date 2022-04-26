@@ -79,7 +79,6 @@ exports.lista_archivo = (request, response, next) => {
 
 exports.nuevo_get = (request, response, next) => {
   //debe de haber una manera mejor de hacer esto pero aja creo que sirve por ahora
-  console.log(request.session);
   if (2 in request.session.privilegios){
   Tipo_incidencia.fetchAll()
     .then(([rowsTipoIncidencia, fieldDataTipoIncidencia]) => {
