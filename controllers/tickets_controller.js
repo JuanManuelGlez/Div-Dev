@@ -278,20 +278,28 @@ exports.getDatosTicket = (request, response, next) => {
         .then(([rowsEstado, fielDataEstado]) => {
           Ticket.fetchLabel_Ticket(request.params.id_ticket)
             .then(([rowsLabels, fielDataLabels]) => {
-              Ticket.fetchOne(request.params.id_ticket)
-                .then(([rowsTicket, fielData]) => {
-                  response.status(200).json({
-                    datosGenerales: rowsTicket,
-                    labels: rowsLabels,
-                    estado: rowsEstado,
-                    preguntas: rowsPreguntas,
-                    privilegios:request.session.privilegios
+              Usuario.fetchAll()
+              .then(([rowsUsuarios,fieldData]) => {
+                Ticket.fetchOne(request.params.id_ticket)
+                  .then(([rowsTicket, fielData]) => {
+                    response.status(200).json({
+                      usuarios: rowsUsuarios,
+                      datosGenerales: rowsTicket,
+                      labels: rowsLabels,
+                      estado: rowsEstado,
+                      preguntas: rowsPreguntas,
+                      privilegios:request.session.privilegios
+                    })
+                    .catch((err) => {
+                    console.log(err);
                   });
+                })  
                 })
                 .catch((err) => {
                   console.log(err);
-                });
+              });
             })
+            
             .catch((err) => {
               console.log(err);
             });
