@@ -149,7 +149,10 @@ module.exports = class Ticket{
             if(id_estado!=Estado_Actual){
                 await this.assignEstado(id_ticket,id_estado);
                 if(id_estado == 4 || id_estado == 6){
-                    return db.execute('UPDATE ticket SET Fecha_Fin=CURRENT_TIMESTAMP WHERE Id_Ticket=?',[id_ticket]);
+                    return db.execute('UPDATE ticket SET Fecha_Fin = CURRENT_TIMESTAMP WHERE Id_Ticket=?',[id_ticket]);
+                }
+                else if (id_estado != 4 || id_estado != 6){
+                    return db.execute('UPDATE ticket SET Fecha_Fin = NULL WHERE Id_Ticket=?',[id_ticket]);
                 }
             }          
         
