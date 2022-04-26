@@ -307,7 +307,7 @@ exports.getDatosTicket = (request, response, next) => {
 
 
 exports.ticket_panel=(request,response,next)=>{
-    Ticket.fetchAll_Progreso()
+    Ticket.fetchAll_Progreso(request.session.id_usuario)
     .then(([rowsTickets, fielData]) => {
       Tipo_incidencia.fetchAll()
         .then(([rowsIncidencias, fielDataIncidencias]) => {
