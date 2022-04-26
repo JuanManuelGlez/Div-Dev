@@ -64,6 +64,10 @@ function openTicket(element) {
             document.getElementById("Usuario_Prioridad").innerHTML=response.datosGenerales[0].Nombre_Prioridad;
             document.getElementById("select_tipo_incidencia").style.display="none";
             document.getElementById("Usuario_Tipo").innerHTML=response.datosGenerales[0].Nombre_Tipo_Incidencia;
+            document.getElementById("enviar").style.display="none";
+            document.getElementById("archivar").style.display="none";
+            document.getElementById("asignar").style.display="none";
+
         }else{
         }
         
