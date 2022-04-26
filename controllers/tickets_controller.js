@@ -254,7 +254,7 @@ exports.filtros = (request, response, next) => {
 };
 
 exports.filtros_panel = (request, response, next) => {
-  var execute = 'SELECT t.Id_Ticket,t.Asunto,t.Descripcion,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado,t.Fecha_y_Hora FROM ticket_archivo_magia t WHERE t.Archivado = 0 AND t.Id_Prioridad =' + request.body.prioridad + ' AND t.Tipo_Incidencia = ' + request.body.tipo_incidencia + ' GROUP BY t.Id_Ticket HAVING MAX(t.Fecha_y_Hora) ORDER BY t.Fecha_y_Hora DESC'
+  var execute = 'SELECT t.Id_Ticket,t.Asunto,t.Descripcion,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado,t.Fecha_y_Hora FROM ticket_estado_magia t WHERE t.Archivado = 0 AND t.Id_Prioridad =' + request.body.prioridad + ' AND t.Tipo_Incidencia = ' + request.body.tipo_incidencia +' AND t.Id_Usuario = ' + request.body.usuario + ' GROUP BY t.Id_Ticket HAVING MAX(t.Fecha_y_Hora) ORDER BY t.Fecha_y_Hora DESC'
  
   Ticket.fetchListFiltrarPanel(
     execute
