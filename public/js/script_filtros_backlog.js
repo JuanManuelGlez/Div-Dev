@@ -1,9 +1,10 @@
-document.getElementById("dropdown_filter_backlog").onclick = () =>
+
+document.getElementById("dropdown_filter_archivo").onclick = () =>
 {
     let f_usuario = document.getElementById("filtro_usuario").value
     let f_prioridad = document.getElementById("filtro_prioridad").value
     let f_categoria = document.getElementById("filtro_tipo_incidencia").value
-    let f_estado = 1
+    let f_estado = document.getElementById("filtro_estado").value
     let f_procedencia = document.getElementById("filtro_procedencia").value
     let content = document.getElementById("content_filtro")
 
