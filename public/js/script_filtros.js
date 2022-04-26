@@ -1,3 +1,15 @@
+//FILTROS PANEL TICKET
+document.getElementById("dropdown_filter").onclick = () =>
+{
+    let f_usuario = document.getElementById("")
+    let f_prioridad = document.getElementById("")
+    let f_categoria = document.getElementById("")
+    const csrf = document.getElementById('_csrf').value;
+    let ruta = '../tickets/filtros'
+
+}
+// categoria
+
 document.getElementById("filtrar").onclick = () =>
 {
     let filtro = document.getElementById("filtro").value;
