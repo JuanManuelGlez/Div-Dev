@@ -10,9 +10,12 @@ document.getElementById("dropdown_filter").onclick = () =>
     let progreso = document.getElementById("progreso_col")
     const csrf = document.getElementById('_csrf').value;
     let ruta = '../tickets/filtros_panel'
-    console.log(ruta)
+    if(f_usuario=="Todos los usuarios" || f_categoria =="Todas las categorías"|| f_prioridad =="Todas las prioridades"){
+        document.location.reload();
+    }
     data = {
-        prioridad : f_prioridad
+        prioridad : f_prioridad,
+        tipo_incidencia : f_categoria
     }
 
     fetch(ruta,{
