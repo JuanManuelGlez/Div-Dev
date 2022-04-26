@@ -12,13 +12,20 @@ exports.lista = (request, response, next) => {
         .then(([rowsIncidencias, fielDataIncidencias]) => {
           Ticket.fetchPrioridades()
             .then(([rowsPrioridades, fieldDataPrioridades]) => {
-              Ticket.fetchEstado()
-                .then(([rowsEstados, fielDataEstados]) => {
-                  response.render("panel_principal", {
-                    tickets: rowsTickets,
-                    prioridades: rowsPrioridades,
-                    estados: rowsEstados,
-                    incidencias: rowsIncidencias,
+              Usuario.fetchAll()
+              .then(([rowsUsuarios,fieldData]) => {
+                Ticket.fetchEstado()
+                  .then(([rowsEstados, fielDataEstados]) => {
+                    response.render("panel_principal", {
+                      usuarios:rowsUsuarios,
+                      tickets: rowsTickets,
+                      prioridades: rowsPrioridades,
+                      estados: rowsEstados,
+                      incidencias: rowsIncidencias,
+                    });
+                  })
+                  .catch((err) => {
+                    console.log(err);
                   });
                 })
                 .catch((err) => {
