@@ -27,6 +27,9 @@ document.getElementById("dropdown_filter").onclick = () =>
         .then(response => {
     
         sin_asignar.innerHTML = "";
+        progreso.innerHTML = "";
+        completo.innerHTML = "";
+        bloqueado.innerHTML = "";
         
         for(let ticket of response.tickets)
             {   
@@ -35,17 +38,17 @@ document.getElementById("dropdown_filter").onclick = () =>
                     sin_asignar.innerHTML += '<div  onClick="openTicket(this)" data-bs-toggle="modal" data-bs-target="#myModal" id=" boton' + ticket.Id_Ticket + '" class="col" style="cursor:pointer;margin-bottom:20px;"> <div class="card h-100" style="overflow: hidden;margin-top:10px;margin-bottom:10px;box-shadow: 1px 4px 8px rgba(0,0,0,0.46);"> <div class="card-body" style="text-align: left;width: 262px;overflow: hidden;"> <h4 class="card-title" style="overflow: hidden;color: rgb(0,0,0);text-align: left;"> #' + ticket.Id_Ticket + ':' + ticket.Asunto + '</h4> <h6 class="text-muted card-subtitle mb-2" style="overflow: hidden;color: rgb(0,0,0);">' + ticket.Descripcion.substring(0, 20) +'... </h6> <i class="fa fa-circle" style="'+ style +'" ></i> <span style="overflow: hidden;margin-left: 10px;color: rgb(136,136,136);">Creado el' + (ticket.Fecha_Inicio.toString()).substring(4, 21) + '</span> </div> </div> </div>'
                 
                 }
-                if(ticket.Id_Estado == 2 | ticket.Id_Estado == 3 | ticket.Id_Estado == 5){
+                else if(ticket.Id_Estado == 2 | ticket.Id_Estado == 3 | ticket.Id_Estado == 5){
                     var style = ticket.Id_Estado == 1 ? "color: grey" :  ticket.Id_Estado  == 2 ? "color: yellow"  :  ticket.Id_Estado == 3 ? "color: green" : ticket.Id_Estado  == 4 ? "color: red" :  ticket.Id_Estado  == 5 ? "color: purple" : "color : black" 
                     progreso.innerHTML += '<div  onClick="openTicket(this)" data-bs-toggle="modal" data-bs-target="#myModal" id=" boton' + ticket.Id_Ticket + '" class="col" style="cursor:pointer;margin-bottom:20px;"> <div class="card h-100" style="overflow: hidden;margin-top:10px;margin-bottom:10px;box-shadow: 1px 4px 8px rgba(0,0,0,0.46);"> <div class="card-body" style="text-align: left;width: 262px;overflow: hidden;"> <h4 class="card-title" style="overflow: hidden;color: rgb(0,0,0);text-align: left;"> #' + ticket.Id_Ticket + ':' + ticket.Asunto + '</h4> <h6 class="text-muted card-subtitle mb-2" style="overflow: hidden;color: rgb(0,0,0);">' + ticket.Descripcion.substring(0, 20) +'... </h6> <i class="fa fa-circle" style="'+ style +'" ></i> <span style="overflow: hidden;margin-left: 10px;color: rgb(136,136,136);">Creado el' + (ticket.Fecha_Inicio.toString()).substring(4, 21) + '</span> </div> </div> </div>'
                 
                 }
-                if(ticket.Id_Estado == 1){
+                else if(ticket.Id_Estado == 1){
                     var style = ticket.Id_Estado == 4 ? "color: grey" :  ticket.Id_Estado  == 2 ? "color: yellow"  :  ticket.Id_Estado == 3 ? "color: green" : ticket.Id_Estado  == 4 ? "color: red" :  ticket.Id_Estado  == 5 ? "color: purple" : "color : black" 
                     bloqueado.innerHTML += '<div  onClick="openTicket(this)" data-bs-toggle="modal" data-bs-target="#myModal" id=" boton' + ticket.Id_Ticket + '" class="col" style="cursor:pointer;margin-bottom:20px;"> <div class="card h-100" style="overflow: hidden;margin-top:10px;margin-bottom:10px;box-shadow: 1px 4px 8px rgba(0,0,0,0.46);"> <div class="card-body" style="text-align: left;width: 262px;overflow: hidden;"> <h4 class="card-title" style="overflow: hidden;color: rgb(0,0,0);text-align: left;"> #' + ticket.Id_Ticket + ':' + ticket.Asunto + '</h4> <h6 class="text-muted card-subtitle mb-2" style="overflow: hidden;color: rgb(0,0,0);">' + ticket.Descripcion.substring(0, 20) +'... </h6> <i class="fa fa-circle" style="'+ style +'" ></i> <span style="overflow: hidden;margin-left: 10px;color: rgb(136,136,136);">Creado el' + (ticket.Fecha_Inicio.toString()).substring(4, 21) + '</span> </div> </div> </div>'
                 
                 }
-                if(ticket.Id_Estado == 6){
+                else if(ticket.Id_Estado == 6){
                     var style = ticket.Id_Estado == 1 ? "color: grey" :  ticket.Id_Estado  == 2 ? "color: yellow"  :  ticket.Id_Estado == 3 ? "color: green" : ticket.Id_Estado  == 4 ? "color: red" :  ticket.Id_Estado  == 5 ? "color: purple" : "color : black" 
                     completo.innerHTML += '<div  onClick="openTicket(this)" data-bs-toggle="modal" data-bs-target="#myModal" id=" boton' + ticket.Id_Ticket + '" class="col" style="cursor:pointer;margin-bottom:20px;"> <div class="card h-100" style="overflow: hidden;margin-top:10px;margin-bottom:10px;box-shadow: 1px 4px 8px rgba(0,0,0,0.46);"> <div class="card-body" style="text-align: left;width: 262px;overflow: hidden;"> <h4 class="card-title" style="overflow: hidden;color: rgb(0,0,0);text-align: left;"> #' + ticket.Id_Ticket + ':' + ticket.Asunto + '</h4> <h6 class="text-muted card-subtitle mb-2" style="overflow: hidden;color: rgb(0,0,0);">' + ticket.Descripcion.substring(0, 20) +'... </h6> <i class="fa fa-circle" style="'+ style +'" ></i> <span style="overflow: hidden;margin-left: 10px;color: rgb(136,136,136);">Creado el' + (ticket.Fecha_Inicio.toString()).substring(4, 21) + '</span> </div> </div> </div>'
                 
