@@ -12,6 +12,7 @@ function openUsuario(element) {
     let login = document.getElementById("login");
     let select_rol = document.getElementById("select_rol");
     let total= document.getElementById("total_tickets");
+    let historico=document.getElementById("historia");
 
     let rutaUsuarios = '../usuario/datos/' + id_usuario;
     
@@ -36,7 +37,7 @@ function openUsuario(element) {
             document.getElementById("Usuario_Rol").innerHTML=response.rol[0].Nombre_Rol;
         }
         total.innerHTML = response.total[0].Total;
-        
+        historico.innerHTML=response.historicos[0].Total;
 
 
     }).catch(err => {
