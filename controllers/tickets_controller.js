@@ -115,7 +115,6 @@ exports.nuevo_post = (request, response, next) => {
   const ticketNuevo = new Ticket(
     request.body.asunto,
     request.body.descripcion,
-    request.body.prioridad,
     request.body.tipo_incidencia,
     request.body.procedencia
   );
