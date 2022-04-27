@@ -20,6 +20,10 @@ router.post('/filtros',  isAuth,tickets_controller.filtros);
 
 router.post('/filtros_panel',  isAuth,tickets_controller.filtros_panel);
 
+router.post('/filtros_backlog',  isAuth,tickets_controller.filtros_backlog);
+
+router.post('/filtros_archivo',  isAuth,tickets_controller.filtros_archivo);
+
 router.get('/datos/:id_ticket',  isAuth,tickets_controller.getDatosTicket);
 
 router.get('/:id_ticket', isAuth, tickets_controller.ticket_get);

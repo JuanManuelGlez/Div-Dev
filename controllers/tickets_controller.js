@@ -298,21 +298,43 @@ exports.filtros = (request, response, next) => {
 };
 
 exports.filtros_panel = (request, response, next) => {
+  
   var execute = 'SELECT t.Id_Ticket,t.Asunto,t.Descripcion,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado,t.Fecha_y_Hora FROM ticket_archivo_magia t WHERE t.Archivado = 0 AND t.Id_Prioridad =' + request.body.prioridad + ' AND t.Tipo_Incidencia = ' + request.body.tipo_incidencia +' AND t.Id_Usuario = ' + request.body.usuario + ' AND t.Id_Procedencia = ' + request.body.procedencia + ' AND t.Id_Estado = ' + request.body.estado + ' GROUP BY t.Id_Ticket HAVING MAX(t.Fecha_y_Hora) ORDER BY t.Fecha_y_Hora DESC'
- 
-  Ticket.fetchListFiltrarPanel(
-    execute
-  )
-  .then(([rowsTickets, fielDataLabels])=>{
-    
-    response.status(200).json({
-      tickets: rowsTickets
-    } 
-    )
-  })
-  .catch((err)=>{
+  Ticket.fetchListFiltrarPanel(execute)
+    .then(([rowsTickets, fielDataLabels]) => {
+      response.status(200).json({
+        tickets: rowsTickets,
+      });
+    })
+    .catch((err) => {
       console.log(err);
-  })
+    });
+};
+
+exports.filtros_archivo = (request, response, next) => {
+  var execute = 'SELECT t.Id_Ticket,t.Asunto,t.Descripcion,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado,t.Fecha_y_Hora FROM ticket_archivo_magia t WHERE t.Archivado = 1 AND t.Id_Prioridad =' + request.body.prioridad + ' AND t.Tipo_Incidencia = ' + request.body.tipo_incidencia +' AND t.Id_Usuario = ' + request.body.usuario + ' AND t.Id_Procedencia = ' + request.body.procedencia + ' AND t.Id_Estado = ' + request.body.estado +' GROUP BY t.Id_Ticket HAVING MAX(t.Fecha_y_Hora) ORDER BY t.Fecha_y_Hora DESC'
+  Ticket.fetchListFiltrarPanel(execute)
+    .then(([rowsTickets, fielDataLabels]) => {
+      response.status(200).json({
+        tickets: rowsTickets,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+exports.filtros_backlog = (request, response, next) => {
+  var execute = 'SELECT t.Id_Ticket,t.Asunto,t.Descripcion,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado,t.Fecha_y_Hora FROM ticket_archivo_magia t WHERE t.Archivado = 0 AND t.Id_Prioridad =' + request.body.prioridad + ' AND t.Tipo_Incidencia = ' + request.body.tipo_incidencia +' AND t.Id_Usuario = ' + request.body.usuario + ' AND t.Id_Procedencia = ' + request.body.procedencia + ' GROUP BY t.Id_Ticket HAVING MAX(t.Fecha_y_Hora) ORDER BY t.Fecha_y_Hora DESC'
+  Ticket.fetchListFiltrarPanel(execute)
+    .then(([rowsTickets, fielDataLabels]) => {
+      response.status(200).json({
+        tickets: rowsTickets,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 exports.ticket_archivar = (request, response, next) => {
@@ -340,7 +362,6 @@ exports.getDatosTicket = (request, response, next) => {
         .then(([rowsEstado, fielDataEstado]) => {
           Ticket.fetchLabel_Ticket(request.params.id_ticket)
             .then(([rowsLabels, fielDataLabels]) => {
-<<<<<<< HEAD
                 Ticket.fetchOne(request.params.id_ticket)
                   .then(([rowsTicket, fielData]) => {
                     response.status(200).json({
@@ -354,18 +375,6 @@ exports.getDatosTicket = (request, response, next) => {
                     .catch((err) => {
                     console.log(err);
                   }); 
-=======
-              Ticket.fetchOne(request.params.id_ticket)
-                .then(([rowsTicket, fielData]) => {
-                  console.log(rowsTicket);
-                  response.status(200).json({
-                    datosGenerales: rowsTicket,
-                    labels: rowsLabels,
-                    estado: rowsEstado,
-                    preguntas: rowsPreguntas,
-                    privilegios:request.session.privilegios
-                  });
->>>>>>> 2989a20c69f001df1c8b9ec61259657d44284d37
                 })
                 .catch((err) => {
                   console.log(err);
