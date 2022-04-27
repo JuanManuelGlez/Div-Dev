@@ -9,6 +9,7 @@
     let total = document.getElementById("total")
     let Id_Usuario = document.getElementById("Id_Usuario")
     let foto_sidebar = document.getElementById("foto_sidebar")
+    let actual = document.getElementById("actual")
     fetch(rutaUsuario, {
         method: 'GET',
         headers: {
@@ -28,6 +29,7 @@
 
         if (response.datos[0].Tickets == 1){
             total.innerHTML = response.total[0].Total;
+            actual.innerHTML = response.total[0].Total;
         }else{
         total.innerHTML = 0;
 
