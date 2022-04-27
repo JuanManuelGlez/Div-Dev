@@ -228,6 +228,7 @@ function allByTipoIncidencia()
                         }
                     },
                     y: {
+                        max: Math.max.apply(null, datosTickets)+Math.ceil((Math.max.apply(null, datosTickets))*.2),
                         grid: {
                             display: false
                         } 
