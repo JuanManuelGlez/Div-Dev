@@ -27,7 +27,7 @@
         url_foto.src = response.datos[0].URL_Foto;
 
         if (response.datos[0].Tickets == 1){
-            total.innerHTML = response.datos[0].Tickets;
+            total.innerHTML = response.total[0].Total;
         }else{
         total.innerHTML = 0;
 

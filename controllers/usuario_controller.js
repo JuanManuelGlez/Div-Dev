@@ -11,10 +11,14 @@ exports.datos = (request, response, next) => {
   console.log(request.session.usuario)
   Usuario.findProfile(request.session.usuario.login_usuario)
   .then(([rowsUsuarios, fieldData]) => {
-    response.status(200).json({
-      datos: rowsUsuarios,
-      privilegios: request.session.privilegios
-    });
+    Usuario.countActiveTickets(request.session.id_usuario)
+    .then(([rowsTickets,fieldData])=>{
+      response.status(200).json({
+        datos: rowsUsuarios,
+        privilegios: request.session.privilegios,
+        total:rowsTickets
+      });
+    })
   })
   .catch((err) => console.log(err));
 };
