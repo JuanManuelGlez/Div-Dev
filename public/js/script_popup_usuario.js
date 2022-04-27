@@ -35,7 +35,7 @@ function openUsuario(element) {
             document.getElementById("select_rol").style.display="none";
             document.getElementById("Usuario_Rol").innerHTML=response.rol[0].Nombre_Rol;
         }
-
+        console.log(response.total)
         total.innerHTML = response.total[0].Total;
         
 

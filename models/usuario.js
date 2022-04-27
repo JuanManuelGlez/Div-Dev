@@ -59,7 +59,7 @@ module.exports = class Usuario{
     }
 
     static countActiveTickets(id_usuario) {
-        return db.execute('SELECT COUNT(t.Id_Ticket) as "Total" FROM ticket t, usuario_ticket ut WHERE t.Id_Ticket = ut.Id_Ticket AND ut.Id_Usuario = ? AND t.Id_Estado != 4 AND t.Id_Estado != 6 ',
+        return db.execute('SELECT COUNT(t.Id_Ticket) as "Total" FROM ticket t, usuario_ticket ut WHERE t.Id_Ticket = ut.Id_Ticket AND ut.Id_Usuario = ? AND t.Id_Estado != 4 AND t.Id_Estado != 6 AND ut.Cargo ="Encargado"',
             [id_usuario]);
         
     }
