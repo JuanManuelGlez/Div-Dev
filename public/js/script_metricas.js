@@ -37,10 +37,42 @@ function allByEstado()
         const config = {
             type: 'bar',
             data: data,
+            plugins: [ChartDataLabels],
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                indexAxis: 'y',                    
+                legend: {
+                    display: false
+                },
+                scales: {
+                    x: {
+                        max: Math.max.apply(null, datosTickets)+3,
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            display: false,
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false,
+                        },
+                    }
+                },
+                indexAxis: 'y',
+                plugins: {
+                    datalabels: {
+                        color: '#000000',
+                        anchor: 'end',
+                        align: 'right',
+                        offset: 10,
+                        font: {
+                            weight: 'bold',
+                            size: 10,
+                        }
+                    }
+                }                
             }
         };
         
@@ -68,7 +100,7 @@ function allByProcedencia()
     .then(response => {
         let datosTickets = [];
         let labels = [];
-        let bg = ['#a900d3', '#b53ad8', '#c158de', '#cc72e3', '#d68be8', '#dfa2ed','#e8b9f2', '#f0d1f6', '#f8e8fb', '#ffffff'];
+        let bg = ['#a900d3', '#b53ad8', '#c158de', '#cc72e3', '#d68be8', '#dfa2ed','#e8b9f2', '#f0d1f6', '#f8e8fb'];
 
         for(dato of response.datos)
         {
@@ -92,10 +124,49 @@ function allByProcedencia()
         const config = {
             type: 'bar',
             data: data,
+            plugins: [ChartDataLabels],
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                indexAxis: 'y',                 
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    callbacks: {
+                       label: function(tooltipItem) {
+                              return tooltipItem.yLabel;
+                       }
+                    }
+                },
+                scales: {
+                    x: {
+                        max: Math.max.apply(null, datosTickets)+3,
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            display: false,
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                },
+                indexAxis: 'y',
+                plugins: {
+                    datalabels: {
+                        color: '#000000',
+                        anchor: 'end',
+                        align: 'right',
+                        offset: 10,
+                        font: {
+                            weight: 'bold',
+                            size: 10,
+                        }
+                    }
+                }                 
             }
         };
         
@@ -147,9 +218,45 @@ function allByTipoIncidencia()
         const config = {
             type: 'bar',
             data: data,
+            plugins: [ChartDataLabels],
             options: {
+                scales: {
+                    x: {
+                        max: Math.max.apply(null, datosTickets)+3,
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false
+                        } 
+                    }
+                },
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    callbacks: {
+                       label: function(tooltipItem) {
+                              return tooltipItem.yLabel;
+                       }
+                    }
+                },
                 responsive: true,
-                maintainAspectRatio: false                
+                maintainAspectRatio: false,
+                plugins: {
+                    datalabels: {
+                        color: '#000000',
+                        anchor: 'end',
+                        align: 'top',
+                        offset: 10,
+                        font: {
+                            weight: 'bold',
+                            size: 10,
+                        }
+                    }
+                }                
             }
         };
         
@@ -163,6 +270,119 @@ function allByTipoIncidencia()
     });
 }
 
+function allByResolucion()
+{
+    let rutaTickets = '../metricas/getByResolucion';
+
+    fetch(rutaTickets, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(response => {
+        console.log(response);
+
+        let labels = ['Ticekts'];
+        
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'Resueltos',
+                backgroundColor: '#C9E265',
+                borderColor: '#C9E265',
+                data: [response.datos[0].Tickets],
+                borderWidth: 2,
+                borderRadius: 5,
+                borderSkipped: false,
+            },
+            {
+                label: 'Resueltos a destiempo',
+                backgroundColor: '#FFE990',
+                borderColor: '#FFE990',
+                data: [response.datos[1].Tickets],
+                borderWidth: 2,
+                borderRadius: 5,
+                borderSkipped: false,
+            },
+            {
+                label: 'Sin resolver',
+                backgroundColor: '#FF5757',
+                borderColor: '#FF5757',
+                data: [response.datos[2].Tickets],
+                borderWidth: 2,
+                borderRadius: 5,
+                borderSkipped: false,
+            }
+            ]
+        };
+        
+        const config = {
+            type: 'bar',
+            data: data,
+            plugins: [ChartDataLabels],
+            options: {
+                scales: {
+                    x: {
+                        stacked: true,
+                        grid: {
+                            display: false,
+                            drawBorder: false,
+                            lineWidth: 0.5
+                        },
+                        ticks: {
+                            display: false,
+                        }
+                    },
+                    y: {
+                        stacked: true,
+                        grid: {
+                            display: false,
+                            drawBorder: false,
+                            lineWidth: 0.5
+                        } 
+                    }
+                },
+                indexAxis: 'y',
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    callbacks: {
+                       label: function(tooltipItem) {
+                              return tooltipItem.yLabel;
+                       }
+                    }
+                },
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    datalabels: {
+                        color: '#000000',
+                        anchor: 'center',
+                        align: 'end',
+                        offset: 20,
+                        font: {
+                            weight: 'bold',
+                            size: 10,
+                        }
+                    }
+                }                
+            }
+        };
+        
+        const porEstados = new Chart(
+            document.getElementById('porResolucion'),
+            config
+        );
+
+    }).catch(err => {
+        console.log(err);
+    });
+}
+
 allByEstado();
 allByProcedencia();
+allByResolucion()
 allByTipoIncidencia();

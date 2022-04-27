@@ -14,5 +14,7 @@ router.get('/getByProcedenciaAll', isAuth, metricas_controller.getByProcedenciaA
 
 router.get('/getByTipoIncidenciaAll', isAuth, metricas_controller.getByTipoIncidenciaAll);
 
+router.get('/getByResolucion', isAuth, metricas_controller.getByResolucion);
+
 
 module.exports = router;
