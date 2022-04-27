@@ -46,6 +46,14 @@ module.exports = class Usuario{
         return db.execute('SELECT R.Id_Rol, R.Nombre_Rol, U.Id_Rol, U.URL_Foto, U.Id_Usuario, U.Login, U.Contraseña, U.Nombre_Usuario, COUNT(T.Id_Ticket) AS "Total" FROM rol R, usuario_ticket T, usuario U WHERE R.Id_Rol = U.Id_Rol AND T.Id_Usuario = U.Id_Usuario GROUP BY U.Id_Usuario');
     }
 
+    static fetchByRol(execute) {
+        return db.execute(execute);
+    }
+
+    static fetchLike(texto_ingresado) {
+        return db.execute('SELECT R.Id_Rol, R.Nombre_Rol, U.Id_Rol, U.URL_Foto, U.Id_Usuario, U.Login, U.Contraseña, U.Nombre_Usuario, COUNT(T.Id_Ticket) AS "Total" FROM rol R, usuario_ticket T, usuario U WHERE R.Id_Rol = U.Id_Rol AND T.Id_Usuario = U.Id_Usuario AND U.Nombre_Usuario LIKE ? GROUP BY U.Id_Usuario', ['%' + texto_ingresado + '%']);
+    }
+
     static findOne(login_usuario) {
         return db.execute('SELECT * FROM usuario WHERE Login=?',
             [login_usuario]);
