@@ -1,41 +1,10 @@
 <%- include('includes/header.ejs') %>
 <%- include('includes/sidebar.ejs') %>
 
-<style>
-    .chartMenu {
-      width: 100vw;
-      height: 40px;
-    }
-    .chartMenu p {
-      padding: 10px;
-      font-size: 20px;
-    }
-    .chartCard {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .chartBox {
-      width: 700px;
-      height: 500px;
-      -webkit-box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.62); 
-      box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.62);
-      border-radius: 20px;
-      background: white;
-      border-color: black;
-    }
+<script src="https://cdnjs.cloudflare.com/ajax/libs/patternomaly/1.3.2/patternomaly.js" integrity="sha512-gNM40ajr/bSi3Af8i6D4dV2CUWZrkm2zhgeWf46H91zOwWoH8Wwsyf6kQ4syfNyOrnjATrjKkP4ybWD7eKp2KA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/patternomaly/1.3.2/patternomaly.min.js" integrity="sha512-Zjnjh2DCl/MrwdZ8FNp25vSbXac3yWUWoMn0CL8qQ/K11HGv7cJ9RGNUiojnSfqVtwbGf+eyqEEjiw2hlHd6iQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    .chartBoxFull {
-      width: 100%;
-      height: 500px;
-      -webkit-box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.62); 
-      box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.62);
-      border-radius: 20px;
-      background: white;
-      border-color: black;
-    }
-  </style>
+<link rel="stylesheet" href="/css/estiloMetricas.css">
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
@@ -177,16 +146,29 @@
         </div>
           <div class="chartCard">
             <div class="chartBox p-4">
-                <canvas id="porEstados"></canvas>
+                <h2 id="tituloGrafica">Status</h2>
+                <h3 id="subtituloGrafica">Tickets organizados por su estado actual</h3>
+              <div style="height: 80%"><canvas id="porEstados"></canvas></div>
             </div>
             <div class="chartBox p-4 offset-sm-1">
-                <canvas id="porProcedencia"></canvas>
+                <h2 id="tituloGrafica">Procedencia</h2>
+                <h3 id="subtituloGrafica">Tickets organizados por su procedencia</h3>
+                <div style="height: 80%"><canvas id="porProcedencia"></canvas></div>
+               
             </div>
           </div>
           <br>
           <div class="chartCard">
+            <div class="chartBoxClear">
+                <h2 id="tituloGrafica" style="text-align: center; padding-top: 15px;">Por resolución</h2>
+                <div style="height: 75%; width:90%; margin: 0 auto; padding-left: 6%;"><canvas id="porResolucion"></canvas></div>
+            </div>
+          </div>
+          <div class="chartCard">
             <div class="chartBoxFull">
-                <canvas id="porTipoIncidencia"></canvas>
+                <h2 id="tituloGrafica" style="text-align: center; padding-top: 15px;">Tipo de Incidencia</h2>
+                <h3 id="subtituloGrafica" style="text-align: center;">Tickets organizados por su tipo de incidencia</h3>
+                <div style="height: 80%;"><canvas id="porTipoIncidencia"></canvas></div>
             </div>
           </div>
     </div>

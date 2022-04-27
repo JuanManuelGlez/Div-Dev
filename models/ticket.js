@@ -16,7 +16,7 @@ module.exports = class Ticket {
 
     //Este método servirá para guardar de manera persistente el nuevo objeto. 
     save() {
-        return db.execute('INSERT INTO ticket(Id_Procedencia, Id_Tipo_Incidencia, Id_Prioridad, Fecha_Inicio,  Descripcion, Asunto, Archivado, Id_Estado) VALUES (?, ?, ?, CURRENT_TIMESTAMP, ?, ?, ?, ?)',
+        return db.execute('INSERT INTO ticket(Id_Ticket, Id_Procedencia, Id_Tipo_Incidencia, Id_Prioridad, Fecha_Inicio,  Descripcion, Asunto, Archivado, Id_Estado) VALUES (DEFAULT, ?, ?, ?, CURRENT_TIMESTAMP, ?, ?, ?, ?)',
             [
                 this.id_procedencia,
                 this.id_tipo_incidencia,
@@ -34,18 +34,18 @@ module.exports = class Ticket {
     }
 
     static fetchList() {
-        return db.execute('SELECT t.Id_Ticket,t.Asunto,t.Descripcion,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado,t.Fecha_y_Hora FROM ticket_archivo_magia t WHERE t.Archivado = 0 GROUP BY t.Id_Ticket HAVING MAX(t.Fecha_y_Hora) ORDER BY t.Fecha_y_Hora DESC');
+        return db.execute('SELECT t.Id_Ticket,t.Asunto,t.Descripcion,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado FROM ticket t WHERE t.Archivado = 0');
     }
 
     static fetchListFiltrarEstado(id_estado) {
-        return db.execute('SELECT t.Id_Ticket,t.Asunto,t.Descripcion,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado,t.Fecha_y_Hora FROM ticket_archivo_magia t WHERE t.Archivado = 0 AND t.Id_Estado = ? GROUP BY t.Id_Ticket HAVING MAX(t.Fecha_y_Hora) ORDER BY t.Fecha_y_Hora DESC', [id_estado]);
+        return db.execute('SELECT t.Id_Ticket,t.Asunto,t.Descripcion,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado FROM ticket t WHERE t.Archivado = 0 AND t.Id_Estado = ? ', [id_estado]);
     }
 
     static fetchListArchivo() {
-        return db.execute('SELECT t.Id_Ticket,t.Asunto,t.Fecha_Inicio,t.Descripcion, t.Id_Prioridad,t.Id_Estado,t.Fecha_y_Hora FROM ticket_archivo_magia t WHERE t.Archivado = 1 GROUP BY t.Id_Ticket HAVING MAX(t.Fecha_y_Hora) ORDER BY t.Fecha_y_Hora DESC');
+        return db.execute('SELECT t.Id_Ticket,t.Asunto,t.Fecha_Inicio,t.Descripcion, t.Id_Prioridad,t.Id_Estado FROM ticket t WHERE t.Archivado = 1');
     }
     static fetchAll_Progreso() {
-        return db.execute('SELECT t.Id_Ticket,t.Descripcion,t.Asunto,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado,t.Fecha_y_Hora FROM ticket_archivo_magia t WHERE t.Archivado = 0 GROUP BY t.Id_Ticket HAVING MAX(t.Fecha_y_Hora)')
+        return db.execute('SELECT t.Id_Ticket,t.Descripcion,t.Asunto,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado FROM ticket t WHERE t.Archivado = 0')
     }
 
     static fetchOne(id_ticket) {
