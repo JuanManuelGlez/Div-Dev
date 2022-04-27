@@ -56,7 +56,7 @@ module.exports = class Ticket {
         return db.execute('SELECT Id_Label FROM label_ticket WHERE Id_Ticket=?', [id_ticket]);
     }
     static fetchEstado_Ticket(id_ticket) {
-        return db.execute('SELECT estado.Nombre_Estado,estado.Id_Estado FROM estado_ticket, estado WHERE Id_Ticket=? AND estado_ticket.Id_Estado=estado.Id_Estado ORDER BY Fecha_y_Hora DESC  LIMIT 1', [id_ticket]);
+        return db.execute('SELECT t.Id_Estado FROM ticket t WHERE t.Id_Ticket = ?', [id_ticket]);
     }
     static fetchPregunta_Ticket(id_ticket) {
         return db.execute('SELECT Pregunta, Respuesta FROM pregunta_ticket WHERE Id_Ticket=?', [id_ticket]);
