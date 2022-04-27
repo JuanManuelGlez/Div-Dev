@@ -44,8 +44,11 @@ module.exports = class Ticket {
     static fetchListArchivo() {
         return db.execute('SELECT t.Id_Ticket,t.Asunto,t.Fecha_Inicio,t.Descripcion, t.Id_Prioridad,t.Id_Estado,t.Fecha_y_Hora FROM ticket_archivo_magia t WHERE t.Archivado = 1 GROUP BY t.Id_Ticket HAVING MAX(t.Fecha_y_Hora) ORDER BY t.Fecha_y_Hora DESC');
     }
-    static fetchAll_Progreso() {
-        return db.execute('SELECT t.Id_Ticket,t.Descripcion,t.Asunto,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado,t.Fecha_y_Hora FROM ticket_archivo_magia t WHERE t.Archivado = 0 GROUP BY t.Id_Ticket HAVING MAX(t.Fecha_y_Hora)')
+    static fetchAll_Progreso(id_usuario) {
+        return db.execute('SELECT t.Id_Ticket,t.Descripcion,t.Asunto,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado FROM ticket t, usuario_ticket ut WHERE t.Archivado = 0 AND ut.Id_Ticket = t.Id_Ticket AND ut.Id_Usuario=? ',[id_usuario])
+    }
+    static fetchAllSinAsignar(){
+        return db.execute('SELECT t.Id_Ticket,t.Descripcion,t.Asunto,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado FROM ticket t, usuario_ticket ut WHERE t.Archivado = 0 AND t.Id_Estado')
     }
 
     static fetchOne(id_ticket) {
