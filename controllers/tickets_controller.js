@@ -115,7 +115,6 @@ exports.nuevo_post = (request, response, next) => {
   const ticketNuevo = new Ticket(
     request.body.asunto,
     request.body.descripcion,
-    request.body.prioridad,
     request.body.tipo_incidencia,
     request.body.procedencia
   );
@@ -280,6 +279,7 @@ exports.getDatosTicket = (request, response, next) => {
             .then(([rowsLabels, fielDataLabels]) => {
               Ticket.fetchOne(request.params.id_ticket)
                 .then(([rowsTicket, fielData]) => {
+                  console.log(rowsTicket);
                   response.status(200).json({
                     datosGenerales: rowsTicket,
                     labels: rowsLabels,

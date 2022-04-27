@@ -40,19 +40,7 @@
                             <div class="col-xxl-4"><label  class="col-form-label text-dark">Descripción</label></div>
                             <div class="col"><input id="descripcion" name="descripcion" class="form-control" type="text" maxlength="255" required></div>
                         </div>
-                        <div class="row" style="padding: 15px 0px;">
-                            <div class="col-xxl-4"><label class="col-form-label text-dark">Prioridad</label></div>
-                            <div class="col">
-                                <div class="dropdown shadow">
-                                    <select class="form-select" id="select_prioridad" name="prioridad" aria-label="Default select example" required>
-                                        <option value="" selected disabled>Prioridad de la incidencia:</option>
-                                        <% for(let prioridad of prioridades) {%>
-                                          <option value="<%= prioridad.Id_Prioridad %>"><%= prioridad.Nombre_Prioridad %></option>
-                                        <% }%>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+                        
                         <div class="row" style="padding: 15px 0px;">
                             <div class="col-xxl-4"><label class="col-form-label text-dark">Procedencia</label></div>
                             <div class="col">
