@@ -1,0 +1,53 @@
+.chartMenu {
+    width: 100vw;
+    height: 40px;
+}
+
+.chartMenu p {
+  padding: 10px;
+  font-size: 20px;
+}
+
+.chartCard {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chartBox {
+  width: 700px;
+  height: 500px;
+  -webkit-box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.62); 
+  box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.62);
+  border-radius: 20px;
+  background: white;
+  border-color: black;
+}
+
+.chartBoxClear {
+  width: 100%;;
+  height: 400px;
+  background: white;
+}
+
+.chartBoxFull {
+  width: 100%;
+  height: 500px;
+  -webkit-box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.62); 
+  box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.62);
+  border-radius: 20px;
+  background: white;
+  border-color: black;
+}
+
+#tituloGrafica {
+    font-style: bold;
+    color: black;
+    font-size: large;
+}
+
+#subtituloGrafica {
+    color: rgb(107, 107, 107);
+    font-size: medium;
+}

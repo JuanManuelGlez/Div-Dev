@@ -25,3 +25,24 @@ exports.getByTipoIncidenciaAll = (request, response, next) => {
         .catch(err => console.log(err));
 }
 
+exports.getByResolucion = async (request, response, next) => {
+    Metricas.getATiempo()
+        .then(([rowsATiempo, fieldData1]) => {
+            Metricas.getADestiempo()
+            .then(([rowsDestiempo, fieldData2]) => {
+                Metricas.getSinResolver()
+                .then(([rowsSin, fieldData3]) => {
+                    let datosTickets = [
+                        {estado: 'Resueltos a Tiempo', Tickets: rowsATiempo[0].A_Tiempo},
+                        {estado: 'Resueltos a Destiempo', Tickets: rowsDestiempo[0].A_Destiempo},
+                        {estado: 'Sin resolver', Tickets: rowsSin[0].SinResolver},
+                    ];
+                    response.status(200).json({datos: datosTickets});
+                })
+                .catch((err) => {console.log(err)});
+            })
+            .catch((err) => {console.log(err)});
+        })
+        .catch((err) => {console.log(err)});
+}
+
