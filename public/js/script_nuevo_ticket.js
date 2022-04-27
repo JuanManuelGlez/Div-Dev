@@ -2,6 +2,7 @@
 $(document).ready(function () {
     $('.form-select-label').selectpicker();
     $('.form-select-label .bs-searchbox input').attr('maxlength','30');
+    document.getElementById("principal").style.opacity = 1;
 });
 
 $(document).on('keyup', '.form-select-label .bs-searchbox input', function (e) {

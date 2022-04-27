@@ -115,7 +115,6 @@ exports.nuevo_post = (request, response, next) => {
   const ticketNuevo = new Ticket(
     request.body.asunto,
     request.body.descripcion,
-    request.body.prioridad,
     request.body.tipo_incidencia,
     request.body.procedencia
   );
@@ -280,6 +279,7 @@ exports.getDatosTicket = (request, response, next) => {
             .then(([rowsLabels, fielDataLabels]) => {
               Ticket.fetchOne(request.params.id_ticket)
                 .then(([rowsTicket, fielData]) => {
+                  console.log(rowsTicket);
                   response.status(200).json({
                     datosGenerales: rowsTicket,
                     labels: rowsLabels,
@@ -307,7 +307,7 @@ exports.getDatosTicket = (request, response, next) => {
 
 
 exports.ticket_panel=(request,response,next)=>{
-    Ticket.fetchAll_Progreso()
+    Ticket.fetchAll_Progreso(request.session.id_usuario)
     .then(([rowsTickets, fielData]) => {
       Tipo_incidencia.fetchAll()
         .then(([rowsIncidencias, fielDataIncidencias]) => {
@@ -315,11 +315,19 @@ exports.ticket_panel=(request,response,next)=>{
             .then(([rowsPrioridades, fieldDataPrioridades]) => {
               Ticket.fetchEstado()
                 .then(([rowsEstados, fielDataEstados]) => {
-                  response.render("panel", {
-                    tickets: rowsTickets,
-                    prioridades: rowsPrioridades,
-                    estados: rowsEstados,
-                    incidencias: rowsIncidencias,
+                  Ticket.fetchAllSinAsignar()
+                  .then(([rowsSinAsignar,fieldData])=>{
+                    console.log(rowsSinAsignar);
+                    response.render("panel", {
+                      tickets: rowsTickets,
+                      prioridades: rowsPrioridades,
+                      estados: rowsEstados,
+                      incidencias: rowsIncidencias,
+                      sinasignar: rowsSinAsignar
+                    });
+                  })
+                  .catch((err)=>{
+                    console.log(err);
                   });
                 })
                 .catch((err) => {
