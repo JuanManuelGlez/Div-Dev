@@ -28,11 +28,20 @@ exports.lista = (request, response, next) => {
         .then(([rowsUsuarios, fieldData]) => {
           Usuario.countAllActiveTickets()
           .then(([rowsTickets,fieldData])=> {
-            response.render("lista_usuarios", {
-              usuarios: rowsUsuarios,
-              rols: rowsRols,
-              totales:rowsTickets
-            });
+            if (rowsTickets.length===0){
+              response.render("lista_usuarios", {
+                usuarios: rowsUsuarios,
+                rols: rowsRols,
+                totales:0
+              });
+            }else{
+              response.render("lista_usuarios", {
+                usuarios: rowsUsuarios,
+                rols: rowsRols,
+                totales:rowsTickets
+              });
+            }
+            
           })
           .catch((err)=> console.log(err));
           

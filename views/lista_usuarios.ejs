@@ -125,7 +125,7 @@
                     <div class="col" style="font-size: 22px;text-align: center;"><span style="color: rgb(0,0,0);"><%= usuario.Nombre_Usuario %></span></div>
                     <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);"><%= usuario.Login %></span></div>
                     <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);"><%= usuario.Nombre_Rol %></span></div>
-                    <%if (usuario.Tickets==1){%>
+                    <%if (usuario.Tickets==1 && totales != 0){%>
                     <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);"><%= totales[i].Total %></span></div>
                     <% i+=1 %>
                     <%}else{%>
