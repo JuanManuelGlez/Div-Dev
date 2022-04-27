@@ -26,10 +26,16 @@ exports.lista = (request, response, next) => {
     .then(([rowsRols, fieldDataRows]) => {
       Usuario.fetchAll()
         .then(([rowsUsuarios, fieldData]) => {
-          response.render("lista_usuarios", {
-            usuarios: rowsUsuarios,
-            rols: rowsRols,
-          });
+          Usuario.countAllActiveTickets()
+          .then(([rowsTickets,fieldData])=> {
+            response.render("lista_usuarios", {
+              usuarios: rowsUsuarios,
+              rols: rowsRols,
+              totales:rowsTickets
+            });
+          })
+          .catch((err)=> console.log(err));
+          
         })
         .catch((err) => console.log(err));
     })
