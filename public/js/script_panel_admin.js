@@ -423,7 +423,6 @@ document.getElementById('abreEstados').addEventListener('mousedown', async funct
     $('#accordionExample').css('height', 'auto');
     let rutaEstados = '../estado/getAll';
         
-    contenido.innerHTML = '';
     await fetch(rutaEstados, {
         method: 'GET',
         headers: {
@@ -432,6 +431,7 @@ document.getElementById('abreEstados').addEventListener('mousedown', async funct
     })
     .then(response => response.json())
     .then(response => {
+        contenido.innerHTML = '';
         contenido.innerHTML += `
         <table class="table table-bordered" >
         <thead>

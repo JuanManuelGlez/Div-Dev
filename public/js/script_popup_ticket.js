@@ -40,9 +40,12 @@ function openTicket(element) {
         select_prioridad.namedItem("prioridad"+response.datosGenerales[0].Id_Prioridad).selected = true;
 
         descripcion.innerHTML = response.datosGenerales[0].Descripcion;
-        console.log(response.datosGenerales[0]);
         let fecha_fin = "";
-        document.getElementById("fecha_fin").innerHTML='Fecha que se termino:'+response.datosGenerales[0].Fecha_Fin;
+        document.getElementById("fecha_fin").innerHTML = '';
+        if (response.datosGenerales[0].Fecha_Fin != null){
+            fecha_fin = new Date(response.datosGenerales[0].Fecha_Fin);
+            document.getElementById("fecha_fin").innerHTML = 'Fecha que se termino: ' + (fecha_fin.toString()).substring(4,21);
+        }
         preguntas.innerHTML = '';
         labels.innerHTML = 'Labels:';
         preguntas_nuevas.innerHTML = '';
@@ -53,7 +56,7 @@ function openTicket(element) {
         for(let label of response.labels)
         {
             labels.innerHTML +=  '<span class="badge bg-secondary m-2">' + label.Id_Label  + '</span>';
-        }
+        } 
         if (!response.privilegios.includes(3)){
             document.getElementById("select_estado").style.display="none";
             document.getElementById("Usuario_Estado").innerHTML=response.estado[0].Nombre_Estado;
@@ -61,6 +64,10 @@ function openTicket(element) {
             document.getElementById("Usuario_Prioridad").innerHTML=response.datosGenerales[0].Nombre_Prioridad;
             document.getElementById("select_tipo_incidencia").style.display="none";
             document.getElementById("Usuario_Tipo").innerHTML=response.datosGenerales[0].Nombre_Tipo_Incidencia;
+            document.getElementById("enviar").style.display="none";
+            document.getElementById("archivar").style.display="none";
+            document.getElementById("asignar").style.display="none";
+
         }else{
         }
         

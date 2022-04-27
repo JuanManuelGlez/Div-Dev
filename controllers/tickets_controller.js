@@ -153,7 +153,6 @@ exports.nuevo_post = (request, response, next) => {
   const ticketNuevo = new Ticket(
     request.body.asunto,
     request.body.descripcion,
-    request.body.prioridad,
     request.body.tipo_incidencia,
     request.body.procedencia
   );
@@ -341,6 +340,7 @@ exports.getDatosTicket = (request, response, next) => {
         .then(([rowsEstado, fielDataEstado]) => {
           Ticket.fetchLabel_Ticket(request.params.id_ticket)
             .then(([rowsLabels, fielDataLabels]) => {
+<<<<<<< HEAD
                 Ticket.fetchOne(request.params.id_ticket)
                   .then(([rowsTicket, fielData]) => {
                     response.status(200).json({
@@ -354,6 +354,18 @@ exports.getDatosTicket = (request, response, next) => {
                     .catch((err) => {
                     console.log(err);
                   }); 
+=======
+              Ticket.fetchOne(request.params.id_ticket)
+                .then(([rowsTicket, fielData]) => {
+                  console.log(rowsTicket);
+                  response.status(200).json({
+                    datosGenerales: rowsTicket,
+                    labels: rowsLabels,
+                    estado: rowsEstado,
+                    preguntas: rowsPreguntas,
+                    privilegios:request.session.privilegios
+                  });
+>>>>>>> 2989a20c69f001df1c8b9ec61259657d44284d37
                 })
                 .catch((err) => {
                   console.log(err);

@@ -1,6 +1,18 @@
 <%- include('includes/header.ejs') %>
 <%- include('includes/sidebar.ejs') %>
-<div class="page-content-wrapper" style="color: var(--bs-teal);">
+<style>
+    #principal {
+        opacity: 0;
+    
+        -webkit-transition: opacity 0.5s ease-in;
+           -moz-transition: opacity 0.5s ease-in;
+            -ms-transition: opacity 0.5s ease-in;
+             -o-transition: opacity 0.5s ease-in;
+                transition: opacity 0.5s ease-in;
+    }
+    
+</style>
+<div id="principal" class="page-content-wrapper face-in" style="color: var(--bs-teal);">
     <div class="container-fluid" style="color: transparent;background: var(--bs-indigo);">
         <div class="row" style="background: var(--bs-red);">
             <div class="col-md-12 offset-2 offset-sm-1 offset-md-0 offset-xxl-0" style="color: var(--bs-purple);background: #ff595a;text-align: center;">
@@ -40,19 +52,7 @@
                             <div class="col-xxl-4"><label  class="col-form-label text-dark">Descripción</label></div>
                             <div class="col"><input id="descripcion" name="descripcion" class="form-control" type="text" maxlength="255" required></div>
                         </div>
-                        <div class="row" style="padding: 15px 0px;">
-                            <div class="col-xxl-4"><label class="col-form-label text-dark">Prioridad</label></div>
-                            <div class="col">
-                                <div class="dropdown shadow">
-                                    <select class="form-select" id="select_prioridad" name="prioridad" aria-label="Default select example" required>
-                                        <option value="" selected disabled>Prioridad de la incidencia:</option>
-                                        <% for(let prioridad of prioridades) {%>
-                                          <option value="<%= prioridad.Id_Prioridad %>"><%= prioridad.Nombre_Prioridad %></option>
-                                        <% }%>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+                        
                         <div class="row" style="padding: 15px 0px;">
                             <div class="col-xxl-4"><label class="col-form-label text-dark">Procedencia</label></div>
                             <div class="col">
