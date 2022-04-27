@@ -44,7 +44,7 @@ module.exports = class Ticket{
         // return db.execute('SELECT t.Id_Ticket,t.Asunto,t.Descripcion,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado,t.Fecha_y_Hora FROM ticket_archivo_magia t WHERE t.Archivado = 0 AND t.Id_Prioridad = ? AND t.Tipo_Incidencia = t.Tipo_Incidencia GROUP BY t.Id_Ticket HAVING MAX(t.Fecha_y_Hora) ORDER BY t.Fecha_y_Hora DESC',[id_prioridad,id_tipo_incidencia]);
     }
     static fetchLike(texto_ingresado) {
-        return db.execute('SELECT * FROM ticket_estado_magia t WHERE t.Asunto LIKE ? GROUP BY t.Id_Ticket HAVING MAX(t.Fecha_y_Hora) ORDER BY t.Fecha_y_Hora DESC', ['%' + texto_ingresado + '%']);
+        return db.execute('SELECT * FROM ticket_estado_magia t WHERE t.Asunto LIKE ? OR t.Id_Label LIKE ? GROUP BY t.Id_Ticket HAVING MAX(t.Fecha_y_Hora) ORDER BY t.Fecha_y_Hora DESC', ['%' + texto_ingresado + '%','%' + texto_ingresado + '%']);
     }
     static fetchListArchivo(){
         return db.execute('SELECT t.Id_Ticket,t.Asunto,t.Fecha_Inicio,t.Descripcion, t.Id_Prioridad,t.Id_Estado,t.Fecha_y_Hora FROM ticket_archivo_magia t WHERE t.Archivado = 1 GROUP BY t.Id_Ticket HAVING MAX(t.Fecha_y_Hora) ORDER BY t.Fecha_y_Hora DESC');
