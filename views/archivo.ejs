@@ -227,10 +227,18 @@
                                     </ul>
                                 </div>  
                                
+                                <form id="form_nuevo_label" method="POST">
+                                    <input type="hidden" id="__csrf" name="_csrf" value="<%= csrfToken %>">
+                                    <div class="row" style="padding: 15px 0px;">
+                                        <div class="col-xxl-4"><label  class="col-form-label text-dark">Buscar</label></div>
+                                    <div class="col"><input id="input_busqueda" name="input_busqueda" class="form-control" type="text" maxlength="30"></div>
 
+                           
+                                    </form>
 
                              
                              <div style="display:none"> <input type="number" id="Bool" value="0">  
+                            </div>
                             </div>
                         </div>
                     </div>

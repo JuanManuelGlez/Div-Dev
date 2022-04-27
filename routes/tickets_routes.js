@@ -24,6 +24,8 @@ router.get('/datos/:id_ticket',  isAuth,tickets_controller.getDatosTicket);
 
 router.get('/:id_ticket', isAuth, tickets_controller.ticket_get);
 
+router.post('/getLike',isAuth, tickets_controller.getLike);
+
 router.post('/:id_ticket', isAuth,tickets_controller.ticket_post);
 
 router.post('/archivar/:id_ticket', isAuth,tickets_controller.ticket_archivar);

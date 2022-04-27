@@ -1,3 +1,6 @@
+
+document.getElementById('input_busqueda').onkeyup = filtraLabels;
+
 document.getElementById("dropdown_filter_backlog").onclick = () =>
 {
     let f_usuario = document.getElementById("filtro_usuario").value
@@ -42,3 +45,34 @@ document.getElementById("dropdown_filter_backlog").onclick = () =>
         console.log(err);
     });
 }
+
+// function buscaTicket() {
+//     const csrf = document.getElementById('_csrf').value;
+//     const nuevaTicket = document.getElementById("input_busqueda").value
+//     let ruta = '../tickets/getLike';
+//     let content = document.getElementById("content_filtro");
+
+//     data = {
+//         buscaTicket: nuevaTicket
+//     }
+
+//     fetch(ruta, {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'csrf-token': csrf
+//         },
+//         body:JSON.stringify(data)
+//     })
+//     .then(response => response.json())
+//     .then(response => {
+//         content.innerHTML = ''
+
+//         for(ticket of response.tickets)
+//         {
+//          content.innerHTML =+ ticket.Id_Ticket
+//         }
+//     }).catch(err => {
+//         console.log(err);
+//     });
+// };

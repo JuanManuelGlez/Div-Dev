@@ -54,6 +54,16 @@ exports.lista = (request, response, next) => {
   
 };
 
+exports.getLike = (request, response, next) => {
+  Ticket.fetchLike(request.body.buscaTicket)
+  .then(([rows, fieldData]) => {
+      response.status(200).json({
+          tickets:rows
+      });
+  })
+  .catch(err => console.log(err));
+};
+
 exports.lista_archivo = (request, response, next) => {
   if( 8 in request.session.privilegios){
   Ticket.fetchListArchivo()
