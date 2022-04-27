@@ -392,12 +392,13 @@ exports.getDatosTicket = (request, response, next) => {
 
 
 exports.ticket_panel=(request,response,next)=>{
-    Ticket.fetchAll_Progreso()
+    Ticket.fetchAll_Progreso(request.session.id_usuario)
     .then(([rowsTickets, fielData]) => {
       Tipo_incidencia.fetchAll()
         .then(([rowsIncidencias, fielDataIncidencias]) => {
           Ticket.fetchPrioridades()
             .then(([rowsPrioridades, fieldDataPrioridades]) => {
+<<<<<<< HEAD
               Usuario.fetchAll()
               .then(([rowsUsuarios,fieldData]) => {
                 Ticket.fetchProcedencias()
@@ -407,13 +408,28 @@ exports.ticket_panel=(request,response,next)=>{
                     response.render("panel", {
                       procedencias: rowsProcedencias,
                       usuarios:rowsUsuarios,
+=======
+              Ticket.fetchEstado()
+                .then(([rowsEstados, fielDataEstados]) => {
+                  Ticket.fetchAllSinAsignar()
+                  .then(([rowsSinAsignar,fieldData])=>{
+                    console.log(rowsSinAsignar);
+                    response.render("panel", {
+>>>>>>> 9364545e99d0ff51c432a0c2c0cd4ed63a5880f0
                       tickets: rowsTickets,
                       prioridades: rowsPrioridades,
                       estados: rowsEstados,
                       incidencias: rowsIncidencias,
+<<<<<<< HEAD
                     });
                   })
                   .catch((err) => {
+=======
+                      sinasignar: rowsSinAsignar
+                    });
+                  })
+                  .catch((err)=>{
+>>>>>>> 9364545e99d0ff51c432a0c2c0cd4ed63a5880f0
                     console.log(err);
                   });
                 })

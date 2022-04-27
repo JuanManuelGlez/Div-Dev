@@ -25,7 +25,14 @@
         //pass.innerHTML = response.datos[0].Contraseña;
         email.innerHTML = response.datos[0].Login
         url_foto.src = response.datos[0].URL_Foto;
-        total.innerHTML = response.datos[0].Total;
+
+        if (response.datos[0].Tickets == 1){
+            total.innerHTML = response.datos[0].Tickets;
+        }else{
+        total.innerHTML = 0;
+
+        }
+
         Id_Usuario.innerHTML = response.datos[0].Id_Usuario;
         foto_sidebar.src = response.datos[0].URL_Foto;
 

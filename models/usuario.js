@@ -43,7 +43,7 @@ module.exports = class Usuario{
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
-        return db.execute('SELECT R.Id_Rol, R.Nombre_Rol, U.Id_Rol, U.URL_Foto, U.Id_Usuario, U.Login, U.Contraseña, U.Nombre_Usuario, COUNT(T.Id_Ticket) AS "Total" FROM rol R, usuario_ticket T, usuario U WHERE R.Id_Rol = U.Id_Rol AND T.Id_Usuario = U.Id_Usuario GROUP BY U.Id_Usuario');
+        return db.execute('SELECT u.Nombre_Usuario, u.Id_Usuario, u.URL_Foto, u.Login, u.Contraseña, u.Id_Rol, r.Nombre_Rol, CASE WHEN (u.Id_Usuario IN (SELECT ut.Id_Usuario FROM usuario_ticket ut, estado_ticket et WHERE ut.Id_Ticket = et.Id_Ticket AND ut.Cargo = "Encargado" AND et.Id_Estado != 4 AND et.Id_Estado != 6) = FALSE) THEN 0 WHEN (u.Id_Usuario IN (SELECT ut.Id_Usuario FROM usuario_ticket ut, estado_ticket et WHERE ut.Id_Ticket = et.Id_Ticket AND ut.Cargo = "Encargado" AND et.Id_Estado != 4 AND et.Id_Estado != 6) = TRUE) THEN 1 END AS "Tickets" FROM usuario u , rol r WHERE u.Id_Rol = r.Id_Rol AND u.Login = u.Login GROUP BY u.Id_Usuario');
     }
 
     static fetchByRol(execute) {
@@ -60,13 +60,20 @@ module.exports = class Usuario{
     }
 
     static findProfile(login_usuario) {
-        return db.execute('SELECT R.Id_Rol, R.Nombre_Rol, U.Id_Rol, U.URL_Foto, U.Id_Usuario, U.Login, U.Contraseña, U.Nombre_Usuario, COUNT(T.Id_Ticket) AS "Total" FROM rol R, usuario_ticket T, usuario U WHERE R.Id_Rol = U.Id_Rol AND T.Id_Usuario = U.Id_Usuario AND U.Login = ?',
-            [login_usuario]);
+        return db.execute('SELECT u.Nombre_Usuario, u.Id_Usuario, u.URL_Foto, u.Login, u.Contraseña, u.Id_Rol, r.Nombre_Rol, CASE WHEN ((u.Id_Usuario IN (SELECT ut.Id_Usuario FROM usuario_ticket ut)) = FALSE) THEN 0 WHEN ((u.Id_Usuario IN (SELECT ut.Id_Usuario FROM usuario_ticket ut)) = TRUE) THEN 1 END AS "Tickets"  FROM usuario u , rol r WHERE u.Id_Rol = r.Id_Rol AND u.Login = ? GROUP BY u.Id_Usuario',
+        [login_usuario]);
+        //return db.execute('SELECT R.Id_Rol, R.Nombre_Rol, U.Id_Rol, U.URL_Foto, U.Id_Usuario, U.Login, U.Contraseña, U.Nombre_Usuario, COUNT(T.Id_Ticket) AS "Total" FROM rol R, usuario_ticket T, usuario U WHERE R.Id_Rol = U.Id_Rol AND T.Id_Usuario = U.Id_Usuario AND U.Login = ?',
+        //[login_usuario]);
     }
 
     static countActiveTickets(id_usuario) {
-        return db.execute('SELECT COUNT(T.Id_Ticket) as "Total" FROM usuario_ticket T WHERE T.Id_Usuario = ?',
+        return db.execute('SELECT COUNT(t.Id_Ticket) as "Total" FROM ticket t, usuario_ticket ut WHERE t.Id_Ticket = ut.Id_Ticket AND ut.Id_Usuario = ? AND t.Id_Estado != 4 AND t.Id_Estado != 6 AND ut.Cargo ="Encargado"',
             [id_usuario]);
+        
+    }
+
+    static countAllActiveTickets(){
+        return db.execute('SELECT ut.Id_Usuario, COUNT(ut.Id_Ticket) AS "Total" FROM usuario_ticket ut, ticket t WHERE t.Id_Ticket = ut.Id_Ticket AND t.Id_Estado != 4 AND t.Id_Estado != 6 AND ut.Cargo = "Encargado" GROUP BY (ut.Id_Usuario)')
     }
 
     static fetchOne(id_usuario) {
