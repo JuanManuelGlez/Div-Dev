@@ -89,11 +89,14 @@ module.exports = class Usuario{
     }
     //CU MODIFICAR USUARIO // EN PROCESO
     //ID USUARIO - ID ROL - NOMBRE_USUARIO - LOGIN - CONTASEÑA - URL FOTO
-    static async update(id_usuario,id_rol){
-            return db.execute('UPDATE usuario SET Id_Rol=? WHERE Id_Usuario=?',[id_rol,id_usuario]);
-          
+    static async updatepassword(id_usuario,id_rol,newpassword){
+                return db.execute('UPDATE usuario SET Id_Rol=?, Contraseña=? WHERE Id_Usuario=?',[id_rol,newpassword,id_usuario]); 
     }
 
+    static async update(id_usuario,id_rol){
+                return db.execute('UPDATE usuario SET Id_Rol=? WHERE Id_Usuario=?',[id_rol, id_usuario]);
+    }
+    
     static async profile_update(name,id_usuario){
         
         return db.execute('UPDATE usuario SET Nombre_Usuario = ? WHERE Id_Usuario=?',[name,id_usuario]);
