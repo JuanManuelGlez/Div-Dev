@@ -164,91 +164,18 @@
                         <div class="col-sm-12 offset-2 offset-sm-1 offset-md-0 offset-lg-0 offset-xl-0 offset-xxl-0"
                             style="color: var(--bs-purple);background: #FF595A;">
                             <div  class="row">
-                                <div class="col"> <h1 style="color: var(--bs-body-bg);margin-left: 50px;"> Archivo </h1> </div>
-                                <div class="col" style="padding:10px"><input placeholder="Buscar..." id="input_busqueda" name="input_busqueda" class="form-control" type="text" maxlength="30"></div>
+                                <div class="col-xxl-9"> <h1 style="color: var(--bs-body-bg);margin-left: 50px;"> Archivo </h1> </div>
                                 
-                                <div class="col-sm-3" style="padding-top:10px;">
-                                <div class="dropdown">
-                                    <button type="button" style="background-color: black;border-width:0px;" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-                                      Filtros
-                                    </button>
-                                    <ul  class="dropdown-menu">
-                                        <form class="px-4 py-3">
-                                            <div class="form-group">
-                                                <label for="filtro_tipo_incidencia"> Categoría</label>
-                                                <select class="form-select" id="filtro_tipo_incidencia" name="filtro_tipo_incidencia" aria-label="Default select example">
-                                                    
-                                                    <% for (let incidencia of incidencias){%>
-                                                        <option selected="false" value="<%=incidencia.Id_Tipo_Incidencia%>" id="tipo_incidencia<%= incidencia.Id_Tipo_Incidencia %>"> <%=incidencia.Nombre_Tipo_Incidencia%> </option>
-                                                    <%}%>
-                                                    <option selected value="t.Id_Tipo_Incidencia" id="default"> Todas las categorias </option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="filtro_prioridad"> Prioridad </label>
-                                                <select class="form-select" id="filtro_prioridad" name="filtro_prioridad" aria-label="Default select example">
-                                                   
-                                                    <% for (let prioridad of prioridades){%>
-                                                        <option selected="false" value="<%=prioridad.Id_Prioridad%>" id="prioridad<%= prioridad.Id_Prioridad %>"> <%=prioridad.Nombre_Prioridad %> </option>
-                                                    <%}%>
-                                                    <option selected value="t.Id_Prioridad" id="default"> Todas las prioridades </option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="filtro_usuario"> Usuario </label>
-                                                <select class="form-select" id="filtro_usuario" name="filtro_usuario" aria-label="Default select example">
-                                                    <% for (let usuario of usuarios){%>
-                                                        <option selected="false" value="<%=usuario.Id_Usuario%>" id="usuario<%= usuario.Id_Usuario %>"> <%=usuario.Nombre_Usuario%> </option>
-                                                    <%}%>
-                                                    <option selected value="u.Id_Usuario" id="default"> Todos los usuarios </option>
-                                                </select>
-                                                
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="filtro_procedencia"> Procedencia </label>
-                                                <select class="form-select" id="filtro_procedencia" name="filtro_procedencia" aria-label="Default select example">
-                                                    <% for (let procedencia of procedencias){%>
-                                                        <option selected="false" value="<%=procedencia.Id_Procedencia%>" id="procedencia<%= procedencia.Id_Procedencia %>"> <%=procedencia.Nombre_Procedencia%> </option>
-                                                    <%}%>
-                                                    <option selected value="t.Id_Procedencia" id="default"> Todos las procedencias </option>
-                                                </select>
-                                                
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="filtro_procedencia"> Estados </label>
-                                                <select class="form-select" id="filtro_estado" name="filtro_estado" aria-label="Default select example">
-                                                    <% for (let estado of estados){%>
-                                                        <option selected="false" value="<%=estado.Id_Estado%>" id="estados<%= estado.Id_Estado %>"> <%=estado.Nombre_Estado%> </option>
-                                                    <%}%>
-                                                    <option selected value="t.Id_Estado" id="default"> Todos las procedencias </option>
-                                                </select>
-                                                
-                                            </div>
-                                            <br>
-                                            <button id="dropdown_filter_archivo" type="button" class="btn btn-primary"> Filtrar </button>
-                                          </form>
-                                    </ul>
-                                </div>  
-                                </div>
-                               
-                                
-                                    <input type="hidden" id="__csrf" name="_csrf" value="<%= csrfToken %>">
-                                
-                            
-                                    
-
-                           
-                                
-
+                                <div style="margin-top:auto;margin-bottom:auto" class="col-xxl-1">  <input id="filtro" name="filtro" class="form-control" type="number" min="1" max="6" value="1" required/>  </div>
+                                <div style="margin-top:auto;margin-bottom:auto" class="col-xxl-1"> <button id="filtrar" class="btn btn-success"> FILTRAR </button> </div>
                              
                              <div style="display:none"> <input type="number" id="Bool" value="0">  
-                            </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="container">
-                    <div id="content_filtro" class="row" style="margin-top: 30px;">
+                    <div id="filtro_ver" class="row" style="margin-top: 30px;">
                         <% for(let ticket of tickets) {%>
                         
                             <div  onClick="openTicket(this)" data-bs-toggle="modal" data-bs-target="#myModal"
@@ -274,7 +201,6 @@
                                             <!-- <img class="rounded-circle"
                                             style="width: 35px;height: 35px;margin-left: 15px;"
                                             src="/img/WhatsApp%20Image%202021-12-02%20at%206.30.57%20AM.jpeg"> -->
-
                                     </div>
                                 </div>
                             </div>
@@ -289,5 +215,5 @@
 
 
             <script src="/js/script_popup_ticket.js"></script>
-            <script src="/js/script_filtros_backlog.js"></script>
+            <script src="/js/script_filtros.js"></script>
             <%- include('includes/foot.ejs') %>

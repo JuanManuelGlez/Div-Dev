@@ -62,26 +62,6 @@ exports.lista = (request, response, next) => {
   }
 };
 
-exports.filtros = (request, response, next) => {
-  execute = 'SELECT R.Id_Rol, R.Nombre_Rol, U.Id_Rol, U.URL_Foto, U.Id_Usuario, U.Login, U.Contraseña, U.Nombre_Usuario, COUNT(T.Id_Ticket) AS "Total" FROM rol R, usuario_ticket T, usuario U WHERE R.Id_Rol = U.Id_Rol AND T.Id_Usuario = U.Id_Usuario AND U.Id_Rol = ' + request.body.rol + ' GROUP BY U.Id_Usuario'
-  Usuario.fetchByRol(execute)
-  .then(([rowsUsuario, fieldData]) => {
-    console.log(rowsUsuario)
-    response.status(200).json({
-      usuarios: rowsUsuario
-    });
-  })
-};
-
-exports.getLike = (request, response, next) => {
-  Usuario.fetchLike(request.body.buscaUsuario)
-  .then(([rows, fieldData]) => {
-      response.status(200).json({
-          usuarios:rows
-      });
-  })
-  .catch(err => console.log(err));
-};
 
 exports.signup_post = (request, response, next) => {
   const usuario_nuevo = new Usuario(
@@ -279,4 +259,3 @@ exports.panel_admin = (request, response, next) => {
     response.redirect("/");
   }
 };
-

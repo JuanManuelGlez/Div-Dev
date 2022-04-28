@@ -18,11 +18,7 @@ router.post('/login',usuario_controller.login_post);
 
 router.get('/lista', isAuth,usuario_controller.lista);
 
-router.post('/filtros', isAuth,usuario_controller.filtros);
-
 router.get('/datos', isAuth,usuario_controller.datos);
-
-router.post('/getLike',isAuth, usuario_controller.getLike);
 
 router.post('/profile_update', isAuth,usuario_controller.profile_update); // ?
 

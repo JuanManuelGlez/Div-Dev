@@ -11,24 +11,11 @@
 
 
 <div class="page-content-wrapper" style="color: var(--bs-teal);">
-    <div class="container-fluid" style="color: transparent;background: #FF595A;;">
-        <div class="row" style="background: #FF595A;">
+    <div class="container-fluid" style="color: transparent;background: var(--bs-indigo);">
+        <div class="row" style="background: var(--bs-red);">
             <div class="col" style="color: var(--bs-purple);background: #FF595A;">
                 <div></div>
                 <h1 style="color: var(--bs-white);margin-left: 20px;">Lista de Usuarios</h1>
-            </div>
-            <div class="col" style="padding:10px"><input placeholder="Buscar..." id="input_busqueda" name="input_busqueda" class="form-control" type="text" maxlength="30"></div>
-            <div class="col-sm-3" style="padding-top:10px">
-
-              <div class="form-group">
-                <select class="form-select" id="filtro_rol" name="filtro_rol" aria-label="Default select example">
-                    
-                    <% for (let rol of rols){%>
-                        <option selected="false" value="<%=rol.Id_Rol%>" id="Rol<%= rol.Id_Rol %>"> <%=rol.Nombre_Rol%> </option>
-                    <%}%>
-                    <option selected value="U.Id_Rol" id="default"> Todos los roles </option>
-                </select>
-            </div>
             </div>
         </div>
     </div>
@@ -92,22 +79,14 @@
                         <div id="historia"></div>
                       </div>
                     </div>
-                    <br>
-                    <div class="row">
-                      <div class="col">
-                        Tiempo promedio de respuesta:
-                      </div>
-                      <div class="col">
-                        <div style="color:red"> No implementado </div>
-                      </div>
-                    </div>
+                    
                     
                     <br>
                     <div class="row">
                         <button type="button" class="btn btn-primary" id="enviar"
                                             type="button"
-                                            style="background: rgb(0,0,0);width: 100%;margin-top: 40px;">Actualizar<i
-                                                class="fa fa-refresh" style="margin-left: 15px;"></i></button>
+                                            style="background: rgb(0,0,0);width: 100%;margin-top: 40px;">Guardar<i
+                                                class="fa fa-save" style="margin-left: 15px;"></i></button>
                     </div>
                   
               </div>
@@ -131,21 +110,6 @@
                     <div class="col" style="text-align: center;padding: 12px 0px;background: transparent;"><span style="color: rgb(0,0,0);font-weight: bold;font-size: 21px;">Rol</span></div>
                     <div class="col" style="text-align: center;padding: 12px 0px;background: transparent;"><span style="color: rgb(0,0,0);font-weight: bold;font-size: 21px;">Tickets Actuales</span></div>
                 </div>
-<<<<<<< HEAD
-
-                <div class="row" id="display">
-                  <% for(let usuario of usuarios) {%>
-                    <div id="<%=usuario.Id_Usuario %>" onClick="openUsuario(this)" data-bs-toggle="modal" data-bs-target="#myModal" class="row" style="cursor: pointer;margin: 20px -12px;border-radius: 5px;box-shadow: 0px 0px 9px rgba(147,147,147,0.55);padding: 5px;">
-                        <div class="col" style="font-size: 22px;text-align: center;"><span style="color: rgb(0,0,0);"><%= usuario.Nombre_Usuario %></span></div>
-                        <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);"><%= usuario.Login %></span></div>
-                        <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);"><%= usuario.Nombre_Rol %></span></div>
-                        <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);"><%= usuario.Total %></span></div>
-                       <!-- // <button id="<%=usuario.Id_Usuario %>" onClick="openUsuario(this)" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-                            Open modal
-                          </button> -->
-                    </div>
-                    <% }%>
-=======
                 <% let i=0 %>
                 <% for(let usuario of usuarios) {%>
                   
@@ -163,14 +127,13 @@
                         Open modal
                       </button-->
                       
->>>>>>> 9364545e99d0ff51c432a0c2c0cd4ed63a5880f0
                 </div>
-                
+                <% }%>
                 
             </div>
         </div>
     </div>
 </div>
-<script src="/js/script_filtros_usuarios.js"></script>
+
 <script src="/js/script_popup_usuario.js"></script>
 <%- include('includes/foot.ejs') %>

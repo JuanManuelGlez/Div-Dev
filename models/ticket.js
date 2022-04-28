@@ -41,16 +41,8 @@ module.exports = class Ticket {
         return db.execute('SELECT t.Id_Ticket,t.Asunto,t.Descripcion,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado FROM ticket t WHERE t.Archivado = 0 AND t.Id_Estado = ? ', [id_estado]);
     }
 
-    static fetchListFiltrarPanel(execute){
-        return db.execute(execute);
-        // return db.execute('SELECT t.Id_Ticket,t.Asunto,t.Descripcion,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado,t.Fecha_y_Hora FROM ticket_archivo_magia t WHERE t.Archivado = 0 AND t.Id_Prioridad = ? AND t.Tipo_Incidencia = t.Tipo_Incidencia GROUP BY t.Id_Ticket HAVING MAX(t.Fecha_y_Hora) ORDER BY t.Fecha_y_Hora DESC',[id_prioridad,id_tipo_incidencia]);
-    }
-    static fetchLike(texto_ingresado) {
-        return db.execute('SELECT t.Id_Ticket,tl.Id_Label,t.Asunto,t.Archivado,t.Descripcion,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado  FROM ticket t  LEFT JOIN label_ticket tl ON t.Id_Ticket = tl.Id_Ticket WHERE t.Asunto LIKE ? OR tl.Id_Label LIKE ? GROUP BY t.Id_Ticket;', ['%' + texto_ingresado + '%','%' + texto_ingresado + '%']);
-    }
-    static fetchListArchivo(){
-        
-        return db.execute('SELECT t.Id_Ticket,t.Asunto,t.Archivado,t.Fecha_Inicio,t.Descripcion, t.Id_Prioridad,t.Id_Estado FROM ticket t WHERE t.Archivado = 1 GROUP BY t.Id_Ticket');
+    static fetchListArchivo() {
+        return db.execute('SELECT t.Id_Ticket,t.Asunto,t.Fecha_Inicio,t.Descripcion, t.Id_Prioridad,t.Id_Estado FROM ticket t WHERE t.Archivado = 1');
     }
     static fetchAll_Progreso(id_usuario) {
         return db.execute('SELECT t.Id_Ticket,t.Descripcion,t.Asunto,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado FROM ticket t, usuario_ticket ut WHERE t.Archivado = 0 AND ut.Id_Ticket = t.Id_Ticket AND ut.Id_Usuario=? GROUP BY t.Id_Ticket',[id_usuario])
@@ -67,7 +59,7 @@ module.exports = class Ticket {
         return db.execute('SELECT Id_Label FROM label_ticket WHERE Id_Ticket=?', [id_ticket]);
     }
     static fetchEstado_Ticket(id_ticket) {
-        return db.execute('SELECT t.Id_Estado FROM estado_ticket t WHERE t.Id_Ticket = ?', [id_ticket]);
+        return db.execute('SELECT t.Id_Estado FROM ticket t WHERE t.Id_Ticket = ?', [id_ticket]);
     }
     static fetchPregunta_Ticket(id_ticket) {
         return db.execute('SELECT Pregunta, Respuesta FROM pregunta_ticket WHERE Id_Ticket=?', [id_ticket]);
