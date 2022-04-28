@@ -35,6 +35,7 @@ function openUsuario(element) {
         if(!response.privilegios.includes(15)){
             document.getElementById("select_rol").style.display="none";
             document.getElementById("Usuario_Rol").innerHTML=response.rol[0].Nombre_Rol;
+            document.getElementById("password").style.display="none";
         }
         total.innerHTML = response.total[0].Total;
         historico.innerHTML=response.historicos[0].Total;
@@ -53,8 +54,10 @@ document.getElementById("enviar").onclick = () =>
     const idUsuario = document.getElementById("Id_Usuario").value;
     let select_rol = document.getElementById("select_rol");
     const csrf = document.getElementById('_csrf').value;
+    let contrasenia=document.getElementById("password");
     data = {
       rol:select_rol.value,
+      contrasenia : contrasenia.value
     }
 
     fetch(idUsuario, {

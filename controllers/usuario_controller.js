@@ -212,16 +212,38 @@ exports.getDatosUsuario = (request, response, next) => {
 };
 
 exports.usuario_post = (request, response, next) => {
-  Usuario.update(
-    request.params.id_usuario,
-    request.body.rol,
-  )
-    .then(() => {
-      response.status(200).json({});
+  console.log(request.body.contrasenia);
+  if (request.body.contrasenia ===""){
+      Usuario.update(
+        request.params.id_usuario,
+        request.body.rol
+      )
+      .then(()=>{
+        response.status(200).json({});
+      })
+      .catch((err)=>{
+        console.log(err);
+      });
+  }else{
+    bcrypt.hash(request.body.contrasenia, 12)
+    .then((contrasenia_cifrada)=>{ 
+      Usuario.updatepassword(
+        request.params.id_usuario,
+        request.body.rol,
+        contrasenia_cifrada
+      )
+      .then(() => {
+        response.status(200).json({});
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     })
-    .catch((err) => {
+    .catch((err)=>{
       console.log(err);
-    });
+    })
+  }
+  
 };
 
 
