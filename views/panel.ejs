@@ -185,7 +185,7 @@
                                     <% for (let incidencia of incidencias){%>
                                         <option selected="false" value="<%=incidencia.Id_Tipo_Incidencia%>" id="tipo_incidencia<%= incidencia.Id_Tipo_Incidencia %>"> <%=incidencia.Nombre_Tipo_Incidencia%> </option>
                                     <%}%>
-                                    <option selected value="t.Tipo_Incidencia" id="default"> Todas las categorias </option>
+                                    <option selected value="t.Id_Tipo_Incidencia" id="default"> Todas las categorias </option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -204,7 +204,7 @@
                                     <% for (let usuario of usuarios){%>
                                         <option selected="false" value="<%=usuario.Id_Usuario%>" id="usuario<%= usuario.Id_Usuario %>"> <%=usuario.Nombre_Usuario%> </option>
                                     <%}%>
-                                    <option selected value="t.Id_Usuario" id="default"> Todos los usuarios </option>
+                                    <option selected value="u.Id_Usuario" id="default"> Todos los usuarios </option>
                                 </select>
                                 
                             </div>
@@ -231,7 +231,7 @@
             </div>
             <div class="row" id="sin_asignar_col">
                 
-                <%for (let ticket of sinasignar){%>
+                <%for (let ticket of tickets){%>
                     <%if ( ticket.Id_Estado == 1){%>
                         <div  onClick="openTicket(this)" data-bs-toggle="modal" data-bs-target="#myModal"
                                 id="boton<%= ticket.Id_Ticket %>" class="col" style="cursor:pointer;margin-bottom:20px;">

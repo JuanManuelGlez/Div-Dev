@@ -299,7 +299,7 @@ exports.filtros = (request, response, next) => {
 
 exports.filtros_panel = (request, response, next) => {
   
-  var execute = 'SELECT t.Id_Ticket,t.Asunto,t.Descripcion,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado,t.Fecha_y_Hora FROM ticket_archivo_magia t WHERE t.Archivado = 0 AND t.Id_Prioridad =' + request.body.prioridad + ' AND t.Tipo_Incidencia = ' + request.body.tipo_incidencia +' AND t.Id_Usuario = ' + request.body.usuario + ' AND t.Id_Procedencia = ' + request.body.procedencia + ' AND t.Id_Estado = ' + request.body.estado + ' GROUP BY t.Id_Ticket HAVING MAX(t.Fecha_y_Hora) ORDER BY t.Fecha_y_Hora DESC'
+  var execute = 'SELECT t.Id_Ticket,t.Asunto,t.Descripcion,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado FROM ticket t, usuario u WHERE t.Id_Ticket = u.Id_Ticket AND t.Archivado = 0 AND t.Id_Prioridad =' + request.body.prioridad + ' AND t.Tipo_Incidencia = ' + request.body.tipo_incidencia +' AND u.Id_Usuario = ' + request.body.usuario + ' AND t.Id_Procedencia = ' + request.body.procedencia + ' AND t.Id_Estado = ' + request.body.estado + ' '
   Ticket.fetchListFiltrarPanel(execute)
     .then(([rowsTickets, fielDataLabels]) => {
       response.status(200).json({
@@ -312,7 +312,7 @@ exports.filtros_panel = (request, response, next) => {
 };
 
 exports.filtros_archivo = (request, response, next) => {
-  var execute = 'SELECT t.Id_Ticket,t.Asunto,t.Descripcion,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado,t.Fecha_y_Hora FROM ticket_archivo_magia t WHERE t.Archivado = 1 AND t.Id_Prioridad =' + request.body.prioridad + ' AND t.Tipo_Incidencia = ' + request.body.tipo_incidencia +' AND t.Id_Usuario = ' + request.body.usuario + ' AND t.Id_Procedencia = ' + request.body.procedencia + ' AND t.Id_Estado = ' + request.body.estado +' GROUP BY t.Id_Ticket HAVING MAX(t.Fecha_y_Hora) ORDER BY t.Fecha_y_Hora DESC'
+  var execute = 'SELECT u.Id_Usuario,t.Id_Ticket,t.Asunto,t.Descripcion,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado FROM ticket t, usuario_ticket u WHERE t.Id_Ticket = u.Id_Ticket AND t.Archivado = 1 AND t.Id_Prioridad =' + request.body.prioridad + ' AND t.Id_Tipo_Incidencia = ' + request.body.tipo_incidencia +' AND u.Id_Usuario = ' + request.body.usuario + ' AND t.Id_Procedencia = ' + request.body.procedencia + ' AND t.Id_Estado = ' + request.body.estado +' GROUP BY t.Id_Ticket '
   Ticket.fetchListFiltrarPanel(execute)
     .then(([rowsTickets, fielDataLabels]) => {
       response.status(200).json({
@@ -325,7 +325,7 @@ exports.filtros_archivo = (request, response, next) => {
 };
 
 exports.filtros_backlog = (request, response, next) => {
-  var execute = 'SELECT t.Id_Ticket,t.Asunto,t.Descripcion,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado,t.Fecha_y_Hora FROM ticket_archivo_magia t WHERE t.Archivado = 0 AND t.Id_Prioridad =' + request.body.prioridad + ' AND t.Tipo_Incidencia = ' + request.body.tipo_incidencia +' AND t.Id_Usuario = ' + request.body.usuario + ' AND t.Id_Procedencia = ' + request.body.procedencia + ' GROUP BY t.Id_Ticket HAVING MAX(t.Fecha_y_Hora) ORDER BY t.Fecha_y_Hora DESC'
+  var execute = 'SELECT t.Id_Ticket,u.Id_Usuario,t.Asunto,t.Descripcion,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado FROM ticket t, usuario_ticket u WHERE t.Id_Ticket = u.Id_Ticket AND t.Archivado = 0 AND t.Id_Prioridad =' + request.body.prioridad + ' AND t.Id_Tipo_Incidencia = ' + request.body.tipo_incidencia +' AND u.Id_Usuario = ' + request.body.usuario + ' AND t.Id_Procedencia = ' + request.body.procedencia + ' GROUP BY t.Id_Ticket '
   Ticket.fetchListFiltrarPanel(execute)
     .then(([rowsTickets, fielDataLabels]) => {
       response.status(200).json({
@@ -398,7 +398,6 @@ exports.ticket_panel=(request,response,next)=>{
         .then(([rowsIncidencias, fielDataIncidencias]) => {
           Ticket.fetchPrioridades()
             .then(([rowsPrioridades, fieldDataPrioridades]) => {
-<<<<<<< HEAD
               Usuario.fetchAll()
               .then(([rowsUsuarios,fieldData]) => {
                 Ticket.fetchProcedencias()
@@ -408,28 +407,13 @@ exports.ticket_panel=(request,response,next)=>{
                     response.render("panel", {
                       procedencias: rowsProcedencias,
                       usuarios:rowsUsuarios,
-=======
-              Ticket.fetchEstado()
-                .then(([rowsEstados, fielDataEstados]) => {
-                  Ticket.fetchAllSinAsignar()
-                  .then(([rowsSinAsignar,fieldData])=>{
-                    console.log(rowsSinAsignar);
-                    response.render("panel", {
->>>>>>> 9364545e99d0ff51c432a0c2c0cd4ed63a5880f0
                       tickets: rowsTickets,
                       prioridades: rowsPrioridades,
                       estados: rowsEstados,
                       incidencias: rowsIncidencias,
-<<<<<<< HEAD
                     });
                   })
                   .catch((err) => {
-=======
-                      sinasignar: rowsSinAsignar
-                    });
-                  })
-                  .catch((err)=>{
->>>>>>> 9364545e99d0ff51c432a0c2c0cd4ed63a5880f0
                     console.log(err);
                   });
                 })
