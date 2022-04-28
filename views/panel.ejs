@@ -198,16 +198,6 @@
                                     <option selected value="t.Id_Prioridad" id="default"> Todas las prioridades </option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="filtro_usuario"> Usuario </label>
-                                <select class="form-select" id="filtro_usuario" name="filtro_usuario" aria-label="Default select example">
-                                    <% for (let usuario of usuarios){%>
-                                        <option selected="false" value="<%=usuario.Id_Usuario%>" id="usuario<%= usuario.Id_Usuario %>"> <%=usuario.Nombre_Usuario%> </option>
-                                    <%}%>
-                                    <option selected value="u.Id_Usuario" id="default"> Todos los usuarios </option>
-                                </select>
-                                
-                            </div>
                             <br>
                             <button id="dropdown_filter" type="button" class="btn btn-primary"> Filtrar </button>
                           </form>
@@ -231,27 +221,26 @@
             </div>
             <div class="row" id="sin_asignar_col">
                 
-                <%for (let ticket of tickets){%>
-                    <%if ( ticket.Id_Estado == 1){%>
+                <%for (let ticketa of sinasignar){%>
+                    <%if ( ticketa.Id_Estado == 1){%>
                         <div  onClick="openTicket(this)" data-bs-toggle="modal" data-bs-target="#myModal"
-                                id="boton<%= ticket.Id_Ticket %>" class="col" style="cursor:pointer;margin-bottom:20px;">
+                                id="boton<%= ticketa.Id_Ticket %>" class="col" style="cursor:pointer;margin-bottom:20px;">
                                 <div class="card h-100"
                                     style="overflow: hidden;margin-top:10px;margin-bottom:-10px;box-shadow: 1px 4px 8px rgba(0,0,0,0.46);">
                                     <div class="card-body" style="text-align: left;width: 262px;overflow: hidden;">
                                         <h4 class="card-title"
-                                        style="overflow: hidden;color: rgb(0,0,0);text-align: left;"> #<%= ticket.Id_Ticket %>: <%= ticket.Asunto.substring(0, 20)%>...
+                                        style="overflow: hidden;color: rgb(0,0,0);text-align: left;"> #<%= ticketa.Id_Ticket %>: <%= ticketa.Asunto.substring(0, 20)%>...
                                         </h4>
                                         <h6 class="text-muted card-subtitle mb-2"
                                             style="overflow: hidden;color: rgb(0,0,0);">
-                                            <%= ticket.Descripcion.substring(0, 20)%>...
+                                            <%= ticketa.Descripcion.substring(0, 20)%>...
                                         </h6> 
                                         
-                                        <i class="fa fa-circle"
-                                            style="<%= ticket.Id_Estado == 1 ? 'color: grey' :  ticket.Id_Estado == 6? 'color: green' : ticket.Id_Estado  == 4 ? 'color: red' : 'color : yellow' %>" ></i>
+                                        <i class="fa fa-circle" style="<%= ticketa.Id_Estado == 1 ? 'color: grey' : ticketa.Id_Estado == 2 ? 'color: yellow' : ticketa.Id_Estado == 3 ? 'color: green' : ticketa.Id_Estado == 4 ? 'color: red' : ticketa.Id_Estado == 5 ? 'color: purple' : 'color:black' %>" ></i>
                                         
                                             <span
                                             style="overflow: hidden;margin-left: 10px;color: rgb(136,136,136);">Creado
-                                            el <%= (ticket.Fecha_Inicio.toString()).substring(4, 21) %></span>
+                                            el <%= (ticketa.Fecha_Inicio.toString()).substring(4, 21) %></span>
                                             
                                             <!-- <img class="rounded-circle"
                                             style="width: 35px;height: 35px;margin-left: 15px;"
@@ -274,7 +263,7 @@
             </div>
             <div class="row" id="progreso_col">
                 <%for (let ticket of tickets){%>
-                    <%if (ticket.Id_Estado == 2 || ticket.Id_Estado == 3 || ticket.Id_Estado ==5){%>
+                    <%if (ticket.Id_Estado != 1 && ticket.Id_Estado != 4 && ticket.Id_Estado != 6){%>
                         <div  onClick="openTicket(this)" data-bs-toggle="modal" data-bs-target="#myModal"
                                 id="boton<%= ticket.Id_Ticket %>" class="col" style="cursor:pointer;margin-bottom:20px;">
                                 <div class="card h-100"
