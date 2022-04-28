@@ -318,7 +318,6 @@ exports.ticket_panel=(request,response,next)=>{
                 .then(([rowsEstados, fielDataEstados]) => {
                   Ticket.fetchAllSinAsignar()
                   .then(([rowsSinAsignar,fieldData])=>{
-                    console.log(rowsSinAsignar);
                     response.render("panel", {
                       tickets: rowsTickets,
                       prioridades: rowsPrioridades,
@@ -344,6 +343,4 @@ exports.ticket_panel=(request,response,next)=>{
         });
     })
     .catch((err) => console.log(err));   
-                           
-             
 }
