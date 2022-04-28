@@ -12,6 +12,13 @@ module.exports = class Rol{
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
+        return db.execute('SELECT * FROM rol');
+    }
+
+    static getId(rol) {
+        return db.execute('SELECT Id_Rol FROM rol WHERE Nombre_Rol = ?',
+            [rol]
+        );
     }
 
 }
