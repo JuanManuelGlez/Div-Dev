@@ -12,9 +12,15 @@ exports.lista = (request, response, next) => {
         .then(([rowsIncidencias, fielDataIncidencias]) => {
           Ticket.fetchPrioridades()
             .then(([rowsPrioridades, fieldDataPrioridades]) => {
+              Ticket.fetchProcedencias()
+            .then(([rowsProcedencias, fieldDataPrioridades]) => {
+              Usuario.fetchAll()
+            .then(([rowsUsuarios, fieldDataPrioridades]) => {
               Ticket.fetchEstado()
                 .then(([rowsEstados, fielDataEstados]) => {
                   response.render("panel_principal", {
+                    usuarios: rowsUsuarios,
+                    procedencias: rowsProcedencias,
                     tickets: rowsTickets,
                     prioridades: rowsPrioridades,
                     estados: rowsEstados,
@@ -28,6 +34,14 @@ exports.lista = (request, response, next) => {
             .catch((err) => {
               console.log(err);
             });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
         })
         .catch((err) => {
           console.log(err);
@@ -167,6 +181,10 @@ exports.ticket_get = (request, response, next) => {
             .then(([rowsPrioridades, fieldDataPrioridades]) => {
               Ticket.fetchEstado()
                 .then(([rowsEstados, fielDataEstados]) => {
+                  Ticket.fetchProcedencias()
+                .then(([rowsProcedencias, fielDataEstados]) => {
+                  Usuario.fetchAll()
+                .then(([rowsUsuarios, fielDataEstados]) => {
                   Ticket.fetchEstado_Ticket(request.params.id_ticket)
                     .then(([rowsEstado, fielDataEstado]) => {
                       Ticket.fetchLabel_Ticket(request.params.id_ticket)
@@ -178,6 +196,8 @@ exports.ticket_get = (request, response, next) => {
                                 prioridades: rowsPrioridades,
                                 labels: rowsLabels,
                                 estado: rowsEstado,
+                                procedencias: rowsProcedencia,
+                                usuarios: rowsUsuarios,
                                 estados: rowsEstados,
                                 preguntas: rowsPreguntas,
                                 incidencias: rowsIncidencias
@@ -190,6 +210,14 @@ exports.ticket_get = (request, response, next) => {
                         .catch((err) => {
                           console.log(err);
                         });
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                      });
+                    })
+                    .catch((err) => {
+                      console.log(err);
+                    });
                     })
                     .catch((err) => {
                       console.log(err);
