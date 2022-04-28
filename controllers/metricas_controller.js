@@ -45,4 +45,3 @@ exports.getByResolucion = async (request, response, next) => {
         })
         .catch((err) => {console.log(err)});
 }
-

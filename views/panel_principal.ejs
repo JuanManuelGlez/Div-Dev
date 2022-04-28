@@ -220,18 +220,14 @@
                                                     style="overflow: hidden;color: rgb(0,0,0);">
                                                     <%= ticket.Descripcion.substring(0, 20)%>...
                                                 </h6>
-
                                                 <i class="fa fa-circle"
                                                     style="<%= ticket.Id_Estado == 1 ? 'color: grey' : ticket.Id_Estado == 2 ? 'color: yellow' : ticket.Id_Estado == 3 ? 'color: green' : ticket.Id_Estado == 4 ? 'color: red' : ticket.Id_Estado == 5 ? 'color: purple' : 'color : black' %>"></i>
-
                                                 <span
                                                     style="overflow: hidden;margin-left: 10px;color: rgb(136,136,136);">Creado
                                                     el <%= (ticket.Fecha_Inicio.toString()).substring(4, 21) %></span>
-
                                                 <!-- <img class="rounded-circle"
                                             style="width: 35px;height: 35px;margin-left: 15px;"
                                             src="/img/WhatsApp%20Image%202021-12-02%20at%206.30.57%20AM.jpeg"> -->
-
                                             </div>
                                         </div>
                                     </div>

@@ -45,7 +45,7 @@ module.exports = class Ticket {
         return db.execute('SELECT t.Id_Ticket,t.Asunto,t.Fecha_Inicio,t.Descripcion, t.Id_Prioridad,t.Id_Estado FROM ticket t WHERE t.Archivado = 1');
     }
     static fetchAll_Progreso(id_usuario) {
-        return db.execute('SELECT t.Id_Ticket,t.Descripcion,t.Asunto,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado FROM ticket t, usuario_ticket ut WHERE t.Archivado = 0 AND ut.Id_Ticket = t.Id_Ticket AND ut.Id_Usuario=? ',[id_usuario])
+        return db.execute('SELECT t.Id_Ticket,t.Descripcion,t.Asunto,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado FROM ticket t, usuario_ticket ut WHERE t.Archivado = 0 AND ut.Id_Ticket = t.Id_Ticket AND ut.Id_Usuario=? GROUP BY t.Id_Ticket',[id_usuario])
     }
     static fetchAllSinAsignar(){
         return db.execute('SELECT t.Id_Ticket,t.Descripcion,t.Asunto,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado FROM ticket t WHERE t.Archivado = 0 AND t.Id_Estado = 1')
@@ -145,14 +145,19 @@ module.exports = class Ticket {
 
     }
 
-    static async update(id_ticket, id_estado, id_prioridad, Estado_Actual, id_incidencia) {
+    static async update(id_ticket, id_estado, id_prioridad, Estado_Actual, id_incidencia, id_usuario) {
 
         await this.assignIncidencia(id_ticket, id_incidencia);
         await this.assignPrioridad(id_ticket, id_prioridad);
         if (id_estado != Estado_Actual) {
             await this.assignEstado(id_ticket, id_estado);
+            db.execute('INSERT INTO usuario_ticket VALUES (?, ?, "Encargado", CURRENT_TIMESTAMP)', [id_usuario, id_ticket]);
             if (id_estado == 4 || id_estado == 6) {
                 db.execute('UPDATE ticket SET Fecha_Fin = CURRENT_TIMESTAMP, Id_Estado = ? WHERE Id_Ticket=?', [id_estado, id_ticket]);
+            }
+            else if (id_estado == 1){
+                db.execute('DELETE FROM usuario_ticket WHERE Id_Ticket = ? AND Cargo = "Encargado"', [id_ticket]);
+                db.execute('UPDATE ticket SET Fecha_Fin = NULL, Id_Estado = ? WHERE Id_Ticket=?', [id_estado, id_ticket]);
             }
             else if (id_estado != 4 || id_estado != 6) {
                 db.execute('UPDATE ticket SET Fecha_Fin = NULL, Id_Estado = ? WHERE Id_Ticket=?', [id_estado, id_ticket]);
@@ -160,8 +165,9 @@ module.exports = class Ticket {
         }
     }
 
+    static async 
+
     static async archivar(archivado, id_ticket) {
-        console.log(archivado);
         return db.execute('UPDATE ticket SET Archivado=? WHERE Id_Ticket=?', [archivado, id_ticket]);
     }
 }

@@ -281,4 +281,3 @@ exports.panel_admin = (request, response, next) => {
     response.redirect("/");
   }
 };
-
