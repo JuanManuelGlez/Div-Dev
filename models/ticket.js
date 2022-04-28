@@ -130,6 +130,9 @@ module.exports = class Ticket {
         return db.execute(execute);
         // return db.execute('SELECT t.Id_Ticket,t.Asunto,t.Descripcion,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado,t.Fecha_y_Hora FROM ticket_archivo_magia t WHERE t.Archivado = 0 AND t.Id_Prioridad = ? AND t.Tipo_Incidencia = t.Tipo_Incidencia GROUP BY t.Id_Ticket HAVING MAX(t.Fecha_y_Hora) ORDER BY t.Fecha_y_Hora DESC',[id_prioridad,id_tipo_incidencia]);
     }
+    static fetchLike(texto_ingresado) {
+        return db.execute('SELECT t.Id_Ticket,tl.Id_Label,t.Asunto,t.Archivado,t.Descripcion,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado  FROM ticket t  LEFT JOIN label_ticket tl ON t.Id_Ticket = tl.Id_Ticket WHERE t.Asunto LIKE ? OR tl.Id_Label LIKE ? GROUP BY t.Id_Ticket;', ['%' + texto_ingresado + '%','%' + texto_ingresado + '%']);
+    }
 
     static assignUsuario(id_ticket, id_usuario, cargo) {
         return db.execute('INSERT INTO usuario_ticket VALUES(?, ?, ?, CURRENT_TIMESTAMP)',
