@@ -126,6 +126,11 @@ module.exports = class Ticket {
             [id_incidencia, id_ticket]);
     }
 
+    static fetchListFiltrarPanel(execute){
+        return db.execute(execute);
+        // return db.execute('SELECT t.Id_Ticket,t.Asunto,t.Descripcion,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado,t.Fecha_y_Hora FROM ticket_archivo_magia t WHERE t.Archivado = 0 AND t.Id_Prioridad = ? AND t.Tipo_Incidencia = t.Tipo_Incidencia GROUP BY t.Id_Ticket HAVING MAX(t.Fecha_y_Hora) ORDER BY t.Fecha_y_Hora DESC',[id_prioridad,id_tipo_incidencia]);
+    }
+
     static assignUsuario(id_ticket, id_usuario, cargo) {
         return db.execute('INSERT INTO usuario_ticket VALUES(?, ?, ?, CURRENT_TIMESTAMP)',
             [id_usuario, id_ticket, cargo])
