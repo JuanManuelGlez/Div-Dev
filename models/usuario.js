@@ -76,6 +76,12 @@ module.exports = class Usuario{
         return db.execute('SELECT ut.Id_Usuario, COUNT(ut.Id_Ticket) AS "Total" FROM usuario_ticket ut, ticket t WHERE t.Id_Ticket = ut.Id_Ticket AND t.Id_Estado != 4 AND t.Id_Estado != 6 AND ut.Cargo = "Encargado" GROUP BY (ut.Id_Usuario)')
     }
 
+    static countAllTickets(id_usuario){
+        return db.execute('SELECT COUNT(t.Id_Ticket) as "Total" FROM ticket t, usuario_ticket ut WHERE t.Id_Ticket = ut.Id_Ticket AND ut.Id_Usuario = ? AND ut.Cargo ="Encargado"',
+            [id_usuario]);
+    }
+
+
     static fetchOne(id_usuario) {
         return db.execute('SELECT * FROM usuario WHERE Id_Usuario=?',
             [id_usuario]);

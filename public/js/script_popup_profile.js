@@ -9,6 +9,7 @@
     let total = document.getElementById("total")
     let Id_Usuario = document.getElementById("Id_Usuario")
     let foto_sidebar = document.getElementById("foto_sidebar")
+    let actual = document.getElementById("actual")
     fetch(rutaUsuario, {
         method: 'GET',
         headers: {
@@ -20,14 +21,15 @@
 
         username.value = response.datos[0].Nombre_Usuario;
         username_sidebar.innerHTML = response.datos[0].Nombre_Usuario;
-        rol.innerHTML = response.datos[0].Id_Rol;
+        rol.innerHTML = response.datos[0].Nombre_Rol;
         
         //pass.innerHTML = response.datos[0].Contraseña;
         email.innerHTML = response.datos[0].Login
         url_foto.src = response.datos[0].URL_Foto;
 
         if (response.datos[0].Tickets == 1){
-            total.innerHTML = response.datos[0].Tickets;
+            total.innerHTML = response.historicos[0].Total;
+            actual.innerHTML = response.total[0].Total;
         }else{
         total.innerHTML = 0;
 
@@ -55,7 +57,6 @@
         let username = document.getElementById("username").value;
         let Id_Usuario = document.getElementById("Id_Usuario").innerHTML;
         const csrf = document.getElementById('_csrf').value;
-        console.log(Id_Usuario)
         ruta = '../usuario/profile_update';
         data = {
             name: username,
@@ -84,7 +85,6 @@
         var image = document.getElementById("foto_user");
         image.src = URL.createObjectURL(event.target.files[0]);
         var image_url_json = URL.createObjectURL(event.target.files[0]);
-        console.log(image_url_json)
         var id_usuario_json = document.getElementById("Id_Usuario")
         const csrf = document.getElementById('_csrf').value;
         var ruta = '../usuario/profile_update' 

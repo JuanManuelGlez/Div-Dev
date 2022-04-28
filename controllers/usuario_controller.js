@@ -11,10 +11,18 @@ exports.datos = (request, response, next) => {
   console.log(request.session.usuario)
   Usuario.findProfile(request.session.usuario.login_usuario)
   .then(([rowsUsuarios, fieldData]) => {
-    response.status(200).json({
-      datos: rowsUsuarios,
-      privilegios: request.session.privilegios
-    });
+    Usuario.countActiveTickets(request.session.id_usuario)
+    .then(([rowsTickets,fieldData])=>{
+      Usuario.countAllTickets(request.session.id_usuario)
+      .then(([rowsTotal,fieldData])=>{
+        response.status(200).json({
+          datos: rowsUsuarios,
+          privilegios: request.session.privilegios,
+          total:rowsTickets,
+          historicos:rowsTotal
+        });
+      }).catch((err)=>console.log(err));
+    })
   })
   .catch((err) => console.log(err));
 };
@@ -118,7 +126,7 @@ exports.login_post = (request, response, next) => {
     .then(([rows, fielData]) => {
       if (rows.length < 1) 
       {
-        return response.redirect("usuario/login");
+        return response.redirect("/login");
       }
       const usuario = new Usuario(
         rows[0].Nombre_Usuario,
@@ -195,12 +203,20 @@ exports.getDatosUsuario = (request, response, next) => {
       .then(([rowsTickets, fielData]) => {
         Usuario.fetchRolUsuario(request.params.id_usuario)
         .then(([rowsRol, fielData]) => {
-          response.status(200).json({
-            datosGenerales: rowsUsuario,
-            rol : rowsRol,
-            total : rowsTickets,
-            privilegios:request.session.privilegios
-          });
+          Usuario.countAllTickets(request.params.id_usuario)
+          .then(([rowsTotal,fielData])=>{
+            
+            response.status(200).json({
+              datosGenerales: rowsUsuario,
+              rol : rowsRol,
+              total : rowsTickets,
+              privilegios:request.session.privilegios,
+              historicos:rowsTotal
+            });
+          }).catch((err)=>{
+            console.log(err);
+          })
+          
         })
       .catch((err) => {
         console.log(err);
