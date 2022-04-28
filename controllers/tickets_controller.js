@@ -218,7 +218,8 @@ exports.ticket_post = (request, response, next) => {
     request.body.estado,
     request.body.prioridad,
     request.body.Estado_Actual,
-    request.body.tipo_incidencia
+    request.body.tipo_incidencia,
+    request.session.id_usuario
   )
     .then(() => {
       for (let i = 0; i < request.body.numPreguntas; i++) {
