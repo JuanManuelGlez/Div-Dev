@@ -181,7 +181,7 @@
                 </div>
             </div>
         </div>
-        </div>
+    </div>
 
         <div class="page-content-wrapper" style="color: var(--bs-teal);">
             <div class="container-fluid" style="color: transparent;background: white;">
@@ -203,7 +203,7 @@
                 </div>
                 <div class="container">
                     <div id="filtro_ver" class="row" style="margin-top: 30px;">
-                        <% let i = 0; %>
+                        <% let i=0; %>
                             <% for(let ticket of tickets) {%>
                                 <%if (ticket.Id_Estado==1){%>
                                     <div onClick="openTicket(this)" data-bs-toggle="modal" data-bs-target="#myModal"
@@ -232,12 +232,10 @@
                                         </div>
                                     </div>
                                     <% }%>
-                                        <% i = i + 1; }%>
+                                        <% i=i + 1; }%>
                     </div>
                 </div>
             </div>
-
-
 
 
             <script src="/js/script_popup_ticket.js"></script>
