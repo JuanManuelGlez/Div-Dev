@@ -308,9 +308,9 @@ function allByResolucion()
                 borderSkipped: false,
             },
             {
-                label: 'Sin resolver',
-                backgroundColor: '#FF5757',
-                borderColor: '#FF5757',
+                label: 'Abiertos',
+                backgroundColor: '#9B9B9B',
+                borderColor: '#9B9B9B',
                 data: [response.datos[2].Tickets],
                 borderWidth: 2,
                 borderRadius: 5,
