@@ -4,6 +4,8 @@ const filesystem = require('fs');
 const path = require('path');
 const isAuth = require('../util/is-auth.js');
 const tick_panel= require('../controllers/tickets_controller');
+const Tipo_Incidencia = require('../models/tipo_incidencia');
+const Usuario = require('../models/usuario');
 
 router.get('/', isAuth,tick_panel.ticket_panel
 );
@@ -11,7 +13,15 @@ router.get('/', isAuth,tick_panel.ticket_panel
 router.get('/metricas', isAuth,(request, response, next) =>{
     console.log(request.session.privilegios);
     if(request.session.privilegios.includes(11)){
-        response.render('metricas')
+        Tipo_Incidencia.fetchAll()
+            .then(([rowsTipoIncidencia, fieldDataTipoIncidencia]) => {
+                Usuario.fetchAll()
+                .then(([rowsUsuario, fieldDataUsuario]) => {
+                    response.render('metricas', {usuarios:rowsUsuario, incidencias:rowsTipoIncidencia});
+                })
+                .catch((err) => console.log(err));
+            })
+            .catch((err) => console.log(err));
     }else{
         response.redirect('/')
     } 

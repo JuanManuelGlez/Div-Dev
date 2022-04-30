@@ -9,6 +9,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
 
 
 <div id="content" class="page-content-wrapper" style="color: var(--bs-teal);">
@@ -17,6 +18,48 @@
             <div class="col-sm-5 col-md-7 col-lg-8 col-xl-9 offset-2 offset-sm-1 offset-md-0 offset-lg-0" style="color: var(--bs-purple);background: #FF595A;">
                 <div></div>
                 <h1 style="color: var(--bs-body-bg);margin-left: 60px;">Métricas</h1>
+            </div>
+            <div class="col-sm-3" style="padding-top:10px;">
+                <div class="dropdown">
+                    <button type="button" style="background-color: black;border-width:0px;" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                      Filtros
+                    </button>
+                    <ul class="dropdown-menu">
+                        <form class="px-4 py-3">
+                            <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>">
+                            <div class="form-group">
+                                <label for="filtro_usuario"> Categoría</label>
+                                <select class="form-select" id="filtro_usuario" name="filtro_usuario" aria-label="Default select example" data-live-search="true">
+                                    <% for (let usuario of usuarios){%>
+                                        <option selected="false" value="<%=usuario.Id_Usuario%>" id="usuario<%= usuario.Id_Usuario %>"> <%= usuario.Nombre_Usuario%> </option>
+                                    <%}%>
+                                    <option selected value="" id="default"> Todos los usuarios </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="filtro_tipo_incidencia"> Categoría</label>
+                                <select class="form-select" id="filtro_tipo_incidencia" name="filtro_tipo_incidencia" aria-label="Default select example" data-live-search="true">
+                                    
+                                    <% for (let incidencia of incidencias){%>
+                                        <option selected="false" value="<%=incidencia.Id_Tipo_Incidencia%>" id="tipo_incidencia<%= incidencia.Id_Tipo_Incidencia %>"> <%=incidencia.Nombre_Tipo_Incidencia%> </option>
+                                    <%}%>
+                                    <option selected value="t.Id_Tipo_Incidencia" id="default"> Todas las categorias </option>
+                                </select>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="fecha_inicio"> Fecha de inicio: </label>
+                                <input type="date" id="fecha_inicio" name="fecha_inicio">
+                            </div>
+                            <div class="form-group">
+                                <label for="fecha_fin"> Fecha fin: </label>
+                                <input type="date" id="fecha_fin" name="fecha_fin">
+                            </div>
+                            <br>
+                            <button id="dropdown_filter_metricas" type="button" class="btn btn-primary"> Filtrar </button>
+                        </form>
+                    </ul>
+                </div>  
             </div>
                 
         </div>
@@ -161,7 +204,7 @@
           <div class="chartCard">
             <div class="chartBoxClear">
                 <h2 id="tituloGrafica" style="text-align: center; padding-top: 15px;">Por resolución</h2>
-                <div style="height: 75%; width:90%; margin: 0 auto; padding-left: 6%;"><canvas id="porResolucion"></canvas></div>
+                <div style="height: 75%; width:90%; margin: 0 auto;"><canvas id="porResolucion"></canvas></div>
             </div>
           </div>
           <div class="chartCard">
