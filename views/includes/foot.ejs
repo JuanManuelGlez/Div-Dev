@@ -21,14 +21,16 @@
       html2canvas(document.querySelector("#content"),{
       onrendered:function(canvas){
       var img = canvas.toDataURL("image/png");
-      doc.addImage(img, 'PNG', 0, 20, pdfWidth-50, pdfHeight)
+
+      doc.addImage(img, 'PNG', 0, 20, pdfWidth, pdfHeight)
+      doc.save('Reporte_de_Métricas.pdf');
       }
       
       });
 
    
    
-   doc.save('Reporte_de_Métricas.pdf');
+   
   }
   </script>
 </html>

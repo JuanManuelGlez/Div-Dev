@@ -169,6 +169,9 @@
     <div class="container-fluid" style="color: transparent;background: var(--bs-indigo);">
         <div class="row" style="background: var(--bs-red);">
             <div class="col offset-2 offset-sm-1 offset-md-0" style="color: var(--bs-purple);background: #ff595a;">
+                <div class="row">
+                <div class="col"> <h1 style="color: var(--bs-body-bg);margin-left: 50px;"> Backlog </h1> </div>
+                <div class="col-sm-2" style="margin-top:10px">
                 <div class="dropdown">
                     <button type="button" style="background-color: black;border-width:0px" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
                       Filtros
@@ -205,14 +208,24 @@
                                 </select>
                                 
                             </div>
+                            <div class="form-group">
+                                <label for="filtro_estado"> Estados </label>
+                                <select class="form-select" id="filtro_estado" name="filtro_estado" aria-label="Default select example">
+                                    <% for (let estado of estados){%>
+                                        <option selected="false" value="<%=estado.Id_Estado%>" id="estado<%= estado.Id_Estado %>"> <%=estado.Nombre_Estado%> </option>
+                                    <%}%>
+                                    <option selected value="u.Id_Estado" id="default"> Todos los estados </option>
+                                </select>
+                                
+                            </div>
                             <br>
                             <button id="dropdown_filter" type="button" class="btn btn-primary"> Filtrar </button>
                           </form>
                     </ul>
                 </div>
                 <div style="display:none"> <input type="number" id="Bool" value="1">  
-                
-
+                </div>
+                    </div>
             </div>
         </div>
     </div>
