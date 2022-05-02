@@ -151,7 +151,6 @@
                     <div class="row" style="background: var(--bs-red);">
                         <div class="col-sm-12 offset-2 offset-sm-1 offset-md-0 offset-lg-0 offset-xl-0 offset-xxl-0"
                             style="color: var(--bs-purple);background: #FF595A;">
-<<<<<<< HEAD
                             <div  class="row">
                                 <div class="col"> <h1 style="color: var(--bs-body-bg);margin-left: 50px;"> Archivo </h1> </div>
                                 <div class="col" style="padding:10px"><input placeholder="Buscar..." id="input_busqueda" name="input_busqueda" class="form-control" type="text" maxlength="30"></div>
@@ -256,41 +255,6 @@
                                         <i class="fa fa-circle"
                                             style="<%= ticket.Id_Estado == 1 ? 'color: grey' : ticket.Id_Estado == 2 ? 'color: yellow' : ticket.Id_Estado == 3 ? 'color: green' : ticket.Id_Estado == 4 ? 'color: red' : ticket.Id_Estado == 5 ? 'color: purple' : 'color:black' %>" ></i>
                                         
-=======
-                            <div class="row">
-                                <div class="col-xxl-9">
-                                    <h1 style="color: var(--bs-body-bg);margin-left: 50px;"> Archivo </h1>
-                                </div>
-                                <div style="margin-top:auto;margin-bottom:auto" class="col-xxl-1"> <input id="filtro"
-                                        name="filtro" class="form-control" type="number" min="1" max="6" value="1"
-                                        required /> </div>
-                                <div style="margin-top:auto;margin-bottom:auto" class="col-xxl-1"> <button id="filtrar"
-                                        class="btn btn-success"> FILTRAR </button> </div>
-                                <div style="display:none"> <input type="number" id="Bool" value="0">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div id="filtro_ver" class="row" style="margin-top: 30px;">
-                            <% for(let ticket of tickets) {%>
-                                <div onClick="openTicket(this)" data-bs-toggle="modal" data-bs-target="#myModal"
-                                    id="boton<%= ticket.Id_Ticket %>" class="col-3"
-                                    style="cursor:pointer;margin-bottom:20px;">
-                                    <div class="card h-100"
-                                        style="overflow: hidden;margin-top:10px;margin-bottom:-10px;box-shadow: 1px 4px 8px rgba(0,0,0,0.46);">
-                                        <div class="card-body" style="text-align: left;width: 262px;overflow: hidden;">
-                                            <h4 class="card-title"
-                                                style="overflow: hidden;color: rgb(0,0,0);text-align: left;"> #<%=
-                                                    ticket.Id_Ticket %>: <%= ticket.Asunto.substring(0, 20)%>...
-                                            </h4>
-                                            <h6 class="text-muted card-subtitle mb-2"
-                                                style="overflow: hidden;color: rgb(0,0,0);">
-                                                <%= ticket.Descripcion.substring(0, 20)%>...
-                                            </h6>
-                                            <i class="fa fa-circle"
-                                                style="<%= ticket.Id_Estado == 1 ? 'color: grey' : ticket.Id_Estado == 2 ? 'color: yellow' : ticket.Id_Estado == 3 ? 'color: green' : ticket.Id_Estado == 4 ? 'color: red' : ticket.Id_Estado == 5 ? 'color: purple' : 'color:black' %>"></i>
->>>>>>> 3481cbb1f6fa4666773f1ffd9879cbcf7934ca0e
                                             <span
                                                 style="overflow: hidden;margin-left: 10px;color: rgb(136,136,136);">Creado
                                                 el <%=(ticket.Fecha_Inicio.toString()).substring(4,21) %></span>
