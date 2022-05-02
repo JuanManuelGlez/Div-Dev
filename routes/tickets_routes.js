@@ -28,6 +28,8 @@ router.get('/datos/:id_ticket',  isAuth,tickets_controller.getDatosTicket);
 
 router.get('/:id_ticket', isAuth, tickets_controller.ticket_get);
 
+router.post('/filtros_panel',  isAuth,tickets_controller.filtros_panel);
+
 router.post('/:id_ticket', isAuth,tickets_controller.ticket_post);
 
 router.post('/archivar/:id_ticket', isAuth,tickets_controller.ticket_archivar);

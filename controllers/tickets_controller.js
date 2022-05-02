@@ -278,6 +278,20 @@ exports.ticket_post = (request, response, next) => {
     });
 };
 
+exports.filtros_panel = (request, response, next) => {
+  
+  var execute = 'SELECT t.Id_Ticket,t.Asunto,t.Descripcion,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado FROM ticket t, usuario_ticket u WHERE t.Id_Ticket = u.Id_Ticket AND t.Archivado = 0 AND t.Id_Prioridad =' + request.body.prioridad + ' AND t.Id_Tipo_Incidencia = ' + request.body.tipo_incidencia +' AND u.Id_Usuario = ' + request.body.usuario + ' AND t.Id_Procedencia = ' + request.body.procedencia + ' AND t.Id_Estado = ' + request.body.estado + ' '
+  Ticket.fetchListFiltrarPanel(execute)
+    .then(([rowsTickets, fielDataLabels]) => {
+      response.status(200).json({
+        tickets: rowsTickets,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 exports.filtros = (request, response, next) => {
 
   Ticket.fetchListFiltrarEstado(
@@ -395,9 +409,12 @@ exports.ticket_panel=(request,response,next)=>{
             .then(([rowsPrioridades, fieldDataPrioridades]) => {
               Ticket.fetchEstado()
                 .then(([rowsEstados, fielDataEstados]) => {
+                  Usuario.fetchAll()
+                  .then(([rowsUsuarios,fieldData]) => {
                   Ticket.fetchAllSinAsignar()
                   .then(([rowsSinAsignar,fieldData])=>{
                     response.render("panel", {
+                      usuarios: rowsUsuarios,
                       tickets: rowsTickets,
                       prioridades: rowsPrioridades,
                       estados: rowsEstados,
@@ -408,6 +425,10 @@ exports.ticket_panel=(request,response,next)=>{
                   .catch((err)=>{
                     console.log(err);
                   });
+                })
+                .catch((err)=>{
+                  console.log(err);
+                });
                 })
                 .catch((err) => {
                   console.log(err);
