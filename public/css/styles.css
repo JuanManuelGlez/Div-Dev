@@ -1,0 +1,14 @@
+/*.primary-hover:hover{
+    text-decoration: none;
+    color:rgb(6, 6, 6);
+    background: var(--bs-white);
+    border:;
+  }
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: var(--bs-red);
+  }*/
+
+
