@@ -18,9 +18,17 @@ router.post('/nuevo',  isAuth,tickets_controller.nuevo_post);
 
 router.post('/filtros',  isAuth,tickets_controller.filtros);
 
+router.post('/getLike',isAuth, tickets_controller.getLike);
+
+router.post('/filtros_archivo',  isAuth,tickets_controller.filtros_archivo);
+
+router.post('/filtros_backlog',  isAuth,tickets_controller.filtros_backlog);
+
 router.get('/datos/:id_ticket',  isAuth,tickets_controller.getDatosTicket);
 
 router.get('/:id_ticket', isAuth, tickets_controller.ticket_get);
+
+router.post('/filtros_panel',  isAuth,tickets_controller.filtros_panel);
 
 router.post('/:id_ticket', isAuth,tickets_controller.ticket_post);
 
