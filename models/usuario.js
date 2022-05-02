@@ -49,7 +49,7 @@ module.exports = class Usuario{
 
         
     static fetchAll() {
-        return db.execute('SELECT R.Id_Rol, R.Nombre_Rol, U.Id_Rol, U.URL_Foto, U.Id_Usuario, U.Login, U.Contraseña, U.Nombre_Usuario, COUNT(T.Id_Ticket) AS "Total" FROM rol R, usuario_ticket T, usuario U WHERE R.Id_Rol = U.Id_Rol AND T.Id_Usuario = U.Id_Usuario GROUP BY U.Id_Usuario;');
+        return db.execute('SELECT R.Id_Rol, R.Nombre_Rol, U.Id_Rol, U.URL_Foto, U.Id_Usuario, U.Login, U.Contraseña, U.Nombre_Usuario, COUNT(T.Id_Ticket) AS "Total" FROM rol R, usuario_ticket T, usuario U WHERE R.Id_Rol = U.Id_Rol AND T.Id_Usuario = U.Id_Usuario GROUP BY U.Id_Usuario');
     }
 
     static findOne(login_usuario) {
@@ -58,7 +58,7 @@ module.exports = class Usuario{
     }
 
     static countActiveTickets(id_usuario) {
-        return db.execute('SELECT COUNT(T.Id_Ticket) as "Total" FROM usuario_ticket T WHERE T.Id_Usuario = ? ',
+        return db.execute('SELECT COUNT(T.Id_Ticket) as "Total" FROM usuario_ticket T WHERE T.Id_Usuario = ?',
             [id_usuario]);
     }
 
@@ -67,7 +67,7 @@ module.exports = class Usuario{
             [id_usuario]);
     }
 
-    static fetchEstado(){
+    static fetchEstado(){ //?
         return db.execute('SELECT * FROM rol');
     }
 

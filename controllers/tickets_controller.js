@@ -35,6 +35,39 @@ exports.lista = (request, response, next) => {
     .catch((err) => console.log(err));
 };
 
+exports.lista_archivo = (request, response, next) => {
+  Ticket.fetchListArchivo()
+    .then(([rowsTickets, fielData]) => {
+      Tipo_incidencia.fetchAll()
+        .then(([rowsIncidencias, fielDataIncidencias]) => {
+          Ticket.fetchPrioridades()
+            .then(([rowsPrioridades, fieldDataPrioridades]) => {
+              Ticket.fetchEstado()
+                .then(([rowsEstados, fielDataEstados]) => {
+                  response.render("archivo", {
+                    tickets: rowsTickets,
+                    prioridades: rowsPrioridades,
+                    estados: rowsEstados,
+                    incidencias: rowsIncidencias,
+                  });
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => console.log(err));
+};
+
+
+
 exports.nuevo_get = (request, response, next) => {
   //debe de haber una manera mejor de hacer esto pero aja creo que sirve por ahora
   Tipo_incidencia.fetchAll()
@@ -77,9 +110,12 @@ exports.nuevo_post = (request, response, next) => {
       let idNuevo = result[0].insertId; //probablemente una mejor manera de hacer esto
       Ticket.assignEstado(idNuevo, 1);
 
-      for (label of request.body.labels) 
+      if(typeof request.body.labels[0] !== 'undefined')
       {
-        Ticket.assignLabel(idNuevo, label);
+        for (label of request.body.labels) 
+        {
+          Ticket.assignLabel(idNuevo, label);
+        }
       }
 
       if(request.session.isLoggedIn)
@@ -184,6 +220,17 @@ exports.ticket_post = (request, response, next) => {
     .catch((err) => {
       console.log(err);
     });
+};
+
+exports.ticket_archivar = (request, response, next) => {
+  Ticket.archivar(
+    request.params.id_ticket
+  )
+  .then(()=>{
+  })
+  .catch((err)=>{
+      console.log(err);
+  })
 };
 
 exports.getDatosTicket = (request, response, next) => {

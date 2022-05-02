@@ -11,6 +11,7 @@ exports.lista = (request, response, next) => {
     .then(([rowsRols, fieldDataRows]) => {
       Usuario.fetchAll()
         .then(([rowsUsuarios, fieldData]) => {
+          console.log(rowsUsuarios);
           response.render("lista_usuarios", {
             usuarios: rowsUsuarios,
             rols: rowsRols,
@@ -129,4 +130,13 @@ exports.usuario_post = (request, response, next) => {
     .catch((err) => {
       console.log(err);
     });
+<<<<<<< HEAD
 };
+=======
+};
+
+exports.panel_admin = (request, response, next) => {
+  response.render('panel_administrativo');
+};
+
+>>>>>>> fe6049ed1b23d90e45cae7fa9f07554d56eb0467

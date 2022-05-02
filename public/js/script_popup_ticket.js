@@ -36,8 +36,6 @@ function openTicket(element) {
 
         select_prioridad.namedItem("prioridad"+response.datosGenerales[0].Id_Prioridad).selected = true;
 
-        
-
         descripcion.innerHTML = response.datosGenerales[0].Descripcion;
         preguntas.innerHTML = '';
         preguntas_nuevas.innerHTML = '';
@@ -202,6 +200,33 @@ document.getElementById("enviar").onclick = () =>
       tipo_incidencia:select_tipo_incidencia.value,
       preguntas:preguntas_nuevas,
       numPreguntas:numPreguntas_
+    }
+
+    fetch(idTicket, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+          'csrf-token': csrf
+      },
+      body:JSON.stringify(data)
+  })
+  .then(response => {
+      alert("Datos guardados");
+      closeTicket();
+      openTicket(document.getElementById("boton"+idTicket));
+  }).catch(err => {
+      console.log(err);
+  });
+}
+
+document.getElementById("archivar").onclick = () =>
+{
+    const idTicket = document.getElementById("Id_Ticket").value;
+
+    const csrf = document.getElementById('_csrf').value;
+    let ruta = '../ticket/archivar/' + id_ticket;
+    data = {
+      Archivado : 1
     }
 
     fetch(idTicket, {

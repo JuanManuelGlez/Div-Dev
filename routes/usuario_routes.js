@@ -18,7 +18,10 @@ router.post('/login',usuario_controller.login_post);
 
 router.get('/lista',usuario_controller.lista);
 
+router.get('/panelAdmin',usuario_controller.panel_admin);
+
 router.get('/datos/:id_usuario', usuario_controller.getDatosUsuario);
+
 router.post('/:id_usuario',usuario_controller.usuario_post);
 
 

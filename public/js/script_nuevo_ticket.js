@@ -22,15 +22,28 @@ $(document).on('keyup', '.form-select-label .bs-searchbox input', function (e) {
 
             let labels_actuales = document.querySelector('[data-id="select_labels"]').title.split(", ");
 
-            for(label of labels_actuales)
+            if(labels_actuales[0] !== 'Nothing selected')
             {
-                document.getElementById(label).setAttribute('selected', true);
+                let labels_totales = document.querySelectorAll('.opcionLabel');
+
+                labels_totales.forEach(element => {
+                    if(labels_actuales.includes(element.id))
+                    {
+                        element.setAttribute('selected', true);
+                    }
+                    else
+                    {
+                        element.removeAttribute('selected'); //Creo que si no lo tiene no pasa nada pero creo que hay que revisar
+                    }
+                });
             }
 
             let select_labels = document.getElementById("select_labels");
+
+            select_labels.innerHTML = '<option class="opcionLabel" id=' + input.replace(/ /g, '_') + ' value="' + input + '">' + input + '</option>' + select_labels.innerHTML;
             
-            select_labels.innerHTML = '<option id=' + input + ' value=' + input + '>' + input + '</option>' + select_labels.innerHTML;
             $('.form-select-label').selectpicker('refresh');
+            e.target.value = '';
             event.stopPropagation();
         });
     }
@@ -59,7 +72,7 @@ document.getElementById("select_tipo_incidencia").onchange = () =>
         let cont = 0;
         for(let pregunta of response.preguntas)
         {
-            preguntas.innerHTML += '<div class="row" style="padding: 15px 0px;"><div class="col-xxl-4"><label class="col-form-label text-dark">' + pregunta.Texto_Pregunta + ': </label></div> <div class="col"><input class="form-control" type="text" id="respuesta' + cont + '" name="respuesta' + cont + '">';
+            preguntas.innerHTML += '<div class="row" style="padding: 15px 0px;"><div class="col-xxl-4"><label class="col-form-label text-dark">' + pregunta.Texto_Pregunta + ': </label></div> <div class="col"><input class="form-control" type="text" id="respuesta' + cont + '" name="respuesta' + cont + '"maxlength="500">';
             preguntas.innerHTML += '<input type="hidden" id="pregunta' + cont + '" name="pregunta' + cont + '" value="' + pregunta.Id_Pregunta + '">';
             cont++;
         }
