@@ -2,7 +2,7 @@ const path = require("path");
 const Metricas = require("../models/metrica");
 
 exports.getByStatusAll = (request, response, next) => {
-    Metricas.getByStatusAll(request.body.usuario, request.body.tipo_incidencia, request.body.fecha_inicio, request.body.fecha_fin)
+    Metricas.getByStatusAll(request.body.usuario, request.body.tipo_incidencia, request.body.fecha_inicio, request.body.fecha_fin, request.body.archivado)
         .then(([rowsEstados, fieldDataEstados]) => {
             response.status(200).json({datos: rowsEstados});
         })
@@ -10,15 +10,16 @@ exports.getByStatusAll = (request, response, next) => {
 }
 
 exports.getByProcedenciaAll = (request, response, next) => {
-    Metricas.getByProcedenciaAll(request.body.usuario, request.body.tipo_incidencia, request.body.fecha_inicio, request.body.fecha_fin)
+    Metricas.getByProcedenciaAll(request.body.usuario, request.body.tipo_incidencia, request.body.fecha_inicio, request.body.fecha_fin, request.body.archivado)
         .then(([rows, fieldData]) => {
+            console.log(rows);
             response.status(200).json({datos: rows});
         })
         .catch(err => console.log(err));
 }
 
 exports.getByTipoIncidenciaAll = (request, response, next) => {
-    Metricas.getByTipoIncidenciaAll(request.body.usuario, request.body.tipo_incidencia, request.body.fecha_inicio, request.body.fecha_fin)
+    Metricas.getByTipoIncidenciaAll(request.body.usuario, request.body.tipo_incidencia, request.body.fecha_inicio, request.body.fecha_fin, request.body.archivado)
         .then(([rows, fieldData]) => {
             response.status(200).json({datos: rows});
         })
@@ -26,11 +27,11 @@ exports.getByTipoIncidenciaAll = (request, response, next) => {
 }
 
 exports.getByResolucion = async (request, response, next) => {
-    Metricas.getATiempo(request.body.usuario, request.body.tipo_incidencia, request.body.fecha_inicio, request.body.fecha_fin)
+    Metricas.getATiempo(request.body.usuario, request.body.tipo_incidencia, request.body.fecha_inicio, request.body.fecha_fin, request.body.archivado)
         .then(([rowsATiempo, fieldData1]) => {
-            Metricas.getADestiempo(request.body.usuario, request.body.tipo_incidencia, request.body.fecha_inicio, request.body.fecha_fin)
+            Metricas.getADestiempo(request.body.usuario, request.body.tipo_incidencia, request.body.fecha_inicio, request.body.fecha_fin, request.body.archivado)
             .then(([rowsDestiempo, fieldData2]) => {
-                Metricas.getSinResolver(request.body.usuario, request.body.tipo_incidencia, request.body.fecha_inicio, request.body.fecha_fin)
+                Metricas.getSinResolver(request.body.usuario, request.body.tipo_incidencia, request.body.fecha_inicio, request.body.fecha_fin, request.body.archivado)
                 .then(([rowsSin, fieldData3]) => {
                     let datosTickets = [
                         {estado: 'Resueltos a Tiempo', Tickets: rowsATiempo[0].A_Tiempo},

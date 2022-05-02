@@ -28,22 +28,29 @@
                         <form class="px-4 py-3">
                             <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>">
                             <div class="form-group">
-                                <label for="filtro_usuario"> Categoría</label>
-                                <select class="form-select" id="filtro_usuario" name="filtro_usuario" aria-label="Default select example" data-live-search="true">
+                                <label for="filtro_usuario"> Usuario</label>
+                                <select class="form-select" id="filtro_usuario" name="filtro_usuario" aria-label="Default select example">
+                                    <option selected value="ut.Id_Usuario" id="default"> Todos los usuarios </option>
                                     <% for (let usuario of usuarios){%>
-                                        <option selected="false" value="<%=usuario.Id_Usuario%>" id="usuario<%= usuario.Id_Usuario %>"> <%= usuario.Nombre_Usuario%> </option>
+                                        <option value="<%=usuario.Id_Usuario%>" id="usuario<%= usuario.Id_Usuario %>"> <%= usuario.Nombre_Usuario%> </option>
                                     <%}%>
-                                    <option selected value="" id="default"> Todos los usuarios </option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="filtro_tipo_incidencia"> Categoría</label>
-                                <select class="form-select" id="filtro_tipo_incidencia" name="filtro_tipo_incidencia" aria-label="Default select example" data-live-search="true">
-                                    
-                                    <% for (let incidencia of incidencias){%>
-                                        <option selected="false" value="<%=incidencia.Id_Tipo_Incidencia%>" id="tipo_incidencia<%= incidencia.Id_Tipo_Incidencia %>"> <%=incidencia.Nombre_Tipo_Incidencia%> </option>
-                                    <%}%>
+                                <select class="form-select" id="filtro_tipo_incidencia" name="filtro_tipo_incidencia" aria-label="Default select example">
                                     <option selected value="t.Id_Tipo_Incidencia" id="default"> Todas las categorias </option>
+                                    <% for (let incidencia of incidencias){%>
+                                        <option value="<%=incidencia.Id_Tipo_Incidencia%>" id="tipo_incidencia<%= incidencia.Id_Tipo_Incidencia %>"> <%=incidencia.Nombre_Tipo_Incidencia%> </option>
+                                    <%}%>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="filtro_archivado"> Visibilidad</label>
+                                <select class="form-select" id="filtro_archivado" name="filtro_archivado" aria-label="Default select example">
+                                    <option selected value="t.Archivado" id="default"> Todos </option>
+                                    <option value="0" id="default"> Activos </option>
+                                    <option value="1" id="default"> Archivados </option>
                                 </select>
                             </div>
                             <br>

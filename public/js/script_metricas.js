@@ -10,14 +10,26 @@ function allByEstado()
     let f_usuario = document.getElementById("filtro_usuario").value
     let f_categoria = document.getElementById("filtro_tipo_incidencia").value
     let f_fecha_inicio = document.getElementById("fecha_inicio").value
-    let f_fecha_fin = document.getElementById("filtro_tipo_incidencia").value
+    let f_fecha_fin = document.getElementById("fecha_fin").value
     const csrf = document.getElementById('_csrf').value;
+    let f_archivado = document.getElementById("filtro_archivado").value
+
+    if(f_fecha_inicio == '')
+    {
+        f_fecha_inicio = "t.Fecha_Inicio";
+    }
+
+    if(f_fecha_fin == '')
+    {
+        f_fecha_fin = "t.Fecha_Inicio";
+    }
 
     data = {
         tipo_incidencia : f_categoria,
         usuario: f_usuario,
         fecha_inicio: f_fecha_inicio,
-        fecha_fin: f_fecha_fin
+        fecha_fin: f_fecha_fin,
+        archivado: f_archivado
     }
 
     fetch(rutaTickets, {
@@ -108,12 +120,38 @@ function allByEstado()
 function allByProcedencia()
 {
     let rutaTickets = '../metricas/getByProcedenciaAll';
+    let f_usuario = document.getElementById("filtro_usuario").value
+    let f_categoria = document.getElementById("filtro_tipo_incidencia").value
+    let f_fecha_inicio = document.getElementById("fecha_inicio").value
+    let f_fecha_fin = document.getElementById("fecha_fin").value
+    const csrf = document.getElementById('_csrf').value;
+    let f_archivado = document.getElementById("filtro_archivado").value
+
+    if(f_fecha_inicio == '')
+    {
+        f_fecha_inicio = "t.Fecha_Inicio";
+    }
+
+    if(f_fecha_fin == '')
+    {
+        f_fecha_fin = "t.Fecha_Inicio";
+    }
+
+    data = {
+        tipo_incidencia : f_categoria,
+        usuario: f_usuario,
+        fecha_inicio: f_fecha_inicio,
+        fecha_fin: f_fecha_fin,
+        archivado: f_archivado
+    }
 
     fetch(rutaTickets, {
-        method: 'GET',
+        method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
-        }
+            'Content-Type': 'application/json',
+            'csrf-token': csrf
+        },
+        body:JSON.stringify(data)
     })
     .then(response => response.json())
     .then(response => {
@@ -202,12 +240,38 @@ function allByProcedencia()
 function allByTipoIncidencia()
 {
     let rutaTickets = '../metricas/getByTipoIncidenciaAll';
+    let f_usuario = document.getElementById("filtro_usuario").value
+    let f_categoria = document.getElementById("filtro_tipo_incidencia").value
+    let f_fecha_inicio = document.getElementById("fecha_inicio").value
+    let f_fecha_fin = document.getElementById("fecha_fin").value
+    const csrf = document.getElementById('_csrf').value;
+    let f_archivado = document.getElementById("filtro_archivado").value
+
+    if(f_fecha_inicio == '')
+    {
+        f_fecha_inicio = "t.Fecha_Inicio";
+    }
+
+    if(f_fecha_fin == '')
+    {
+        f_fecha_fin = "t.Fecha_Inicio";
+    }
+
+    data = {
+        tipo_incidencia : f_categoria,
+        usuario: f_usuario,
+        fecha_inicio: f_fecha_inicio,
+        fecha_fin: f_fecha_fin,
+        archivado: f_archivado
+    }
 
     fetch(rutaTickets, {
-        method: 'GET',
+        method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
-        }
+            'Content-Type': 'application/json',
+            'csrf-token': csrf
+        },
+        body:JSON.stringify(data)
     })
     .then(response => response.json())
     .then(response => {
@@ -293,12 +357,38 @@ function allByTipoIncidencia()
 function allByResolucion()
 {
     let rutaTickets = '../metricas/getByResolucion';
+    let f_usuario = document.getElementById("filtro_usuario").value
+    let f_categoria = document.getElementById("filtro_tipo_incidencia").value
+    let f_fecha_inicio = document.getElementById("fecha_inicio").value
+    let f_fecha_fin = document.getElementById("fecha_fin").value
+    const csrf = document.getElementById('_csrf').value;
+    let f_archivado = document.getElementById("filtro_archivado").value
+
+    if(f_fecha_inicio == '')
+    {
+        f_fecha_inicio = "t.Fecha_Inicio";
+    }
+
+    if(f_fecha_fin == '')
+    {
+        f_fecha_fin = "t.Fecha_Inicio";
+    }
+
+    data = {
+        tipo_incidencia : f_categoria,
+        usuario: f_usuario,
+        fecha_inicio: f_fecha_inicio,
+        fecha_fin: f_fecha_fin,
+        archivado: f_archivado
+    }
 
     fetch(rutaTickets, {
-        method: 'GET',
+        method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
-        }
+            'Content-Type': 'application/json',
+            'csrf-token': csrf
+        },
+        body:JSON.stringify(data)
     })
     .then(response => response.json())
     .then(response => {
@@ -310,8 +400,8 @@ function allByResolucion()
             labels: labels,
             datasets: [{
                 label: 'Resueltos',
-                backgroundColor: '#C9E265',
-                borderColor: '#C9E265',
+                backgroundColor: '#338128',
+                borderColor: '#338128',
                 data: [response.datos[0].Tickets],
                 borderWidth: 2,
                 borderRadius: 5,
@@ -319,8 +409,8 @@ function allByResolucion()
             },
             {
                 label: 'Resueltos a destiempo',
-                backgroundColor: '#FFE990',
-                borderColor: '#FFE990',
+                backgroundColor: '#FFCD00',
+                borderColor: '#FFCD00',
                 data: [response.datos[1].Tickets],
                 borderWidth: 2,
                 borderRadius: 5,
@@ -385,7 +475,7 @@ function allByResolucion()
                         offset: 20,
                         font: {
                             weight: 'bold',
-                            size: 10,
+                            size: 15,
                         }
                     }
                 }                
@@ -409,44 +499,19 @@ allByTipoIncidencia();
 
 document.getElementById("dropdown_filter_metricas").onclick = () =>
 {
-    let f_usuario = document.getElementById("filtro_usuario").value
-    let f_categoria = document.getElementById("filtro_tipo_incidencia").value
-    let f_fecha_inicio = document.getElementById("fecha_inicio").value
-    let f_fecha_fin = document.getElementById("fecha_fin").value
+    porEstados.destroy();
+    porTipoIncidencia.destroy();
+    porProcedencia.destroy();
+    porResolucion.destroy();
 
-    const csrf = document.getElementById('_csrf').value;
-    let ruta = '../tickets/filtros_backlog'
+    allByEstado();
+    allByProcedencia();
+    allByResolucion()
+    allByTipoIncidencia();
+}
 
-    data = {
-        tipo_incidencia : f_categoria,
-        usuario: f_usuario,
-        fecha_inicio: f_fecha_inicio,
-        fecha_fin: f_fecha_fin
-    }
+console.log(document.getElementById("fecha_inicio").value);
 
-    fetch(ruta,{
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'csrf-token': csrf
-        }
-    ,body:JSON.stringify(data)
-    })
-    .then(response => response.json())
-        .then(response => {
-    
-        content.innerHTML = '';
- 
-       
-        for(let ticket of response.tickets)
-        {
-            if(ticket.Id_Estado == 1){
-                var style = ticket.Id_Estado == 1 ? "color: grey" :  ticket.Id_Estado  == 2 ? "color: yellow"  :  ticket.Id_Estado == 3 ? "color: green" : ticket.Id_Estado  == 4 ? "color: red" :  ticket.Id_Estado  == 5 ? "color: purple" : "color : black" 
-                content.innerHTML += '<div  onClick="openTicket(this)" data-bs-toggle="modal" data-bs-target="#myModal" id=" boton' + ticket.Id_Ticket + '" class="col-3" style="cursor:pointer;margin-bottom:20px;"> <div class="card h-100" style="overflow: hidden;margin-top:10px;margin-bottom:10px;box-shadow: 1px 4px 8px rgba(0,0,0,0.46);"> <div class="card-body" style="text-align: left;width: 262px;overflow: hidden;"> <h4 class="card-title" style="overflow: hidden;color: rgb(0,0,0);text-align: left;"> #' + ticket.Id_Ticket + ':' + ticket.Asunto + '</h4> <h6 class="text-muted card-subtitle mb-2" style="overflow: hidden;color: rgb(0,0,0);">' + ticket.Descripcion.substring(0, 20) +'... </h6> <i class="fa fa-circle" style="'+ style +'" ></i> <span style="overflow: hidden;margin-left: 10px;color: rgb(136,136,136);">Creado el' + (ticket.Fecha_Inicio.toString()).substring(4, 21) + '</span> </div> </div> </div>'    
-            }
-        }
-
-    }).catch(err => {
-        console.log(err);
-    });
+document.getElementById("fecha_inicio").onchange = () => {
+    console.log(document.getElementById("fecha_inicio").value);
 }
