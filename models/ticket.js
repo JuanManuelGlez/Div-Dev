@@ -146,7 +146,6 @@ module.exports = class Ticket {
     }
 
     static async update(id_ticket, id_estado, id_prioridad, Estado_Actual, id_incidencia, id_usuario) {
-
         await this.assignIncidencia(id_ticket, id_incidencia);
         await this.assignPrioridad(id_ticket, id_prioridad);
         if (id_estado != Estado_Actual) {
@@ -164,7 +163,6 @@ module.exports = class Ticket {
             }
         }
     }
-
     static async archivar(archivado, id_ticket) {
         return db.execute('UPDATE ticket SET Archivado=? WHERE Id_Ticket=?', [archivado, id_ticket]);
     }
