@@ -12,10 +12,24 @@
 
 <div class="page-content-wrapper" style="color: var(--bs-teal);">
     <div class="container-fluid" style="color: transparent;background: var(--bs-indigo);">
-        <div class="row" style="background: var(--bs-red);">
+        <div class="row" style="background: #FF595A;">
             <div class="col" style="color: var(--bs-purple);background: #FF595A;">
                 <div></div>
                 <h1 style="color: var(--bs-white);margin-left: 20px;">Lista de Usuarios</h1>
+                
+            </div>
+            <div class="col" style="padding:10px"><input placeholder="Buscar..." id="input_busqueda" name="input_busqueda" class="form-control" type="text" maxlength="30"></div>
+            <div class="col-sm-3" style="padding-top:10px">
+
+              <div class="form-group">
+                <select class="form-select" id="filtro_rol" name="filtro_rol" aria-label="Default select example">
+                    
+                    <% for (let rol of rols){%>
+                        <option selected="false" value="<%=rol.Id_Rol%>" id="Rol<%= rol.Id_Rol %>"> <%=rol.Nombre_Rol%> </option>
+                    <%}%>
+                    <option selected value="U.Id_Rol" id="default"> Todos los roles </option>
+                </select>
+            </div>
             </div>
         </div>
     </div>
@@ -120,6 +134,8 @@
                     <div class="col" style="text-align: center;padding: 12px 0px;background: transparent;"><span style="color: rgb(0,0,0);font-weight: bold;font-size: 21px;">Rol</span></div>
                     <div class="col" style="text-align: center;padding: 12px 0px;background: transparent;"><span style="color: rgb(0,0,0);font-weight: bold;font-size: 21px;">Tickets Actuales</span></div>
                 </div>
+
+                <div class="col" id="display">
                 <% let i=0 %>
                 <% for(let usuario of usuarios) {%>
                   
@@ -139,11 +155,12 @@
                       
                 </div>
                 <% }%>
+              </div>
                 
             </div>
         </div>
     </div>
 </div>
-
+<script src="/js/script_filtros_usuarios.js"></script>
 <script src="/js/script_popup_usuario.js"></script>
 <%- include('includes/foot.ejs') %>

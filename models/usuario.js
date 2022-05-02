@@ -97,9 +97,17 @@ module.exports = class Usuario{
                 return db.execute('UPDATE usuario SET Id_Rol=? WHERE Id_Usuario=?',[id_rol, id_usuario]);
     }
     
+    static fetchByRol(execute) {
+        return db.execute(execute);
+    }
+    
     static async profile_update(name,id_usuario){
         
         return db.execute('UPDATE usuario SET Nombre_Usuario = ? WHERE Id_Usuario=?',[name,id_usuario]);
+    }
+
+    static fetchLike(texto_ingresado) {
+        return db.execute('SELECT R.Id_Rol, R.Nombre_Rol, U.Id_Rol, U.URL_Foto, U.Id_Usuario, U.Login, U.Contraseña, U.Nombre_Usuario, COUNT(T.Id_Ticket) AS "Total" FROM rol R, usuario_ticket T, usuario U WHERE R.Id_Rol = U.Id_Rol AND T.Id_Usuario = U.Id_Usuario AND U.Nombre_Usuario LIKE ? GROUP BY U.Id_Usuario', ['%' + texto_ingresado + '%']);
     }
 
 }

@@ -20,6 +20,10 @@ router.get('/lista', isAuth,usuario_controller.lista);
 
 router.get('/datos', isAuth,usuario_controller.datos);
 
+router.post('/getLike',isAuth, usuario_controller.getLike);
+
+router.post('/filtros', isAuth,usuario_controller.filtros);
+
 router.post('/profile_update', isAuth,usuario_controller.profile_update); // ?
 
 router.post('/profile_image', isAuth,usuario_controller.profile_image); // ?

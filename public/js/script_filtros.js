@@ -4,7 +4,7 @@ document.getElementById("dropdown_filter").onclick = () =>
     let f_usuario = document.getElementById("filtro_usuario").value
     let f_prioridad = document.getElementById("filtro_prioridad").value
     let f_categoria = document.getElementById("filtro_tipo_incidencia").value
-    let f_estado = "t.Id_Estado"
+    let f_estado = document.getElementById("filtro_estado").value
     let f_procedencia = "t.Id_Procedencia"
     let sin_asignar = document.getElementById("sin_asignar_col")
     let bloqueado = document.getElementById("bloqueado_col")
