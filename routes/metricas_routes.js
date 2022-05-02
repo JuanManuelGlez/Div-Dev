@@ -8,7 +8,7 @@ const metricas_controller = require('../controllers/metricas_controller');
 
 const router = express.Router();
     
-router.get('/getByStatusAll', isAuth, metricas_controller.getByStatusAll);
+router.post('/getByStatusAll', isAuth, metricas_controller.getByStatusAll);
 
 router.get('/getByProcedenciaAll', isAuth, metricas_controller.getByProcedenciaAll);
 

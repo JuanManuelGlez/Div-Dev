@@ -7,12 +7,26 @@ let porResolucion;
 function allByEstado()
 {
     let rutaTickets = '../metricas/getByStatusAll';
+    let f_usuario = document.getElementById("filtro_usuario").value
+    let f_categoria = document.getElementById("filtro_tipo_incidencia").value
+    let f_fecha_inicio = document.getElementById("fecha_inicio").value
+    let f_fecha_fin = document.getElementById("filtro_tipo_incidencia").value
+    const csrf = document.getElementById('_csrf').value;
+
+    data = {
+        tipo_incidencia : f_categoria,
+        usuario: f_usuario,
+        fecha_inicio: f_fecha_inicio,
+        fecha_fin: f_fecha_fin
+    }
 
     fetch(rutaTickets, {
-        method: 'GET',
+        method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
-        }
+            'Content-Type': 'application/json',
+            'csrf-token': csrf
+        },
+        body:JSON.stringify(data)
     })
     .then(response => response.json())
     .then(response => {

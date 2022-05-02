@@ -2,7 +2,7 @@ const path = require("path");
 const Metricas = require("../models/metrica");
 
 exports.getByStatusAll = (request, response, next) => {
-    Metricas.getByStatusAll()
+    Metricas.getByStatusAll(request.body.usuario, request.body.tipo_incidencia, request.body.fecha_inicio, request.body.fecha_fin)
         .then(([rowsEstados, fieldDataEstados]) => {
             response.status(200).json({datos: rowsEstados});
         })
@@ -10,7 +10,7 @@ exports.getByStatusAll = (request, response, next) => {
 }
 
 exports.getByProcedenciaAll = (request, response, next) => {
-    Metricas.getByProcedenciaAll()
+    Metricas.getByProcedenciaAll(request.body.usuario, request.body.tipo_incidencia, request.body.fecha_inicio, request.body.fecha_fin)
         .then(([rows, fieldData]) => {
             response.status(200).json({datos: rows});
         })
@@ -18,7 +18,7 @@ exports.getByProcedenciaAll = (request, response, next) => {
 }
 
 exports.getByTipoIncidenciaAll = (request, response, next) => {
-    Metricas.getByTipoIncidenciaAll()
+    Metricas.getByTipoIncidenciaAll(request.body.usuario, request.body.tipo_incidencia, request.body.fecha_inicio, request.body.fecha_fin)
         .then(([rows, fieldData]) => {
             response.status(200).json({datos: rows});
         })
@@ -26,11 +26,11 @@ exports.getByTipoIncidenciaAll = (request, response, next) => {
 }
 
 exports.getByResolucion = async (request, response, next) => {
-    Metricas.getATiempo()
+    Metricas.getATiempo(request.body.usuario, request.body.tipo_incidencia, request.body.fecha_inicio, request.body.fecha_fin)
         .then(([rowsATiempo, fieldData1]) => {
-            Metricas.getADestiempo()
+            Metricas.getADestiempo(request.body.usuario, request.body.tipo_incidencia, request.body.fecha_inicio, request.body.fecha_fin)
             .then(([rowsDestiempo, fieldData2]) => {
-                Metricas.getSinResolver()
+                Metricas.getSinResolver(request.body.usuario, request.body.tipo_incidencia, request.body.fecha_inicio, request.body.fecha_fin)
                 .then(([rowsSin, fieldData3]) => {
                     let datosTickets = [
                         {estado: 'Resueltos a Tiempo', Tickets: rowsATiempo[0].A_Tiempo},
