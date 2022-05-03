@@ -281,7 +281,7 @@ exports.ticket_post = (request, response, next) => {
 
 exports.filtros_panel = (request, response, next) => {
   
-  var execute = 'SELECT t.Id_Ticket,t.Asunto,t.Descripcion,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado FROM ticket t, usuario_ticket u WHERE t.Id_Ticket = u.Id_Ticket AND t.Archivado = 0 AND t.Id_Prioridad =' + request.body.prioridad + ' AND t.Id_Tipo_Incidencia = ' + request.body.tipo_incidencia +' AND u.Id_Usuario = ' + request.body.usuario + ' AND t.Id_Procedencia = ' + request.body.procedencia + ' AND t.Id_Estado = ' + request.body.estado + ' '
+  var execute = 'SELECT t.Id_Ticket,t.Asunto,t.Descripcion,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado FROM ticket t, usuario_ticket u WHERE t.Id_Ticket = u.Id_Ticket AND t.Archivado = 0 AND t.Id_Prioridad =' + request.body.prioridad + ' AND t.Id_Tipo_Incidencia = ' + request.body.tipo_incidencia +' AND u.Id_Usuario = ' + request.body.usuario + ' AND t.Id_Procedencia = ' + request.body.procedencia + ' AND t.Id_Estado = ' + request.body.estado + ' GROUP BY t.Id_Ticket'
   Ticket.fetchListFiltrarPanel(execute)
     .then(([rowsTickets, fielDataLabels]) => {
       response.status(200).json({
@@ -449,6 +449,6 @@ exports.ticket_panel=(request,response,next)=>{
           console.log(err);
         });
     })
-    .catch((err) => console.log(err));   
+    .catch((err) => console.log(err));    
 }
 
