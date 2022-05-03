@@ -50,6 +50,7 @@ router.get('/signup', isAuth,(request, response, next) =>{
 router.get('/administrar_privilegios', isAuth, privilegios_controller.getRoles);
 router.post('/AgregaPrivilegio', isAuth, privilegios_controller.AgregaPrivilegio);
 router.post('/EliminaPrivilegio', isAuth, privilegios_controller.EliminaPrivilegio);
+router.post('/CreaRol', isAuth, privilegios_controller.CreaRol);
 
 router.get('/nuevo_tipo_incidencia', isAuth,(request, response, next) =>{
     //if(  3 in request.session.privilegios){

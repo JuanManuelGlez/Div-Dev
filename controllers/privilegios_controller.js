@@ -34,3 +34,9 @@ exports.AgregaPrivilegio = (request, response, next) => {
             .then(response.status(200).json({}))
             .catch(err => console.log(err));
 }
+
+exports.CreaRol = (request, response, next) => {
+    Rol.CreaRol(request.body.Nombre_Rol)
+    .then(response.status(200).json({}))
+    .catch(err => console.log(err));
+}
