@@ -75,7 +75,7 @@ module.exports = class Usuario{
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
-        return db.execute('SELECT u.Nombre_Usuario, u.Id_Usuario, u.URL_Foto, u.Login, u.Contraseña, u.Id_Rol, r.Nombre_Rol, CASE WHEN (u.Id_Usuario IN (SELECT ut.Id_Usuario FROM usuario_ticket ut, estado_ticket et WHERE ut.Id_Ticket = et.Id_Ticket AND ut.Cargo = "Encargado" AND et.Id_Estado != 4 AND et.Id_Estado != 6) = FALSE) THEN 0 WHEN (u.Id_Usuario IN (SELECT ut.Id_Usuario FROM usuario_ticket ut, estado_ticket et WHERE ut.Id_Ticket = et.Id_Ticket AND ut.Cargo = "Encargado" AND et.Id_Estado != 4 AND et.Id_Estado != 6) = TRUE) THEN 1 END AS "Tickets" FROM usuario u , rol r WHERE u.Id_Rol = r.Id_Rol AND u.Login = u.Login GROUP BY u.Id_Usuario');
+        return db.execute('SELECT u.Nombre_Usuario, u.Id_Usuario, u.URL_Foto, u.Login, u.Contraseña, u.Id_Rol, r.Nombre_Rol, CASE WHEN (u.Id_Usuario IN (SELECT ut.Id_Usuario FROM usuario_ticket ut, ticket t WHERE ut.Id_Ticket = t.Id_Ticket AND ut.Cargo = "Encargado" AND t.Id_Estado != 4 AND t.Id_Estado != 6) = FALSE) THEN 0 WHEN (u.Id_Usuario IN (SELECT ut.Id_Usuario FROM usuario_ticket ut, ticket t WHERE ut.Id_Ticket = t.Id_Ticket AND ut.Cargo = "Encargado" AND t.Id_Estado != 4 AND t.Id_Estado != 6) = TRUE) THEN 1 END AS "Tickets" FROM usuario u , rol r WHERE u.Id_Rol = r.Id_Rol AND u.Login = u.Login GROUP BY u.Id_Usuario');
     }
 
     static findOne(login_usuario) {
