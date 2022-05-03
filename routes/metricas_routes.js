@@ -8,13 +8,13 @@ const metricas_controller = require('../controllers/metricas_controller');
 
 const router = express.Router();
     
-router.get('/getByStatusAll', isAuth, metricas_controller.getByStatusAll);
+router.post('/getByStatusAll', isAuth, metricas_controller.getByStatusAll);
 
-router.get('/getByProcedenciaAll', isAuth, metricas_controller.getByProcedenciaAll);
+router.post('/getByProcedenciaAll', isAuth, metricas_controller.getByProcedenciaAll);
 
-router.get('/getByTipoIncidenciaAll', isAuth, metricas_controller.getByTipoIncidenciaAll);
+router.post('/getByTipoIncidenciaAll', isAuth, metricas_controller.getByTipoIncidenciaAll);
 
-router.get('/getByResolucion', isAuth, metricas_controller.getByResolucion);
+router.post('/getByResolucion', isAuth, metricas_controller.getByResolucion);
 
 
 module.exports = router;

@@ -399,6 +399,12 @@ exports.getDatosTicket = (request, response, next) => {
     });
 };
 
+exports.asignar_usuario= async (request,response,next)=>{
+  
+  await Ticket.assignUsuario(request.params.id_ticket, request.body.elegir_usuario, "Encargado");
+  response.redirect("/tickets/lista")
+  
+}
 
 exports.ticket_panel=(request,response,next)=>{
     Ticket.fetchAll_Progreso(request.session.id_usuario)
@@ -444,3 +450,4 @@ exports.ticket_panel=(request,response,next)=>{
     })
     .catch((err) => console.log(err));   
 }
+

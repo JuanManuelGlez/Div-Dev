@@ -8,7 +8,6 @@
             }
         </style>
         <div id="Ticket" style="color:black">
-            <!-- The Modal -->
             <div class="modal fade" id="myModal">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -18,11 +17,13 @@
                                 </span> </h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
+
                         <!-- Modal body -->
                         <div class="modal-body">
                             <form id="modify_ticket" method="POST">
                                 <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>"></input>
                                 <input type="hidden" name="Id_Ticket" id="Id_Ticket" value="">
+
                                 <div class="row">
                                     <div class="col-xxl-2">
                                         <h6 style="text-align: left;">Tipo Incidencia</h6>
@@ -38,8 +39,11 @@
                                                 <%}%>
                                         </select>
                                     </div>
+                                    <div id="Usuario_Tipo"></div>
                                 </div>
+
                                 <br>
+
                                 <div class="row">
                                     <div class="col-xxl-2">
                                         <h6 style="text-align: left;">Estado</h6>
@@ -55,8 +59,11 @@
                                                 <%}%>
                                                     <input type="hidden" name="Estado_Actual" id="Estado_Actual"
                                                         value="">
+                                                    <div id="Usuario_Estado"></div>
                                         </select>
                                     </div>
+
+
                                     <div class="col-xxl-2">
                                         <h6 style="text-align: left;">Prioridad</h6>
                                     </div>
@@ -69,17 +76,25 @@
                                                     <%=prioridad.Nombre_Prioridad %>
                                                 </option>
                                                 <%}%>
+
                                         </select>
+                                        <div id="Usuario_Prioridad"></div>
                                     </div>
+
                                 </div>
+
                                 <br>
+                                <p id="fecha_fin"></p>
                                 <h6 id="label_display">Labels: </h6>
+
                                 <h6>Descripción: </h6>
                                 <p class="border-primary" id="descripcion"
                                     style="border-radius: 18px;padding: 0px;border-right: 0px solid rgb(0,0,0);">
                                 </p>
                                 <br>
+
                                 <h6>Preguntas: </h6>
+
                                 <div class="row">
                                     <div class="row" id="preguntas">
                                     </div>
@@ -87,11 +102,15 @@
                                     </div>
                                     <input type="hidden" id="numPreguntas" name="numPreguntas" value="0">
                                 </div>
+
+
                                 <div class="row">
+
+
                                     <div class="col"><button type="button" class="btn btn-primary" id="enviar"
                                             type="button"
                                             style="background: rgb(0,0,0);width: 100%;margin-top: 40px;border-width: 0px">Guardar<i
-                                                class="fa fa-refresh" style="margin-left: 15px;"></i></button></div>
+                                                class="fa fa-save" style="margin-left: 15px;"></i></button></div>
                                     <div class="col"><button class="btn btn-primary" id="boton_comentarios"
                                             type="button"
                                             style="background: rgb(0,0,0);width: 100%;margin-top: 40px;border-width: 0px">Comentarios<i
@@ -101,12 +120,23 @@
                                                 class="fa fa-user-plus" style="margin-left: 15px;"></i></button></div>
                                     <div class="col"><button class="btn btn-primary" id="archivar" type="button"
                                             style="background: rgb(0,0,0);width: 100%;margin-top: 40px;border-width: 0px;">
-                                            Desarchivar <i class="fa fa-archive"
-                                                style="margin-left: 15px;"></i></button></div>
+                                            Desarchivar <i class="fa fa-archive" style="margin-left: 15px;"></i></button>
+                                    </div>
+
                                 </div>
+
+
+
+
                             </form>
+
                         </div>
+
+
+
+
                         <div id="commentShow" style="display:none;" class="modal-body">
+
                             <div>
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
@@ -120,6 +150,7 @@
                                                     <input id="id_ticket" name="id_ticket" type="hidden" value="">
                                                     <input type="text" id="texto_comentario" name="texto_comentario"
                                                         placeholder="Escribe aqui...">
+
                                                     <button onClick="submitForm()" type="button" class="btn btn-success"
                                                         id="Agregar"> Agregar Comentario </button>
                                                     <input type="file" id="url_archivo_comentario"
@@ -135,6 +166,7 @@
                                                         });
                                                     </script>
                                                     <!-- </form> -->
+
                                                 </div>
                                                 <div id="comentarios"></div>
                                             </div>
@@ -144,8 +176,10 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
+        </div>
             <div class="page-content-wrapper" style="color: var(--bs-teal);">
                 <div class="container-fluid" style="color: transparent;background: white;">
                     <div class="row" style="background: var(--bs-red);">
