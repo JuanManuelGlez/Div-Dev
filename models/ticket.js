@@ -45,7 +45,7 @@ module.exports = class Ticket {
         return db.execute('SELECT t.Id_Ticket,t.Asunto,t.Fecha_Inicio,t.Descripcion, t.Id_Prioridad,t.Id_Estado FROM ticket t WHERE t.Archivado = 1');
     }
     static fetchAll_Progreso(id_usuario) {
-        return db.execute('SELECT t.Id_Ticket,t.Descripcion,t.Asunto,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado FROM ticket t, usuario_ticket ut WHERE t.Archivado = 0 AND ut.Id_Ticket = t.Id_Ticket AND ut.Id_Usuario=? GROUP BY t.Id_Ticket',[id_usuario])
+        return db.execute('SELECT t.Id_Ticket,t.Descripcion,t.Asunto,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado FROM ticket t, usuario_ticket ut WHERE t.Archivado = 0 AND ut.Id_Ticket = t.Id_Ticket GROUP BY t.Id_Ticket')
     }
     static fetchAllSinAsignar(){
         return db.execute('SELECT t.Id_Ticket,t.Descripcion,t.Asunto,t.Fecha_Inicio,t.Id_Prioridad,t.Id_Estado FROM ticket t WHERE t.Archivado = 0 AND t.Id_Estado = 1')
