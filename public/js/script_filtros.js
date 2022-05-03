@@ -41,8 +41,8 @@ document.getElementById("dropdown_filter").onclick = () =>
         
         for(let ticket of response.tickets)
             {   
-                let fecha_inicio_ = "";
-                fecha_inicio_ = new Date(ticket.Fecha_Inicio);
+                let fecha_inicio = "";
+                let fecha_inicio_ = new Date(ticket.Fecha_Inicio);
                 fecha_inicio = fecha_inicio_.toString().substring(4,21);
                 if(ticket.Id_Estado == 1){
                     var style = ticket.Id_Estado == 1 ? "color: grey" :  ticket.Id_Estado == 6? "color: green" : ticket.Id_Estado  == 4 ? "color: red" : "color : yellow" 
