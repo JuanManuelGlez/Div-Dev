@@ -286,7 +286,6 @@ function allByResolucion()
         console.log(response);
 
         let labels = ['Ticekts'];
-        
         const data = {
             labels: labels,
             datasets: [{
