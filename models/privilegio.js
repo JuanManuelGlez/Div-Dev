@@ -12,9 +12,8 @@ module.exports = class Privilegio{
     }
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
-    static fetchPrivilegios(id) {
-        return db.execute('SELECT p.Nombre_Privilegio, p.Id_Privilegio, rp.Id_Rol FROM privilegio p, rol_privilegio rp WHERE p.Id_Privilegio = rp.Id_Privilegio HAVING rp.Id_Rol = ?', 
-        [id]);
+    static fetchPrivilegios() {
+        return db.execute('SELECT * FROM rol_privilegio');
     }
 
     static fetchAll(){

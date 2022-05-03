@@ -1,42 +1,6 @@
-document.getElementById("select_rol").onchange = () =>
-{
-    let value = document.getElementById("select_rol").value;
+function privilegioChange(element, id_privilegio, id_rol) {
 
-    let rutaPrivilegios = '../getPrivilegios/' + value;
-
-    fetch(rutaPrivilegios, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(response => {
-        privilegio_select.innerHTML = '';
-        privilegio_select.innerHTML += '<table class = "table table-bordered"><thead><tr><th scope="col"> Privilegio </th><th scope="col"> Check </th></tr></thead><tbody id="table_privilegios">';
-        
-        for(let privilegio of response.allprivilegios)
-        {
-            document.getElementById("table_privilegios").innerHTML += '<tr> <td>' + privilegio.Nombre_Privilegio + ' </td> <td> <input type="checkbox" id='+ (privilegio.Nombre_Privilegio).replace(/\s/g,'_')+' name='+(privilegio.Nombre_Privilegio).replace(/\s/g,'')+' value='+privilegio.Nombre_Privilegio+' onchange="privilegioChange(this, '+privilegio.Id_Privilegio+')"> </td></tr>'
-        }
-        privilegio_select.innerHTML += '</tbody>';
-        privilegio_select.innerHTML += '</table>';
-
-        for(let privilegio of response.privilegiosact){
-            document.getElementById((privilegio.Nombre_Privilegio).replace(/\s/g,'_')).setAttribute('checked',true);
-        }
-
-    }).catch(err => {
-        console.log(err);
-    });
-    
-}
-
-function privilegioChange(element, id_privilegio) {
-
-    const csrf = document.getElementById('_csrf').value;
-    id_rol = document.getElementById("select_rol").value;
-    
+    const csrf = document.getElementById('_csrf').value;    
     if(element.getAttribute('checked') == 'true'){
 
         element.removeAttribute('checked');

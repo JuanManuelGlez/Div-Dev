@@ -9,25 +9,43 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12 offset-12 offset-sm-12 offset-lg-0 offset-xxl-0" style="margin-bottom:80px;padding:30px">
-            <div class="row" style="padding: 15px 0px;">
-                <div class="col-xxl-1"><label class="col-form-label text-dark">Rol</label></div>
-                <div class="col">
-                    <div class="dropdown shadow">
-                        <select required class="form-select" id="select_rol" name="select_rol" aria-label="Default select example">
-                            <option selected disabled>Elige el rol</option>
-                            <% for(let rol of roles) {%>
-                            <option value="<%= rol.Nombre_Rol %>"><%= rol.Nombre_Rol %></option>                            
-                            <% }%>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div id="privilegio_select"></div>
+    <table class = "table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col"> Privilegio </th>
+                <% for (let rol of roles){ %>
+                    <th scope="col"> <%= rol.Nombre_Rol %></th>
+                <% } %>
+            </tr> 
+        </thead>
+        <tbody id="table_privilegios">
+            <% for (let privilegio of allprivilegios){ %>
+            <tr>
+                <td> <%= privilegio.Nombre_Privilegio %></td>
+                <% for (let rol of roles){ %>
+                    <% let check = 0; %>
+                    <% for (let act of privilegiosact){ %>
+                        <% console.log(act.Id_Privilegio); %>
+                        <% if(act.Id_Rol == rol.Id_Rol && act.Id_Privilegio == privilegio.Id_Privilegio){ %>
+                            <% check = 1; %>
+                        <% }%>
+                    <% }%>
+                    <% if(check == 1){ %>
+                        <td> 
+                            <input type="checkbox" id= "<%= (privilegio.Nombre_Privilegio).replace(/\s/g,'_')+rol.Id_Rol %>" name= "<%= (privilegio.Nombre_Privilegio).replace(/\s/g,'')+rol.Id_Rol %>" value= "<%= privilegio.Nombre_Privilegio %>" checked = true onchange='privilegioChange(this, "<%= privilegio.Id_Privilegio %>" ,"<%= rol.Id_Rol %>")'> 
+                        </td>
+                    <% }else{%>
+                        <td> 
+                            <input type="checkbox" id= "<%= (privilegio.Nombre_Privilegio).replace(/\s/g,'_')+rol.Id_Rol %>" name= "<%= (privilegio.Nombre_Privilegio).replace(/\s/g,'')+rol.Id_Rol %>" value= " <%= privilegio.Nombre_Privilegio %>" onchange='privilegioChange(this, "<%= privilegio.Id_Privilegio %>" ,"<%= rol.Id_Rol %>")'> 
+                        </td>
+                    <% }%>
+                <% }%>
+            </tr>
+            <% }%>
+        </tbody>
+    </table>
+
 
 </div>
 

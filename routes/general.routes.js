@@ -48,7 +48,6 @@ router.get('/signup', isAuth,(request, response, next) =>{
 });
 
 router.get('/administrar_privilegios', isAuth, privilegios_controller.getRoles);
-router.get('/getPrivilegios/:rol', isAuth, privilegios_controller.getprivs);
 router.post('/AgregaPrivilegio', isAuth, privilegios_controller.AgregaPrivilegio);
 router.post('/EliminaPrivilegio', isAuth, privilegios_controller.EliminaPrivilegio);
 
