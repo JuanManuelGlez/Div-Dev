@@ -406,6 +406,18 @@ exports.asignar_usuario= async (request,response,next)=>{
   
 }
 
+exports.usuarios_get=(request,response,next)=>{
+  Ticket.UsuarioEncargado(request.params.id_ticket)
+  .then(([rows_encargado,fielData_encargado])=>{
+      Usuario.fetchAll_AsignarTicket()
+          .then(([rows,fielData])=>{
+              response.render('tickets/asignar_ticket', {
+                  usuarios:rows, encargado: rows_encargado
+              });
+       }).catch(error=>console.log(error));
+  }).catch(error=>console.log(error));
+}
+
 exports.ticket_panel=(request,response,next)=>{
     Ticket.fetchAll_Progreso(request.session.id_usuario)
     .then(([rowsTickets, fielData]) => {

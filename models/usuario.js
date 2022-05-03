@@ -97,6 +97,10 @@ module.exports = class Usuario{
             [id_usuario]);
     }
 
+    static fetchAll_AsignarTicket(){
+        return db.execute("SELECT ut.Id_Usuario, u.Nombre_Usuario, u.URL_Foto, COUNT(*) AS 'Tickets_Activos' FROM usuario_ticket ut, estado_ticket et, usuario u WHERE ut.Id_Ticket = et.Id_Ticket AND u.Id_Usuario = ut.Id_Usuario AND ut.Cargo = 'Encargado' AND (et.Id_Estado = 2 OR et.Id_Estado = 3 OR et.Id_Estado = 4) GROUP BY u.Nombre_Usuario, u.URL_Foto ORDER BY COUNT('Tickets_Activos')");}
+
+   
 
     static fetchOne(id_usuario) {
         return db.execute('SELECT * FROM usuario WHERE Id_Usuario=?',
