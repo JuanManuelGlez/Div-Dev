@@ -251,6 +251,7 @@ document.getElementById("enviar").onclick = () =>
   .then(response => {
       alert("Datos guardados");
       closeTicket();
+      document.location.reload();
       openTicket(document.getElementById("boton"+idTicket));
   }).catch(err => {
       console.log(err);
@@ -289,6 +290,7 @@ document.getElementById("archivar").onclick = () =>
 function closeTicket() {
   document.getElementById("Ticket").style.display = "none";
   document.getElementById("commentShow").style.display = "none";
+//   document.location.reload();
 }
 
 $('#Ticket').on('hidden.bs.modal', function () {
