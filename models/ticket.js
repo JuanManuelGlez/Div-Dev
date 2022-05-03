@@ -163,12 +163,12 @@ module.exports = class Ticket {
         await this.assignPrioridad(id_ticket, id_prioridad);
         if (id_estado != Estado_Actual) {
             await this.assignEstado(id_ticket, id_estado);
-            db.execute('INSERT INTO usuario_ticket VALUES (?, ?, "Encargado", CURRENT_TIMESTAMP)', [id_usuario, id_ticket]);
+            db.execute('UPDATE usuario_ticket SET Id_Usuario = ?, Fecha_Asignacion = CURRENT_TIMESTAMP WHERE Id_Ticket = ? AND Cargo = "Encargado"', [id_usuario, id_ticket]);
             if (id_estado == 4 || id_estado == 6) {
                 db.execute('UPDATE ticket SET Fecha_Fin = CURRENT_TIMESTAMP, Id_Estado = ? WHERE Id_Ticket=?', [id_estado, id_ticket]);
             }
             else if (id_estado == 1){
-                db.execute('DELETE FROM usuario_ticket WHERE Id_Ticket = ? AND Cargo = "Encargado"', [id_ticket]);
+                db.execute('UPDATE usuario_ticket SET Id_Usuario = 0 WHERE Id_Ticket = ? AND Cargo = "Encargado"', [id_ticket]);
                 db.execute('UPDATE ticket SET Fecha_Fin = NULL, Id_Estado = ? WHERE Id_Ticket=?', [id_estado, id_ticket]);
             }
             else if (id_estado != 4 || id_estado != 6) {

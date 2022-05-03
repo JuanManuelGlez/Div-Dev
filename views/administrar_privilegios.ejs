@@ -15,6 +15,46 @@
             <div class="col" style="padding: 15px;text-align: left;border-radius: 17px;box-shadow: 0px 0px 20px rgba(143,143,143,0.5);">
                 <div class="row">
                     <div class="col">
+                        <h3 style="color: rgb(0,0,0);text-align: left;margin-left: 30px;margin-bottom: 20px;"> Crear nuevo rol </h3>
+                    </div>
+                </div>
+                <div class="row" style="margin: 0px 30px;border-width: 2px;border-color: var(--bs-red);">
+                    <div class="col" style="padding: 0px;">
+                        <div class="row" style="padding: 0px;margin: 0px;margin-top: 0px;border-width: 5px;border-color: var(--bs-red);margin-left: 0px;">
+                            
+
+                            <table class = "table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"> Rol </th>
+                                    </tr> 
+                                </thead>
+                                <tbody id="table_privilegios">
+                                    <% for (let rol of roles){ %>
+                                        <tr>
+                                            <div id="textinput_mod"><td scope="col"> <input class="form-control" type="text" id="nuevo_rol" name="nuevo_rol" value="<%= rol.Nombre_Rol %>"></td></div>
+                                            <td scope="col"> <button id='<%= "eliminar" + rol.Nombre_Rol%>' type="button" class="btn btn-primary btn-sm float-end " style="height: 30px;" onclick="Modificarol(this)">Modificar </button>
+                                            <button id='<%= "eliminar" + rol.Nombre_Rol%>' type="button" class="btn btn-danger btn-sm float-end" style="height: 30px; margin-left:20px; margin-right:20px" onclick="eliminarol(this)">Eliminar</button></td>
+                                        </tr> 
+                                    <% } %>
+                                </tbody>
+                            </table>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div style="margin-top:30px" class="container">
+        <div class="row" style="color:black;margin: 0px 25px;margin-top: 24px;">
+            <div class="col" style="padding: 15px;text-align: left;border-radius: 17px;box-shadow: 0px 0px 20px rgba(143,143,143,0.5);">
+                <div class="row">
+                    <div class="col">
                         <h3 style="color: rgb(0,0,0);text-align: left;margin-left: 30px;margin-bottom: 20px;"> Administra privilegios </h3>
                     </div>
                 </div>

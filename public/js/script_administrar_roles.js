@@ -17,6 +17,7 @@ document.getElementById("enviar_rol").onclick = () => {
     .then(response => {
         document.getElementById("nuevo_rol").value = "";
         alert('Operacion completada')
+        response.redirect("/administrar_privilegios");
 
     }).catch(err => {
         console.log(err);
