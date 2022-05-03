@@ -32,13 +32,16 @@ document.getElementById("credencial").onclick=()=>{
     })
     .then(response => response.json())
     .then(response => {
-        if (response.errores==true){
+        if (response.errores==1){
             //alert("Usuario y/o Contraseña Incorrecots");
             mensaje_error.innerHTML += '<p class="text-center text-danger"> Usuario y/o contraseña erroneo </p>';
 
-        }else if(response.errores==false){
+        }else if(response.errores==0){
             window.location.href="/"
             
+        }else if(response.errores==2){
+            mensaje_error.innerHTML += '<p class="text-center text-danger"> No ha verificado su correo </p>';
+
         }
        
     }).catch(err => {

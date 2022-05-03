@@ -1,5 +1,16 @@
 const db = require('../util/database');
 const bcrypt = require('bcryptjs');
+const nodemailer= require('nodemailer');
+        const { callbackPromise } = require('nodemailer/lib/shared');
+        
+        const transporter= nodemailer.createTransport({
+            service: "hotmail",
+            auth : {
+                user:"ticketz_no_reply@outlook.com",
+                pass: "Jorgito@22"
+            }
+        });
+
 
 module.exports = class Usuario{
 
@@ -9,7 +20,7 @@ module.exports = class Usuario{
         this.login_usuario = login;
         this.contrasenia_usuario = contrasenia;
         this.url_foto_usuario = url_foto;
-        this.id_rol_usuario = 1;
+        this.id_rol_usuario = 4;
     }
 
     //Este método servirá para guardar de manera persistente el nuevo objeto. 
@@ -17,17 +28,26 @@ module.exports = class Usuario{
         
         return bcrypt.hash(this.contrasenia_usuario, 12)
         .then((contrasenia_usuario_cifrado)=>{
-            return db.execute('INSERT INTO usuario(Id_Rol, Nombre_Usuario, Login, Contraseña, URL_Foto) VALUES (?, ?, ?, ?, ?)', 
-                [
-                    this.id_rol_usuario,
-                    this.nombre_usuario,
-                    this.login_usuario,
-                    contrasenia_usuario_cifrado,
-                    this.url_foto_usuario
-                ]    
-            );
-        })
-        .catch((err) =>{    
+            var crypto = require("crypto");
+            var id = crypto.randomBytes(20).toString('hex');
+            const options= {
+                from: "ticketz_no_reply@outlook.com",
+                to: this.login_usuario,
+                subject: "Verificacion Ticketz",
+                text: "Haga click en el siguiente link para verificar su correo:  localhost:8080/verificacion/"+ id 
+            };
+            transporter.sendMail(options,callbackPromise());
+                        return db.execute('INSERT INTO usuario(Id_Rol, Nombre_Usuario, Login, Contraseña, URL_Foto, Hash_Verificacion) VALUES (?, ?, ?, ?, ?,?)', 
+                            [
+                                this.id_rol_usuario,
+                                this.nombre_usuario,
+                                this.login_usuario,
+                                contrasenia_usuario_cifrado,
+                                this.url_foto_usuario,
+                                id
+                            ]    
+                        )
+            }).catch((err) =>{    
             console.log(err);
         });
 
@@ -39,6 +59,10 @@ module.exports = class Usuario{
             [login])
         .then()
         .catch((err) => {console.log(err);});
+    }
+
+    static getOneActive(login){
+        return db.execute('SELECT u.Activo FROM usuario u WHERE u.login = ? ', [login]);
     }
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
@@ -110,4 +134,11 @@ module.exports = class Usuario{
         return db.execute('SELECT R.Id_Rol, R.Nombre_Rol, U.Id_Rol, U.URL_Foto, U.Id_Usuario, U.Login, U.Contraseña, U.Nombre_Usuario, COUNT(T.Id_Ticket) AS "Total" FROM rol R, usuario_ticket T, usuario U WHERE R.Id_Rol = U.Id_Rol AND T.Id_Usuario = U.Id_Usuario AND U.Nombre_Usuario LIKE ? GROUP BY U.Id_Usuario', ['%' + texto_ingresado + '%']);
     }
 
+
+    static  Usuario_Verificar(hash){
+        return db.execute('SELECT U.Id_Usuario,U.Contraseña FROM usuario U WHERE Hash_Verificacion=?',[hash]);
+    }
+    static async Activo(id_usuario){
+        return db.execute('UPDATE usuario SET Activo = 1 WHERE Id_Usuario=?',[id_usuario]);
+    }
 }

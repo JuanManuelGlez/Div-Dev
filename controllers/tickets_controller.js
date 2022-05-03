@@ -448,6 +448,6 @@ exports.ticket_panel=(request,response,next)=>{
           console.log(err);
         });
     })
-    .catch((err) => console.log(err));   
+    .catch((err) => console.log(err));    
 }
 
