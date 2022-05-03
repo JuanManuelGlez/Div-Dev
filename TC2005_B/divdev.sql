@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-04-2022 a las 15:37:37
+-- Tiempo de generación: 03-05-2022 a las 16:38:10
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -105,12 +105,14 @@ INSERT INTO `estado_ticket` (`Id_Estado`, `Id_Ticket`, `Fecha_y_Hora`) VALUES
 (1, 4, '2022-04-28 10:51:40'),
 (1, 4, '2022-04-28 17:36:59'),
 (1, 4, '2022-04-28 17:55:15'),
+(1, 4, '2022-05-02 20:19:19'),
 (1, 5, '2022-04-28 11:04:15'),
 (1, 6, '2022-04-28 17:51:35'),
 (1, 6, '2022-04-28 17:52:57'),
 (1, 6, '2022-04-28 17:54:02'),
 (1, 7, '2022-04-29 08:25:39'),
 (1, 8, '2022-04-29 08:26:06'),
+(1, 8, '2022-05-02 20:26:19'),
 (1, 9, '2022-04-29 08:26:45'),
 (1, 10, '2022-04-29 08:28:43'),
 (2, 2, '2022-04-27 16:58:36'),
@@ -138,6 +140,7 @@ INSERT INTO `estado_ticket` (`Id_Estado`, `Id_Ticket`, `Fecha_y_Hora`) VALUES
 (3, 2, '2022-04-27 19:08:51'),
 (3, 2, '2022-04-28 17:28:07'),
 (3, 2, '2022-04-28 17:41:24'),
+(3, 2, '2022-05-02 20:19:12'),
 (3, 3, '2022-04-27 18:11:59'),
 (3, 4, '2022-04-28 17:36:52'),
 (3, 4, '2022-04-28 17:54:47'),
@@ -160,6 +163,8 @@ INSERT INTO `estado_ticket` (`Id_Estado`, `Id_Ticket`, `Fecha_y_Hora`) VALUES
 (4, 3, '2022-04-27 19:40:04'),
 (4, 3, '2022-04-28 10:53:24'),
 (4, 6, '2022-04-29 08:27:24'),
+(4, 8, '2022-05-02 20:26:26'),
+(4, 10, '2022-05-02 20:16:13'),
 (5, 2, '2022-04-28 17:28:18'),
 (5, 3, '2022-04-27 18:12:04'),
 (5, 5, '2022-04-29 08:28:17'),
@@ -182,7 +187,8 @@ INSERT INTO `estado_ticket` (`Id_Estado`, `Id_Ticket`, `Fecha_y_Hora`) VALUES
 (6, 6, '2022-04-28 17:52:11'),
 (6, 6, '2022-04-28 17:53:41'),
 (6, 8, '2022-04-29 08:27:35'),
-(6, 9, '2022-04-29 08:27:45');
+(6, 9, '2022-04-29 08:27:45'),
+(6, 10, '2022-05-02 20:26:35');
 
 -- --------------------------------------------------------
 
@@ -569,15 +575,15 @@ CREATE TABLE `ticket` (
 --
 
 INSERT INTO `ticket` (`Id_Ticket`, `Id_Procedencia`, `Id_Tipo_Incidencia`, `Id_Prioridad`, `Fecha_Inicio`, `Fecha_Fin`, `Descripcion`, `Asunto`, `Archivado`, `Id_Estado`) VALUES
-(2, 12, 1, 1, '2022-04-27 13:47:09', NULL, 'Prueba 3 cambio bd', 'Prueba 3 cambio bd', 0, 1),
+(2, 12, 1, 4, '2022-04-27 13:47:09', NULL, 'Prueba 3 cambio bd', 'Prueba 3 cambio bd', 0, 3),
 (3, 10, 6, 1, '2022-04-27 18:11:39', NULL, 'Prueba 4 cambio bd', 'Prueba 4 cambio bd', 0, 2),
-(4, 8, 4, 1, '2022-04-27 18:49:51', NULL, 'Prueba 5 cambio bd', 'Prueba 5 cambio bd', 1, 3),
+(4, 8, 4, 1, '2022-04-27 18:49:51', NULL, 'Prueba 5 cambio bd', 'Prueba 5 cambio bd', 0, 1),
 (5, 2, 8, 1, '2022-04-28 11:04:15', NULL, 'Prueba 6 cambio bd', 'Prueba 6 cambio bd', 0, 5),
-(6, 12, 4, 1, '2022-04-28 17:51:35', '2022-04-29 08:27:24', 'Prueba 7 cambio bd', 'Prueba 7 cambio bd', 0, 4),
+(6, 12, 4, 1, '2022-04-28 17:51:35', '2022-04-29 08:27:24', 'Prueba 7 cambio bd', 'Prueba 7 cambio bd', 0, 6),
 (7, 4, 4, 1, '2022-04-29 08:25:39', NULL, 'Prueba 1 Instancia', 'Prueba 1 Instancia', 0, 1),
-(8, 10, 1, 1, '2022-04-29 08:26:06', '2022-04-29 08:27:35', 'Prueba 2 Instancia', 'Prueba 2 Instancia', 0, 6),
+(8, 10, 1, 1, '2022-04-29 08:26:06', '2022-05-02 20:26:26', 'Prueba 2 Instancia', 'Prueba 2 Instancia', 0, 4),
 (9, 12, 11, 1, '2022-04-29 08:26:45', '2022-04-29 08:27:45', 'Prueba 3 Instancia', 'Prueba 3 Instancia', 0, 6),
-(10, 10, 8, 1, '2022-04-29 08:28:43', NULL, 'Prueba 4 Instancia', 'Prueba 4 Instancia', 0, 1);
+(10, 10, 8, 1, '2022-04-29 08:28:43', '2022-05-02 20:26:35', 'Prueba 4 Instancia', 'Prueba 4 Instancia', 0, 6);
 
 -- --------------------------------------------------------
 
@@ -663,16 +669,19 @@ CREATE TABLE `usuario` (
   `Nombre_Usuario` varchar(70) CHARACTER SET utf8mb4 NOT NULL,
   `Login` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
   `Contraseña` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
-  `URL_Foto` varchar(255) CHARACTER SET utf8mb4 NOT NULL
+  `URL_Foto` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+  `Activo` tinyint(1) NOT NULL DEFAULT 0,
+  `Hash_Verificacion` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`Id_Usuario`, `Id_Rol`, `Nombre_Usuario`, `Login`, `Contraseña`, `URL_Foto`) VALUES
-(1, 1, 'Rodrigo M', 'ro@zeb.mx', '$2a$12$wVKI2Xd8aYOGxIxQehjx2OmwhUD.C7Oz4LM19A9Uhxn4lt/mw3/Au', 'https://tanzolymp.com/images/default-non-user-no-photo-1.jpg'),
-(2, 3, 'MAURICIO', 'mau@zeb.mx', '$2a$12$WvpeezaxYMQqKMajonPUdO7nHNF4Bc04AbuaYLVDShAguuvpo5bAC', 'https://tanzolymp.com/images/default-non-user-no-photo-1.jpg');
+INSERT INTO `usuario` (`Id_Usuario`, `Id_Rol`, `Nombre_Usuario`, `Login`, `Contraseña`, `URL_Foto`, `Activo`, `Hash_Verificacion`) VALUES
+(0, 4, 'Usuario Sin Asignar', 'n/a', 'n/a', 'n/a', 1, 'n/a'),
+(1, 1, 'Rodrigo M', 'ro@zeb.mx', '$2a$12$wVKI2Xd8aYOGxIxQehjx2OmwhUD.C7Oz4LM19A9Uhxn4lt/mw3/Au', 'https://tanzolymp.com/images/default-non-user-no-photo-1.jpg', 1, '0'),
+(2, 3, 'MAURICIO', 'mau@zeb.mx', '$2a$12$WvpeezaxYMQqKMajonPUdO7nHNF4Bc04AbuaYLVDShAguuvpo5bAC', 'https://tanzolymp.com/images/default-non-user-no-photo-1.jpg', 1, '0');
 
 -- --------------------------------------------------------
 
@@ -693,20 +702,22 @@ CREATE TABLE `usuario_ticket` (
 
 INSERT INTO `usuario_ticket` (`Id_Usuario`, `Id_Ticket`, `Cargo`, `Fecha_Asignacion`) VALUES
 (1, 2, 'Creador', '2022-04-27 13:47:09'),
+(1, 2, 'Encargado', '2022-05-02 20:19:12'),
 (1, 3, 'Creador', '2022-04-27 18:11:39'),
 (1, 3, 'Encargado', '2022-04-29 08:27:05'),
 (1, 4, 'Creador', '2022-04-27 18:49:51'),
-(1, 4, 'Encargado', '2022-04-29 08:27:13'),
 (1, 5, 'Creador', '2022-04-28 11:04:16'),
 (1, 5, 'Encargado', '2022-04-29 08:28:17'),
 (1, 6, 'Creador', '2022-04-28 17:51:35'),
 (1, 6, 'Encargado', '2022-04-29 08:27:24'),
 (1, 7, 'Creador', '2022-04-29 08:25:39'),
 (1, 8, 'Creador', '2022-04-29 08:26:06'),
-(1, 8, 'Encargado', '2022-04-29 08:27:35'),
+(1, 8, 'Encargado', '2022-05-02 20:26:26'),
 (1, 9, 'Creador', '2022-04-29 08:26:45'),
 (1, 9, 'Encargado', '2022-04-29 08:27:45'),
-(1, 10, 'Creador', '2022-04-29 08:28:43');
+(1, 10, 'Creador', '2022-04-29 08:28:43'),
+(1, 10, 'Encargado', '2022-05-02 20:16:13'),
+(1, 10, 'Encargado', '2022-05-02 20:26:35');
 
 --
 -- Índices para tablas volcadas
@@ -829,6 +840,8 @@ ALTER TABLE `usuario_ticket`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+ALTER TABLE `usuario`
+  MODIFY `Id_Usuario` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `estado`
@@ -877,12 +890,6 @@ ALTER TABLE `ticket`
 --
 ALTER TABLE `tipo_incidencia`
   MODIFY `Id_Tipo_Incidencia` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT de la tabla `usuario`
---
-ALTER TABLE `usuario`
-  MODIFY `Id_Usuario` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
