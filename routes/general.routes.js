@@ -4,6 +4,7 @@ const filesystem = require('fs');
 const path = require('path');
 const isAuth = require('../util/is-auth.js');
 const tick_panel= require('../controllers/tickets_controller');
+const usuario=require('../controllers/usuario_controller');
 
 router.get('/', isAuth,tick_panel.ticket_panel
 );
@@ -58,5 +59,7 @@ router.get('/ticket', isAuth,(request, response, next) =>{
     response.render('ticket');
 });
 
+router.get('/verificacion/:cript/',usuario.verificar_get);
+router.post('/verificacion/:cript/',usuario.verificar);
 
 module.exports = router;

@@ -1,0 +1,17 @@
+<%- include('includes/header.ejs') %>
+<form method="post">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+<div>
+    <label for="contraseña">Ingre su contraseña nuevamente:</label>
+    <input type="password" id="password" name="password" minlength="6"></input>
+    <button type="submit">Verificar</button>
+</div>
+</form>
+
+<div name="Mensaje"></div>
+
+
+
+
+
+<%- include('includes/foot.ejs') %>
