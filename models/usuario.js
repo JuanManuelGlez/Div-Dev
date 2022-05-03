@@ -34,9 +34,17 @@ module.exports = class Usuario{
                 from: "ticketz_no_reply@outlook.com",
                 to: this.login_usuario,
                 subject: "Verificacion Ticketz",
-                text: "Haga click en el siguiente link para verificar su correo:  localhost:8080/verificacion/"+ id 
+                text: "Haga click en el siguiente link https://localhost:8080/verificacion/"+id
             };
-            transporter.sendMail(options,callbackPromise());
+            transporter.sendMail(options,function(error,info){
+                if (error) {
+                    console.log("error is ", error);
+                    reject(error);
+                } else {
+                    console.log('Email sent: ' + info.response);
+                    resolve(true);
+                }
+            });
                         return db.execute('INSERT INTO usuario(Id_Rol, Nombre_Usuario, Login, Contraseña, URL_Foto, Hash_Verificacion) VALUES (?, ?, ?, ?, ?,?)', 
                             [
                                 this.id_rol_usuario,
