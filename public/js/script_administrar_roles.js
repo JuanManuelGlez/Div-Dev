@@ -13,20 +13,15 @@ document.getElementById("select_rol").onchange = () =>
     .then(response => response.json())
     .then(response => {
         privilegio_select.innerHTML = '';
-        privilegio_select.innerHTML+='<div><table> '
+        privilegio_select.innerHTML += '<table class = "table table-bordered"><thead><tr><th scope="col"> Privilegio </th><th scope="col"> Check </th></tr></thead><tbody id="table_privilegios">';
+        
         for(let privilegio of response.allprivilegios)
         {
-            privilegio_select.innerHTML+='<tr><td>'
-
-            privilegio_select.innerHTML += '<input type="checkbox" id='+ (privilegio.Nombre_Privilegio).replace(/\s/g,'_')+' name='+(privilegio.Nombre_Privilegio).replace(/\s/g,'_')+' value='+privilegio.Nombre_Privilegio+' onchange="privilegioChange(this, '+privilegio.Id_Privilegio+')">';
-            privilegio_select.innerHTML+='</td>'
-            privilegio_select.innerHTML+='<td>'
-            privilegio_select.innerHTML += '<label for='+ (privilegio.Nombre_Privilegio).replace(/\s/g,'_')+'>'+ privilegio.Nombre_Privilegio+'</label><br></br>'
-            privilegio_select.innerHTML+='</td>'
-            privilegio_select.innerHTML+='</td>'
+            document.getElementById("table_privilegios").innerHTML += '<tr> <td>' + privilegio.Nombre_Privilegio + ' </td> <td> <input type="checkbox" id='+ (privilegio.Nombre_Privilegio).replace(/\s/g,'_')+' name='+(privilegio.Nombre_Privilegio).replace(/\s/g,'')+' value='+privilegio.Nombre_Privilegio+' onchange="privilegioChange(this, '+privilegio.Id_Privilegio+')"> </td></tr>'
         }
-        privilegio_select.innerHTML+='</table> </div>'
-        
+        privilegio_select.innerHTML += '</tbody>';
+        privilegio_select.innerHTML += '</table>';
+
         for(let privilegio of response.privilegiosact){
             document.getElementById((privilegio.Nombre_Privilegio).replace(/\s/g,'_')).setAttribute('checked',true);
         }
