@@ -34,9 +34,17 @@ module.exports = class Usuario{
                 from: "ticketz_no_reply@outlook.com",
                 to: this.login_usuario,
                 subject: "Verificacion Ticketz",
-                text: "Haga click en el siguiente link para verificar su correo:  localhost:8080/verificacion/"+ id 
+                text: "Haga click en el siguiente link https://localhost:8080/verificacion/"+id
             };
-            transporter.sendMail(options,callbackPromise());
+            transporter.sendMail(options,function(error,info){
+                if (error) {
+                    console.log("error is ", error);
+                    reject(error);
+                } else {
+                    console.log('Email sent: ' + info.response);
+                    resolve(true);
+                }
+            });
                         return db.execute('INSERT INTO usuario(Id_Rol, Nombre_Usuario, Login, Contraseña, URL_Foto, Hash_Verificacion) VALUES (?, ?, ?, ?, ?,?)', 
                             [
                                 this.id_rol_usuario,
@@ -67,7 +75,7 @@ module.exports = class Usuario{
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
-        return db.execute('SELECT u.Nombre_Usuario, u.Id_Usuario, u.URL_Foto, u.Login, u.Contraseña, u.Id_Rol, r.Nombre_Rol, CASE WHEN (u.Id_Usuario IN (SELECT ut.Id_Usuario FROM usuario_ticket ut, estado_ticket et WHERE ut.Id_Ticket = et.Id_Ticket AND ut.Cargo = "Encargado" AND et.Id_Estado != 4 AND et.Id_Estado != 6) = FALSE) THEN 0 WHEN (u.Id_Usuario IN (SELECT ut.Id_Usuario FROM usuario_ticket ut, estado_ticket et WHERE ut.Id_Ticket = et.Id_Ticket AND ut.Cargo = "Encargado" AND et.Id_Estado != 4 AND et.Id_Estado != 6) = TRUE) THEN 1 END AS "Tickets" FROM usuario u , rol r WHERE u.Id_Rol = r.Id_Rol AND u.Login = u.Login GROUP BY u.Id_Usuario');
+        return db.execute('SELECT u.Nombre_Usuario, u.Id_Usuario, u.URL_Foto, u.Login, u.Contraseña, u.Id_Rol, r.Nombre_Rol, CASE WHEN (u.Id_Usuario IN (SELECT ut.Id_Usuario FROM usuario_ticket ut, ticket t WHERE ut.Id_Ticket = t.Id_Ticket AND ut.Cargo = "Encargado" AND t.Id_Estado != 4 AND t.Id_Estado != 6) = FALSE) THEN 0 WHEN (u.Id_Usuario IN (SELECT ut.Id_Usuario FROM usuario_ticket ut, ticket t WHERE ut.Id_Ticket = t.Id_Ticket AND ut.Cargo = "Encargado" AND t.Id_Estado != 4 AND t.Id_Estado != 6) = TRUE) THEN 1 END AS "Tickets" FROM usuario u , rol r WHERE u.Id_Rol = r.Id_Rol AND u.Login = u.Login GROUP BY u.Id_Usuario');
     }
 
     static findOne(login_usuario) {
@@ -97,6 +105,10 @@ module.exports = class Usuario{
             [id_usuario]);
     }
 
+    static fetchAll_AsignarTicket(){
+        return db.execute("SELECT ut.Id_Usuario, u.Nombre_Usuario, u.URL_Foto, COUNT(*) AS 'Tickets_Activos' FROM usuario_ticket ut, estado_ticket et, usuario u WHERE ut.Id_Ticket = et.Id_Ticket AND u.Id_Usuario = ut.Id_Usuario AND ut.Cargo = 'Encargado' AND (et.Id_Estado = 2 OR et.Id_Estado = 3 OR et.Id_Estado = 4) GROUP BY u.Nombre_Usuario, u.URL_Foto ORDER BY COUNT('Tickets_Activos')");}
+
+   
 
     static fetchOne(id_usuario) {
         return db.execute('SELECT * FROM usuario WHERE Id_Usuario=?',

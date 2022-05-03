@@ -13,7 +13,6 @@ router.get('/', isAuth,tick_panel.ticket_panel
 );
 
 router.get('/metricas', isAuth,(request, response, next) =>{
-    console.log(request.session.privilegios);
     if(request.session.privilegios.includes(11)){
         Tipo_Incidencia.fetchAll()
             .then(([rowsTipoIncidencia, fieldDataTipoIncidencia]) => {

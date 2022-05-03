@@ -283,7 +283,8 @@
                                                     <%= ticket.Descripcion.substring(0, 20)%>...
                                                 </h6>
                                                 <i class="fa fa-circle"
-                                                    style="<%= ticket.Id_Estado == 1 ? 'color: grey' : ticket.Id_Estado == 2 ? 'color: yellow' : ticket.Id_Estado == 3 ? 'color: green' : ticket.Id_Estado == 4 ? 'color: red' : ticket.Id_Estado == 5 ? 'color: purple' : 'color : black' %>"></i>
+                                                style="<%= ticket.Id_Estado == 1 ? 'color: grey' : ticket.Id_Estado == 4 ? 'color: red' :  ticket.Id_Estado == 6 ? 'color: green' : 'color:yellow' %>" ></i>
+                                            
                                                 <span
                                                     style="overflow: hidden;margin-left: 10px;color: rgb(136,136,136);">Creado
                                                     el <%= (ticket.Fecha_Inicio.toString()).substring(4, 21) %></span>
