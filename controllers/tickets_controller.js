@@ -165,6 +165,7 @@ exports.nuevo_post = (request, response, next) => {
         Usuario.getId(usuarioAct.login_usuario)
         .then(([rows, fieldData]) => {
           Ticket.assignUsuario(idNuevo, rows[0].Id_Usuario, "Creador");
+          Ticket.assignUsuario(idNuevo, 0, "Encargado");
         })
         .catch((err) => {console.log(err)});
       }
