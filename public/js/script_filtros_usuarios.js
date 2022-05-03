@@ -2,6 +2,7 @@
 document.getElementById('input_busqueda').onkeyup = buscaUsuario;
 
 function buscaUsuario() {
+  
     const csrf = document.getElementById('_csrf').value;
     const nuevoUsuario = document.getElementById("input_busqueda").value
     let ruta = '../usuario/getLike';

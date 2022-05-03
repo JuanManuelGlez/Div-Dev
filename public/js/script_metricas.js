@@ -1,13 +1,44 @@
 
+let porEstados;
+let porTipoIncidencia;
+let porProcedencia;
+let porResolucion;
+
 function allByEstado()
 {
     let rutaTickets = '../metricas/getByStatusAll';
+    let f_usuario = document.getElementById("filtro_usuario").value
+    let f_categoria = document.getElementById("filtro_tipo_incidencia").value
+    let f_fecha_inicio = document.getElementById("fecha_inicio").value
+    let f_fecha_fin = document.getElementById("fecha_fin").value
+    const csrf = document.getElementById('_csrf').value;
+    let f_archivado = document.getElementById("filtro_archivado").value
+
+    if(f_fecha_inicio == '')
+    {
+        f_fecha_inicio = "t.Fecha_Inicio";
+    }
+
+    if(f_fecha_fin == '')
+    {
+        f_fecha_fin = "t.Fecha_Inicio";
+    }
+
+    data = {
+        tipo_incidencia : f_categoria,
+        usuario: f_usuario,
+        fecha_inicio: f_fecha_inicio,
+        fecha_fin: f_fecha_fin,
+        archivado: f_archivado
+    }
 
     fetch(rutaTickets, {
-        method: 'GET',
+        method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
-        }
+            'Content-Type': 'application/json',
+            'csrf-token': csrf
+        },
+        body:JSON.stringify(data)
     })
     .then(response => response.json())
     .then(response => {
@@ -76,7 +107,7 @@ function allByEstado()
             }
         };
         
-        const porEstados = new Chart(
+        porEstados = new Chart(
             document.getElementById('porEstados'),
             config
         );
@@ -89,12 +120,38 @@ function allByEstado()
 function allByProcedencia()
 {
     let rutaTickets = '../metricas/getByProcedenciaAll';
+    let f_usuario = document.getElementById("filtro_usuario").value
+    let f_categoria = document.getElementById("filtro_tipo_incidencia").value
+    let f_fecha_inicio = document.getElementById("fecha_inicio").value
+    let f_fecha_fin = document.getElementById("fecha_fin").value
+    const csrf = document.getElementById('_csrf').value;
+    let f_archivado = document.getElementById("filtro_archivado").value
+
+    if(f_fecha_inicio == '')
+    {
+        f_fecha_inicio = "t.Fecha_Inicio";
+    }
+
+    if(f_fecha_fin == '')
+    {
+        f_fecha_fin = "t.Fecha_Inicio";
+    }
+
+    data = {
+        tipo_incidencia : f_categoria,
+        usuario: f_usuario,
+        fecha_inicio: f_fecha_inicio,
+        fecha_fin: f_fecha_fin,
+        archivado: f_archivado
+    }
 
     fetch(rutaTickets, {
-        method: 'GET',
+        method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
-        }
+            'Content-Type': 'application/json',
+            'csrf-token': csrf
+        },
+        body:JSON.stringify(data)
     })
     .then(response => response.json())
     .then(response => {
@@ -170,7 +227,7 @@ function allByProcedencia()
             }
         };
         
-        const porEstados = new Chart(
+        porProcedencia = new Chart(
             document.getElementById('porProcedencia'),
             config
         );
@@ -183,12 +240,38 @@ function allByProcedencia()
 function allByTipoIncidencia()
 {
     let rutaTickets = '../metricas/getByTipoIncidenciaAll';
+    let f_usuario = document.getElementById("filtro_usuario").value
+    let f_categoria = document.getElementById("filtro_tipo_incidencia").value
+    let f_fecha_inicio = document.getElementById("fecha_inicio").value
+    let f_fecha_fin = document.getElementById("fecha_fin").value
+    const csrf = document.getElementById('_csrf').value;
+    let f_archivado = document.getElementById("filtro_archivado").value
+
+    if(f_fecha_inicio == '')
+    {
+        f_fecha_inicio = "t.Fecha_Inicio";
+    }
+
+    if(f_fecha_fin == '')
+    {
+        f_fecha_fin = "t.Fecha_Inicio";
+    }
+
+    data = {
+        tipo_incidencia : f_categoria,
+        usuario: f_usuario,
+        fecha_inicio: f_fecha_inicio,
+        fecha_fin: f_fecha_fin,
+        archivado: f_archivado
+    }
 
     fetch(rutaTickets, {
-        method: 'GET',
+        method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
-        }
+            'Content-Type': 'application/json',
+            'csrf-token': csrf
+        },
+        body:JSON.stringify(data)
     })
     .then(response => response.json())
     .then(response => {
@@ -261,7 +344,7 @@ function allByTipoIncidencia()
             }
         };
         
-        const porEstados = new Chart(
+        porTipoIncidencia = new Chart(
             document.getElementById('porTipoIncidencia'),
             config
         );
@@ -274,12 +357,38 @@ function allByTipoIncidencia()
 function allByResolucion()
 {
     let rutaTickets = '../metricas/getByResolucion';
+    let f_usuario = document.getElementById("filtro_usuario").value
+    let f_categoria = document.getElementById("filtro_tipo_incidencia").value
+    let f_fecha_inicio = document.getElementById("fecha_inicio").value
+    let f_fecha_fin = document.getElementById("fecha_fin").value
+    const csrf = document.getElementById('_csrf').value;
+    let f_archivado = document.getElementById("filtro_archivado").value
+
+    if(f_fecha_inicio == '')
+    {
+        f_fecha_inicio = "t.Fecha_Inicio";
+    }
+
+    if(f_fecha_fin == '')
+    {
+        f_fecha_fin = "t.Fecha_Inicio";
+    }
+
+    data = {
+        tipo_incidencia : f_categoria,
+        usuario: f_usuario,
+        fecha_inicio: f_fecha_inicio,
+        fecha_fin: f_fecha_fin,
+        archivado: f_archivado
+    }
 
     fetch(rutaTickets, {
-        method: 'GET',
+        method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
-        }
+            'Content-Type': 'application/json',
+            'csrf-token': csrf
+        },
+        body:JSON.stringify(data)
     })
     .then(response => response.json())
     .then(response => {
@@ -290,8 +399,8 @@ function allByResolucion()
             labels: labels,
             datasets: [{
                 label: 'Resueltos',
-                backgroundColor: '#C9E265',
-                borderColor: '#C9E265',
+                backgroundColor: '#338128',
+                borderColor: '#338128',
                 data: [response.datos[0].Tickets],
                 borderWidth: 2,
                 borderRadius: 5,
@@ -299,17 +408,17 @@ function allByResolucion()
             },
             {
                 label: 'Resueltos a destiempo',
-                backgroundColor: '#FFE990',
-                borderColor: '#FFE990',
+                backgroundColor: '#FFCD00',
+                borderColor: '#FFCD00',
                 data: [response.datos[1].Tickets],
                 borderWidth: 2,
                 borderRadius: 5,
                 borderSkipped: false,
             },
             {
-                label: 'Sin resolver',
-                backgroundColor: '#FF5757',
-                borderColor: '#FF5757',
+                label: 'Abiertos',
+                backgroundColor: '#9B9B9B',
+                borderColor: '#9B9B9B',
                 data: [response.datos[2].Tickets],
                 borderWidth: 2,
                 borderRadius: 5,
@@ -365,14 +474,14 @@ function allByResolucion()
                         offset: 20,
                         font: {
                             weight: 'bold',
-                            size: 10,
+                            size: 15,
                         }
                     }
                 }                
             }
         };
         
-        const porEstados = new Chart(
+        porResolucion = new Chart(
             document.getElementById('porResolucion'),
             config
         );
@@ -386,3 +495,22 @@ allByEstado();
 allByProcedencia();
 allByResolucion()
 allByTipoIncidencia();
+
+document.getElementById("dropdown_filter_metricas").onclick = () =>
+{
+    porEstados.destroy();
+    porTipoIncidencia.destroy();
+    porProcedencia.destroy();
+    porResolucion.destroy();
+
+    allByEstado();
+    allByProcedencia();
+    allByResolucion()
+    allByTipoIncidencia();
+}
+
+console.log(document.getElementById("fecha_inicio").value);
+
+document.getElementById("fecha_inicio").onchange = () => {
+    console.log(document.getElementById("fecha_inicio").value);
+}
