@@ -72,11 +72,15 @@ document.getElementById("select_tipo_incidencia").onchange = () =>
     .then(response => response.json())
     .then(response => {
         let cont = 0;
-        for(let pregunta of response.preguntas)
-        {
-            preguntas.innerHTML += '<div class="row" style="padding: 15px 0px;"><div class="col-xxl-4"><label class="col-form-label text-dark">' + pregunta.Texto_Pregunta + ': </label></div> <div class="col"><input class="form-control" type="text" id="respuesta' + cont + '" name="respuesta' + cont + '"maxlength="500">';
-            preguntas.innerHTML += '<input type="hidden" id="pregunta' + cont + '" name="pregunta' + cont + '" value="' + pregunta.Id_Pregunta + '">';
-            cont++;
+        if(response.preguntas.length == 0){
+            preguntas.innerHTML += '<div class="col" style= "text-align: center;" > <p style="color: black"> No necesita informacion adicional </p> </div>';
+        }else{
+            for(let pregunta of response.preguntas)
+            {
+                preguntas.innerHTML += '<div class="row" style="padding: 15px 0px;"><div class="col-xxl-4"><label class="col-form-label text-dark">' + pregunta.Texto_Pregunta + ': </label></div> <div class="col"><input class="form-control" type="text" id="respuesta' + cont + '" name="respuesta' + cont + '"maxlength="500">';
+                preguntas.innerHTML += '<input type="hidden" id="pregunta' + cont + '" name="pregunta' + cont + '" value="' + pregunta.Id_Pregunta + '">';
+                cont++;
+            }
         }
         preguntas.innerHTML += '<input type="hidden" id="numPreguntas" name="numPreguntas" value="' + cont + '">';
     }).catch(err => {
