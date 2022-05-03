@@ -9,7 +9,7 @@ module.exports = class Usuario{
         this.login_usuario = login;
         this.contrasenia_usuario = contrasenia;
         this.url_foto_usuario = url_foto;
-        this.id_rol_usuario = 1;
+        this.id_rol_usuario = 4;
     }
 
     //Este método servirá para guardar de manera persistente el nuevo objeto. 
