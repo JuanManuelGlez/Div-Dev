@@ -1,17 +1,31 @@
 <%- include('includes/header.ejs') %>
-<form method="post">
-    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-<div>
-    <label for="contraseña">Ingre su contraseña nuevamente:</label>
-    <input type="password" id="password" name="password" minlength="6"></input>
-    <button type="submit">Verificar</button>
-</div>
-</form>
 
 <div name="Mensaje"></div>
 
 
 
+<body style="padding: 0px;">
+    <div class="row" style="height: 100vh;">
+        <div class="col"><img style="width: 100%;height: 100%;" src="/img/zeb%20back.png"></div>
+        <div style = "margin-top:70px" class="col">
+            <div class="d-flex flex-column justify-content-center" id="login-box" style="margin-top: 100px;">
+                <div class="login-box-header">
+                    <h4 style="color: rgb(0,0,0);margin-bottom: 0px;font-weight: 400;font-size: 27px;">Verficar</h4>
+                </div>
+                <form method="post">
+                    <input type="hidden" id="_csrf" name="_csrf" value="<%= csrfToken %>">
+                    <div  style="background-color:#ffffff;text-align: center;">
+                        <label for="contraseña" style="margin-top:10px;">Ingrese su contraseña nuevamente:</label><br>
+                        <input type="password" id="password" name="password" minlength="6" style="margin-top:10px;"></input>
+                    </div>
+                        
+                    <div class="submit-row" style="margin-bottom:8px;padding-top:0px;">
+                        <button style="background-color: black;" class="btn btn-primary mt-3" type="submit">Verificar</button>
+                    
+                    </div>
+                </form>
+            </div>
+        </div>
 
 
 <%- include('includes/foot.ejs') %>
