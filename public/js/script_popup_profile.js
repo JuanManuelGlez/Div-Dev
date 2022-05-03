@@ -48,6 +48,10 @@
             document.getElementById("metricas").style.display="none"
         }
 
+        if(!response.privilegios.includes(12)){
+            document.getElementById("admin_privilegios").style.display="none"
+        }
+
     }).catch(err => {
         console.log(err);
     });

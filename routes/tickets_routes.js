@@ -34,6 +34,8 @@ router.post('/:id_ticket', isAuth,tickets_controller.ticket_post);
 
 router.post('/archivar/:id_ticket', isAuth,tickets_controller.ticket_archivar);
 
+router.post('/:id_ticket/asignar_usuario', isAuth, tickets_controller.asignar_usuario);
+
 router.get('/paneles',isAuth,tickets_controller.ticket_panel);
 
 router.get('/panel', isAuth,tickets_controller.ticket_panel);
