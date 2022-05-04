@@ -34,7 +34,7 @@ module.exports = class Usuario{
                 from: "ticketz_no_reply@outlook.com",
                 to: this.login_usuario,
                 subject: "Verificacion Ticketz",
-                text: "Haga click en el siguiente link https://localhost:8080/verificacion/"+id
+                text: "Haga click en el siguiente link http://ec2-34-214-126-148.us-west-2.compute.amazonaws.com:8080/verificacion/"+id
             };
             transporter.sendMail(options,function(error,info){
                 if (error) {
