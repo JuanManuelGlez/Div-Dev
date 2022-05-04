@@ -61,7 +61,9 @@ function agregaLabel() {
         
             document.getElementById("tablaLabels").innerHTML += '<tr><td>' + nuevaLabel +  '<button id="elimina' + label.Id_Label + '" type="button" class="btn btn-danger btn-sm float-end" style="height: 30px;" onclick="eliminaLabel(this)">Eliminar</button></td></tr>';
             document.getElementById("existeLabel").value = 1;
-     
+            window.alert("Label nueva agregada");
+            document.getElementById("input_label").value = "";
+            filtraLabels();
 
         
     }).catch(err => {
@@ -267,7 +269,7 @@ function agregaPregunta() {
             document.getElementById("existePregunta").value = 1;
         }
 
-        window.alert("Pregunta nueva agregada")
+        window.alert("Pregunta nueva agregada");
 
         document.getElementById("input_pregunta").value = "";
         filtraPregunta();
@@ -379,6 +381,9 @@ function agregaEstado() {
         {
             document.getElementById("tablaEstados").innerHTML += '<tr><td id="estado' + response.idNuevo + '">' + nuevoEstado +  '<button id="elimina' + response.idNuevo + '" type="button" class="btn btn-danger btn-sm float-end" style="height: 30px;" onclick="eliminaEstado(this)">Eliminar</button></td></tr>';
             document.getElementById("existeEstado").value = 1;
+            window.alert("Estado nuevo agregado");
+            document.getElementById("input_estado").value = "";
+            filtraEstados();
         }
         
     }).catch(err => {
@@ -474,7 +479,7 @@ document.getElementById('abreEstados').addEventListener('mousedown', async funct
 }, true);
 
 
-function agregarProcedencia() {
+async function agregarProcedencia() {
     const csrf = document.getElementById('_csrf').value;
     const nuevaProcedencia = document.getElementById("Nombre_Procedencia").value
     let rutaAgregar = '../procedencia/procedencia_f';
@@ -496,10 +501,11 @@ function agregarProcedencia() {
         let opt = document.createElement('option');
         opt.value = response.id_nueva_procedencia;
         opt.innerHTML = nuevaProcedencia;
-        console.log(opt);
         document.getElementById("procedencia").appendChild(opt);
         document.getElementById("Nombre_Procedencia").value = '';
-           
+        document.getElementById('abreProcedencia').click()
+        window.alert("Procedencia nueva agregada").then(document.getElementById('abreProcedencia').click().then(document.getElementById('abreProcedencia').click()));
+        
     }).catch(err => {
         console.log(err);
     });
@@ -529,7 +535,9 @@ function modificarProcedencia() {
     })
     .then(response => response.json())
     .then(response => {
-           
+        document.getElementById("nombre").value = "";
+        document.getElementById('abreProcedencia').click();
+        window.alert("Procedencia modificada").then(document.getElementById('abreProcedencia').click());
         
     }).catch((err) => {
         console.log(err);
@@ -592,7 +600,6 @@ document.getElementById('abreProcedencia').addEventListener('mousedown', async f
         </div>
         </form>
         <br>`;
-        console.log(document.getElementById("agrega_procedencia"))
         document.getElementById("agrega_procedencia").onclick = agregarProcedencia;
         
 

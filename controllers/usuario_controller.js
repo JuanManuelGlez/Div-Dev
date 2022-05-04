@@ -144,8 +144,9 @@ exports.login_get = (request, response, next) => {
 exports.login_post = (request, response, next) => {
   Usuario.findOne(request.body.correo)
     .then(([rows, fielData]) => {
+      let error = 1;
       if (rows.length < 1) {
-        return response.redirect("/login");
+        response.status(200).json({ errores: error });
       }
       const usuario = new Usuario(
         rows[0].Nombre_Usuario,
