@@ -55,12 +55,14 @@ function agregaLabel() {
     })
     .then(response => response.json())
     .then(response => {
-
-        if(document.getElementById("existeLabel").value == "0")
-        {
+        
+         
+            if(document.getElementById("existeLabel").value == "0")
+        
             document.getElementById("tablaLabels").innerHTML += '<tr><td>' + nuevaLabel +  '<button id="elimina' + label.Id_Label + '" type="button" class="btn btn-danger btn-sm float-end" style="height: 30px;" onclick="eliminaLabel(this)">Eliminar</button></td></tr>';
             document.getElementById("existeLabel").value = 1;
-        }
+     
+
         
     }).catch(err => {
         console.log(err);

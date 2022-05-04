@@ -97,5 +97,9 @@ function alert_success(){
         'Ticket nuevo creado, ver en Panel Ticket o Backlog',
         'success'
       )
+      .then(response => {
+        document.location.reload();
+        
+      })
 }
 

@@ -188,7 +188,7 @@ function submitForm(){
     })
     .then(response => response.json())
     .then(response => {
-        alert("Datos guardados");
+        toastCambiosGuardados()
         console.log(response);
         comentarios.innerHTML = "";
         for(let comentario of response.comentarios)
@@ -252,7 +252,7 @@ document.getElementById("enviar").onclick = () =>
       body:JSON.stringify(data)
   })
   .then(response => {
-      alert("Datos guardados");
+      toastCambiosGuardados()
       closeTicket();
       document.location.reload();
       openTicket(document.getElementById("boton"+idTicket));
@@ -340,7 +340,7 @@ document.getElementById("asignar").onclick = () =>
       body:JSON.stringify(data)
   })
   .then(response => {
-    alert("Datos guardados")
+    toastCambiosGuardados()
       closeTicket();
       openTicket(document.getElementById("boton"+idTicket));
   }).catch(err => {
@@ -360,3 +360,10 @@ $('#Ticket').on('hidden.bs.modal', function () {
     document.location.reload();
     
   })
+
+function toastCambiosGuardados() {
+
+    var x = document.getElementById("snackbar");
+    x.className = "show";  
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
