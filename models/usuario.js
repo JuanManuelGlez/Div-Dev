@@ -143,7 +143,7 @@ module.exports = class Usuario{
     }
 
     static fetchLike(texto_ingresado) {
-        return db.execute('SELECT R.Id_Rol, R.Nombre_Rol, U.Id_Rol, U.URL_Foto, U.Id_Usuario, U.Login, U.Contraseña, U.Nombre_Usuario, COUNT(T.Id_Ticket) AS "Total" FROM rol R, usuario_ticket T, usuario U WHERE R.Id_Rol = U.Id_Rol AND T.Id_Usuario = U.Id_Usuario AND U.Nombre_Usuario LIKE ? GROUP BY U.Id_Usuario', ['%' + texto_ingresado + '%']);
+        return db.execute('SELECT u.Nombre_Usuario, u.Id_Usuario, u.URL_Foto, u.Login, u.Contraseña, u.Id_Rol, r.Nombre_Rol, COUNT(t.Id_Ticket) AS "Total" FROM rol r, usuario u LEFT JOIN usuario_ticket t ON u.Id_Usuario = t.Id_Usuario WHERE r.Id_Rol = u.Id_Rol AND U.Nombre_Usuario LIKE ? GROUP BY U.Id_Usuario', ['%' + texto_ingresado + '%']);
     }
 
 
