@@ -827,3 +827,9 @@ document.getElementById("dropdown_filter_metricas").onclick = () =>
     rangoTiempoYDestiempo();
 }
 
+document.getElementById("reset_filtros").addEventListener('click', function (e) {
+
+    document.getElementById("form_filtros").reset();
+    document.getElementById("dropdown_filter_metricas").click();
+    e.stopImmediatePropagation();
+});

@@ -32,7 +32,7 @@
                       Filtros
                     </button>
                     <ul class="dropdown-menu">
-                        <form class="px-4 py-3">
+                        <form class="px-4 py-3" id="form_filtros">
                             <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>">
                             <div class="form-group">
                                 <label for="filtro_usuario"> Usuario</label>
@@ -63,13 +63,17 @@
                             <br>
                             <div class="form-group">
                                 <label for="fecha_inicio"> Fecha de inicio: </label>
+                                <br>
                                 <input type="date" id="fecha_inicio" name="fecha_inicio">
                             </div>
+                            <br>
                             <div class="form-group">
                                 <label for="fecha_fin"> Fecha fin: </label>
+                                <br>
                                 <input type="date" id="fecha_fin" name="fecha_fin">
                             </div>
                             <br>
+                            <button id="reset_filtros" type="button" class="btn btn-danger"> Borrar filtros </button>
                             <button id="dropdown_filter_metricas" type="button" class="btn btn-primary"> Filtrar </button>
                         </form>
                     </ul>

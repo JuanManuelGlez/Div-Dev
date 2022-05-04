@@ -67,6 +67,12 @@ document.getElementById("dropdown_filter").onclick = () =>
     });
 }
 
+document.getElementById("reset_filtros").addEventListener('click', function (e) {
+
+    document.getElementById("form_filtros").reset();
+    document.getElementById("dropdown_filter").click();
+    e.stopImmediatePropagation();
+});
 
 
 // categoria
