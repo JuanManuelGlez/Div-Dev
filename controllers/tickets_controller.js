@@ -401,10 +401,12 @@ exports.getDatosTicket = (request, response, next) => {
 };
 
 exports.asignar_usuario= async (request,response,next)=>{
-  
-  await Ticket.assignUsuario(request.params.id_ticket, request.body.elegir_usuario, "Encargado");
-  response.redirect("/tickets/lista")
-  
+  Ticket.assignUsuario(request.params.id_ticket, request.body.encargado, "Encargado")
+  .then(([rows_encargado,fielData_encargado])=>{
+      response.status(200).json({
+          
+      });
+    }).catch(error=>console.log(error));
 }
 
 exports.usuarios_get=(request,response,next)=>{
@@ -412,7 +414,7 @@ exports.usuarios_get=(request,response,next)=>{
   .then(([rows_encargado,fielData_encargado])=>{
       Usuario.fetchAll_AsignarTicket()
           .then(([rows,fielData])=>{
-              response.render('tickets/asignar_ticket', {
+              response.status(200).json({
                   usuarios:rows, encargado: rows_encargado
               });
        }).catch(error=>console.log(error));
