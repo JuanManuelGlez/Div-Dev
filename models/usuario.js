@@ -153,4 +153,8 @@ module.exports = class Usuario{
     static async Activo(id_usuario){
         return db.execute('UPDATE usuario SET Activo = 1 WHERE Id_Usuario=?',[id_usuario]);
     }
+
+    static async changerol(id_rol){
+        return db.execute('UPDATE usuario SET Id_Rol = 4 WHERE Id_Rol = ?', [id_rol])
+    }
 }

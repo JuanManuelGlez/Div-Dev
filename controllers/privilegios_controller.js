@@ -1,6 +1,7 @@
 const path = require("path");
 const Privilegio = require("../models/privilegio");
 const Rol = require("../models/rol");
+const Usuario = require("../models/usuario");
 
 exports.getRoles = (request, response, next) => {
     if (request.session.privilegios.includes(12)) {
@@ -57,12 +58,21 @@ exports.ModificaRol = (request, response, next) => {
         .catch(err => console.log(err));
 }
 
-exports.EliminaRol = (request, response, next) => {
+exports.EliminaRol = async (request, response, next) => {
     Rol.getId(request.body.Rol)
         .then(([rowsid, fieldData]) => {
-            Rol.delete((rowsid[0].Id_Rol))
-                .then(response.status(200).json({}))
-                .catch(err => console.log(err));
+            if(((rowsid[0].Id_Rol) == 1) || ((rowsid[0].Id_Rol) == 4)){
+                response.status(200).json({})
+            }else{
+                Privilegio.deleteprivs((rowsid[0].Id_Rol))
+                .then(
+                    Usuario.changerol((rowsid[0].Id_Rol))
+                    .then(
+                        Rol.delete((rowsid[0].Id_Rol))
+                        .then(response.status(200).json({}))
+                        .catch(err => console.log(err))
+                ))
+            }
         })
         .catch(err => console.log(err));
 }
