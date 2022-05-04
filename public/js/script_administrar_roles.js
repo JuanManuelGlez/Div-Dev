@@ -15,9 +15,14 @@ document.getElementById("enviar_rol").onclick = () => {
     })
     .then(response => response.json())
     .then(response => {
-        document.getElementById("nuevo_rol").value = "";
-        alert('Operacion completada')
-        response.redirect("/administrar_privilegios");
+        Swal.fire(
+            '¡Operación Exitosa!',  
+            'rol creado exitosamente',
+            'success'
+          )
+          .then(response => {
+            window.location.reload();
+          })
 
     }).catch(err => {
         console.log(err);
@@ -47,7 +52,7 @@ function privilegioChange(element, id_privilegio, id_rol) {
             })
             .then(response => response.json())
             .then(response => {
-                alert('Operacion completada')
+                toast('Operacion completada')
     
             }).catch(err => {
                 console.log(err);
@@ -71,11 +76,87 @@ function privilegioChange(element, id_privilegio, id_rol) {
             })
             .then(response => response.json())
             .then(response => {
-                alert('Operacion completada')
+                toast('Operacion completada')
 
 
             }).catch(err => {
                 console.log(err);
             });
         }
-    }
+}
+
+function Modificarrol(rol){
+    document.getElementById("textinput_mod"+rol).innerHTML = '<td scope="col"> <input class="form-control" type="text" id="text_'+rol+'" name="text_'+rol+'" value="'+(rol.replace(/_/g," "))+'" onkeydown="creabotonguardar(this)"></td>';
+};
+
+function creabotonguardar(element){
+    document.getElementById("cambios"+(element.id.slice(5))).innerHTML = '<button id="guardar_'+(element.id.slice(5))+'" class="btn btn-primary btn-sm float-end " type="button" style="height: 30px; margin-left:20px; margin-right:20px; background: rgb(0,0,0); border:rgb(0,0,0); " onclick="guardarrol(this)">Guardar Cambios</button></td>';
+};
+
+function guardarrol(element){
+
+    const csrf = document.getElementById('_csrf').value;    
+    let rutaModificaRol = '../ModificaRol';
+
+    let id = "text_"+(element.id).slice(8);
+        data = {
+            Rol: (element.id).slice(8).replace(/_/g," "),
+            Nuevo: document.getElementById(id).value
+        }
+        fetch(rutaModificaRol, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'csrf-token': csrf
+            },
+            body:JSON.stringify(data)
+        })
+        .then(response => response.json())
+            .then(response => {
+                Swal.fire(
+                    '¡Operación Exitosa!',  
+                    'rol modificado exitosamente',
+                    'success'
+                  )
+                  .then(response => {
+                    window.location.reload();
+                  })
+    
+            }).catch(err => {
+                console.log(err);
+            });
+}
+
+function eliminarol(element){
+
+    const csrf = document.getElementById('_csrf').value;    
+    let rutaEliminaRol = '../EliminaRol';
+    let rol = ((element.id).slice(9)).replace(/_/g," ");
+
+    console.log(rol);
+        data = {
+            Rol: rol
+        }
+        fetch(rutaEliminaRol, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'csrf-token': csrf
+            },
+            body:JSON.stringify(data)
+        })
+        .then(response => response.json())
+            .then(response => {
+                Swal.fire(
+                    '¡Operación Exitosa!',  
+                    'rol eliminado exitosamente',
+                    'success'
+                  )
+                  .then(response => {
+                    window.location.reload();
+                  })
+    
+            }).catch(err => {
+                console.log(err);
+            });
+}

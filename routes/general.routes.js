@@ -51,6 +51,8 @@ router.get('/administrar_privilegios', isAuth, privilegios_controller.getRoles);
 router.post('/AgregaPrivilegio', isAuth, privilegios_controller.AgregaPrivilegio);
 router.post('/EliminaPrivilegio', isAuth, privilegios_controller.EliminaPrivilegio);
 router.post('/CreaRol', isAuth, privilegios_controller.CreaRol);
+router.post('/ModificaRol', isAuth, privilegios_controller.ModificaRol)
+router.post('/EliminaRol', isAuth, privilegios_controller.EliminaRol)
 
 router.get('/nuevo_tipo_incidencia', isAuth,(request, response, next) =>{
     //if(  3 in request.session.privilegios){

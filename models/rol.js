@@ -28,4 +28,17 @@ module.exports = class Rol{
         )
     }
 
+    static update(Id_Rol, Nuevo){
+        return db.execute('UPDATE rol SET Nombre_Rol = ? WHERE Id_Rol = ?',
+        [Nuevo, 
+        Id_Rol]
+        )
+    }
+
+    static delete(Id_Rol){
+        return db.execute('DELETE FROM rol WHERE Id_Rol = ?',
+        [ Id_Rol]
+        )
+    }
+
 }

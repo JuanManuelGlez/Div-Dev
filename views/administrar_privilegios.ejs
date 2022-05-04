@@ -15,7 +15,7 @@
             <div class="col" style="padding: 15px;text-align: left;border-radius: 17px;box-shadow: 0px 0px 20px rgba(143,143,143,0.5);">
                 <div class="row">
                     <div class="col">
-                        <h3 style="color: rgb(0,0,0);text-align: left;margin-left: 30px;margin-bottom: 20px;"> Crear nuevo rol </h3>
+                        <h3 style="color: rgb(0,0,0);text-align: left;margin-left: 30px;margin-bottom: 20px;"> Roles Actuales </h3>
                     </div>
                 </div>
                 <div class="row" style="margin: 0px 30px;border-width: 2px;border-color: var(--bs-red);">
@@ -31,10 +31,14 @@
                                 </thead>
                                 <tbody id="table_privilegios">
                                     <% for (let rol of roles){ %>
+                                        <% let r = (rol.Nombre_Rol).replace(/\s/g,"_"); %>
                                         <tr>
-                                            <div id="textinput_mod"><td scope="col"> <input class="form-control" type="text" id="nuevo_rol" name="nuevo_rol" value="<%= rol.Nombre_Rol %>"></td></div>
-                                            <td scope="col"> <button id='<%= "eliminar" + rol.Nombre_Rol%>' type="button" class="btn btn-primary btn-sm float-end " style="height: 30px;" onclick="Modificarol(this)">Modificar </button>
-                                            <button id='<%= "eliminar" + rol.Nombre_Rol%>' type="button" class="btn btn-danger btn-sm float-end" style="height: 30px; margin-left:20px; margin-right:20px" onclick="eliminarol(this)">Eliminar</button></td>
+                                            <td scope="col"><div id="textinput_mod<%=r%>"> <%= rol.Nombre_Rol %></div></td>
+                                            <td scope="col"> 
+                                                <div id="cambios<%=r%>"> </div> 
+                                                <button id='<%= "eliminar" + r%>' type="button" class="btn btn-primary btn-sm float-end " style="height: 30px;" onclick='Modificarrol("<%= r %>")'>Modificar </button>
+                                                <button id='<%= "modificar" + r%>' type="button" class="btn btn-danger btn-sm float-end" style="height: 30px; margin-left:20px; margin-right:20px" onclick="eliminarol(this)">Eliminar</button>
+                                            </td>
                                         </tr> 
                                     <% } %>
                                 </tbody>
@@ -77,7 +81,6 @@
                                         <% for (let rol of roles){ %>
                                             <% let check = 0; %>
                                             <% for (let act of privilegiosact){ %>
-                                                <% console.log(act.Id_Privilegio); %>
                                                 <% if(act.Id_Rol == rol.Id_Rol && act.Id_Privilegio == privilegio.Id_Privilegio){ %>
                                                     <% check = 1; %>
                                                 <% }%>
