@@ -1,92 +1,186 @@
 <%- include('includes/header.ejs') %>
-<%- include('includes/sidebar.ejs') %>
-<div class="page-content-wrapper" style="color: var(--bs-teal);">
-    <div class="container-fluid" style="color: transparent;background: var(--bs-indigo);">
-        <div class="row" style="background: var(--bs-red);">
-            <div class="col-sm-12 col-md-12 offset-2 offset-sm-1 offset-md-0 offset-lg-0" style="color: var(--bs-purple);background: #FF595A;">
-                <div></div>
-                <h1 style="color: var(--bs-body-bg);margin-left: 60px;">FAQ</h1>
+    <%- include('includes/sidebar.ejs') %>
+        <div class="page-content-wrapper" style="color: var(--bs-teal);">
+            <div class="container-fluid" style="color: transparent;background: var(--bs-indigo);">
+                <div class="row" style="background: var(--bs-red);">
+                    <div class="col-sm-12 col-md-12 offset-2 offset-sm-1 offset-md-0 offset-lg-0"
+                        style="color: var(--bs-purple);background: #FF595A;">
+                        <div></div>
+                        <h1 style="color: var(--bs-body-bg);margin-left: 60px;">FAQ</h1>
+                    </div>
+                </div>
+            </div>
+
+
+            <script>
+                $(function () {
+                    $('#grid').gridstrap();
+                });
+            </script>
+            <div class="row"
+                style="padding: 0px;padding-top: 30px;margin: 0px 50px;margin-top: 20px;box-shadow: 0px 0px 17px 5px rgba(122,122,122,0.45);">
+                <div class="col">
+                    <div class="row">
+                        <div class="col" style="margin-bottom: 30px;">
+                            <h1 style="color: rgb(0,0,0);font-size: 50px;">Preguntas Frecuentes</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p style="color: rgb(0,0,0);font-size: 24px;font-weight: bold;">1. ¿Lorsckdnvkfsv ajsndksnd
+                                akdnfskdnfdlsk aondflksnvf?</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p style="color: rgb(0,0,0);font-size: 24px;"><br>Akjdnkasjdnak cadcnkadc andakndoa
+                                eoiwaedioqdn qacnoaidnclka qoinocadnva caodnadcnoaldc ajdvnjkadn jndajcnadjncak
+                                ajdcnajcnak adncakncoandk c qowienpiav npia qaoncoaidvnp qaoidnvcoakav aoidnvckaondv
+                                qwiwdn qiedcoifv ocj pqeij qoindon qlken<br><br></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p style="color: rgb(0,0,0);font-size: 24px;font-weight: bold;">2. ¿Lorsckdnvkfsv ajsndksnd
+                                akdnfskdnfdlsk aondflksnvf?</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p style="color: rgb(0,0,0);font-size: 24px;"><br>Akjdnkasjdnak cadcnkadc andakndoa
+                                eoiwaedioqdn qacnoaidnclka qoinocadnva caodnadcnoaldc ajdvnjkadn jndajcnadjncak
+                                ajdcnajcnak adncakncoandk c qowienpiav npia qaoncoaidvnp qaoidnvcoakav aoidnvckaondv
+                                qwiwdn qiedcoifv ocj pqeij qoindon qlken<br><br></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row"
+                style="padding: 0px;padding-top: 30px;margin: 0px 50px;margin-top: 20px;box-shadow: 0px 0px 17px 5px rgba(122,122,122,0.45);">
+                <div class="col">
+                    <div class="row">
+                        <div class="col" style="margin-bottom: 30px;">
+                            <h1 style="color: rgb(0,0,0);font-size: 50px;">Videos tutoriales</h1>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 0px;margin-bottom: 20px;margin-right: 20px;margin-left: 20px;">
+                        <!--Modal1-->
+                        <div class="col"><img style="width: 100%;height: 150px;" data-bs-toggle="modal"
+                                data-bs-target="#Modal1" src="/img/fondo%20login.jpg">
+                            <h4 class="text-center text-dark" style="border-color: rgb(0,0,0);">Video prueba 1</h4>
+                        </div>
+                        <!--Modal2-->
+                        <div class="col"><img style="width: 100%;height: 150px;" data-bs-toggle="modal"
+                                data-bs-target="#Modal2" src="/img/fondo%20login.jpg">
+                            <h4 class="text-center text-dark" style="border-color: rgb(0,0,0);">Video prueba 2</h4>
+                        </div>
+                        <!--Modal3-->
+                        <div class="col"><img style="width: 100%;height: 150px;" data-bs-toggle="modal"
+                                data-bs-target="#Modal3" src="/img/fondo%20login.jpg">
+                            <h4 class="text-center text-dark" style="border-color: rgb(0,0,0);">Video prueba 3</h4>
+                        </div>
+                        <!--Modal4-->
+                        <div class="col"><img style="width: 100%;height: 150px;" data-bs-toggle="modal"
+                                data-bs-target="#Modal4" src="/img/fondo%20login.jpg">
+                            <h4 class="text-center text-dark" style="border-color: rgb(0,0,0);">Video prueba 4</h4>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+        <!--Modal 1-->
+        <div class="modal fade" id="Modal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Video Prueba 1</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
 
-    <div id="grid" class="row">
-        <div class="col-xs-4 col-sm-2 col-md-1"> hi </div>
-        <div class="col-xs-4 col-sm-2 col-md-1"> hi </div>
-        <div class="col-xs-4 col-sm-2 col-md-1"> hi </div>
-
-    </div>
-
-    <script>
-        $(function(){
-	$('#grid').gridstrap();
-});
-    </script>
-    <div class="row" style="padding: 0px;padding-top: 30px;margin: 0px 50px;margin-top: 20px;box-shadow: 0px 0px 17px 5px rgba(122,122,122,0.45);">
-        <div class="col">
-            <div class="row">
-                <div class="col" style="margin-bottom: 30px;">
-                    <h1 style="color: rgb(0,0,0);font-size: 50px;">Preguntas Frecuentes</h1>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <p style="color: rgb(0,0,0);font-size: 24px;font-weight: bold;">1. ¿Lorsckdnvkfsv ajsndksnd akdnfskdnfdlsk aondflksnvf?</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <p style="color: rgb(0,0,0);font-size: 24px;"><br>Akjdnkasjdnak cadcnkadc andakndoa eoiwaedioqdn qacnoaidnclka qoinocadnva caodnadcnoaldc ajdvnjkadn jndajcnadjncak ajdcnajcnak adncakncoandk c qowienpiav npia qaoncoaidvnp qaoidnvcoakav aoidnvckaondv qwiwdn qiedcoifv ocj pqeij qoindon qlken<br><br></p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <p style="color: rgb(0,0,0);font-size: 24px;font-weight: bold;">2. ¿Lorsckdnvkfsv ajsndksnd akdnfskdnfdlsk aondflksnvf?</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <p style="color: rgb(0,0,0);font-size: 24px;"><br>Akjdnkasjdnak cadcnkadc andakndoa eoiwaedioqdn qacnoaidnclka qoinocadnva caodnadcnoaldc ajdvnjkadn jndajcnadjncak ajdcnajcnak adncakncoandk c qowienpiav npia qaoncoaidvnp qaoidnvcoakav aoidnvckaondv qwiwdn qiedcoifv ocj pqeij qoindon qlken<br><br></p>
+                    <div class="modal-body" style="  display: flex;
+        justify-content: center;
+        align-items: center;">
+                        <iframe width="679" height="383" src="https://www.youtube.com/embed/aIHF7u9Wwiw"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row" style="padding: 0px;padding-top: 30px;margin: 0px 50px;margin-top: 20px;box-shadow: 0px 0px 17px 5px rgba(122,122,122,0.45);">
-        <div class="col">
-            <div class="row">
-                <div class="col" style="margin-bottom: 30px;">
-                    <h1 style="color: rgb(0,0,0);font-size: 50px;">Videos tutoriales</h1>
-                </div>
-            </div>
-            <div class="row" style="margin-top: 0px;margin-bottom: 20px;margin-right: 20px;margin-left: 20px;">
-                <div class="col"><img style="width: 100%;height: 150px;" src="/img/fondo%20login.jpg">
-                    <h4 class="text-center text-dark" style="border-color: rgb(0,0,0);">Heading</h4>
-                </div>
-                <div class="col"><img style="width: 100%;height: 150px;" src="/img/fondo%20login.jpg">
-                    <h4 class="text-center text-dark" style="border-color: rgb(0,0,0);">Heading</h4>
-                </div>
-                <div class="col"><img style="width: 100%;height: 150px;" src="/img/fondo%20login.jpg">
-                    <h4 class="text-center text-dark" style="border-color: rgb(0,0,0);">Heading</h4>
-                </div>
-                <div class="col"><img style="width: 100%;height: 150px;" src="/img/fondo%20login.jpg">
-                    <h4 class="text-center text-dark" style="border-color: rgb(0,0,0);">Heading</h4>
-                </div>
-            </div>
-            <div class="row" style="margin-top: 0px;margin-bottom: 20px;margin-right: 20px;margin-left: 20px;">
-                <div class="col"><img style="width: 100%;height: 150px;" src="/img/fondo%20login.jpg">
-                    <h4 class="text-center text-dark" style="border-color: rgb(0,0,0);">Heading</h4>
-                </div>
-                <div class="col"><img style="width: 100%;height: 150px;" src="/img/fondo%20login.jpg">
-                    <h4 class="text-center text-dark" style="border-color: rgb(0,0,0);">Heading</h4>
-                </div>
-                <div class="col"><img style="width: 100%;height: 150px;" src="/img/fondo%20login.jpg">
-                    <h4 class="text-center text-dark" style="border-color: rgb(0,0,0);">Heading</h4>
-                </div>
-                <div class="col"><img style="width: 100%;height: 150px;" src="/img/fondo%20login.jpg">
-                    <h4 class="text-center text-dark" style="border-color: rgb(0,0,0);">Heading</h4>
+
+        <!--Modal 2-->
+        <div class="modal fade" id="Modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Video Prueba 2</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body" style="  display: flex;
+        justify-content: center;
+        align-items: center;">
+                        <iframe width="679" height="383" src="https://www.youtube.com/embed/aIHF7u9Wwiw"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<%- include('includes/foot.ejs') %>
+        <!--Modal 3-->
+        <div class="modal fade" id="Modal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Video Prueba 3</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body" style="  display: flex;
+                justify-content: center;
+                align-items: center;">
+                        <iframe width="679" height="383" src="https://www.youtube.com/embed/aIHF7u9Wwiw"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Modal 4-->
+        <div class="modal fade" id="Modal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Video Prueba 4</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body" style="  display: flex;
+                justify-content: center;
+                align-items: center;">
+                        <iframe width="679" height="383" src="https://www.youtube.com/embed/aIHF7u9Wwiw"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <%- include('includes/foot.ejs') %>

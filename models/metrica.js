@@ -122,5 +122,49 @@ module.exports = class Metricas{
         let query = 'SELECT COUNT(Id_Ticket) AS "SinResolver" FROM ticket t WHERE t.Fecha_Fin IS NULL AND t.Id_Ticket IN (SELECT ut.Id_Ticket FROM usuario_ticket ut WHERE ut.Id_Usuario = ' + usuario + ' GROUP BY ut.Id_Ticket) AND t.Id_Tipo_Incidencia = ' + tipo_incidencia + ' AND t.Archivado = ' + archivado + ' AND t.Fecha_Inicio BETWEEN ' + fecha_inicio + ' AND ' + fecha_fin;
         return db.execute(query);
     }
+
+    static getPromedios()
+    {
+        return db.execute('SELECT ti.Nombre_Tipo_Incidencia as Tipo_Incidencia, ROUND(AVG((UNIX_TIMESTAMP(fecha_fin) - UNIX_TIMESTAMP(fecha_inicio)) DIV 3600)) as Promedio FROM tipo_incidencia ti, ticket t WHERE t.Id_Tipo_Incidencia = ti.Id_Tipo_Incidencia GROUP BY t.Id_Tipo_Incidencia;');
+    }
+
+    static getATiempoRango(usuario, tipo_incidencia, fecha_inicio, fecha_fin, archivado){
+
+        if(fecha_inicio != 't.Fecha_Inicio')
+            fecha_inicio = "'" + fecha_inicio + "'";
+        
+        if(fecha_fin != 't.Fecha_Inicio')
+            fecha_fin = "'" + fecha_fin + "'";
+
+        if(fecha_inicio != 't.Fecha_Inicio')
+        {
+            if(fecha_fin == 't.Fecha_Inicio')
+            {
+                fecha_fin = 'CURRENT_DATE + INTERVAL 1 DAY';
+            }
+        }
+
+        let query = 'SELECT WEEK(t.Fecha_Fin) AS "Semana", COUNT(t.Id_Ticket) AS "A_Tiempo" FROM ticket t, tipo_incidencia ti WHERE t.Id_Tipo_Incidencia = ti.Id_Tipo_Incidencia AND t.Fecha_Fin IS NOT NULL AND ((UNIX_TIMESTAMP(t.Fecha_Fin) - UNIX_TIMESTAMP(t.Fecha_Inicio)) DIV 3600) > ti.SLA AND t.Id_Estado != 4 AND t.Id_Ticket IN (SELECT ut.Id_Ticket FROM usuario_ticket ut WHERE ut.Id_Usuario = ' + usuario + ' GROUP BY ut.Id_Ticket) AND t.Id_Tipo_Incidencia = ' + tipo_incidencia + ' AND t.Archivado = ' + archivado + ' AND t.Fecha_Inicio BETWEEN ' + fecha_inicio + ' AND ' + fecha_fin +' GROUP BY WEEK(t.Fecha_Fin)';
+        return db.execute(query);
+    }
     
+    static getADestiempoRango(usuario, tipo_incidencia, fecha_inicio, fecha_fin, archivado){
+
+        if(fecha_inicio != 't.Fecha_Inicio')
+            fecha_inicio = "'" + fecha_inicio + "'";
+        
+        if(fecha_fin != 't.Fecha_Inicio')
+            fecha_fin = "'" + fecha_fin + "'";
+
+        if(fecha_inicio != 't.Fecha_Inicio')
+        {
+            if(fecha_fin == 't.Fecha_Inicio')
+            {
+                fecha_fin = 'CURRENT_DATE + INTERVAL 1 DAY';
+            }
+        }
+
+        let query = 'SELECT WEEK(t.Fecha_Fin) AS "Semana", COUNT(t.Id_Ticket) AS "A_Destiempo" FROM ticket t, tipo_incidencia ti WHERE t.Id_Tipo_Incidencia = ti.Id_Tipo_Incidencia AND t.Fecha_Fin IS NOT NULL AND ((UNIX_TIMESTAMP(t.Fecha_Fin) - UNIX_TIMESTAMP(t.Fecha_Inicio)) DIV 3600) <= ti.SLA AND t.Id_Estado != 4 AND t.Id_Ticket IN (SELECT ut.Id_Ticket FROM usuario_ticket ut WHERE ut.Id_Usuario = ' + usuario + ' GROUP BY ut.Id_Ticket) AND t.Id_Tipo_Incidencia = ' + tipo_incidencia + ' AND t.Archivado = ' + archivado + ' AND t.Fecha_Inicio BETWEEN ' + fecha_inicio + ' AND ' + fecha_fin +' GROUP BY WEEK(t.Fecha_Fin)';
+        return db.execute(query);
+    }
 }
