@@ -51,7 +51,7 @@ function openTicket(element) {
         preguntas_nuevas.innerHTML = '';
         for(let pregunta of response.preguntas)
         {
-            preguntas.innerHTML += '<div class="row"><div class="col"><label class="col-form-label">' + pregunta.Pregunta + '</label></div></div><div class="row"><div class="col">' + pregunta.Respuesta + '</div></div>';
+            preguntas.innerHTML += '<div class="row"><div class="col"><label class="col-form-label"><b>' + pregunta.Pregunta + '</b></label></div></div><div class="row"><div class="col">' + pregunta.Respuesta + '</div></div>';
         }
         for(let label of response.labels)
         {
@@ -104,7 +104,7 @@ document.getElementById("select_tipo_incidencia").onchange = () =>
         let cont = 0;
         for(let pregunta of response.preguntas)
         {
-            preguntas.innerHTML += '<div class="col"> <label for="respuesta' + cont + '">' + pregunta.Texto_Pregunta + ' </label> </div> <div class="col"> <input type="text" id="respuesta' + cont + '" name="respuesta' + cont + '"> </div> <br> ';
+            preguntas.innerHTML += '<div> <label for="respuesta' + cont + '"><b>' + pregunta.Texto_Pregunta + '</b> </label> </div> <div> <input type="text" id="respuesta' + cont + '" name="respuesta' + cont + '"> </div> <br><br> ';
             preguntas.innerHTML += '<input type="hidden" id="pregunta' + cont + '" name="pregunta' + cont + '" value="' + pregunta.Id_Pregunta + '">';
             cont++;
         }
@@ -231,6 +231,7 @@ document.getElementById("enviar").onclick = () =>
       let actualR = 'respuesta' + i;
       preguntas_nuevas.push({pregunta:document.getElementById(actualP).value, respuesta:document.getElementById(actualR).value})
     }
+    document.getElementById("numPreguntas").value = 0;
     data = {
       estado:select_estado.value,
       prioridad:select_prioridad.value,
