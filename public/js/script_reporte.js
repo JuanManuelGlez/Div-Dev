@@ -26,6 +26,8 @@
                 
                 const archi=document.getElementById("filtro_archivado");
                 const archis= archi.options[archi.selectedIndex].text;
+
+                let today = new Date().toISOString().slice(0, 10)
                 
                 const inicio=document.getElementById("fecha_inicio").value;
                 if (inicio===0){
@@ -48,41 +50,43 @@
                 pdf.text(10,15,"Zebrands");
                 pdf.text(75,20,"Reporte de Métricas");
                 pdf.text(175,15,"Ticketz");
-                pdf.setFontSize(10);
-                
-                pdf.setFontStyle("bold");
-                pdf.text(20,30,"Usuarios: ");
-                pdf.setFontStyle("normal");
                 pdf.setFontSize(8);
-                pdf.text(20,35,usuarios);
-                
-                pdf.setFontSize(10);
-                pdf.setFontStyle("bold");
-                pdf.text(50,30,"Tipos de incidencia: ");
-                pdf.setFontStyle("normal");
-                pdf.setFontSize(8);
-                pdf.text(50,35,tipos);
-                
-                pdf.setFontSize(10);
-                pdf.setFontStyle("bold");
-                pdf.text(100,30,"Archivados: ");
-                pdf.setFontStyle("normal");
-                pdf.setFontSize(8);
-                pdf.text(100,35,archis);
-                
-                pdf.setFontSize(10);
-                pdf.setFontStyle("bold");
-                pdf.text(130,30,"Fecha Inicio: ");
-                pdf.setFontStyle("normal");
-                pdf.setFontSize(8);
-                pdf.text(130,35,fecha_inicio);    
+                pdf.text(87,25,"Fecha de reporte: "+today);
 
                 pdf.setFontSize(10);
                 pdf.setFontStyle("bold");
-                pdf.text(160,30,"Fecha Fin: ");
+                pdf.text(20,32,"Usuarios: ");
                 pdf.setFontStyle("normal");
                 pdf.setFontSize(8);
-                pdf.text(160,35,fecha_fin);  
+                pdf.text(20,37,usuarios);
+                
+                pdf.setFontSize(10);
+                pdf.setFontStyle("bold");
+                pdf.text(50,32,"Tipos de incidencia: ");
+                pdf.setFontStyle("normal");
+                pdf.setFontSize(8);
+                pdf.text(50,37,tipos);
+                
+                pdf.setFontSize(10);
+                pdf.setFontStyle("bold");
+                pdf.text(100,32,"Archivados: ");
+                pdf.setFontStyle("normal");
+                pdf.setFontSize(8);
+                pdf.text(100,37,archis);
+                
+                pdf.setFontSize(10);
+                pdf.setFontStyle("bold");
+                pdf.text(130,32,"Fecha Inicio: ");
+                pdf.setFontStyle("normal");
+                pdf.setFontSize(8);
+                pdf.text(130,37,fecha_inicio);    
+
+                pdf.setFontSize(10);
+                pdf.setFontStyle("bold");
+                pdf.text(160,32,"Fecha Fin: ");
+                pdf.setFontStyle("normal");
+                pdf.setFontSize(8);
+                pdf.text(160,37,fecha_fin);  
 
                 ////PORESTADOS
                 pdf.setFontStyle("bold");
@@ -139,7 +143,7 @@
                 pdf.text(12,160,"Tickets organizados por su tipo de incidencia");
                 pdf.addImage(canvas6Image,'JPEG',10,165,190,75);
 
-                let today = new Date().toISOString().slice(0, 10)
+                
 
                 pdf.save('Reporte_'+ today +'.pdf');
             }
