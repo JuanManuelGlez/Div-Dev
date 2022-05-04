@@ -5,6 +5,8 @@ $(document).ready(function () {
     document.getElementById("principal").style.opacity = 1;
 });
 
+
+
 $(document).on('keyup', '.form-select-label .bs-searchbox input', function (e) {
     var input = e.target.value;
     if(document.getElementsByClassName("no-results").length == 1)
@@ -87,5 +89,13 @@ document.getElementById("select_tipo_incidencia").onchange = () =>
         console.log(err);
     });
     
+}
+
+function alert_success(){
+    Swal.fire(
+        '¡Creación Exitosa!',
+        'Ticket nuevo creado, ver en Panel Ticket o Backlog',
+        'success'
+      )
 }
 

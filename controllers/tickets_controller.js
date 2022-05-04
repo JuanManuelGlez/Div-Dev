@@ -181,7 +181,7 @@ exports.nuevo_post = (request, response, next) => {
         ); //Esto funciona, no se si sea lo mejor
       }
 
-      response.redirect("/tickets/nuevo");
+      
     })
     .catch((err) => console.log(err));
 };

@@ -281,9 +281,17 @@ document.getElementById("archivar").onclick = () =>
       body:JSON.stringify(data)
   })
   .then(response => {
-      alert("Datos guardados");
-      closeTicket();
-      openTicket(document.getElementById("boton"+idTicket));
+    Swal.fire(
+        '¡Creación Exitosa!',
+        'Ticket nuevo creado, ver en Panel Ticket o Backlog',
+        'success'
+      )
+      .then(response => {
+        document.location.reload();
+        closeTicket();
+        openTicket(document.getElementById("boton"+idTicket));
+      })
+      
   }).catch(err => {
       console.log(err);
   });
@@ -332,7 +340,7 @@ document.getElementById("asignar").onclick = () =>
       body:JSON.stringify(data)
   })
   .then(response => {
-      alert("Datos guardados");
+    alert("Datos guardados")
       closeTicket();
       openTicket(document.getElementById("boton"+idTicket));
   }).catch(err => {
