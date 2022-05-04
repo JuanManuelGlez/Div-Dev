@@ -710,6 +710,8 @@ function rangoTiempoYDestiempo()
             }
         }
 
+        let datosTotales = datosATiempo.concat(datosADestiempo);
+
         const data = {
             labels: labels,
             datasets: [{
@@ -762,7 +764,7 @@ function rangoTiempoYDestiempo()
                     },
                     y: {
                         stacked: true,
-                        max: Math.max.apply(null, datosADestiempo)+3,
+                        max: Math.max.apply(null, datosTotales)+3,
                         grid: {
                             display: false
                         } 

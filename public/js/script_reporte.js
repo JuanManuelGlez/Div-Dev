@@ -139,6 +139,8 @@
                 pdf.text(12,160,"Tickets organizados por su tipo de incidencia");
                 pdf.addImage(canvas6Image,'JPEG',10,165,190,75);
 
-                pdf.save('mychart.pdf');
+                let today = new Date().toISOString().slice(0, 10)
+
+                pdf.save('Reporte_'+ today +'.pdf');
             }
      
