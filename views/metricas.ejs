@@ -21,8 +21,13 @@
                 <div></div>
                 <h1 style="color: var(--bs-body-bg);margin-left: 60px;">Métricas</h1>
             </div>
-            <div class="col-sm-3" style="padding-top:10px;">
-                <div class="dropdown">
+            <div class="col-sm-1" style="padding-top: 10px;">
+                <button type="button"  style="background-color: black;border-width:0px;" class="btn btn-primary" onclick="downloadPDF()">PDF</button>
+            </div>
+           
+            
+            <div class="col-sm-1" style="padding-top:10px;">
+                 <div class="dropdown">
                     <button type="button" style="background-color: black;border-width:0px;" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
                       Filtros
                     </button>
@@ -73,126 +78,6 @@
                 
         </div>
     </div>
-    <!--
-    <div class="container" id="content">
-        <div class="row" style="margin-top: 0px;">
-            <div class="col offset-sm-1 offset-lg-0" style="text-align: center;">
-                <div class="row" style="margin-top: 30px;">
-                    <div class="col offset-2 offset-sm-0 offset-lg-0 offset-xl-0 offset-xxl-0">
-                        <div class="card" style="box-shadow: 1px 4px 8px rgba(0,0,0,0.46);">
-                            <div class="card-body" style="text-align: left;width: 262px;">
-                                <h4 class="card-title" style="color: rgb(0,0,0);text-align: left;">Status</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col offset-sm-1 offset-xl-0" style="text-align: center;">
-                <div class="row" style="margin-top: 30px;">
-                    <div class="col offset-2 offset-sm-0 offset-lg-0 offset-xl-0 offset-xxl-0">
-                        <div class="card" style="box-shadow: 1px 4px 8px rgba(0,0,0,0.46);">
-                            <div class="card-body" style="text-align: left;width: 262px;">
-                                <h4 class="card-title" style="color: rgb(0,0,0);text-align: left;">Procedencia</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col offset-sm-1 offset-lg-0" style="text-align: center;">
-                <div class="row" style="margin-top: 30px;">
-                    <div class="col offset-2 offset-sm-0 offset-lg-0 offset-xl-0 offset-xxl-0">
-                        <div class="card" style="box-shadow: 1px 4px 8px rgba(0,0,0,0.46);">
-                            <div class="card-body" style="text-align: left;width: 262px;">
-                                <h4 class="card-title" style="color: rgb(0,0,0);text-align: left;">Tipo de Incidencia</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col offset-2 offset-sm-1 offset-lg-0">
-                <div class="row" style="margin-top: 30px;">
-                    <div class="col">
-                        <div class="card" style="box-shadow: 1px 4px 8px rgba(0,0,0,0.46);">
-                            <div class="card-body" style="text-align: left;width: 100%;">
-                                <h4 class="card-title" style="color: rgb(0,0,0);text-align: left;width: 100%;">Historial de Tickets Complettados a tiempo vs a Destiempo</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col offset-2 offset-sm-1 offset-lg-0">
-                <div class="row" style="margin-top: 30px;">
-                    <div class="col">
-                        <div class="card" style="box-shadow: 1px 4px 8px rgba(0,0,0,0.46);">
-                            <div class="card-body" style="text-align: left;width: 262px;">
-                                <h4 class="card-title" style="color: rgb(0,0,0);text-align: left;width: 1000px;">Satisfacción de clientes&nbsp;</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col offset-2 offset-sm-1 offset-lg-0">
-                <div class="row" style="margin-top: 30px;">
-                    <div class="col">
-                        <div class="card" style="box-shadow: 1px 4px 8px rgba(0,0,0,0.46);">
-                            <div class="card-body" style="text-align: left;width: 262px;">
-                                <h4 class="card-title" style="color: rgb(0,0,0);text-align: left;width: 1000px;">Tiempos Promedio de respuesta</h4>
-                            </div>
-                            <div class="row" style="margin-bottom: 40px;">
-                                <div class="col">
-                                    <div class="card" style="margin-left: 15px;margin-right: 15px;width: 150px;height: 150px;">
-                                        <div class="card-body shadow" style="background: #f9e24c;border-radius: 16px;">
-                                            <h4 class="card-title" style="text-align: center;color: rgb(0,0,0);">Database</h4>
-                                            <h4 class="card-title" style="text-align: center;color: #9e6b05;margin-top: 24px;font-size: 34px;font-weight: bold;">34hrs</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="card" style="margin-left: 15px;margin-right: 15px;width: 150px;height: 150px;">
-                                        <div class="card-body shadow" style="background: #f9e24c;border-radius: 16px;">
-                                            <h4 class="card-title" style="text-align: center;color: rgb(0,0,0);">Database</h4>
-                                            <h4 class="card-title" style="text-align: center;color: #9e6b05;margin-top: 24px;font-size: 34px;font-weight: bold;">34hrs</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="card" style="margin-left: 15px;margin-right: 15px;width: 150px;height: 150px;">
-                                        <div class="card-body shadow" style="background: #f9e24c;border-radius: 16px;">
-                                            <h4 class="card-title" style="text-align: center;color: rgb(0,0,0);">Database</h4>
-                                            <h4 class="card-title" style="text-align: center;color: #9e6b05;margin-top: 24px;font-size: 34px;font-weight: bold;">34hrs</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="card" style="margin-left: 15px;margin-right: 15px;width: 150px;height: 150px;">
-                                        <div class="card-body shadow" style="background: #f9e24c;border-radius: 16px;">
-                                            <h4 class="card-title" style="text-align: center;color: rgb(0,0,0);">Database</h4>
-                                            <h4 class="card-title" style="text-align: center;color: #9e6b05;margin-top: 24px;font-size: 34px;font-weight: bold;">34hrs</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="card" style="margin-left: 15px;margin-right: 15px;width: 150px;height: 150px;">
-                                        <div class="card-body shadow" style="background: #f9e24c;border-radius: 16px;">
-                                            <h4 class="card-title" style="text-align: center;color: rgb(0,0,0);">Database</h4>
-                                            <h4 class="card-title" style="text-align: center;color: #9e6b05;margin-top: 24px;font-size: 34px;font-weight: bold;">34hrs</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    -->
     <div class="container">
         <div class="chartMenu">
         </div>
@@ -201,7 +86,6 @@
                 <h2 id="tituloGrafica">Status</h2>
                 <h3 id="subtituloGrafica">Tickets organizados por su estado actual</h3>
               <div style="height: 80%"><canvas id="porEstados"></canvas></div>
-              <button onclick="downloadPDF()">PDF version </button>
             </div>
 
             <div class="chartBox p-4 offset-sm-1">
@@ -246,38 +130,7 @@
 </div>
 
 </div>
- <script>
-               function downloadPDF(){
-                    const canvas1=document.getElementById("porEstados");
-                    const canvas1Image= canvas1.toDataURL('image/jpeg',1.0);
-
-                    const canvas2=document.getElementById("porProcedencia");
-                    const canvas2Image= canvas2.toDataURL('image/jpeg',1.0);
-
-                    const canvas3=document.getElementById("porResolucion");
-                    const canvas3Image= canvas3.toDataURL('image/jpeg',1.0);
-                    let pdf = new jsPDF();
-                    ////PORESTADOS
-                    pdf.setFontSize(10);
-                    pdf.text(8,30,"Status");
-                    pdf.text(8,35,"Tickets organizados por su estado actual");
-                    pdf.addImage(canvas1Image, 'JPEG',5,40,90,80);
-                    ////PROCEDENCIA
-                    pdf.text(112,30,"Procedencia");
-                    pdf.text(112,35,"Tickets organizados por su procedencia");
-                    pdf.addImage(canvas2Image,'JPEG',115,40,90,80);
-                    ////Resolucion
-                    pdf.text(95,125,"Resolucion");
-                    pdf.text(8,105,"");
-                    pdf.addImage(canvas3Image,'JPEG',15,130,170,60);
-
-                    pdf.save('mychart.pdf'); 
-                }
-            </script>
-
-
-
-
+ <script src="/js/script_reporte.js"></script>
 <script src="/js/script_metricas.js"></script>
 
 <%- include('includes/foot.ejs') %>

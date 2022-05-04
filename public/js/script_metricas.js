@@ -577,10 +577,20 @@ function promediosTipoIncidencia()
             }]
         };
         
+        const bgColor={
+            id:'bgColor',
+            beforeDraw:(chart,options)=>{
+                const {ctx,width,height}=chart;
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0,0,width,height)
+                ctx.restore();
+            }
+        }
+
         const config = {
             type: 'bar',
             data: data,
-            plugins: [ChartDataLabels],
+            plugins: [ChartDataLabels,bgColor],
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
@@ -728,10 +738,20 @@ function rangoTiempoYDestiempo()
             ]
         };
         
+        const bgColor={
+            id:'bgColor',
+            beforeDraw:(chart,options)=>{
+                const {ctx,width,height}=chart;
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0,0,width,height)
+                ctx.restore();
+            }
+        }
+
         const config = {
             type: 'bar',
             data: data,
-            plugins: [ChartDataLabels],
+            plugins: [ChartDataLabels,bgColor],
             options: {
                 scales: {
                     x: {
@@ -807,8 +827,3 @@ document.getElementById("dropdown_filter_metricas").onclick = () =>
     rangoTiempoYDestiempo();
 }
 
-console.log(document.getElementById("fecha_inicio").value);
-
-document.getElementById("fecha_inicio").onchange = () => {
-    console.log(document.getElementById("fecha_inicio").value);
-}
