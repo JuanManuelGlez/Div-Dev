@@ -46,3 +46,23 @@ exports.CreaRol = (request, response, next) => {
     .then(response.status(200).json({}))
     .catch(err => console.log(err));
 }
+
+exports.ModificaRol = (request, response, next) => {
+    Rol.getId(request.body.Rol)
+        .then(([rowsid, fieldData]) => {
+            Rol.update((rowsid[0].Id_Rol), request.body.Nuevo)
+                .then(response.status(200).json({}))
+                .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
+}
+
+exports.EliminaRol = (request, response, next) => {
+    Rol.getId(request.body.Rol)
+        .then(([rowsid, fieldData]) => {
+            Rol.delete((rowsid[0].Id_Rol))
+                .then(response.status(200).json({}))
+                .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
+}

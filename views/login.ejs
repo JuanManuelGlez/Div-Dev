@@ -11,18 +11,16 @@
                     <input type="hidden" id="_csrf" name="_csrf" value="<%= csrfToken %>">
                     
                     <div class="email-login" style="background-color:#ffffff;">
-                        <input id="correo" name="correo" type="email" class="email-imput form-control" style="margin-top:10px;" required="" placeholder="Email" minlength="6">
-                        <input id="contrasenia" name="contrasenia" type="password" class="password-input form-control" style="margin-top:10px;" required="" placeholder="Password" minlength="6">
+                        <input id="correo" name="correo" type="email" class="email-imput form-control" style="margin-top:10px;" required="" placeholder="Correo" minlength="6">
+                        <input id="contrasenia" name="contrasenia" type="password" class="password-input form-control" style="margin-top:10px;" required="" placeholder="Contraseña" minlength="6">
                     </div>
 
                     <div id="mensaje_error"></div>
                     <div class="submit-row" style="margin-bottom:8px;padding-top:0px;"><input type="button" id="credencial" class="btn btn-primary mt-3" style="background-color: black;" value="Enviar">
-                        <div class="d-flex justify-content-between">
-                            <a id="forgot-password-link" href="#">Forgot Password?</a>
-                        </div>
+                       
                     </div>
                     <div id="login-box-footer" style="padding:10px 20px;padding-bottom:23px;padding-top:18px;">
-                        <p style="margin-bottom:0px;">Don't you have an account?<a id="register-link" href="/usuario/signup">Sign Up!</a></p>
+                        <p style="margin-bottom:0px;">¿Aún no tienes una cuenta?<a id="register-link" href="/usuario/signup">Registrate</a></p>
                     </div>
                 </form>
             </div>

@@ -12,6 +12,9 @@
     }
     
 </style>
+
+
+
 <div id="principal" class="page-content-wrapper face-in" style="color: var(--bs-teal);">
     <div class="container-fluid" style="color: transparent;background: var(--bs-indigo);">
         <div class="row" style="background: var(--bs-red);">
@@ -28,7 +31,7 @@
                     <div class="row">
                         <div class="col" style="padding: 30px 0px;">
                             <h1 class="text-dark" style="background: rgba(255,89,90,0);text-align: center;border-radius: 20px;color: rgb(255,255,255);">Información General</h1>
-                            <p style="text-align: center; color: black;">Comienza eigiendo el tipo de incidencia</p>
+                            <p style="text-align: center; color: black;">Comienza eligiendo el tipo de incidencia</p>
                         </div>
                     </div>
                     <div class="row" style="padding: 15px 0px;">
@@ -51,7 +54,9 @@
                         </div>
                         <div class="row" style="padding: 15px 0px;">
                             <div class="col-xxl-4"><label  class="col-form-label text-dark">Descripción</label></div>
-                            <div class="col"><input id="descripcion" name="descripcion" class="form-control" type="text" maxlength="255" required></div>
+                            <div class="col"><textarea class="form-control" required id="descripcion" name="descripcion" rows = "5" cols = "60" name = "description">
+                                
+                             </textarea></div>
                         </div>
                         
                         <div class="row" style="padding: 15px 0px;">
@@ -121,7 +126,7 @@
                     </div> -->
                     <div id="preguntas_ticket"></div>
                     <div class="row" style="padding: 30px 0px;">
-                        <div class="col" style="text-align: center;"><button type="submit" class="btn btn-primary shadow" type="button" style="background: rgb(0,0,0);border-width: 0px;" id="enviar">Crear Ticket</button></div>
+                        <div class="col" style="text-align: center;"><button type="submit" onClick="alert_success()" class="btn btn-primary shadow" type="button" style="background: rgb(0,0,0);border-width: 0px;" id="enviar">Crear Ticket</button></div>
                     </div>
                 
                 </form>

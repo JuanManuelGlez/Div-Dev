@@ -121,6 +121,7 @@ document.getElementById("button_cambios").onclick = () =>{
             })
             .then(() => {
                 window.alert("cambios guardados")
+                window.location.reload();
 
             }).catch(err => {
                 console.log(err);

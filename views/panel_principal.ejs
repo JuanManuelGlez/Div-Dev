@@ -8,180 +8,185 @@
             }
         </style>
 
-        <div id="Ticket" style="color:black">
-            <div class="modal fade" id="myModal">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <!-- Modal Header -->
-                        <div class="modal-header">
-                            <h4 class="modal-title"> Asunto: <span id="asunto"></span> Ticket # <span id="id_ticket">
-                                </span> </h4>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-
-                        <!-- Modal body -->
-                        <div class="modal-body">
-                            <form id="modify_ticket" method="POST">
-                                <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>"></input>
-                                <input type="hidden" name="Id_Ticket" id="Id_Ticket" value="">
-
-                                <div class="row">
-                                    <div class="col-xxl-2">
-                                        <h6 style="text-align: left;">Tipo Incidencia</h6>
-                                    </div>
-                                    <div class="col">
-                                        <select class="form-select" id="select_tipo_incidencia"
-                                            name="select_tipo_incidencia" aria-label="Default select example">
-                                            <% for (let incidencia of incidencias){%>
-                                                <option selected="false" value="<%=incidencia.Id_Tipo_Incidencia%>"
-                                                    id="tipo_incidencia<%= incidencia.Id_Tipo_Incidencia %>">
-                                                    <%=incidencia.Nombre_Tipo_Incidencia%>
-                                                </option>
-                                                <%}%>
-                                        </select>
-                                    </div>
-                                    <div id="Usuario_Tipo"></div>
-                                </div>
-
-                                <br>
-
-                                <div class="row">
-                                    <div class="col-xxl-2">
-                                        <h6 style="text-align: left;">Estado</h6>
-                                    </div>
-                                    <div class="col">
-                                        <select class="form-select" id="select_estado" name="estado"
-                                            aria-label="Default select example">
-                                            <% for (let estado of estados){%>
-                                                <option selected="false" value="<%=estado.Id_Estado%>"
-                                                    id="estado<%=estado.Id_Estado%>">
-                                                    <%=estado.Nombre_Estado %>
-                                                </option>
-                                                <%}%>
-                                                    <input type="hidden" name="Estado_Actual" id="Estado_Actual"
-                                                        value="">
-                                                    <div id="Usuario_Estado"></div>
-                                        </select>
-                                    </div>
-
-
-                                    <div class="col-xxl-2">
-                                        <h6 style="text-align: left;">Prioridad</h6>
-                                    </div>
-                                    <div class="col">
-                                        <select class="form-select" id="select_prioridad" name="prioridad"
-                                            aria-label="Default select example">
-                                            <% for (let prioridad of prioridades){%>
-                                                <option selected="false" value="<%=prioridad.Id_Prioridad%>"
-                                                    id="prioridad<%= prioridad.Id_Prioridad %>">
-                                                    <%=prioridad.Nombre_Prioridad %>
-                                                </option>
-                                                <%}%>
-
-                                        </select>
-                                        <div id="Usuario_Prioridad"></div>
-                                    </div>
-
-                                </div>
-
-                                <br>
-                                <p id="fecha_fin"></p>
-                                <h6 id="label_display">Labels: </h6>
-
-                                <h6>Descripción: </h6>
-                                <p class="border-primary" id="descripcion"
-                                    style="border-radius: 18px;padding: 0px;border-right: 0px solid rgb(0,0,0);">
-                                </p>
-                                <br>
-
-                                <h6>Preguntas: </h6>
-
-                                <div class="row">
-                                    <div class="row" id="preguntas">
-                                    </div>
-                                    <div class="row" id="preguntas_nuevas">
-                                    </div>
-                                    <input type="hidden" id="numPreguntas" name="numPreguntas" value="0">
-                                </div>
-
-
-                                <div class="row">
-
-
-                                    <div class="col"><button type="button" class="btn btn-primary" id="enviar"
-                                            type="button"
-                                            style="background: rgb(0,0,0);width: 100%;margin-top: 40px;border-width: 0px">Guardar<i
-                                                class="fa fa-save" style="margin-left: 15px;"></i></button></div>
-                                    <div class="col"><button class="btn btn-primary" id="boton_comentarios"
-                                            type="button"
-                                            style="background: rgb(0,0,0);width: 100%;margin-top: 40px;border-width: 0px">Comentarios<i
-                                                class="fa fa-comments-o" style="margin-left: 15px;"></i></button></div>
-                                    <div class="col"><button class="btn btn-primary" type="button" id="asignar"
-                                            style="background: rgb(0,0,0);width: 100%;margin-top: 40px;border-width: 0px">Asignación<i
-                                                class="fa fa-user-plus" style="margin-left: 15px;"></i></button></div>
-                                    <div class="col"><button class="btn btn-primary" id="archivar" type="button"
-                                            style="background: rgb(0,0,0);width: 100%;margin-top: 40px;border-width: 0px;">
-                                            Archivar <i class="fa fa-archive" style="margin-left: 15px;"></i></button>
-                                    </div>
-
-                                </div>
-
-
-
-
-                            </form>
-
-                        </div>
-
-
-
-
-                        <div id="commentShow" style="display:none;" class="modal-body">
-
-                            <div>
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col">
-                                        <div class="card shadow-0 border" style="background-color: #f0f2f5;">
-                                            <div class="card-body p-4">
-                                                <div class="form-outline mb-4">
-                                                    <!-- <form id="nuevo_comentario" method="POST" enctype="multipart/form-data"> -->
-                                                    <input type="hidden" name="_csrf" id="_csrf"
-                                                        value="<%= csrfToken %>"></input>
-                                                    <label for="comment">Comentario: </label>
-                                                    <input id="id_ticket" name="id_ticket" type="hidden" value="">
-                                                    <input type="text" id="texto_comentario" name="texto_comentario"
-                                                        placeholder="Escribe aqui...">
-
-                                                    <button onClick="submitForm()" type="button" class="btn btn-success"
-                                                        id="Agregar"> Agregar Comentario </button>
-                                                    <input type="file" id="url_archivo_comentario"
-                                                        name="url_archivo_comentario">
-                                                    <script>
-                                                        var input = document.getElementById("texto_comentario");
-                                                        input.addEventListener("keyup", function (event) {
-                                                            if (event.keyCode === 13) {
-                                                                event.preventDefault();
-                                                                console.log("hi");
-                                                                document.getElementById("Agregar").click();
-                                                            }
-                                                        });
-                                                    </script>
-                                                    <!-- </form> -->
-
-                                                </div>
-                                                <div id="comentarios"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
+<div id="Ticket" style="color:black">
+    <!-- The Modal -->
+      <div class="modal fade" id="myModal">
+          <div class="modal-dialog modal-lg">
+             <div class="modal-content">
+    <!-- Modal Header -->
+                  <div class="modal-header">
+                      <h4 class="modal-title"> Asunto: <span id="asunto"></span> Ticket # <span id="id_ticket"> </span> </h4>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                  </div>
+  
+    <!-- Modal body -->
+                  <div class="modal-body">
+                      <form id="modify_ticket" method="POST">
+                          <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>"></input>
+                          <input type="hidden" name="Id_Ticket" id="Id_Ticket" value="">
+  
+                          <div class="row">
+                              <div class="col-xxl-2">
+                                  <h6 style="text-align: left;">Tipo Incidencia</h6>
+                              </div>
+                              <div class="col">
+                                  <select class="form-select" id="select_tipo_incidencia" name="select_tipo_incidencia" aria-label="Default select example">
+                                      <% for (let incidencia of incidencias){%>
+                                          <option selected="false" value="<%=incidencia.Id_Tipo_Incidencia%>" id="tipo_incidencia<%= incidencia.Id_Tipo_Incidencia %>"> <%=incidencia.Nombre_Tipo_Incidencia%> </option>
+                                      <%}%>
+                                  </select>
+                              </div><div id="Usuario_Tipo"></div>
+                          </div>
+  
+                          <br>
+                          
+                          <div class="row">       
+                              <div class="col-xxl-2">
+                                  <h6 style="text-align: left;">Estado</h6>
+                              </div>
+                              <div class="col">
+                                  <select class="form-select" id="select_estado" name="estado" aria-label="Default select example">
+                                      <% for (let estado of estados){%>
+                                          <option selected="false" value="<%=estado.Id_Estado%>" id="estado<%=estado.Id_Estado%>"> <%=estado.Nombre_Estado %> </option>
+                                      <%}%>
+                                      <input type="hidden"name="Estado_Actual" id="Estado_Actual" value="">
+                                      <div id="Usuario_Estado"></div>
+                                  </select>
+                              </div>
+  
+  
+                               <div class="col-xxl-2">
+                                  <h6 style="text-align: left;">Prioridad</h6>
+                              </div>
+                              <div class="col">
+                                  <select class="form-select" id="select_prioridad" name="prioridad" aria-label="Default select example">
+                                      <% for (let prioridad of prioridades){%>
+                                          <option selected="false" value="<%=prioridad.Id_Prioridad%>" id="prioridad<%= prioridad.Id_Prioridad %>"> <%=prioridad.Nombre_Prioridad %> </option>
+                                      <%}%>
+                                      
+                                  </select><div id="Usuario_Prioridad"></div>
+                              </div>
+  
+                          </div>
+                                  
+                          <br>
+                          <p id="fecha_fin"></p>
+                          <h6 id="label_display">Labels: </h6>
+  
+                          <h6>Descripción: </h6>
+                              <p class="border-primary" id="descripcion"  style="border-radius: 18px;padding: 0px;border-right: 0px solid rgb(0,0,0);">
+                              </p>
+                          <br>
+  
+                          <h6>Preguntas:  </h6>
+                 
+                              <div class="row">
+                                  <div class="row" id="preguntas">
+                                      </div>
+                                      <div class="row" id="preguntas_nuevas">
+                                          </div>
+                                          <input type="hidden" id="numPreguntas" name="numPreguntas" value="0">
+                                      </div>
+                              
+  
+                                  <div class="row">
+  
+  
+                                      <div class="col"><button type="button" class="btn btn-primary" id="enviar"
+                                              type="button"
+                                              style="background: rgb(0,0,0);width: 100%;margin-top: 40px;border-width: 0px">Guardar<i
+                                                  class="fa fa-save" style="margin-left: 15px;"></i></button></div>
+                                      <div class="col"><button class="btn btn-primary" id="boton_comentarios"
+                                              type="button"
+                                              style="background: rgb(0,0,0);width: 100%;margin-top: 40px;border-width: 0px">Comentarios<i
+                                                  class="fa fa-comments-o" style="margin-left: 15px;"></i></button></div>
+                                      <div class="col">
+                                          <div class="dropdown">
+                                              <button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" id="ver_asignacion" type="button"
+                                                  style="background: rgb(0,0,0);width: 100%;margin-top: 40px;border-width: 0px;"> Asignar <i
+                                                      class="fa fa-archive" style="margin-left: 15px;"></i></button>
+                                              <ul class="dropdown-menu">
+                                                  <form>
+                                                      <div class="form-group" style="margin:10px">
+                                                          <select class="form-select" id="select_encargado" name="select_encargado" aria-label="Default select example">
+                                                              <option selected id="encargado"></option> 
+                                                              <% for (let usuario of usuarios){%>
+                                                                
+                                                                  <option value="<%=usuario.Id_Usuario%>"><%=usuario.Nombre_Usuario%><%=usuario.Tickets_Activos%></option>
+                                                                  
+                                                              <%}%>
+                                                            </select><br>
+                                                      </div>
+                                               
+                                                      <button id="asignar" style="margin-left:40px" type="button" class="btn btn-primary"> Asignar </button>
+                                                    </form>
+                                              </ul>
+                                          </div>
+                                          
+                                      </div>
+  
+                                                  
+                                      <div class="col"><button class="btn btn-primary" id="archivar" type="button"
+                                          style="background: rgb(0,0,0);width: 100%;margin-top: 40px;border-width: 0px;"> Archivar <i
+                                              class="fa fa-archive" style="margin-left: 15px;"></i></button></div>
+                                      
+                                  </div>
+  
+                                  
+  
+  
+                              </form>
+  
+                          </div>
+  
+  
+                      
+  
+                          <div id="commentShow" style="display:none;" class="modal-body">
+                              
+                                  <div >
+                                      <div class="row d-flex justify-content-center">
+                                          <div class="col">
+                                              <div class="card shadow-0 border" style="background-color: #f0f2f5;">
+                                                  <div class="card-body p-4">
+                                                      <div class="form-outline mb-4">
+                                                          <!-- <form id="nuevo_comentario" method="POST" enctype="multipart/form-data"> -->
+                                                              <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>"></input>
+                                                              <label for="comment">Comentario: </label>
+                                                              <input id="id_ticket" name="id_ticket" type="hidden" value="">
+                                                              <input type="text" id="texto_comentario" name="texto_comentario" placeholder="Escribe aqui...">
+                                                          
+                                                              <button onClick="submitForm()"  type="button" class="btn btn-success" id="Agregar"> Agregar Comentario </button>
+                                                              <input type="file" id="url_archivo_comentario" name="url_archivo_comentario">
+                                                              <script>
+                                                                  var input = document.getElementById("texto_comentario");
+                                                                  input.addEventListener("keyup", function(event) {
+                                                                  if (event.keyCode === 13) {
+                                                                  event.preventDefault();
+                                                                  document.getElementById("Agregar").click();
+                                                                  }
+                                                                  });
+                                                              </script> 
+                                                          <!-- </form> -->
+                                                                                              
+                                                      </div> <div id="comentarios"></div>    
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>                       
+                              </div>
+                          </div>
+                      
+                  </div>
+              </div>
+          </div>
+      </div>
+  
+  
+  
+  
+  
 
         <div class="page-content-wrapper" style="color: var(--bs-teal);">
             <div class="container-fluid" style="color: transparent;background: white;">

@@ -60,12 +60,20 @@ document.getElementById("filtro_rol").onchange = () =>
         .then(response => {
     
         display.innerHTML = "";
-        
-        
+        console.log(response)
+        let i = 0;
         for (let usuario of response.usuarios) {
-         
-          display.innerHTML +=
-          '<div id="'+ usuario.Id_Usuario + '" onClick="openUsuario(this)" data-bs-toggle="modal" data-bs-target="#myModal" class="row" style="cursor: pointer;margin: 20px -12px;border-radius: 5px;box-shadow: 0px 0px 9px rgba(147,147,147,0.55);padding: 5px;"> <div class="col" style="font-size: 22px;text-align: center;"><span style="color: rgb(0,0,0);">'+ usuario.Nombre_Usuario+'</span></div> <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);">'+ usuario.Login + '</span></div><div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);">' + usuario.Nombre_Rol + '</span></div> <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);">' + usuario.Total + '</span></div></div>'
+         if(usuario.Tickets = 1 && response.totales != 0){
+            display.innerHTML +=
+            '<div id="'+ usuario.Id_Usuario + '" onClick="openUsuario(this)" data-bs-toggle="modal" data-bs-target="#myModal" class="row" style="cursor: pointer;margin: 20px -12px;border-radius: 5px;box-shadow: 0px 0px 9px rgba(147,147,147,0.55);padding: 5px;"> <div class="col" style="font-size: 22px;text-align: center;"><span style="color: rgb(0,0,0);">'+ usuario.Nombre_Usuario+'</span></div> <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);">'+ usuario.Login + '</span></div><div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);">' + usuario.Nombre_Rol + '</span></div> <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);">' + response.totales[i].Total + '</span></div></div>'
+            i++;
+         }
+         else{
+            display.innerHTML +=
+            '<div id="'+ usuario.Id_Usuario + '" onClick="openUsuario(this)" data-bs-toggle="modal" data-bs-target="#myModal" class="row" style="cursor: pointer;margin: 20px -12px;border-radius: 5px;box-shadow: 0px 0px 9px rgba(147,147,147,0.55);padding: 5px;"> <div class="col" style="font-size: 22px;text-align: center;"><span style="color: rgb(0,0,0);">'+ usuario.Nombre_Usuario+'</span></div> <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);">'+ usuario.Login + '</span></div><div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);">' + usuario.Nombre_Rol + '</span></div> <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);"> 0 </span></div></div>'
+            i++;
+         }
+          
         }
     }).catch(err => {
         console.log(err);

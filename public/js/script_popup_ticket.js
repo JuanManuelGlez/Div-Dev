@@ -78,6 +78,7 @@ function openTicket(element) {
   document.getElementById("Ticket").style.display = "flex";
 }
 
+
 document.getElementById("select_tipo_incidencia").onchange = () =>
 {
     let preguntas = document.getElementById("preguntas_nuevas");
@@ -187,7 +188,7 @@ function submitForm(){
     })
     .then(response => response.json())
     .then(response => {
-        alert("Datos guardados");
+        toastCambiosGuardados()
         console.log(response);
         comentarios.innerHTML = "";
         for(let comentario of response.comentarios)
@@ -211,6 +212,7 @@ function submitForm(){
   
 
 }
+
 
 document.getElementById("enviar").onclick = () =>
 {
@@ -250,7 +252,7 @@ document.getElementById("enviar").onclick = () =>
       body:JSON.stringify(data)
   })
   .then(response => {
-      alert("Datos guardados");
+      toastCambiosGuardados()
       closeTicket();
       document.location.reload();
       openTicket(document.getElementById("boton"+idTicket));
@@ -279,7 +281,66 @@ document.getElementById("archivar").onclick = () =>
       body:JSON.stringify(data)
   })
   .then(response => {
-      alert("Datos guardados");
+    Swal.fire(
+        '¡Creación Exitosa!',
+        'Ticket nuevo creado, ver en Panel Ticket o Backlog',
+        'success'
+      )
+      .then(response => {
+        document.location.reload();
+        closeTicket();
+        openTicket(document.getElementById("boton"+idTicket));
+      })
+      
+  }).catch(err => {
+      console.log(err);
+  });
+}
+
+document.getElementById("ver_asignacion").onclick = () =>
+{ 
+    const id_ticket = document.getElementById("Id_Ticket").value;
+    let select = document.getElementById("encargado");
+    let ruta = '../tickets/' + id_ticket + '/asignar_usuario';
+
+    fetch(ruta, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(response => {
+        select.innerHTML = response.encargado[0].Nombre_Usuario;
+        select.value = response.encargado[0].Id_Usuario;
+
+    }).catch(err => {
+        console.log(err);
+    });
+
+}
+
+document.getElementById("asignar").onclick = () =>
+{
+    const idTicket = document.getElementById("Id_Ticket").value;
+    const csrf = document.getElementById('_csrf').value;
+    let ruta = '../tickets/' + idTicket + '/asignar_usuario';
+    let encargado_f = document.getElementById("select_encargado").value
+
+    data = {
+      encargado: encargado_f
+    }
+
+    fetch(ruta, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+          'csrf-token': csrf
+      },
+      body:JSON.stringify(data)
+  })
+  .then(response => {
+    toastCambiosGuardados()
       closeTicket();
       openTicket(document.getElementById("boton"+idTicket));
   }).catch(err => {
@@ -299,3 +360,10 @@ $('#Ticket').on('hidden.bs.modal', function () {
     document.location.reload();
     
   })
+
+function toastCambiosGuardados() {
+
+    var x = document.getElementById("snackbar");
+    x.className = "show";  
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}

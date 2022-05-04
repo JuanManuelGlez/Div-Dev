@@ -694,7 +694,7 @@ function rangoTiempoYDestiempo()
                 i++;
                 j++;
             }
-            else if(j >= response.datosADestiempo.length || response.datosATiempo[i].Semana < response.datosADestiempo[j].Semana)
+            else if(i < response.datosATiempo.length && (j >= response.datosADestiempo.length || response.datosATiempo[i].Semana < response.datosADestiempo[j].Semana))
             {
                 labels.push(response.datosATiempo[i].Semana);
                 datosATiempo.push(response.datosATiempo[i].A_Tiempo);

@@ -102,9 +102,32 @@
                                             type="button"
                                             style="background: rgb(0,0,0);width: 100%;margin-top: 40px;border-width: 0px">Comentarios<i
                                                 class="fa fa-comments-o" style="margin-left: 15px;"></i></button></div>
-                                    <div class="col"><button class="btn btn-primary" type="button" id="asignar"
-                                            style="background: rgb(0,0,0);width: 100%;margin-top: 40px;border-width: 0px">Asignación<i
-                                                class="fa fa-user-plus" style="margin-left: 15px;"></i></button></div>
+                                    <div class="col">
+                                        <div class="dropdown">
+                                            <button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" id="ver_asignacion" type="button"
+                                                style="background: rgb(0,0,0);width: 100%;margin-top: 40px;border-width: 0px;"> Asignar <i
+                                                    class="fa fa-archive" style="margin-left: 15px;"></i></button>
+                                            <ul class="dropdown-menu">
+                                                <form>
+                                                    <div class="form-group" style="margin:10px">
+                                                        <select class="form-select" id="select_encargado" name="select_encargado" aria-label="Default select example">
+                                                            <option selected id="encargado"></option> 
+                                                            <% for (let usuario of usuarios){%>
+                                                              
+                                                                <option value="<%=usuario.Id_Usuario%>"><%=usuario.Nombre_Usuario%><%=usuario.Tickets_Activos%></option>
+                                                                
+                                                            <%}%>
+                                                          </select><br>
+                                                    </div>
+                                             
+                                                    <button id="asignar" style="margin-left:40px" type="button" class="btn btn-primary"> Asignar </button>
+                                                  </form>
+                                            </ul>
+                                        </div>
+                                        
+                                    </div>
+
+                                                
                                     <div class="col"><button class="btn btn-primary" id="archivar" type="button"
                                         style="background: rgb(0,0,0);width: 100%;margin-top: 40px;border-width: 0px;"> Archivar <i
                                             class="fa fa-archive" style="margin-left: 15px;"></i></button></div>
@@ -161,16 +184,61 @@
             </div>
         </div>
     </div>
+<style>
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;} 
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;} 
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
 
 
+</style>
 
+
+<div id="snackbar">Datos guardados . . . </div>
 
 <div class="page-content-wrapper" style="color: var(--bs-teal);">
     <div class="container-fluid" style="color: transparent;background: var(--bs-indigo);">
         <div class="row" style="background: var(--bs-red);">
             <div class="col offset-2 offset-sm-1 offset-md-0" style="color: var(--bs-purple);background: #ff595a;">
                 <div class="row">
-                <div class="col"> <h1 style="color: var(--bs-body-bg);margin-left: 50px;"> Backlog </h1> </div>
+                <div class="col"> <h1 style="color: var(--bs-body-bg);margin-left: 50px;"> Panel Tickets </h1> </div>
                 <div class="col-sm-2" style="margin-top:10px">
                 <div class="dropdown">
                     <button type="button" style="background-color: black;border-width:0px" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">

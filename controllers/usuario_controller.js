@@ -32,13 +32,30 @@ exports.datos = (request, response, next) => {
 };
 
 exports.filtros = (request, response, next) => {
-  execute = 'SELECT R.Id_Rol, R.Nombre_Rol, U.Id_Rol, U.URL_Foto, U.Id_Usuario, U.Login, U.Contraseña, U.Nombre_Usuario, COUNT(T.Id_Ticket) AS "Total" FROM rol R, usuario_ticket T, usuario U WHERE R.Id_Rol = U.Id_Rol AND T.Id_Usuario = U.Id_Usuario AND U.Id_Rol = ' + request.body.rol + ' GROUP BY U.Id_Usuario'
+  execute = 'SELECT u.Nombre_Usuario, u.Id_Usuario, u.URL_Foto, u.Login, u.Contraseña, u.Id_Rol, r.Nombre_Rol, CASE WHEN (u.Id_Usuario IN (SELECT ut.Id_Usuario FROM usuario_ticket ut, ticket t WHERE ut.Id_Ticket = t.Id_Ticket AND ut.Cargo = "Encargado" AND t.Id_Estado != 4 AND t.Id_Estado != 6) = FALSE) THEN 0 WHEN (u.Id_Usuario IN (SELECT ut.Id_Usuario FROM usuario_ticket ut, ticket t WHERE ut.Id_Ticket = t.Id_Ticket AND ut.Cargo = "Encargado" AND t.Id_Estado != 4 AND t.Id_Estado != 6) = TRUE) THEN 1 END AS "Tickets" FROM usuario u , rol r WHERE u.Id_Rol = r.Id_Rol AND u.Id_Usuario <> 0 AND  u.Login = u.Login AND r.Id_Rol =' + request.body.rol + ' GROUP BY u.Id_Usuario'
   Usuario.fetchByRol(execute)
     .then(([rowsUsuario, fieldData]) => {
-      response.status(200).json({
-        usuarios: rowsUsuario
+      Usuario.countAllActiveTickets()
+        .then(([rowsTickets, fieldData]) => {
+          if(rowsTickets.length === 0){
+            response.status(200).json({
+              usuarios: rowsUsuario,
+              totales : 0
+          });
+          } else {
+            response.status(200).json({
+              usuarios: rowsUsuario,
+              totales : rowsTickets
+          });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    })
 };
 
 exports.getLike = (request, response, next) => {
@@ -103,8 +120,7 @@ exports.signup_post = (request, response, next) => {
 
           .usuario_save()
           .then(() => {
-            response.redirect("/usuario/login");
-
+            
           })
           .catch((err) => console.log(err));
       }
