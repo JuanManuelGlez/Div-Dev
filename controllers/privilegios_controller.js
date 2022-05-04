@@ -62,14 +62,14 @@ exports.EliminaRol = async (request, response, next) => {
     Rol.getId(request.body.Rol)
         .then(([rowsid, fieldData]) => {
             if(((rowsid[0].Id_Rol) == 1) || ((rowsid[0].Id_Rol) == 4)){
-                response.status(200).json({})
+                response.status(200).json({cont: 0})
             }else{
                 Privilegio.deleteprivs((rowsid[0].Id_Rol))
                 .then(
                     Usuario.changerol((rowsid[0].Id_Rol))
                     .then(
                         Rol.delete((rowsid[0].Id_Rol))
-                        .then(response.status(200).json({}))
+                        .then(response.status(200).json({cont: 1}))
                         .catch(err => console.log(err))
                 ))
             }

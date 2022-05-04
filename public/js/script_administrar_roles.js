@@ -135,7 +135,6 @@ function eliminarol(element){
     let rutaEliminaRol = '../EliminaRol';
     let rol = ((element.id).slice(9)).replace(/_/g," ");
 
-    console.log(rol);
         data = {
             Rol: rol
         }
@@ -149,14 +148,19 @@ function eliminarol(element){
         })
         .then(response => response.json())
             .then(response => {
-                Swal.fire(
-                    '¡Operación Exitosa!',  
-                    'rol eliminado exitosamente',
-                    'success'
-                  )
-                  .then(response => {
-                    window.location.reload();
-                  })
+
+                if(response.cont == 1){
+                    Swal.fire(
+                        '¡Operación Exitosa!',  
+                        'rol eliminado exitosamente',
+                        'success'
+                      )
+                      .then(response => {
+                        window.location.reload();
+                      })
+                }else{
+                    Swal.fire('Este rol no se puede borrar')
+                }
     
             }).catch(err => {
                 console.log(err);
