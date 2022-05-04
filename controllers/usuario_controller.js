@@ -32,7 +32,7 @@ exports.datos = (request, response, next) => {
 };
 
 exports.filtros = (request, response, next) => {
-  execute = 'SELECT u.Nombre_Usuario, u.Id_Usuario, u.URL_Foto, u.Login, u.Contraseña, u.Id_Rol, r.Nombre_Rol, CASE WHEN (u.Id_Usuario IN (SELECT ut.Id_Usuario FROM usuario_ticket ut, ticket t WHERE ut.Id_Ticket = t.Id_Ticket AND ut.Cargo = "Encargado" AND t.Id_Estado != 4 AND t.Id_Estado != 6) = FALSE) THEN 0 WHEN (u.Id_Usuario IN (SELECT ut.Id_Usuario FROM usuario_ticket ut, ticket t WHERE ut.Id_Ticket = t.Id_Ticket AND ut.Cargo = "Encargado" AND t.Id_Estado != 4 AND t.Id_Estado != 6) = TRUE) THEN 1 END AS "Tickets" FROM usuario u , rol r WHERE u.Id_Rol = r.Id_Rol AND u.Login = u.Login AND r.Id_Rol =' + request.body.rol + ' GROUP BY u.Id_Usuario'
+  execute = 'SELECT u.Nombre_Usuario, u.Id_Usuario, u.URL_Foto, u.Login, u.Contraseña, u.Id_Rol, r.Nombre_Rol, CASE WHEN (u.Id_Usuario IN (SELECT ut.Id_Usuario FROM usuario_ticket ut, ticket t WHERE ut.Id_Ticket = t.Id_Ticket AND ut.Cargo = "Encargado" AND t.Id_Estado != 4 AND t.Id_Estado != 6) = FALSE) THEN 0 WHEN (u.Id_Usuario IN (SELECT ut.Id_Usuario FROM usuario_ticket ut, ticket t WHERE ut.Id_Ticket = t.Id_Ticket AND ut.Cargo = "Encargado" AND t.Id_Estado != 4 AND t.Id_Estado != 6) = TRUE) THEN 1 END AS "Tickets" FROM usuario u , rol r WHERE u.Id_Rol = r.Id_Rol AND u.Id_Usuario <> 0 AND  u.Login = u.Login AND r.Id_Rol =' + request.body.rol + ' GROUP BY u.Id_Usuario'
   Usuario.fetchByRol(execute)
     .then(([rowsUsuario, fieldData]) => {
       Usuario.countAllActiveTickets()
@@ -120,8 +120,9 @@ exports.signup_post = (request, response, next) => {
 
           .usuario_save()
           .then(() => {
-            response.redirect("/usuario/login");
-
+            response.status(200).json({
+              mensaje: "Cuenta registrada con éxito"
+            });
           })
           .catch((err) => console.log(err));
       }

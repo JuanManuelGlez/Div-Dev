@@ -5,7 +5,7 @@
         <div style="margin-top:70px" class="col">
             <div class="d-flex flex-column justify-content-center" id="login-box" style="margin-top: 100px;">
                 <div class="login-box-header">
-                    <h4 style="color: rgb(0,0,0);margin-bottom: 0px;font-weight: 400;font-size: 27px;">Sign Up</h4>
+                    <h4 style="color: rgb(0,0,0);margin-bottom: 0px;font-weight: 400;font-size: 27px;"> Registrar nueva cuenta </h4>
                 </div>
                 <form id="form_signup" method="POST">
                     
@@ -15,28 +15,18 @@
              
             
                         <input type="text" id="nombre" name="nombre" class="email-imput form-control" style="margin-top:10px;" required="" placeholder="Nombre" minlength="6" maxlength="70">
-                        <input type="email" id="correo" name="correo" id="contrasenia" class="email-imput form-control" style="margin-top:10px;" required="" placeholder="Email" minlength="6" maxlength="50" pattern=".*\@zeb\.mx$">
+                        <input type="email" id="correo" name="correo" id="contrasenia" class="email-imput form-control" style="margin-top:10px;" required="" placeholder="Correo" minlength="6" maxlength="50" pattern=".*\@zeb\.mx$">
                         <input type="password" id="contrasenia" name="contrasenia" class="password-input form-control" style="margin-top: 10px;margin-bottom: 15px;" required="" placeholder="Contraseña" minlength="6" maxlength="30"> 
-                        <div class="submit-row" style="margin-bottom:8px;padding-top:0px;"><button type="submit" class="btn btn-primary mt-3" style="border-width:0px;background-color: black;" id="enviar">Sign Up</button>
+                        <div id="mensaje_exito"></div>
+                        <div class="submit-row" style="margin-bottom:8px;padding-top:0px;"><button type="submit" onClick = "mensaje()" class="btn btn-primary mt-3" style="border-width:0px;background-color: black;" id="enviar"> Registrate </button>
                     </div>
                     <div id="login-box-footer" style="padding:10px 20px;padding-bottom:23px;padding-top:18px;">
-                        <p style="margin-bottom:0px;">Already have an account?<a id="register-link" href="/usuario/login">Login!</a></p>
+                        <p style="margin-bottom:0px;">¿Ya tienes una cuenta?<a id="register-link" href="/usuario/login">Inicia Sesión</a></p>
                     </div>
                 </form>
-                <!-- <div class="login-box-content">
-                    <div class="fb-login box-shadow"></div>
-                    <div class="gp-login box-shadow"><a class="d-flex flex-row align-items-center social-login-link" style="margin-bottom:10px;" href="#"><i class="fa fa-google" style="color:rgb(255,255,255);width:56px;"></i>Sign up with Google+</a></div>
-                </div>
-                <div class="d-flex flex-row align-items-center login-box-seperator-container">
-                    <div class="login-box-seperator"></div>
-                    <div class="login-box-seperator-text">
-                        <p style="margin-bottom:0px;padding-left:10px;padding-right:10px;font-weight:400;color:rgb(201,201,201);">or</p>
-                    </div>
-                    <div class="login-box-seperator"></div>
-                </div>
-                <div class="email-login" style="background-color:#ffffff;"><input type="email" class="email-imput form-control" style="margin-top:10px;" required="" placeholder="Nombre" minlength="6"><input type="email" class="email-imput form-control" style="margin-top:10px;" required="" placeholder="Email" minlength="6"><input type="password" class="password-input form-control" style="margin-top: 10px;margin-bottom: 15px;" required="" placeholder="Contraseña" minlength="6">
-                    <div class="form-check form-check-inline" id="form-check-rememberMe"><input class="form-check-input" type="checkbox" id="formCheck-1" for="remember" style="cursor:pointer;" name="check"><label class="form-check-label" for="formCheck-1"><span class="label-text">Acepto todos los términos y condiciones</span></label></div><a href="#" style="text-align: left;">Ver términos y condiciones</a>
-                </div> -->
+               <script>
+                   
+               </script>
                 
                 <div id="login-box-footer" style="padding:10px 20px;padding-bottom:23px;padding-top:18px;"></div>
             </div>
