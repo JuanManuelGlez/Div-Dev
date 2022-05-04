@@ -65,10 +65,21 @@ function allByEstado()
             }]
         };
         
+        const bgColor={
+            id:'bgColor',
+            beforeDraw:(chart,options)=>{
+                const {ctx,width,height}=chart;
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0,0,width,height)
+                ctx.restore();
+            }
+        }
+
+
         const config = {
             type: 'bar',
             data: data,
-            plugins: [ChartDataLabels],
+            plugins: [ChartDataLabels,bgColor],
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
@@ -177,11 +188,19 @@ function allByProcedencia()
                 borderSkipped: false,
             }]
         };
-        
+        const bgColor={
+            id:'bgColor',
+            beforeDraw:(chart,options)=>{
+                const {ctx,width,height}=chart;
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0,0,width,height)
+                ctx.restore();
+            }
+        }
         const config = {
             type: 'bar',
             data: data,
-            plugins: [ChartDataLabels],
+            plugins: [ChartDataLabels,bgColor],
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
@@ -298,10 +317,20 @@ function allByTipoIncidencia()
             }]
         };
         
+        const bgColor={
+            id:'bgColor',
+            beforeDraw:(chart,options)=>{
+                const {ctx,width,height}=chart;
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0,0,width,height)
+                ctx.restore();
+            }
+        }
+
         const config = {
             type: 'bar',
             data: data,
-            plugins: [ChartDataLabels],
+            plugins: [ChartDataLabels,bgColor],
             options: {
                 scales: {
                     x: {
@@ -427,10 +456,20 @@ function allByResolucion()
             ]
         };
         
+        const bgColor={
+            id:'bgColor',
+            beforeDraw:(chart,options)=>{
+                const {ctx,width,height}=chart;
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0,0,width,height)
+                ctx.restore();
+            }
+        }
+
         const config = {
             type: 'bar',
             data: data,
-            plugins: [ChartDataLabels],
+            plugins: [ChartDataLabels,bgColor],
             options: {
                 scales: {
                     x: {

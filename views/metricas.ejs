@@ -10,6 +10,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script serc="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
 
 
 <div id="content" class="page-content-wrapper" style="color: var(--bs-teal);">
@@ -199,7 +201,9 @@
                 <h2 id="tituloGrafica">Status</h2>
                 <h3 id="subtituloGrafica">Tickets organizados por su estado actual</h3>
               <div style="height: 80%"><canvas id="porEstados"></canvas></div>
+              <button onclick="downloadPDF()">PDF version </button>
             </div>
+
             <div class="chartBox p-4 offset-sm-1">
                 <h2 id="tituloGrafica">Procedencia</h2>
                 <h3 id="subtituloGrafica">Tickets organizados por su procedencia</h3>
@@ -225,6 +229,37 @@
 </div>
 
 </div>
+ <script>
+               function downloadPDF(){
+                    const canvas1=document.getElementById("porEstados");
+                    const canvas1Image= canvas1.toDataURL('image/jpeg',1.0);
+
+                    const canvas2=document.getElementById("porProcedencia");
+                    const canvas2Image= canvas2.toDataURL('image/jpeg',1.0);
+
+                    const canvas3=document.getElementById("porResolucion");
+                    const canvas3Image= canvas3.toDataURL('image/jpeg',1.0);
+                    let pdf = new jsPDF();
+                    ////PORESTADOS
+                    pdf.setFontSize(10);
+                    pdf.text(8,30,"Status");
+                    pdf.text(8,35,"Tickets organizados por su estado actual");
+                    pdf.addImage(canvas1Image, 'JPEG',5,40,90,80);
+                    ////PROCEDENCIA
+                    pdf.text(112,30,"Procedencia");
+                    pdf.text(112,35,"Tickets organizados por su procedencia");
+                    pdf.addImage(canvas2Image,'JPEG',115,40,90,80);
+                    ////Resolucion
+                    pdf.text(95,125,"Resolucion");
+                    pdf.text(8,105,"");
+                    pdf.addImage(canvas3Image,'JPEG',15,130,170,60);
+
+                    pdf.save('mychart.pdf'); 
+                }
+            </script>
+
+
+
 
 <script src="/js/script_metricas.js"></script>
 
