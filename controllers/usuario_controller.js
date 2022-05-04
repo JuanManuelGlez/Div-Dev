@@ -120,9 +120,7 @@ exports.signup_post = (request, response, next) => {
 
           .usuario_save()
           .then(() => {
-            response.status(200).json({
-              mensaje: "Cuenta registrada con éxito"
-            });
+            
           })
           .catch((err) => console.log(err));
       }

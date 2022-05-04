@@ -17,7 +17,7 @@
                         <input type="text" id="nombre" name="nombre" class="email-imput form-control" style="margin-top:10px;" required="" placeholder="Nombre" minlength="6" maxlength="70">
                         <input type="email" id="correo" name="correo" id="contrasenia" class="email-imput form-control" style="margin-top:10px;" required="" placeholder="Correo" minlength="6" maxlength="50" pattern=".*\@zeb\.mx$">
                         <input type="password" id="contrasenia" name="contrasenia" class="password-input form-control" style="margin-top: 10px;margin-bottom: 15px;" required="" placeholder="Contraseña" minlength="6" maxlength="30"> 
-                        <div id="mensaje_exito"></div>
+                        <div style="text-align: center;color:green" id="mensaje_exito"></div>
                         <div class="submit-row" style="margin-bottom:8px;padding-top:0px;"><button type="submit" onClick = "mensaje()" class="btn btn-primary mt-3" style="border-width:0px;background-color: black;" id="enviar"> Registrate </button>
                     </div>
                     <div id="login-box-footer" style="padding:10px 20px;padding-bottom:23px;padding-top:18px;">
@@ -25,7 +25,9 @@
                     </div>
                 </form>
                <script>
-                   
+                   function mensaje(){
+                       document.getElementById("mensaje_exito").innerHTML = "revisa tu correo para verificar tu cuenta"
+                   }
                </script>
                 
                 <div id="login-box-footer" style="padding:10px 20px;padding-bottom:23px;padding-top:18px;"></div>
