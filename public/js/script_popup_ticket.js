@@ -253,9 +253,11 @@ document.getElementById("enviar").onclick = () =>
   })
   .then(response => {
       toastCambiosGuardados()
-      closeTicket();
-      document.location.reload();
-      openTicket(document.getElementById("boton"+idTicket));
+      closeTicket()
+     
+    
+      
+      
   }).catch(err => {
       console.log(err);
   });
@@ -350,9 +352,10 @@ document.getElementById("asignar").onclick = () =>
 
 
 function closeTicket() {
-  document.getElementById("Ticket").style.display = "none";
+  $('.modal').modal('hide');
+  $('.modal-backdrop').hide();
+
   document.getElementById("commentShow").style.display = "none";
-//   document.location.reload();
 }
 
 $('#Ticket').on('hidden.bs.modal', function () {
@@ -365,5 +368,5 @@ function toastCambiosGuardados() {
 
     var x = document.getElementById("snackbar");
     x.className = "show";  
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    setTimeout(function(){ x.className = x.className.replace("show", "");document.location.reload() }, 3000);
 }
