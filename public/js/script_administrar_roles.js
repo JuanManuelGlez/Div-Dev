@@ -90,7 +90,9 @@ function Modificarrol(rol){
 };
 
 function creabotonguardar(element){
-    document.getElementById("cambios"+(element.id.slice(5))).innerHTML = '<button id="guardar_'+(element.id.slice(5))+'" class="btn btn-primary btn-sm float-end " type="button" style="height: 30px; margin-left:20px; margin-right:20px; background: rgb(0,0,0); border:rgb(0,0,0); " onclick="guardarrol(this)">Guardar Cambios</button></td>';
+    document.getElementById("eliminar_hide"+(element.id.slice(5))).innerHTML = "";
+    document.getElementById("modificar_hide"+(element.id.slice(5))).innerHTML = "";
+    document.getElementById("cambios"+(element.id.slice(5))).innerHTML = '<button id="guardar_'+(element.id.slice(5))+'" class="btn btn-primary btn-sm float-end " type="button" style="height: 30px; width: 200px; margin-left:20px; margin-right:20px; background: rgb(0,0,0); border:rgb(0,0,0); " onclick="guardarrol(this)">Guardar Cambios</button></td>';
 };
 
 function guardarrol(element){
@@ -133,7 +135,6 @@ function eliminarol(element){
     let rutaEliminaRol = '../EliminaRol';
     let rol = ((element.id).slice(9)).replace(/_/g," ");
 
-    console.log(rol);
         data = {
             Rol: rol
         }
@@ -147,14 +148,19 @@ function eliminarol(element){
         })
         .then(response => response.json())
             .then(response => {
-                Swal.fire(
-                    '¡Operación Exitosa!',  
-                    'rol eliminado exitosamente',
-                    'success'
-                  )
-                  .then(response => {
-                    window.location.reload();
-                  })
+
+                if(response.cont == 1){
+                    Swal.fire(
+                        '¡Operación Exitosa!',  
+                        'rol eliminado exitosamente',
+                        'success'
+                      )
+                      .then(response => {
+                        window.location.reload();
+                      })
+                }else{
+                    Swal.fire('Este rol no se puede borrar')
+                }
     
             }).catch(err => {
                 console.log(err);

@@ -36,8 +36,8 @@
                                             <td scope="col"><div id="textinput_mod<%=r%>"> <%= rol.Nombre_Rol %></div></td>
                                             <td scope="col"> 
                                                 <div id="cambios<%=r%>"> </div> 
-                                                <button id='<%= "eliminar" + r%>' type="button" class="btn btn-primary btn-sm float-end " style="height: 30px;" onclick='Modificarrol("<%= r %>")'>Modificar </button>
-                                                <button id='<%= "modificar" + r%>' type="button" class="btn btn-danger btn-sm float-end" style="height: 30px; margin-left:20px; margin-right:20px" onclick="eliminarol(this)">Eliminar</button>
+                                                <div id="eliminar_hide<%=r%>"><button id='<%= "eliminar" + r%>' type="button" class="btn btn-primary btn-sm float-end " style="height: 30px;" onclick='Modificarrol("<%= r %>")'>Modificar </button></div>
+                                                <div id="modificar_hide<%=r%>"><button id='<%= "modificar" + r%>' type="button" class="btn btn-danger btn-sm float-end" style="height: 30px; margin-left:20px; margin-right:20px" onclick="eliminarol(this)">Eliminar</button></div>
                                             </td>
                                         </tr> 
                                     <% } %>

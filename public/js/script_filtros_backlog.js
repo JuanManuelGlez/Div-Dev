@@ -84,3 +84,10 @@ function buscaTicket() {
         console.log(err);
     });
 };
+
+document.getElementById("reset_filtros").addEventListener('click', function (e) {
+
+    document.getElementById("form_filtros").reset();
+    document.getElementById("dropdown_filter_archivo").click();
+    e.stopImmediatePropagation();
+});

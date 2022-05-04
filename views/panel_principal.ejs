@@ -203,7 +203,7 @@
                                       Filtros
                                     </button>
                                     <ul  class="dropdown-menu">
-                                        <form class="px-4 py-3">
+                                        <form class="px-4 py-3" id="form_filtros">
                                             <div class="form-group">
                                                 <label for="filtro_tipo_incidencia"> Categoría</label>
                                                 <select class="form-select" id="filtro_tipo_incidencia" name="filtro_tipo_incidencia" aria-label="Default select example">
@@ -255,6 +255,7 @@
                                                 
                                             </div>
                                             <br>
+                                            <button id="reset_filtros" type="button" class="btn btn-danger"> Borrar filtros </button>
                                             <button id="dropdown_filter_backlog" type="button" class="btn btn-primary"> Filtrar </button>
                                           </form>
                                     </ul>

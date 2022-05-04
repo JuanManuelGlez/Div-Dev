@@ -34,4 +34,10 @@ module.exports = class Privilegio{
         )
     }
 
+    static async deleteprivs(id_rol){
+        return db.execute('DELETE FROM rol_privilegio WHERE Id_Rol = ?', 
+            [id_rol]
+        )
+    }
+
 }

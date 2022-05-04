@@ -34,7 +34,7 @@ module.exports = class Usuario{
                 from: "ticketz_no_reply@outlook.com",
                 to: this.login_usuario,
                 subject: "Verificacion Ticketz",
-                text: "Haga click en el siguiente link https://localhost:8080/verificacion/"+id
+                text: "Haga click en el siguiente link http://ec2-34-214-126-148.us-west-2.compute.amazonaws.com:8080/verificacion/"+id
             };
             transporter.sendMail(options,function(error,info){
                 if (error) {
@@ -152,5 +152,9 @@ module.exports = class Usuario{
     }
     static async Activo(id_usuario){
         return db.execute('UPDATE usuario SET Activo = 1 WHERE Id_Usuario=?',[id_usuario]);
+    }
+
+    static async changerol(id_rol){
+        return db.execute('UPDATE usuario SET Id_Rol = 4 WHERE Id_Rol = ?', [id_rol])
     }
 }

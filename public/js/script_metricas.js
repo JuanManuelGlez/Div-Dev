@@ -67,10 +67,21 @@ function allByEstado()
             }]
         };
         
+        const bgColor={
+            id:'bgColor',
+            beforeDraw:(chart,options)=>{
+                const {ctx,width,height}=chart;
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0,0,width,height)
+                ctx.restore();
+            }
+        }
+
+
         const config = {
             type: 'bar',
             data: data,
-            plugins: [ChartDataLabels],
+            plugins: [ChartDataLabels,bgColor],
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
@@ -179,11 +190,19 @@ function allByProcedencia()
                 borderSkipped: false,
             }]
         };
-        
+        const bgColor={
+            id:'bgColor',
+            beforeDraw:(chart,options)=>{
+                const {ctx,width,height}=chart;
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0,0,width,height)
+                ctx.restore();
+            }
+        }
         const config = {
             type: 'bar',
             data: data,
-            plugins: [ChartDataLabels],
+            plugins: [ChartDataLabels,bgColor],
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
@@ -306,10 +325,20 @@ function allByTipoIncidencia()
             }]
         };
         
+        const bgColor={
+            id:'bgColor',
+            beforeDraw:(chart,options)=>{
+                const {ctx,width,height}=chart;
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0,0,width,height)
+                ctx.restore();
+            }
+        }
+
         const config = {
             type: 'bar',
             data: data,
-            plugins: [ChartDataLabels],
+            plugins: [ChartDataLabels,bgColor],
             options: {
                 scales: {
                     x: {
@@ -435,10 +464,20 @@ function allByResolucion()
             ]
         };
         
+        const bgColor={
+            id:'bgColor',
+            beforeDraw:(chart,options)=>{
+                const {ctx,width,height}=chart;
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0,0,width,height)
+                ctx.restore();
+            }
+        }
+
         const config = {
             type: 'bar',
             data: data,
-            plugins: [ChartDataLabels],
+            plugins: [ChartDataLabels,bgColor],
             options: {
                 scales: {
                     x: {
@@ -538,10 +577,20 @@ function promediosTipoIncidencia()
             }]
         };
         
+        const bgColor={
+            id:'bgColor',
+            beforeDraw:(chart,options)=>{
+                const {ctx,width,height}=chart;
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0,0,width,height)
+                ctx.restore();
+            }
+        }
+
         const config = {
             type: 'bar',
             data: data,
-            plugins: [ChartDataLabels],
+            plugins: [ChartDataLabels,bgColor],
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
@@ -661,6 +710,8 @@ function rangoTiempoYDestiempo()
             }
         }
 
+        let datosTotales = datosATiempo.concat(datosADestiempo);
+
         const data = {
             labels: labels,
             datasets: [{
@@ -689,10 +740,20 @@ function rangoTiempoYDestiempo()
             ]
         };
         
+        const bgColor={
+            id:'bgColor',
+            beforeDraw:(chart,options)=>{
+                const {ctx,width,height}=chart;
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0,0,width,height)
+                ctx.restore();
+            }
+        }
+
         const config = {
             type: 'bar',
             data: data,
-            plugins: [ChartDataLabels],
+            plugins: [ChartDataLabels,bgColor],
             options: {
                 scales: {
                     x: {
@@ -703,7 +764,7 @@ function rangoTiempoYDestiempo()
                     },
                     y: {
                         stacked: true,
-                        max: Math.max.apply(null, datosADestiempo)+3,
+                        max: Math.max.apply(null, datosTotales)+3,
                         grid: {
                             display: false
                         } 
@@ -768,8 +829,9 @@ document.getElementById("dropdown_filter_metricas").onclick = () =>
     rangoTiempoYDestiempo();
 }
 
-console.log(document.getElementById("fecha_inicio").value);
+document.getElementById("reset_filtros").addEventListener('click', function (e) {
 
-document.getElementById("fecha_inicio").onchange = () => {
-    console.log(document.getElementById("fecha_inicio").value);
-}
+    document.getElementById("form_filtros").reset();
+    document.getElementById("dropdown_filter_metricas").click();
+    e.stopImmediatePropagation();
+});
