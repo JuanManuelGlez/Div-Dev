@@ -16,5 +16,9 @@ router.post('/getByTipoIncidenciaAll', isAuth, metricas_controller.getByTipoInci
 
 router.post('/getByResolucion', isAuth, metricas_controller.getByResolucion);
 
+router.get('/getPromedios', isAuth, metricas_controller.getPromedios);
+
+router.post('/getTiempoYDestiempo', isAuth, metricas_controller.getTiempoYDestiempo);
+
 
 module.exports = router;
