@@ -348,8 +348,7 @@ document.getElementById("asignar").onclick = () =>
   })
   .then(response => {
     toastCambiosGuardados()
-      closeTicket();
-      openTicket(document.getElementById("boton"+idTicket));
+     
   }).catch(err => {
       console.log(err);
   });
