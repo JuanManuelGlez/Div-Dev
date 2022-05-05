@@ -30,7 +30,7 @@ module.exports = class Tipo_incidencia{
     }
 
     static fetchtipo_incidencia(id){
-        return db.execute('SELECT T.Nombre_Tipo_Incidencia, T.SLA FROM tipo_incidencia t WHERE Id_Tipo_Incidencia = ?',
+        return db.execute('SELECT Nombre_Tipo_Incidencia, SLA FROM tipo_incidencia WHERE Id_Tipo_Incidencia = ?',
             [id]
         );
     }

@@ -61,7 +61,14 @@ function agregaLabel() {
         
             document.getElementById("tablaLabels").innerHTML += '<tr><td>' + nuevaLabel +  '<button id="elimina' + label.Id_Label + '" type="button" class="btn btn-danger btn-sm float-end" style="height: 30px;" onclick="eliminaLabel(this)">Eliminar</button></td></tr>';
             document.getElementById("existeLabel").value = 1;
-     
+            new swal({
+                title: '¡Éxito!',
+                text: 'Nueva label agregada exitosamente',
+                icon: 'success',
+                timer: 800
+              })
+            document.getElementById("input_label").value = "";
+            filtraLabels();
 
         
     }).catch(err => {
@@ -80,8 +87,24 @@ function eliminaLabel(element) {
         Id_Label: label,
         nuevaVisibilidad: nuevaVis
     }
-    if (confirm('Seguro que quieres eliminar la label ' + label + '? Los tickets con esta label se mantendrán de la misma forma')) {
-        fetch(rutaActualiza, {
+
+    Swal.fire({
+        title: '¿Estas seguro?',
+        text: 'Seguro que quieres eliminar la label "' + label + '"? Los tickets con esta label se mantendrán de la misma forma',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, borralo!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            new swal({
+                title: 'Borrada',
+                text: 'La pregunta se ha borrado exitosamente',
+                icon: 'success',
+                timer: 800
+              })
+          fetch(rutaActualiza, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -96,10 +119,13 @@ function eliminaLabel(element) {
         }).catch(err => {
             console.log(err);
         });
-    }
-    else {
-        //Pues nada no se si poner algo aqui
-    }
+        }
+        else{
+            //
+        }
+      })
+
+
 };
 
 document.getElementById('abreLabels').addEventListener('mousedown', async function (e) {
@@ -215,8 +241,23 @@ function eliminaPregunta(element){
     let pregunta = element.id.substring(7);
     let nuevaVis = 0;
     
-    if (confirm('Seguro que quieres eliminar la pregunta? Los tickets con esta pregunta se mantendrán de la misma forma')) {
-        data = {
+    Swal.fire({
+        title: '¿Estas seguro?',
+        text: 'Seguro que quieres eliminar la pregunta "' + pregunta + '"? ',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, borralo!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            new swal({
+                title: 'Borrada',
+                text: 'La pregunta se ha borrado exitosamente',
+                icon: 'success',
+                timer: 800
+              })
+           data = {
             Pregunta: pregunta,
             nuevaVisibilidad: nuevaVis
         }
@@ -234,10 +275,11 @@ function eliminaPregunta(element){
         }).catch(err => {
             console.log(err);
         });
-    } else {
-        //Pues nada no se si poner algo aqui
-    }
+        }
+        
+      })
 
+    
     
 };
 
@@ -262,15 +304,22 @@ function agregaPregunta() {
     .then(response => {
 
         if(document.getElementById("existePregunta").value == "0")
-        {
+        
             document.getElementById("tablaPreguntas").innerHTML += '<tr><td>' + nuevaPregunta +  '</td><td>Si</td></tr>';
             document.getElementById("existePregunta").value = 1;
-        }
+        
 
-        window.alert("Pregunta nueva agregada")
+        new swal({
+            title: '¡Éxito!',
+            text: 'Pregunta nueva agregada',
+            icon: 'success',
+            timer: 800
+          })
 
         document.getElementById("input_pregunta").value = "";
         filtraPregunta();
+
+        
         
     }).catch(err => {
         console.log(err);
@@ -379,6 +428,14 @@ function agregaEstado() {
         {
             document.getElementById("tablaEstados").innerHTML += '<tr><td id="estado' + response.idNuevo + '">' + nuevoEstado +  '<button id="elimina' + response.idNuevo + '" type="button" class="btn btn-danger btn-sm float-end" style="height: 30px;" onclick="eliminaEstado(this)">Eliminar</button></td></tr>';
             document.getElementById("existeEstado").value = 1;
+            new swal({
+                title: '¡Éxito!',
+                text: 'Estado nuevo agregado',
+                icon: 'success',
+                timer: 800
+              })
+            document.getElementById("input_estado").value = "";
+            filtraEstados();
         }
         
     }).catch(err => {
@@ -399,25 +456,41 @@ function eliminaEstado(element) {
         nuevaVisibilidad: nuevaVis
     }
 
-    if (confirm('Seguro que quieres eliminar el estado ' + estado + '? Los tickets con este estado se mantendrán de la misma forma')) {
-        fetch(rutaActualiza, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'csrf-token': csrf
-            },
-            body:JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(response => {
-            element.parentNode.remove();
-        }).catch(err => {
-            console.log(err);
-        });
-    }
-    else {
-        //Pues nada no se si poner algo aqui
-    }
+    Swal.fire({
+        title: '¿Estas seguro?',
+        text: 'Seguro que quieres eliminar el estado ' + estado + '? Los tickets con este estado se mantendrán de la misma forma',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, borralo!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            new swal({
+                title: 'Borrada',
+                text: 'El estado ha sido borrado exitosamente',
+                icon: 'success',
+                timer: 800
+              })
+              fetch(rutaActualiza, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'csrf-token': csrf
+                },
+                body:JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(response => {
+                element.parentNode.remove();
+            }).catch(err => {
+                console.log(err);
+            });
+        }
+        
+      })
+
+   
 };
 
 document.getElementById('abreEstados').addEventListener('mousedown', async function (e) { //Esto no se v a aquedar asi pero no se como arreglar un problema con el collapse
@@ -474,7 +547,7 @@ document.getElementById('abreEstados').addEventListener('mousedown', async funct
 }, true);
 
 
-function agregarProcedencia() {
+async function agregarProcedencia() {
     const csrf = document.getElementById('_csrf').value;
     const nuevaProcedencia = document.getElementById("Nombre_Procedencia").value
     let rutaAgregar = '../procedencia/procedencia_f';
@@ -496,10 +569,18 @@ function agregarProcedencia() {
         let opt = document.createElement('option');
         opt.value = response.id_nueva_procedencia;
         opt.innerHTML = nuevaProcedencia;
-        console.log(opt);
         document.getElementById("procedencia").appendChild(opt);
         document.getElementById("Nombre_Procedencia").value = '';
-           
+        document.getElementById('abreProcedencia').click()
+
+        new swal({
+            title: '¡Éxito!',
+            text: 'Procedencia nueva agregada',
+            icon: 'success',
+            timer: 800
+          })
+         
+        
     }).catch(err => {
         console.log(err);
     });
@@ -529,7 +610,15 @@ function modificarProcedencia() {
     })
     .then(response => response.json())
     .then(response => {
-           
+        document.getElementById("nombre").value = "";
+        document.getElementById('abreProcedencia').click();
+        new swal({
+            title: '¡Éxito!',
+            text: 'Procedencia modificada',
+            icon: 'success',
+            timer: 800
+          })
+          
         
     }).catch((err) => {
         console.log(err);
@@ -592,7 +681,6 @@ document.getElementById('abreProcedencia').addEventListener('mousedown', async f
         </div>
         </form>
         <br>`;
-        console.log(document.getElementById("agrega_procedencia"))
         document.getElementById("agrega_procedencia").onclick = agregarProcedencia;
         
 

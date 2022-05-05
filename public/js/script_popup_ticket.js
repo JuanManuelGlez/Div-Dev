@@ -252,10 +252,13 @@ document.getElementById("enviar").onclick = () =>
       body:JSON.stringify(data)
   })
   .then(response => {
+      
       toastCambiosGuardados()
-      closeTicket();
-      document.location.reload();
-      openTicket(document.getElementById("boton"+idTicket));
+     
+     
+    
+      
+      
   }).catch(err => {
       console.log(err);
   });
@@ -267,7 +270,11 @@ document.getElementById("archivar").onclick = () =>
     const csrf = document.getElementById('_csrf').value;
     let ruta = '../tickets/archivar/' + idTicket;
     const archivar = 1;
+    var text = '';
     const bool_archivar = document.getElementById("Bool").value;
+    if (bool_archivar==0){
+        text = 'desarchivado'
+    } else { text = 'archivado'}
     data = {
       Archivado : bool_archivar
     }
@@ -281,15 +288,15 @@ document.getElementById("archivar").onclick = () =>
       body:JSON.stringify(data)
   })
   .then(response => {
-    Swal.fire(
-        '¡Creación Exitosa!',
-        'Ticket nuevo creado, ver en Panel Ticket o Backlog',
-        'success'
-      )
+    new Swal({
+        title: '¡Éxito!',
+        text: 'Se ha ' + text + ' el ticket',
+        icon: 'success',
+        timer: 800
+    })
       .then(response => {
         document.location.reload();
-        closeTicket();
-        openTicket(document.getElementById("boton"+idTicket));
+        
       })
       
   }).catch(err => {
@@ -350,20 +357,22 @@ document.getElementById("asignar").onclick = () =>
 
 
 function closeTicket() {
-  document.getElementById("Ticket").style.display = "none";
+  $('.modal').modal('hide');
+  $('.modal-backdrop').hide();
+  document.location.reload()
   document.getElementById("commentShow").style.display = "none";
-//   document.location.reload();
 }
 
-$('#Ticket').on('hidden.bs.modal', function () {
-    console.log(":(")
-    document.location.reload();
-    
-  })
+$(document).ready(function(){
+
+    $("#Ticket").on('hidden.bs.modal', function(){
+      location.reload()
+    });
+  });
 
 function toastCambiosGuardados() {
 
     var x = document.getElementById("snackbar");
     x.className = "show";  
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
 }

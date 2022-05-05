@@ -16,7 +16,7 @@
             <div class="col" style="padding: 15px;text-align: left;border-radius: 17px;box-shadow: 0px 0px 20px rgba(143,143,143,0.5);">
                 <div class="row">
                     <div class="col">
-                        <h3 style="color: rgb(0,0,0);text-align: left;margin-left: 30px;margin-bottom: 20px;"> Crear nueva categoría </h3>
+                        <h3 style="color: rgb(0,0,0);text-align: left;margin-left: 30px;margin-bottom: 20px;"> Crear Nuevo Tipo de Incidencia </h3>
                     </div>
                 </div>
                 <div class="row" style="margin: 0px 30px;border-width: 2px;border-color: var(--bs-red);">
@@ -37,13 +37,13 @@
                                </script> -->
                                <br>
                                 <select data-width="100%" data-style="btn-warning" class="form-select-label" multiple data-live-search="true" id="select_preguntas" name="preguntas" aria-label="Default select example">
-                                    <option id="Preguntas:" selected disabled>Preguntas (Selecicona todas las que quieras agregar a la categoría) </option>
+                                    <option id="Preguntas:" selected disabled>Preguntas (Selecicona todas las que quieras agregar al tipo de incidencia) </option>
                                     <% for(let pregunta of Preguntas) {%>
                                         <option class="opcionPregunta" id="<%= pregunta.Texto_Pregunta.replace(/\s/g,'_') %>" value="<%= pregunta.Texto_Pregunta.replace(/\s/g,'_') %>"><%= pregunta.Texto_Pregunta.replace(/_/g, ' ') %></option>
                                     <% }%>
                                 </select>
                                 <br><br>
-                                <button class="btn btn-primary" type="submit" name="enviar" id="enviar" style="background: rgb(0,0,0);">Crear Nueva Categoría<i class="fa fa-plus-square" style="margin-left: 20px;"></i></button>
+                                <button class="btn btn-primary" type="submit" name="enviar" id="enviar" style="background: rgb(0,0,0);">Crear Nuevo Tipo de Incidencia<i class="fa fa-plus-square" style="margin-left: 20px;"></i></button>
                 
                             </form>
                         </div>
@@ -60,7 +60,7 @@
             <div class="col">
                 <div class="row">
                     <div class="col" style="text-align: center;padding: 12px 0px;background: transparent;"><span style="color: rgb(0,0,0);text-align: center;font-weight: bold;font-size: 21px;">ID</span></div>
-                    <div class="col" style="text-align: center;padding: 12px 0px;background: transparent;"><span style="color: rgb(0,0,0);font-weight: bold;font-size: 21px;">Categoría</span></div>
+                    <div class="col" style="text-align: center;padding: 12px 0px;background: transparent;"><span style="color: rgb(0,0,0);font-weight: bold;font-size: 21px;">Tipo de Incidencia</span></div>
                     <div class="col" style="text-align: center;padding: 12px 0px;background: transparent;"><span style="color: rgb(0,0,0);font-weight: bold;font-size: 21px;">Modificar</span></div>
                     
                 </div>
@@ -68,7 +68,7 @@
                 <% for(let Tipo_Incidencia of Tipo_Incidencias) {%>
 
                   
-                <div class="row" style="cursor: pointer;margin: 20px -12px;border-radius: 5px;box-shadow: 0px 0px 9px rgba(147,147,147,0.55);padding: 5px;">
+                <div class="row" style="margin: 20px -12px;border-radius: 5px;box-shadow: 0px 0px 9px rgba(147,147,147,0.55);padding: 5px;">
                     <div class="col" style="font-size: 22px;text-align: center;"><span style="color: rgb(0,0,0);"><%= Tipo_Incidencia.Id_Tipo_Incidencia %></span></div>
                     <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);"><%= Tipo_Incidencia.Nombre_Tipo_Incidencia %></span></div>
                     <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);"><button class="btn btn-success" onclick="window.location.href='../tipo_incidencia/modificar/<%= Tipo_Incidencia.Id_Tipo_Incidencia %>'"> <i class="fa fa-pencil" aria-hidden="true"></i> </button></span></div>
