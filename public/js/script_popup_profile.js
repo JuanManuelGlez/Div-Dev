@@ -77,39 +77,19 @@
             body:JSON.stringify(data)
         })
         .then(response => {
-            alert("Datos Guardados");
-            location.reload();
+            toastCambiosGuardados2()
+
         }).catch(err => {
             console.log(err);
         });
 
     };
 
-    var loadFile = function (event) {
-        var image = document.getElementById("foto_user");
-        image.src = URL.createObjectURL(event.target.files[0]);
-        var image_url_json = URL.createObjectURL(event.target.files[0]);
-        var id_usuario_json = document.getElementById("Id_Usuario")
-        const csrf = document.getElementById('_csrf').value;
-        var ruta = '../usuario/profile_update' 
-        data = {
-        image_url : image_url_json,
-        id_usuario : id_usuario_json
-        }
+    
 
-        fetch(ruta, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'csrf-token': csrf
-        },
-        body:JSON.stringify(data)
-    })
-    .then(response => {
-        alert("ksmd");
-        location.reload();
-    }).catch(err => {
-        console.log(err);
-    });
-      };
-      
+function toastCambiosGuardados2() {
+
+        var x = document.getElementById("snackbar2");
+        x.className = "show";  
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+    }
