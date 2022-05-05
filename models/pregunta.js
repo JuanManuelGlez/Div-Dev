@@ -31,7 +31,7 @@ module.exports = class Pregunta{
         );
     }
 
-   static pregunta_getId(texto_pregunta){
+   static async pregunta_getId(texto_pregunta){
         return db.execute('SELECT Id_Pregunta FROM pregunta WHERE Texto_Pregunta = ?',
             [texto_pregunta]
         );
@@ -50,7 +50,7 @@ module.exports = class Pregunta{
         return db.execute('SELECT * FROM pregunta WHERE Visibilidad_Pregunta = 1 AND Texto_Pregunta LIKE ?', ['%' + texto_ingresado + '%']);
     }
 
-    static agregaPregunta(id_pregunta,id_tipo_incidencia) {
+    static async agregaPregunta(id_pregunta,id_tipo_incidencia) {
         return db.execute('INSERT INTO tipo_incidencia_pregunta(Id_Pregunta, Id_Tipo_Incidencia) VALUES (?,?)',
             [
                 id_pregunta,

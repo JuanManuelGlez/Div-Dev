@@ -121,7 +121,7 @@ document.getElementById("button_cambios").onclick = () =>{
             })
             .then(() => {
                 window.alert("cambios guardados")
-                window.location.reload();
+                window.location = "/tipo_incidencia";
 
             }).catch(err => {
                 console.log(err);
@@ -130,5 +130,36 @@ document.getElementById("button_cambios").onclick = () =>{
     }else{
         window.alert("datos incompletos")
     }
+}
+
+function visibilidad(id_tipo_incidencia){
+    const csrf = document.getElementById('_csrf').value;
+    let eliminarRuta = '../eliminar_tipo_incidencia/' + id_tipo_incidencia;
+
+    let data = {
+        id_tp: id_tipo_incidencia
+    }
+
+    fetch(eliminarRuta, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'csrf-token': csrf
+        },
+        body:JSON.stringify(data)
+        
+    })
+    .then(() => {
+        Swal.fire(
+            '¡Operacion Exitosa!',  
+            'Tipo de incidencia eliminado correctamente',
+            'success'
+          )
+          .then(response => {
+            window.location = "/tipo_incidencia";
+          })
+    }).catch(err => {
+        console.log(err);
+    });
 }
 
