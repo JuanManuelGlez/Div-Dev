@@ -130,6 +130,7 @@ exports.login_post = (request, response, next) => {
       if (rows.length < 1) {
         response.status(200).json({ errores: error });
       }
+      else{
       const usuario = new Usuario(
         rows[0].Nombre_Usuario,
         rows[0].Login,
@@ -186,6 +187,7 @@ exports.login_post = (request, response, next) => {
         .catch((err) => {
           console.log(err);
         });
+    }
     })
     .catch((error) => {
       console.log(error);
