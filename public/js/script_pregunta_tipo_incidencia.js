@@ -54,3 +54,16 @@ $(document).on('keyup', '.form-select-label .bs-searchbox input', function (e) {
     }
 
 });
+
+
+function alert_success(){
+    Swal.fire(
+        '¡Creación Exitosa!',
+        'Tipo de incidencia creado',
+        'success'
+      )
+      .then(response => {
+        document.location.reload();
+        
+      })
+}

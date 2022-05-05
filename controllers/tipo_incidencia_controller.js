@@ -68,8 +68,7 @@ exports.postTipo_Incidencia =  async (request, response, next) => {
                 }
             }).catch(err => console.log(err))
         })
-        .catch(err => console.log(err));
-        response.redirect('/tipo_incidencia');
+        .catch(err => console.log(err)); 
     }
 
 exports.getModficarTipo_Incidencia = (request,response,next) => {
@@ -127,14 +126,15 @@ exports.postModficarTipo_Incidencia = async (request,response,next) => {
             Pregunta.pregunta_check(pregunta.replace(/_/g, ' '))
                 .then(([rowcheck, fieldDatacheck]) => {
                     if(rowcheck[0].E == 0 && pregunta.replace(/_/g, ' ') != "Preguntas:"){
-                        const pregunta_nuevo = new Pregunta(pregunta.replace(/_/g, ' '));
-                        pregunta_nuevo.pregunta_save();
-                        Pregunta.pregunta_getId(pregunta.replace(/_/g, ' '))
-                            .then(([rowidPregunta, fieldDataidPregunta]) => {
-                                Pregunta.agregaPregunta(rowidPregunta[0].Id_Pregunta, id)
-                                .then()
-                                .catch(err => console.log(err));
-                            }).catch(err => console.log(err));
+                        Pregunta.pregunta_save(pregunta.replace(/_/g, ' '))
+                        .then(() => {
+                            Pregunta.pregunta_getId(pregunta.replace(/_/g, ' '))
+                                .then(([rowidPregunta, fieldDataidPregunta]) => {
+                                    Pregunta.agregaPregunta(rowidPregunta[0].Id_Pregunta, id)
+                                    .then()
+                                    .catch(err => console.log(err));
+                                }).catch(err => console.log(err));
+                        });
                     }else{
                         if(rowcheck[0].E == 1){
                             Pregunta.pregunta_getId(pregunta.replace(/_/g, ' '))

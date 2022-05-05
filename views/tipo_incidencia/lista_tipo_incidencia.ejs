@@ -22,12 +22,12 @@
                 <div class="row" style="margin: 0px 30px;border-width: 2px;border-color: var(--bs-red);">
                     <div class="col" style="padding: 0px;">
                         <div class="row" style="padding: 0px;margin: 0px;margin-top: 0px;border-width: 5px;border-color: var(--bs-red);margin-left: 0px;">
-                            <form id="nuevo_tipo_incidencia" method="POST">
+                            <form onsubmit="alert_success()" id="nuevo_tipo_incidencia" method="POST">
                                 <div class="row"> 
                                     <div class="col"> Nombre: </div>
                                     <div class="col-xxl-5"><input class="form-control" type="text" id="nombre_tipo_incidencia" name="nombre_tipo_incidencia" placeholder="Escribe el nombre.." required maxlength="40"></div>
                                     <div class="col"> SLA: </div>
-                                    <div class="col-xxl-5"><input class="form-control" type="number" id="sla_tipo_incidencia" name="sla_tipo_incidencia" placeholder="Ingresa el SLA.." required required></div>
+                                    <div class="col-xxl-5"><input class="form-control" type="number" id="sla_tipo_incidencia" name="sla_tipo_incidencia" min="0"; placeholder="Ingresa el SLA.." required required></div>
                                 </div>
                                 <input type="hidden" name="_csrf" value="<%= csrfToken %>"></input>
                                <!-- <script>

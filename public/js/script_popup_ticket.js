@@ -294,7 +294,8 @@ document.getElementById("archivar").onclick = () =>
         title: '¡Éxito!',
         text: 'Se ha ' + text + ' el ticket',
         icon: 'success',
-        timer: 800
+        timer: 800,
+        showConfirmButton: false
     })
       .then(response => {
         document.location.reload();
