@@ -46,12 +46,9 @@ exports.postTipo_Incidencia =  async (request, response, next) => {
                                 if(rowcheck[0].E == 0){
                                     Pregunta.pregunta_save(pregunta.replace(/_/g, ' '))
                                     .then(() => {
-                                        console.log(pregunta.replace(/_/g, ' '))
                                         Pregunta.pregunta_getId(pregunta.replace(/_/g, ' '))
                                             .then(([rowidPregunta, fieldDataidPregunta]) => {
                                                 console.log(rowidPregunta);
-                                                console.log(rowidPregunta[0]);
-                                                console.log(rowidPregunta[0].Id_Pregunta);
                                                 Pregunta.agregaPregunta(rowidPregunta[0].Id_Pregunta, rowLastTipoIncidencia[0].L)
                                                 .then()
                                                 .catch(err => console.log(err));
