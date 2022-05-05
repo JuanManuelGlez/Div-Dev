@@ -249,13 +249,13 @@
                                     <ul  class="dropdown-menu">
                                         <form class="px-4 py-3" id="form_filtros">
                                             <div class="form-group">
-                                                <label for="filtro_tipo_incidencia"> Categoría</label>
+                                                <label for="filtro_tipo_incidencia"> Tipo de Incidencia</label>
                                                 <select class="form-select" id="filtro_tipo_incidencia" name="filtro_tipo_incidencia" aria-label="Default select example">
                                                     
                                                     <% for (let incidencia of incidencias){%>
                                                         <option selected="false" value="<%=incidencia.Id_Tipo_Incidencia%>" id="tipo_incidencia<%= incidencia.Id_Tipo_Incidencia %>"> <%=incidencia.Nombre_Tipo_Incidencia%> </option>
                                                     <%}%>
-                                                    <option selected value="t.Id_Tipo_Incidencia" id="default"> Todas las categorias </option>
+                                                    <option selected value="t.Id_Tipo_Incidencia" id="default"> Todos los Tipos de Incidencia </option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
