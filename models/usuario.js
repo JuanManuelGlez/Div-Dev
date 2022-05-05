@@ -143,12 +143,12 @@ module.exports = class Usuario{
     }
 
     static fetchLike(texto_ingresado) {
-        return db.execute('SELECT u.Nombre_Usuario, u.Id_Usuario, u.URL_Foto, u.Login, u.Contraseña, u.Id_Rol, r.Nombre_Rol, COUNT(t.Id_Ticket) AS "Total" FROM rol r, usuario u LEFT JOIN usuario_ticket t ON u.Id_Usuario = t.Id_Usuario WHERE r.Id_Rol = u.Id_Rol AND U.Nombre_Usuario LIKE ? GROUP BY U.Id_Usuario', ['%' + texto_ingresado + '%']);
+        return db.execute('SELECT u.Nombre_Usuario, u.Id_Usuario, u.URL_Foto, u.Login, u.Contraseña, u.Id_Rol, r.Nombre_Rol, COUNT(t.Id_Ticket) AS "Total" FROM rol r, usuario u LEFT JOIN usuario_ticket t ON u.Id_Usuario = t.Id_Usuario WHERE r.Id_Rol = u.Id_Rol AND u.Nombre_Usuario LIKE ? GROUP BY u.Id_Usuario', ['%' + texto_ingresado + '%']);
     }
 
 
     static  Usuario_Verificar(hash){
-        return db.execute('SELECT U.Id_Usuario,U.Contraseña FROM usuario U WHERE Hash_Verificacion=?',[hash]);
+        return db.execute('SELECT Id_Usuario,Contraseña FROM usuario WHERE Hash_Verificacion=?',[hash]);
     }
     static async Activo(id_usuario){
         return db.execute('UPDATE usuario SET Activo = 1 WHERE Id_Usuario=?',[id_usuario]);
