@@ -12,7 +12,6 @@ exports.signup_get = (request, response, next) => {
 };
 
 exports.datos = (request, response, next) => {
-  console.log(request.session.usuario)
   Usuario.findProfile(request.session.usuario.login_usuario)
     .then(([rowsUsuarios, fieldData]) => {
       Usuario.countActiveTickets(request.session.id_usuario)
@@ -61,8 +60,6 @@ exports.lista = (request, response, next) => {
           .then(([rowsUsuarios, fieldData]) => {
             Usuario.countAllActiveTickets()
               .then(([rowsTickets, fieldData]) => {
-                console.log(rowsTickets);
-                console.log(rowsUsuarios);
                 if (rowsTickets.length === 0) {
                   response.render("lista_usuarios", {
                     usuarios: rowsUsuarios,
@@ -248,7 +245,6 @@ exports.getDatosUsuario = (request, response, next) => {
 };
 
 exports.usuario_post = (request, response, next) => {
-  console.log(request.body.contrasenia);
   if (request.body.contrasenia === "") {
     Usuario.update(
       request.params.id_usuario,

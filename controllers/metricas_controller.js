@@ -12,7 +12,6 @@ exports.getByStatusAll = (request, response, next) => {
 exports.getByProcedenciaAll = (request, response, next) => {
     Metricas.getByProcedenciaAll(request.body.usuario, request.body.tipo_incidencia, request.body.fecha_inicio, request.body.fecha_fin, request.body.archivado)
         .then(([rows, fieldData]) => {
-            console.log(rows);
             response.status(200).json({datos: rows});
         })
         .catch(err => console.log(err));
