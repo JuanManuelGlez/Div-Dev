@@ -47,6 +47,7 @@ exports.postTipo_Incidencia =  async (request, response, next) => {
                                     const pregunta_nuevo = new Pregunta(pregunta.replace(/_/g, ' '));
                                     pregunta_nuevo.pregunta_save()
                                     .then(() => {
+                                        console.log(pregunta.replace(/_/g, ' '))
                                         Pregunta.pregunta_getId(pregunta.replace(/_/g, ' '))
                                             .then(([rowidPregunta, fieldDataidPregunta]) => {
                                                 console.log(rowidPregunta);
