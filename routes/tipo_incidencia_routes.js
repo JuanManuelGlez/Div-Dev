@@ -21,5 +21,7 @@ router.get('/modificar/:id_tipo_incidencia', isAuth,tipo_incidencia_controller.g
 
 router.post('/modificar/:id_tipo_incidencia', isAuth,tipo_incidencia_controller.postModficarTipo_Incidencia);
 
+router.post('/eliminar_tipo_incidencia/:id_tipo_incidencia', isAuth,tipo_incidencia_controller.postEliminar_tp);
+
 
 module.exports = router;

@@ -74,4 +74,9 @@ module.exports = class Tipo_incidencia{
         ])
     }
 
+    static cambiar_visibilidad(id_tp){
+        return db.execute('UPDATE tipo_incidencia SET Visibilidad_Tipo_Incidencia = 0 WHERE Id_Tipo_Incidencia = ?', 
+        [id_tp])
+    }
+
 }

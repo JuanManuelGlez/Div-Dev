@@ -21,6 +21,14 @@ exports.getTipo_Incidencia = (request, response, next) => {
     }
 }
 
+exports.postEliminar_tp = (request, response, next) => {
+    id_tp = request.params.id_tipo_incidencia;
+    Tipo_incidencia.cambiar_visibilidad(id_tp)
+    .then(response.status(200).json({}))
+    .catch(err => console.log(err));
+
+}
+
 exports.postTipo_Incidencia =  async (request, response, next) => {
 
     if (!Array.isArray(request.body.preguntas))
