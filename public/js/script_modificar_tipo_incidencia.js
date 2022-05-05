@@ -91,7 +91,6 @@ function select_preguntas(select_p){
 
 document.getElementById("button_cambios").onclick = () =>{
     if(document.getElementById("Nombre_Tipo_Incidencia").value != ""){
-        if(window.confirm("Esta seguro que desea guardar los cambios") == true){
             const csrf = document.getElementById('_csrf').value;
             let rutaModificar_t = '../modificar/' + document.getElementById("id_tp").value;
             let contador  = document.getElementById("cont").value;
@@ -120,13 +119,18 @@ document.getElementById("button_cambios").onclick = () =>{
                 
             })
             .then(() => {
-                window.alert("cambios guardados")
-                window.location = "/tipo_incidencia";
+                Swal.fire(
+                    '¡Operacion Exitosa!',  
+                    'Tipo de incidencia modificado correctamente',
+                    'success'
+                  )
+                  .then(response => {
+                    window.location = "/tipo_incidencia";
+                  })
 
             }).catch(err => {
                 console.log(err);
             });
-        }
     }else{
         window.alert("datos incompletos")
     }
