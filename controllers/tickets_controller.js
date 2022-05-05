@@ -164,8 +164,8 @@ exports.nuevo_post = (request, response, next) => {
         let usuarioAct = request.session.usuario;
         Usuario.getId(usuarioAct.login_usuario)
         .then(([rows, fieldData]) => {
-          Ticket.assignUsuario(idNuevo, rows[0].Id_Usuario, "Creador");
-          Ticket.assignUsuario(idNuevo, 0, "Encargado");
+          Ticket.assignUsuarioFirst(idNuevo, rows[0].Id_Usuario, "Creador");
+          Ticket.assignUsuarioFirst(idNuevo, 0, "Encargado");
         })
         .catch((err) => {console.log(err)});
       }

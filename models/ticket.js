@@ -141,6 +141,13 @@ module.exports = class Ticket {
             .catch(err => console.log(err));
     }
 
+    static assignUsuarioFirst(id_ticket, id_usuario, cargo) {
+        return db.execute('INSERT INTO usuario_ticket (Id_Usuario, Id_Ticket, Cargo, Fecha_Asignacion) VALUES (?, ?, ?, CURRENT_TIMESTAMP)',
+            [id_usuario, id_ticket, cargo])
+            .then()
+            .catch(err => console.log(err));
+    }
+
     static UsuarioEncargado (id_ticket){
         return db.execute('SELECT UT.Id_Usuario, U.Nombre_Usuario, Cargo FROM usuario_ticket UT, usuario U WHERE UT.Id_Usuario = U.Id_Usuario AND UT.Id_Ticket = ? AND UT.Cargo = "Encargado" ORDER BY Fecha_Asignacion DESC ',[id_ticket]);
          
