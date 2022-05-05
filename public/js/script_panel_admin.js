@@ -65,7 +65,8 @@ function agregaLabel() {
                 title: '¡Éxito!',
                 text: 'Nueva label agregada exitosamente',
                 icon: 'success',
-                timer: 800
+                timer: 800,
+                showConfirmButton: false
               })
             document.getElementById("input_label").value = "";
             filtraLabels();
@@ -102,7 +103,8 @@ function eliminaLabel(element) {
                 title: 'Borrada',
                 text: 'La pregunta se ha borrado exitosamente',
                 icon: 'success',
-                timer: 800
+                timer: 800,
+                showConfirmButton: false
               })
           fetch(rutaActualiza, {
             method: 'POST',
@@ -255,7 +257,8 @@ function eliminaPregunta(element){
                 title: 'Borrada',
                 text: 'La pregunta se ha borrado exitosamente',
                 icon: 'success',
-                timer: 800
+                timer: 800,
+                showConfirmButton: false
               })
            data = {
             Pregunta: pregunta,
@@ -313,7 +316,8 @@ function agregaPregunta() {
             title: '¡Éxito!',
             text: 'Pregunta nueva agregada',
             icon: 'success',
-            timer: 800
+            timer: 800,
+            showConfirmButton: false
           })
 
         document.getElementById("input_pregunta").value = "";
@@ -432,7 +436,8 @@ function agregaEstado() {
                 title: '¡Éxito!',
                 text: 'Estado nuevo agregado',
                 icon: 'success',
-                timer: 800
+                timer: 800,
+                showConfirmButton: false
               })
             document.getElementById("input_estado").value = "";
             filtraEstados();
@@ -470,7 +475,8 @@ function eliminaEstado(element) {
                 title: 'Borrada',
                 text: 'El estado ha sido borrado exitosamente',
                 icon: 'success',
-                timer: 800
+                timer: 800,
+                showConfirmButton: false
               })
               fetch(rutaActualiza, {
                 method: 'POST',
@@ -577,7 +583,8 @@ async function agregarProcedencia() {
             title: '¡Éxito!',
             text: 'Procedencia nueva agregada',
             icon: 'success',
-            timer: 800
+            timer: 800,
+            showConfirmButton: false
           })
          
         
@@ -616,7 +623,8 @@ function modificarProcedencia() {
             title: '¡Éxito!',
             text: 'Procedencia modificada',
             icon: 'success',
-            timer: 800
+            timer: 800,
+            showConfirmButton: false
           })
           
         
