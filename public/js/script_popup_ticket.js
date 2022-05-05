@@ -270,7 +270,11 @@ document.getElementById("archivar").onclick = () =>
     const csrf = document.getElementById('_csrf').value;
     let ruta = '../tickets/archivar/' + idTicket;
     const archivar = 1;
+    var text = '';
     const bool_archivar = document.getElementById("Bool").value;
+    if (bool_archivar==0){
+        text = 'desarchivado'
+    } else { text = 'archivado'}
     data = {
       Archivado : bool_archivar
     }
@@ -284,15 +288,15 @@ document.getElementById("archivar").onclick = () =>
       body:JSON.stringify(data)
   })
   .then(response => {
-    Swal.fire(
-        '¡Creación Exitosa!',
-        'Ticket nuevo creado, ver en Panel Ticket o Backlog',
-        'success'
-      )
+    new Swal({
+        title: '¡Éxito!',
+        text: 'Se ha ' + text + ' el ticket',
+        icon: 'success',
+        timer: 800
+    })
       .then(response => {
         document.location.reload();
-        closeTicket();
-        openTicket(document.getElementById("boton"+idTicket));
+        
       })
       
   }).catch(err => {
