@@ -119,6 +119,7 @@ document.getElementById("select_tipo_incidencia").onchange = () =>
 // Comentarios
 document.getElementById("boton_comentarios").onclick = () =>
 { 
+  
   const id_ticket = document.getElementById("Id_Ticket").value;
 
   //document.getElementById("Id_Ticket").value = id_ticket;
@@ -140,15 +141,16 @@ document.getElementById("boton_comentarios").onclick = () =>
 
         for(let comentario of response.comentarios)
         {   
+            let fecha_comment = new Date(comentario.Fecha_y_Hora);
             if(comentario.URL_Archivo != ''){
                 if (comentario.URL_Archivo.includes(".jpg") || comentario.URL_Archivo.includes(".jpeg") || comentario.URL_Archivo.includes(".png") || comentario.URL_Archivo.includes(".gif")){
                     comentarios.innerHTML += '<div class="card mb-4"> <div class="card-body"> <p>' + comentario.Texto_Comentario + '</p> <a href="/uploads/'+comentario.URL_Archivo+'" download ='+comentario.URL_Archivo+'> <img src="/uploads/'+comentario.URL_Archivo+'" alt="Download foto adjunta"> </a> <div class="d-flex justify-content-between"> <div class="d-flex flex-row align-items-center"> <img src="'+ comentario.URL_Archivo +  '" alt="avatar" width="25" height="25" /> <p class="small mb-0 ms-2">' + comentario.Nombre_Usuario + '</p> </div> <div class="d-flex flex-row align-items-center"> <p class="small text-muted mb-0"> Comentado en: <span style="overflow: hidden;margin-left: 10px;color: rgb(136,136,136);"' + 
                     ticket.Fecha_Inicio.toString().substring(4, 21) + '</span>' + comentario.Fecha_y_Hora + '</p> </div> </div> </div> </div>'
                 }else{
-                    comentarios.innerHTML += '<div class="card mb-4"> <div class="card-body"> <p>' + comentario.Texto_Comentario + '</p> <div class="d-flex justify-content-between"> <div class="d-flex flex-row align-items-center"> <img src="'+ comentario.URL_Foto + '" alt="avatar" width="25" height="25" /> <p class="small mb-0 ms-2">' + comentario.Nombre_Usuario + '</p> </div> <div class="d-flex flex-row align-items-center"> <p class="small text-muted mb-0"> Comentado en: '+ (comentario.Fecha_y_Hora.toString()).substring(4,21) +'</p> </div> </div> </div> </div>'
+                    comentarios.innerHTML += '<div class="card mb-4"> <div class="card-body"> <p>' + comentario.Texto_Comentario + '</p> <div class="d-flex justify-content-between"> <div class="d-flex flex-row align-items-center"> <img src="'+ comentario.URL_Foto + '" alt="avatar" width="25" height="25" /> <p class="small mb-0 ms-2">' + comentario.Nombre_Usuario + '</p> </div> <div class="d-flex flex-row align-items-center"> <p class="small text-muted mb-0"> Comentado en: '+ (fecha_comment.toString()).substring(4,21) +'</p> </div> </div> </div> </div>'
                 }
             }else{
-                comentarios.innerHTML += '<div class="card mb-4"> <div class="card-body"> <p>' + comentario.Texto_Comentario + '</p> <div class="d-flex justify-content-between"> <div class="d-flex flex-row align-items-center"> <img src="' + comentario.URL_Foto + '" alt="avatar" width="25" height="25" /> <p class="small mb-0 ms-2">' + comentario.Nombre_Usuario + '</p> </div> <div class="d-flex flex-row align-items-center"> <p class="small text-muted mb-0"> Comentado en: '+ (comentario.Fecha_y_Hora.toString()).substring(4,21) +'</p> </div> </div> </div> </div>'
+                comentarios.innerHTML += '<div class="card mb-4"> <div class="card-body"> <p>' + comentario.Texto_Comentario + '</p> <div class="d-flex justify-content-between"> <div class="d-flex flex-row align-items-center"> <img src="' + comentario.URL_Foto + '" alt="avatar" width="25" height="25" /> <p class="small mb-0 ms-2">' + comentario.Nombre_Usuario + '</p> </div> <div class="d-flex flex-row align-items-center"> <p class="small text-muted mb-0"> Comentado en: '+ (fecha_comment.toString()).substring(4,21) +'</p> </div> </div> </div> </div>'
             }
         }
     }).catch(err => {
@@ -189,19 +191,19 @@ function submitForm(){
     .then(response => response.json())
     .then(response => {
         toastCambiosGuardados()
-        console.log(response);
         comentarios.innerHTML = "";
         for(let comentario of response.comentarios)
         {   
+            let fecha_comment = new Date(comentario.Fecha_y_Hora);
             if(comentario.URL_Archivo != ''){
                 if (comentario.URL_Archivo.includes(".jpg") || comentario.URL_Archivo.includes(".jpeg") || comentario.URL_Archivo.includes(".png") || comentario.URL_Archivo.includes(".gif")){
                     comentarios.innerHTML += '<div class="card mb-4"> <div class="card-body"> <p>' + comentario.Texto_Comentario + '</p> <a href="/uploads/'+comentario.URL_Archivo+'" download ='+comentario.URL_Archivo+'> <img src="/uploads/'+comentario.URL_Archivo+'" alt="Download foto adjunta"> </a> <div class="d-flex justify-content-between"> <div class="d-flex flex-row align-items-center"> <img src="' + comentario.URL_Foto +'" alt="avatar" width="25" height="25" /> <p class="small mb-0 ms-2">' + comentario.Nombre_Usuario + '</p> </div> <div class="d-flex flex-row align-items-center"> <p class="small text-muted mb-0"> Comentado en: <span style="overflow: hidden;margin-left: 10px;color: rgb(136,136,136);"' + 
                     ticket.Fecha_Inicio.toString().substring(4, 21) + '</span>' + comentario.Fecha_y_Hora + '</p> </div> </div> </div> </div>'
                 }else{
-                    comentarios.innerHTML += '<div class="card mb-4"> <div class="card-body"> <p>' + comentario.Texto_Comentario + '</p> <div class="d-flex justify-content-between"> <div class="d-flex flex-row align-items-center"> <img src="'+ comentario.URL_Foto + '" alt="avatar" width="25" height="25" /> <p class="small mb-0 ms-2">' + comentario.Nombre_Usuario + '</p> </div> <div class="d-flex flex-row align-items-center"> <p class="small text-muted mb-0"> Comentado en: '+ (comentario.Fecha_y_Hora.toString()).substring(4,21) +'</p> </div> </div> </div> </div>'
+                    comentarios.innerHTML += '<div class="card mb-4"> <div class="card-body"> <p>' + comentario.Texto_Comentario + '</p> <div class="d-flex justify-content-between"> <div class="d-flex flex-row align-items-center"> <img src="'+ comentario.URL_Foto + '" alt="avatar" width="25" height="25" /> <p class="small mb-0 ms-2">' + comentario.Nombre_Usuario + '</p> </div> <div class="d-flex flex-row align-items-center"> <p class="small text-muted mb-0"> Comentado en: '+ (fecha_comment.toString()).substring(4,21) +'</p> </div> </div> </div> </div>'
                 }
             }else{
-                comentarios.innerHTML += '<div class="card mb-4"> <div class="card-body"> <p>' + comentario.Texto_Comentario + '</p> <div class="d-flex justify-content-between"> <div class="d-flex flex-row align-items-center"> <img src="' + comentario.URL_Foto + '" alt="avatar" width="25" height="25" /> <p class="small mb-0 ms-2">' + comentario.Nombre_Usuario + '</p> </div> <div class="d-flex flex-row align-items-center"> <p class="small text-muted mb-0"> Comentado en: '+ (comentario.Fecha_y_Hora.toString()).substring(4,21) +'</p> </div> </div> </div> </div>'
+                comentarios.innerHTML += '<div class="card mb-4"> <div class="card-body"> <p>' + comentario.Texto_Comentario + '</p> <div class="d-flex justify-content-between"> <div class="d-flex flex-row align-items-center"> <img src="' + comentario.URL_Foto + '" alt="avatar" width="25" height="25" /> <p class="small mb-0 ms-2">' + comentario.Nombre_Usuario + '</p> </div> <div class="d-flex flex-row align-items-center"> <p class="small text-muted mb-0"> Comentado en: '+ (fecha_comment.toString()).substring(4,21) +'</p> </div> </div> </div> </div>'
             }
         }
         document.getElementById("commentShow").style.display = "flex";
