@@ -32,7 +32,7 @@ exports.datos = (request, response, next) => {
 };
 
 exports.filtros = (request, response, next) => {
-  execute='SELECT u.Nombre_Usuario, u.Id_Usuario, u.URL_Foto, u.Login, u.Contraseña, u.Id_Rol, r.Nombre_Rol, COUNT(t.Id_Ticket) AS "Total" FROM rol r, usuario u LEFT JOIN usuario_ticket t ON u.Id_Usuario = t.Id_Usuario WHERE r.Id_Rol = u.Id_Rol AND r.Id_Rol =' + request.body.rol  + ' GROUP BY u.Id_Usuario;'
+  execute= execute='SELECT u.Id_Usuario, u.Nombre_Usuario, u.URL_Foto, u.Login, u.Contraseña, u.Id_Rol, r.Nombre_Rol, COUNT(ti.Id_Ticket) AS "Total" FROM usuario u LEFT JOIN (SELECT ut.Id_Usuario, t.Id_Ticket FROM ticket t LEFT JOIN usuario_ticket ut ON t.Id_Ticket = ut.Id_Ticket WHERE ut.Cargo = "Encargado") AS ti ON u.Id_Usuario = ti.Id_Usuario, rol r WHERE r.Id_Rol = u.Id_Rol AND  u.Id_Usuario <> 0 AND u.Id_Rol = ' + request.body.rol + ' GROUP BY u.Id_Usuario;'
  
   Usuario.fetchByRol(execute)
     .then(([rows, fieldData]) => {
