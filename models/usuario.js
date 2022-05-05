@@ -75,7 +75,7 @@ module.exports = class Usuario{
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
-        return db.execute('SELECT u.Nombre_Usuario, u.Id_Usuario, u.URL_Foto, u.Login, u.Contraseña, u.Id_Rol, r.Nombre_Rol, CASE WHEN (u.Id_Usuario IN (SELECT ut.Id_Usuario FROM usuario_ticket ut, ticket t WHERE ut.Id_Ticket = t.Id_Ticket AND ut.Cargo = "Encargado" AND t.Id_Estado != 4 AND t.Id_Estado != 6) = FALSE) THEN 0 WHEN (u.Id_Usuario IN (SELECT ut.Id_Usuario FROM usuario_ticket ut, ticket t WHERE ut.Id_Ticket = t.Id_Ticket AND ut.Cargo = "Encargado" AND t.Id_Estado != 4 AND t.Id_Estado != 6) = TRUE) THEN 1 END AS "Tickets" FROM usuario u , rol r WHERE u.Id_Rol = r.Id_Rol AND u.Login = u.Login AND u.Id_Usuario <> 0 GROUP BY u.Id_Usuario');
+        return db.execute('SELECT u.Nombre_Usuario, u.Id_Usuario, u.URL_Foto, u.Login, u.Contraseña, u.Id_Rol, r.Nombre_Rol, CASE WHEN (u.Id_Usuario IN (SELECT ut.Id_Usuario FROM usuario_ticket ut, ticket t WHERE ut.Id_Ticket = t.Id_Ticket AND ut.Cargo = "Encargado" AND t.Id_Estado != 4 AND t.Id_Estado != 6) = FALSE) THEN 0 WHEN (u.Id_Usuario IN (SELECT ut.Id_Usuario FROM usuario_ticket ut, ticket t WHERE ut.Id_Ticket = t.Id_Ticket AND ut.Cargo = "Encargado" AND t.Id_Estado != 4 AND t.Id_Estado != 6) = TRUE) THEN 1 END AS "Tickets" FROM usuario u , rol r WHERE u.Id_Rol = r.Id_Rol AND u.Login = u.Login AND u.Id_Usuario <> 0 GROUP BY u.Id_Usuario ORDER BY u.Nombre_Usuario');
     }
 
     static findOne(login_usuario) {
@@ -143,7 +143,7 @@ module.exports = class Usuario{
     }
 
     static fetchLike(texto_ingresado) {
-        return db.execute('SELECT u.Id_Usuario, u.Nombre_Usuario, u.URL_Foto, u.Login, u.Contraseña, u.Id_Rol, r.Nombre_Rol, COUNT(ti.Id_Ticket) AS "Total" FROM usuario u LEFT JOIN (SELECT ut.Id_Usuario, t.Id_Ticket FROM ticket t LEFT JOIN usuario_ticket ut ON t.Id_Ticket = ut.Id_Ticket WHERE ut.Cargo = "Encargado") AS ti ON u.Id_Usuario = ti.Id_Usuario, rol r WHERE r.Id_Rol = u.Id_Rol AND  u.Id_Usuario <> 0 AND u.Nombre_Usuario LIKE ? GROUP BY u.Id_Usuario;', ['%' + texto_ingresado + '%']);
+        return db.execute('SELECT u.Id_Usuario, u.Nombre_Usuario, u.URL_Foto, u.Login, u.Contraseña, u.Id_Rol, r.Nombre_Rol, COUNT(ti.Id_Ticket) AS "Total" FROM usuario u LEFT JOIN (SELECT ut.Id_Usuario, t.Id_Ticket FROM ticket t LEFT JOIN usuario_ticket ut ON t.Id_Ticket = ut.Id_Ticket WHERE ut.Cargo = "Encargado") AS ti ON u.Id_Usuario = ti.Id_Usuario, rol r WHERE r.Id_Rol = u.Id_Rol AND  u.Id_Usuario <> 0 AND u.Nombre_Usuario LIKE ? GROUP BY u.Id_Usuario ORDER BY u.Nombre_Usuario;', ['%' + texto_ingresado + '%']);
     }
 
 
