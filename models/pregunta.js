@@ -12,7 +12,7 @@ module.exports = class Pregunta{
     //Este método servirá para guardar de manera persistente el nuevo objeto. 
     static async pregunta_save(pregunta_texto_pregunta) {
         return db.execute('SELECT * FROM pregunta WHERE Texto_Pregunta = ?', [pregunta_texto_pregunta])
-            .then(([rows, fieldData]) =>{
+            .then(async ([rows, fieldData]) =>{
                 if(rows.length == 0)
                 {
                     await db.execute('INSERT INTO pregunta(Texto_Pregunta, Visibilidad_Pregunta) VALUES (?,?)',
