@@ -572,13 +572,14 @@ async function agregarProcedencia() {
         document.getElementById("procedencia").appendChild(opt);
         document.getElementById("Nombre_Procedencia").value = '';
         document.getElementById('abreProcedencia').click()
+
         new swal({
             title: '¡Éxito!',
             text: 'Procedencia nueva agregada',
             icon: 'success',
             timer: 800
           })
-          document.getElementById('abreProcedencia').click()
+         
         
     }).catch(err => {
         console.log(err);
@@ -617,7 +618,7 @@ function modificarProcedencia() {
             icon: 'success',
             timer: 800
           })
-          .then(document.getElementById('abreProcedencia').click().then(document.getElementById('abreProcedencia').click()))
+          
         
     }).catch((err) => {
         console.log(err);
