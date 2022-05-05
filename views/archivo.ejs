@@ -126,7 +126,7 @@
   
                                                   
                                       <div class="col"><button class="btn btn-primary" id="archivar" type="button"
-                                          style="background: rgb(0,0,0);width: 100%;margin-top: 40px;border-width: 0px;"> Desrchivar <i
+                                          style="background: rgb(0,0,0);width: 100%;margin-top: 40px;border-width: 0px;"> Desarchivar <i
                                               class="fa fa-archive" style="margin-left: 15px;"></i></button></div>
                                       
                                   </div>
@@ -146,8 +146,8 @@
                                   <div >
                                       <div class="row d-flex justify-content-center">
                                           <div class="col">
-                                              <div class="card shadow-0 border" style="background-color: #f0f2f5;">
-                                                  <div class="card-body p-4">
+                                            <div class="card shadow-0 border" style="background-color: #f0f2f5;margin-left:120px">
+                                                <div class="card-body p-4">
                                                       <div class="form-outline mb-4">
                                                           <!-- <form id="nuevo_comentario" method="POST" enctype="multipart/form-data"> -->
                                                               <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>"></input>
@@ -156,7 +156,6 @@
                                                               <input type="text" id="texto_comentario" name="texto_comentario" placeholder="Escribe aqui...">
                                                           
                                                               <button onClick="submitForm()"  type="button" class="btn btn-success" id="Agregar"> Agregar Comentario </button>
-                                                              <input type="file" id="url_archivo_comentario" name="url_archivo_comentario">
                                                               <script>
                                                                   var input = document.getElementById("texto_comentario");
                                                                   input.addEventListener("keyup", function(event) {
