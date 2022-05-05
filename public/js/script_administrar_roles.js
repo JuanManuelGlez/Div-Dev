@@ -52,7 +52,7 @@ function privilegioChange(element, id_privilegio, id_rol) {
             })
             .then(response => response.json())
             .then(response => {
-                toast('Operacion completada')
+                toastCambiosGuardados()
     
             }).catch(err => {
                 console.log(err);
@@ -76,7 +76,7 @@ function privilegioChange(element, id_privilegio, id_rol) {
             })
             .then(response => response.json())
             .then(response => {
-                toast('Operacion completada')
+                toastCambiosGuardados()
 
 
             }).catch(err => {
@@ -165,4 +165,11 @@ function eliminarol(element){
             }).catch(err => {
                 console.log(err);
             });
+}
+
+function toastCambiosGuardados() {
+
+    var x = document.getElementById("snackbar");
+    x.className = "show";  
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 800);
 }

@@ -24,6 +24,6 @@ const DB_DEV_EC = {
     port: 3306
 };
 
-const pool = mysql.createPool(DB_ANDRES);
+const pool = mysql.createPool(DB_DEV);
 
 module.exports = pool.promise();
