@@ -10,6 +10,18 @@ body {
   transition: all 0.5s ease;
 }
 
+#primary-hover{
+  text-decoration: none;
+  color:#000;
+  background:var(--bs-white);
+  
+}
+#primary-hover:hover{
+  text-decoration: none;
+  color:white;
+  
+}
+
 #wrapper.toggled {
   padding-left: 250px;
 }
@@ -70,17 +82,6 @@ body {
   background: var(--bs-red);
 }
 
-#primary-hover{
-  text-decoration: none;
-  color:#000;
-  background:var(--bs-white);
-  
-}
-#primary-hover:hover{
-  text-decoration: none;
-  color:white;
-  
-}
 .sidebar-nav li a:active, .sidebar-nav li a:focus {
   text-decoration: none;
 }
