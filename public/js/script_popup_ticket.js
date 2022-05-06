@@ -65,8 +65,7 @@ function openTicket(element) {
             document.getElementById("Usuario_Tipo").innerHTML=response.datosGenerales[0].Nombre_Tipo_Incidencia;
             document.getElementById("enviar").style.display="none";
             document.getElementById("archivar").style.display="none";
-            document.getElementById("asignar").style.display="none";
-            document.getElementById("ver_asignacion").style.display="none";
+            
 
         }else{
         }
