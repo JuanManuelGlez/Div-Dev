@@ -59,7 +59,7 @@ module.exports = class Ticket {
         return db.execute('SELECT Id_Label FROM label_ticket WHERE Id_Ticket=?', [id_ticket]);
     }
     static fetchEstado_Ticket(id_ticket) {
-        return db.execute('SELECT t.Id_Estado FROM ticket t WHERE t.Id_Ticket = ?', [id_ticket]);
+        return db.execute('SELECT t.Id_Estado, e.Nombre_Estado FROM ticket t, estado e WHERE t.Id_Ticket = ? AND t.Id_Estado = e.Id_Estado GROUP BY t.Id_Estado', [id_ticket]);
     }
     static fetchPregunta_Ticket(id_ticket) {
         return db.execute('SELECT Pregunta, Respuesta FROM pregunta_ticket WHERE Id_Ticket=?', [id_ticket]);

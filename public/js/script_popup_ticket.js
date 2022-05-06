@@ -34,7 +34,6 @@ function openTicket(element) {
 
         select_estado.namedItem("estado"+response.estado[0].Id_Estado).selected = true;
         estado_actual.value = response.estado[0].Id_Estado;
-        console.log(response.estado[0].Nombre_Estado);
         select_tipo_incidencia.namedItem("tipo_incidencia"+response.datosGenerales[0].Id_Tipo_Incidencia).selected = true;
 
         select_prioridad.namedItem("prioridad"+response.datosGenerales[0].Id_Prioridad).selected = true;
