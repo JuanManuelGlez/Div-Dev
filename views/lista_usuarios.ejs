@@ -136,19 +136,18 @@
                 </div>
 
                 <div class="col" id="display">
-                <% let i=0 %>
+           
                 <% for(let usuario of usuarios) {%>
                   
                 <div id="<%=usuario.Id_Usuario %>" onClick="openUsuario(this)" data-bs-toggle="modal" data-bs-target="#myModal" class="row" style="cursor: pointer;margin: 20px -12px;border-radius: 5px;box-shadow: 0px 0px 9px rgba(147,147,147,0.55);padding: 5px;">
                     <div class="col" style="font-size: 22px;text-align: center;"><span style="color: rgb(0,0,0);"><%= usuario.Nombre_Usuario %></span></div>
                     <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);"><%= usuario.Login %></span></div>
                     <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);"><%= usuario.Nombre_Rol %></span></div>
-                    <%if (usuario.Tickets==1 && totales != 0){%>
-                    <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);"><%= totales[i].Total %></span></div>
-                    <% i+=1 %>
-                    <%}else{%>
-                      <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);">0</span></div>
-                    <%}%>
+
+                    <div class="col" style="font-size: 21px;text-align: center;"><span style="color: rgb(0,0,0);"><%= usuariogit.Total %></span></div>
+              
+
+          
                     <!---- button id="<%=usuario.Id_Usuario %>" onClick="openUsuario(this)" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
                         Open modal
                       </button-->
