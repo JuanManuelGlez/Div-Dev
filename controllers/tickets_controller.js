@@ -419,7 +419,8 @@ exports.usuarios_get=(request,response,next)=>{
             console.log(rows);
             console.log(rows_encargado);
               response.status(200).json({
-                  encargado: rows_encargado
+                  encargado: rows_encargado,
+                  usuarios: rows
               });
        }).catch(error=>console.log(error));
   }).catch(error=>console.log(error));

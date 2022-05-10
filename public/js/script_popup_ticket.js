@@ -309,7 +309,7 @@ document.getElementById("archivar").onclick = () =>
 document.getElementById("ver_asignacion").onclick = () =>
 { 
     const id_ticket = document.getElementById("Id_Ticket").value;
-    let select = document.getElementById("encargado");
+    let select = document.getElementById("select_encargado");
     let ruta = '../tickets/' + id_ticket + '/asignar_usuario';
 
     fetch(ruta, {
@@ -320,8 +320,23 @@ document.getElementById("ver_asignacion").onclick = () =>
     })
     .then(response => response.json())
     .then(response => {
+        select.innerHTML = '';
         console.log(response);
-        select.innerHTML = response.encargado[0].Nombre_Usuario;
+        let optAct = document.createElement('option');
+        optAct.value = response.encargado[0].Id_Usuario;
+        optAct.innerHTML = response.encargado[0].Nombre_Usuario;
+        select.appendChild(optAct);
+
+        for(usuario of response.usuarios)
+        {
+            if(usuario.Id_Usuario != response.encargado[0].Id_Usuario)
+            {
+                let opt = document.createElement('option');
+                opt.value = usuario.Id_Usuario;
+                opt.innerHTML = usuario.Nombre_Usuario;
+                select.appendChild(opt);
+            }
+        }
         
 
     }).catch(err => {
