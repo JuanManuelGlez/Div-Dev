@@ -409,10 +409,15 @@ exports.asignar_usuario= async (request,response,next)=>{
 }
 
 exports.usuarios_get=(request,response,next)=>{
+  console.log("Id del ticket:" + request.params.id_ticket)
   Ticket.UsuarioEncargado(request.params.id_ticket)
   .then(([rows_encargado,fielData_encargado])=>{
+      console.log("Si jalo al encargado")
       Usuario.fetchAll_AsignarTicket()
           .then(([rows,fielData])=>{
+            console.log("Aqui asignar");
+            console.log(rows);
+            console.log(rows_encargado);
               response.status(200).json({
                   usuarios:rows, encargado: rows_encargado
               });
