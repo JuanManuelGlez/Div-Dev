@@ -322,7 +322,7 @@ document.getElementById("ver_asignacion").onclick = () =>
     .then(response => {
         console.log(response);
         select.innerHTML = response.encargado[0].Nombre_Usuario;
-        select.value = response.encargado[0].Id_Usuario;
+        
 
     }).catch(err => {
         console.log(err);
