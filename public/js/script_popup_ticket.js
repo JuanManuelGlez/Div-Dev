@@ -74,6 +74,7 @@ function openTicket(element) {
         console.log(err);
     });
 
+  cargaUsuarios();
   document.getElementById("Ticket").style.display = "flex";
 }
 
@@ -306,7 +307,7 @@ document.getElementById("archivar").onclick = () =>
   });
 }
 
-document.getElementById("ver_asignacion").onclick = () =>
+function cargaUsuarios()
 { 
     const id_ticket = document.getElementById("Id_Ticket").value;
     let select = document.getElementById("select_encargado");
@@ -321,7 +322,6 @@ document.getElementById("ver_asignacion").onclick = () =>
     .then(response => response.json())
     .then(response => {
         select.innerHTML = '';
-        console.log(response);
         let optAct = document.createElement('option');
         optAct.value = response.encargado[0].Id_Usuario;
         optAct.innerHTML = response.encargado[0].Nombre_Usuario;
