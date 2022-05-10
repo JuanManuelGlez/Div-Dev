@@ -414,7 +414,7 @@ exports.usuarios_get=(request,response,next)=>{
       Usuario.fetchAll_AsignarTicket()
           .then(([rows,fielData])=>{
               response.status(200).json({
-                  usuarios:rows, encargado: rows_encargado
+                  encargado: rows_encargado
               });
        }).catch(error=>console.log(error));
   }).catch(error=>console.log(error));

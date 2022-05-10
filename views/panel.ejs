@@ -156,8 +156,9 @@
                                             <ul class="dropdown-menu">
                                                 <form>
                                                     <div class="form-group" style="margin:10px">
+                                                        <div id="encargado"> </div>
                                                         <select class="form-select" id="select_encargado" name="select_encargado" aria-label="Default select example">
-                                                            <option selected id="encargado"></option> 
+                                                             
                                                             <% for (let usuario of usuarios){%>
                                                               
                                                                 <option value="<%=usuario.Id_Usuario%>"><%=usuario.Nombre_Usuario%><%=usuario.Tickets_Activos%></option>
