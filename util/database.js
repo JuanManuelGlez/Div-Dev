@@ -25,6 +25,6 @@ const DB_DEV_EC = {
 };
 
 
-const pool = mysql.createPool(DB_DEV);
+const pool = mysql.createPool(DB_DEV_EC);
 
 module.exports = pool.promise();
