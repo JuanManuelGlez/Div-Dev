@@ -3,14 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-05-2022 a las 16:38:10
+-- Tiempo de generación: 15-05-2022 a las 20:32:02
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "ONLY_FULL_GROUP_BY";
 START TRANSACTION;
-SET time_zone = "+00:00";
-
+SET time_zone = "-05:00";
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -34,6 +33,7 @@ CREATE TABLE `comentario` (
   `Texto_Comentario` varchar(255) COLLATE utf8mb4_spanish_ci NOT NULL,
   `URL_Archivo` varchar(255) COLLATE utf8mb4_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
 
 -- --------------------------------------------------------
 
@@ -71,125 +71,6 @@ CREATE TABLE `estado_ticket` (
   `Fecha_y_Hora` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
---
--- Volcado de datos para la tabla `estado_ticket`
---
-
-INSERT INTO `estado_ticket` (`Id_Estado`, `Id_Ticket`, `Fecha_y_Hora`) VALUES
-(1, 2, '2022-04-27 13:47:09'),
-(1, 2, '2022-04-27 16:58:50'),
-(1, 2, '2022-04-27 17:19:38'),
-(1, 2, '2022-04-27 18:02:55'),
-(1, 2, '2022-04-27 18:40:01'),
-(1, 2, '2022-04-27 18:50:34'),
-(1, 2, '2022-04-27 18:59:29'),
-(1, 2, '2022-04-27 19:09:12'),
-(1, 2, '2022-04-27 19:09:36'),
-(1, 2, '2022-04-27 19:13:01'),
-(1, 2, '2022-04-27 19:24:01'),
-(1, 2, '2022-04-28 09:46:58'),
-(1, 2, '2022-04-28 10:51:35'),
-(1, 2, '2022-04-28 10:51:54'),
-(1, 2, '2022-04-28 17:29:24'),
-(1, 2, '2022-04-28 17:51:59'),
-(1, 2, '2022-04-29 08:22:36'),
-(1, 3, '2022-04-27 18:11:39'),
-(1, 3, '2022-04-27 18:12:21'),
-(1, 3, '2022-04-27 18:12:35'),
-(1, 3, '2022-04-27 18:50:21'),
-(1, 3, '2022-04-27 19:15:06'),
-(1, 3, '2022-04-28 09:46:46'),
-(1, 3, '2022-04-28 11:07:22'),
-(1, 3, '2022-04-28 17:52:04'),
-(1, 4, '2022-04-27 18:49:51'),
-(1, 4, '2022-04-28 10:51:40'),
-(1, 4, '2022-04-28 17:36:59'),
-(1, 4, '2022-04-28 17:55:15'),
-(1, 4, '2022-05-02 20:19:19'),
-(1, 5, '2022-04-28 11:04:15'),
-(1, 6, '2022-04-28 17:51:35'),
-(1, 6, '2022-04-28 17:52:57'),
-(1, 6, '2022-04-28 17:54:02'),
-(1, 7, '2022-04-29 08:25:39'),
-(1, 8, '2022-04-29 08:26:06'),
-(1, 8, '2022-05-02 20:26:19'),
-(1, 9, '2022-04-29 08:26:45'),
-(1, 10, '2022-04-29 08:28:43'),
-(2, 2, '2022-04-27 16:58:36'),
-(2, 2, '2022-04-27 17:19:18'),
-(2, 2, '2022-04-27 18:38:54'),
-(2, 2, '2022-04-27 18:59:22'),
-(2, 2, '2022-04-27 19:07:03'),
-(2, 2, '2022-04-27 19:09:30'),
-(2, 2, '2022-04-27 19:12:16'),
-(2, 2, '2022-04-27 19:20:56'),
-(2, 2, '2022-04-28 09:46:52'),
-(2, 2, '2022-04-28 10:51:29'),
-(2, 2, '2022-04-28 12:31:32'),
-(2, 2, '2022-04-28 12:31:53'),
-(2, 2, '2022-04-28 16:35:57'),
-(2, 2, '2022-04-28 17:28:13'),
-(2, 2, '2022-04-29 08:22:24'),
-(2, 3, '2022-04-27 18:50:07'),
-(2, 3, '2022-04-27 19:13:44'),
-(2, 3, '2022-04-27 19:39:17'),
-(2, 3, '2022-04-28 17:48:40'),
-(2, 3, '2022-04-29 08:27:05'),
-(2, 6, '2022-04-28 17:51:52'),
-(3, 2, '2022-04-27 18:02:50'),
-(3, 2, '2022-04-27 19:08:51'),
-(3, 2, '2022-04-28 17:28:07'),
-(3, 2, '2022-04-28 17:41:24'),
-(3, 2, '2022-05-02 20:19:12'),
-(3, 3, '2022-04-27 18:11:59'),
-(3, 4, '2022-04-28 17:36:52'),
-(3, 4, '2022-04-28 17:54:47'),
-(3, 4, '2022-04-29 08:27:13'),
-(4, 2, '2022-04-27 16:58:42'),
-(4, 2, '2022-04-27 17:19:31'),
-(4, 2, '2022-04-27 18:02:37'),
-(4, 2, '2022-04-27 18:40:09'),
-(4, 2, '2022-04-27 19:09:26'),
-(4, 2, '2022-04-28 10:41:11'),
-(4, 2, '2022-04-28 10:51:48'),
-(4, 2, '2022-04-28 12:31:41'),
-(4, 2, '2022-04-28 17:28:28'),
-(4, 2, '2022-04-28 17:29:09'),
-(4, 2, '2022-04-29 08:22:11'),
-(4, 3, '2022-04-27 18:12:10'),
-(4, 3, '2022-04-27 18:12:28'),
-(4, 3, '2022-04-27 18:50:01'),
-(4, 3, '2022-04-27 19:14:59'),
-(4, 3, '2022-04-27 19:40:04'),
-(4, 3, '2022-04-28 10:53:24'),
-(4, 6, '2022-04-29 08:27:24'),
-(4, 8, '2022-05-02 20:26:26'),
-(4, 10, '2022-05-02 20:16:13'),
-(5, 2, '2022-04-28 17:28:18'),
-(5, 3, '2022-04-27 18:12:04'),
-(5, 5, '2022-04-29 08:28:17'),
-(6, 2, '2022-04-27 17:19:24'),
-(6, 2, '2022-04-27 18:02:44'),
-(6, 2, '2022-04-27 18:47:27'),
-(6, 2, '2022-04-27 19:09:20'),
-(6, 2, '2022-04-28 12:31:47'),
-(6, 2, '2022-04-28 12:32:00'),
-(6, 2, '2022-04-28 17:27:57'),
-(6, 2, '2022-04-28 17:28:23'),
-(6, 2, '2022-04-28 17:28:34'),
-(6, 3, '2022-04-27 18:12:16'),
-(6, 3, '2022-04-27 18:50:14'),
-(6, 3, '2022-04-27 19:41:00'),
-(6, 3, '2022-04-28 10:53:40'),
-(6, 4, '2022-04-28 10:41:25'),
-(6, 4, '2022-04-28 17:36:44'),
-(6, 4, '2022-04-28 17:54:33'),
-(6, 6, '2022-04-28 17:52:11'),
-(6, 6, '2022-04-28 17:53:41'),
-(6, 8, '2022-04-29 08:27:35'),
-(6, 9, '2022-04-29 08:27:45'),
-(6, 10, '2022-05-02 20:26:35');
-
 -- --------------------------------------------------------
 
 --
@@ -209,14 +90,13 @@ INSERT INTO `label` (`Id_Label`, `Visibilidad_Label`) VALUES
 ('4th generation', 1),
 ('Abilities', 1),
 ('ability', 1),
+('Accesibildad', 1),
 ('algorithm', 1),
 ('Ameliorated', 1),
 ('application', 0),
 ('architecture', 1),
 ('benchmark', 1),
 ('Bug', 1),
-('Bug 2', 1),
-('Bug 3', 1),
 ('Cloned', 1),
 ('coherent', 1),
 ('Compatible', 1),
@@ -235,24 +115,19 @@ INSERT INTO `label` (`Id_Label`, `Visibilidad_Label`) VALUES
 ('firmware', 1),
 ('hardware', 1),
 ('homogeneous', 1),
+('IA', 1),
 ('Implemented', 1),
 ('Intuitive', 1),
 ('knowledge user', 1),
 ('mobile', 1),
 ('monitoring', 1),
 ('Multi-tiered', 1),
-('Nueva', 1),
-('Nueva Label', 1),
-('Nueva Label 2', 1),
-('Nueva Label 3', 1),
 ('Open-source', 1),
 ('Optimized', 1),
 ('page', 1),
 ('portal', 1),
-('pruba', 1),
 ('reciprocal', 1),
 ('Robust', 1),
-('rodigo', 1),
 ('software', 1),
 ('static', 1),
 ('superstructure', 1),
@@ -273,41 +148,6 @@ CREATE TABLE `label_ticket` (
   `Id_Ticket` int(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
---
--- Volcado de datos para la tabla `label_ticket`
---
-
-INSERT INTO `label_ticket` (`Id_Label`, `Id_Ticket`) VALUES
-('Abilities', 9),
-('ability', 9),
-('algorithm', 9),
-('Bug', 5),
-('Bug', 9),
-('Bug 2', 3),
-('Bug 2', 5),
-('Bug 2', 9),
-('Bug 3', 3),
-('Bug 3', 5),
-('Bug 3', 9),
-('Cloned', 5),
-('Cross-group', 9),
-('Cross-platform', 9),
-('database', 4),
-('discrete', 4),
-('empowering', 7),
-('encompassing', 7),
-('Intuitive', 8),
-('Multi-tiered', 8),
-('Nueva Label', 8),
-('pruba', 6),
-('reciprocal', 6),
-('rodigo', 6),
-('software', 10),
-('static', 6),
-('static', 10),
-('superstructure', 10),
-('tangible', 6);
-
 -- --------------------------------------------------------
 
 --
@@ -325,26 +165,7 @@ CREATE TABLE `pregunta` (
 --
 
 INSERT INTO `pregunta` (`Id_Pregunta`, `Texto_Pregunta`, `Visibilidad_Pregunta`) VALUES
-(1, 'SKU:', 1),
-(2, 'Motivo:', 1),
-(3, 'Colocar IAO en shipping (si/no):', 1),
-(4, 'Colocar IAO en payment (si/no):', 1),
-(5, 'Estatus faltante en envio de la orden', 1),
-(6, 'Estatus faltantes en el pago de la orden', 1),
-(7, 'Problema con numero de contacto del cliente.', 1),
-(8, 'La direccion del cliente no coincide con el ticket', 1),
-(9, 'No se envió el correo de confirmacion', 1),
-(10, 'Direccion de envio: ', 1),
-(11, 'Telefono de cliente:', 1),
-(12, 'Nombre del cliente que reporto incidencia:', 1),
-(13, 'SLA:', 1),
-(14, 'Dia en el que se espera la entrega:', 1),
-(15, 'Numero de error:', 1),
-(16, 'Pagina de error:', 1),
-(17, 'Motivo de devolucion:', 1),
-(18, 'comentarios extras:', 1),
-(19, 'Pedido no entregado:', 1),
-(20, 'Articulo dañado:', 1);
+(1, 'Pregunta Extra:', 1);
 
 -- --------------------------------------------------------
 
@@ -359,27 +180,6 @@ CREATE TABLE `pregunta_ticket` (
   `Pregunta` varchar(255) COLLATE utf8mb4_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
---
--- Volcado de datos para la tabla `pregunta_ticket`
---
-
-INSERT INTO `pregunta_ticket` (`Id_Pregunta`, `Id_Ticket`, `Respuesta`, `Pregunta`) VALUES
-(1, 5, 'Prueba 6 cambio bd', 'SKU:'),
-(1, 10, 'Prueba 4 Instancia', 'SKU:'),
-(4, 2, 'Prueba 3 cambio bd', 'Colocar IAO en payment (si/no):'),
-(4, 8, 'Prueba 2 Instancia', 'Colocar IAO en payment (si/no):'),
-(5, 4, 'Prueba 5 cambio bd', 'Estatus faltante en envio de la orden'),
-(5, 5, 'Prueba 6 cambio bd', 'Estatus faltante en envio de la orden'),
-(5, 6, 'Prueba 7 cambio bd', 'Estatus faltante en envio de la orden'),
-(5, 7, 'Prueba 1 Instancia', 'Estatus faltante en envio de la orden'),
-(5, 10, 'Prueba 4 Instancia', 'Estatus faltante en envio de la orden'),
-(7, 4, 'Prueba 5 cambio bd', 'Problema con numero de contacto del cliente.'),
-(7, 6, 'Prueba 7 cambio bd', 'Problema con numero de contacto del cliente.'),
-(7, 7, 'Prueba 1 Instancia', 'Problema con numero de contacto del cliente.'),
-(8, 9, 'Prueba 3 Instancia', 'La direccion del cliente no coincide con el ticket'),
-(10, 5, 'Prueba 6 cambio bd', 'Direccion de envio: '),
-(10, 10, 'Prueba 4 Instancia', 'Direccion de envio: '),
-(11, 9, 'Prueba 3 Instancia', 'Telefono de cliente:');
 
 -- --------------------------------------------------------
 
@@ -461,7 +261,7 @@ INSERT INTO `procedencia` (`Id_Procedencia`, `Nombre_Procedencia`, `Visibilidad_
 (6, 'Homeware', 1),
 (7, 'Quilty', 1),
 (8, 'Added', 1),
-(9, 'Nubed', 0),
+(9, 'Nubed', 1),
 (10, 'Unfold', 1),
 (11, 'Loop', 1),
 (12, 'Zebrands', 1);
@@ -570,20 +370,6 @@ CREATE TABLE `ticket` (
   `Id_Estado` int(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
---
--- Volcado de datos para la tabla `ticket`
---
-
-INSERT INTO `ticket` (`Id_Ticket`, `Id_Procedencia`, `Id_Tipo_Incidencia`, `Id_Prioridad`, `Fecha_Inicio`, `Fecha_Fin`, `Descripcion`, `Asunto`, `Archivado`, `Id_Estado`) VALUES
-(2, 12, 1, 4, '2022-04-27 13:47:09', NULL, 'Prueba 3 cambio bd', 'Prueba 3 cambio bd', 0, 3),
-(3, 10, 6, 1, '2022-04-27 18:11:39', NULL, 'Prueba 4 cambio bd', 'Prueba 4 cambio bd', 0, 2),
-(4, 8, 4, 1, '2022-04-27 18:49:51', NULL, 'Prueba 5 cambio bd', 'Prueba 5 cambio bd', 0, 1),
-(5, 2, 8, 1, '2022-04-28 11:04:15', NULL, 'Prueba 6 cambio bd', 'Prueba 6 cambio bd', 0, 5),
-(6, 12, 4, 1, '2022-04-28 17:51:35', '2022-04-29 08:27:24', 'Prueba 7 cambio bd', 'Prueba 7 cambio bd', 0, 6),
-(7, 4, 4, 1, '2022-04-29 08:25:39', NULL, 'Prueba 1 Instancia', 'Prueba 1 Instancia', 0, 1),
-(8, 10, 1, 1, '2022-04-29 08:26:06', '2022-05-02 20:26:26', 'Prueba 2 Instancia', 'Prueba 2 Instancia', 0, 4),
-(9, 12, 11, 1, '2022-04-29 08:26:45', '2022-04-29 08:27:45', 'Prueba 3 Instancia', 'Prueba 3 Instancia', 0, 6),
-(10, 10, 8, 1, '2022-04-29 08:28:43', '2022-05-02 20:26:35', 'Prueba 4 Instancia', 'Prueba 4 Instancia', 0, 6);
 
 -- --------------------------------------------------------
 
@@ -593,7 +379,7 @@ INSERT INTO `ticket` (`Id_Ticket`, `Id_Procedencia`, `Id_Tipo_Incidencia`, `Id_P
 
 CREATE TABLE `tipo_incidencia` (
   `Id_Tipo_Incidencia` int(7) NOT NULL,
-  `Nombre_Tipo_Incidencia` varchar(30) CHARACTER SET utf8mb4 NOT NULL,
+  `Nombre_Tipo_Incidencia` varchar(40) CHARACTER SET utf8mb4 NOT NULL,
   `SLA` int(3) NOT NULL,
   `Visibilidad_Tipo_Incidencia` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
@@ -603,20 +389,7 @@ CREATE TABLE `tipo_incidencia` (
 --
 
 INSERT INTO `tipo_incidencia` (`Id_Tipo_Incidencia`, `Nombre_Tipo_Incidencia`, `SLA`, `Visibilidad_Tipo_Incidencia`) VALUES
-(1, 'Logo no se visualiza', 7, 1),
-(2, 'Problema con boton', 4, 1),
-(3, 'Pagina no carga', 9, 1),
-(4, 'Datos no se envian', 6, 1),
-(5, 'No puedo hacer login', 6, 1),
-(6, 'Formulario no aparece', 7, 1),
-(7, 'Problema con pedido', 9, 1),
-(8, 'Problema en BD', 9, 1),
-(9, 'Error de autentificacion', 6, 1),
-(10, 'Nuevo post no se publica', 9, 1),
-(11, 'Link roto', 6, 1),
-(12, 'Problemas de acceso', 2, 1),
-(13, 'Brecha de seguridad Cambio', 2, 1),
-(14, 'Nueva Categoria', 3, 1);
+(1, 'Tipo de Incidencia Base', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -629,33 +402,6 @@ CREATE TABLE `tipo_incidencia_pregunta` (
   `Id_Tipo_Incidencia` int(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
---
--- Volcado de datos para la tabla `tipo_incidencia_pregunta`
---
-
-INSERT INTO `tipo_incidencia_pregunta` (`Id_Pregunta`, `Id_Tipo_Incidencia`) VALUES
-(4, 1),
-(9, 2),
-(5, 4),
-(7, 4),
-(9, 5),
-(1, 7),
-(6, 7),
-(8, 7),
-(1, 8),
-(5, 8),
-(10, 8),
-(6, 9),
-(2, 10),
-(8, 10),
-(10, 10),
-(8, 11),
-(11, 11),
-(1, 13),
-(4, 13),
-(9, 13),
-(11, 13),
-(12, 13);
 
 -- --------------------------------------------------------
 
@@ -680,8 +426,7 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`Id_Usuario`, `Id_Rol`, `Nombre_Usuario`, `Login`, `Contraseña`, `URL_Foto`, `Activo`, `Hash_Verificacion`) VALUES
 (0, 4, 'Usuario Sin Asignar', 'n/a', 'n/a', 'n/a', 1, 'n/a'),
-(1, 1, 'Rodrigo M', 'ro@zeb.mx', '$2a$12$wVKI2Xd8aYOGxIxQehjx2OmwhUD.C7Oz4LM19A9Uhxn4lt/mw3/Au', 'https://tanzolymp.com/images/default-non-user-no-photo-1.jpg', 1, '0'),
-(2, 3, 'MAURICIO', 'mau@zeb.mx', '$2a$12$WvpeezaxYMQqKMajonPUdO7nHNF4Bc04AbuaYLVDShAguuvpo5bAC', 'https://tanzolymp.com/images/default-non-user-no-photo-1.jpg', 1, '0');
+(1, 1, 'Admin', 'admin@zeb.mx', '$2a$12$wVKI2Xd8aYOGxIxQehjx2OmwhUD.C7Oz4LM19A9Uhxn4lt/mw3/Au', 'https://tanzolymp.com/images/default-non-user-no-photo-1.jpg', 1, 'n/a');
 
 -- --------------------------------------------------------
 
@@ -695,29 +440,6 @@ CREATE TABLE `usuario_ticket` (
   `Cargo` varchar(20) CHARACTER SET utf8mb4 NOT NULL,
   `Fecha_Asignacion` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
---
--- Volcado de datos para la tabla `usuario_ticket`
---
-
-INSERT INTO `usuario_ticket` (`Id_Usuario`, `Id_Ticket`, `Cargo`, `Fecha_Asignacion`) VALUES
-(1, 2, 'Creador', '2022-04-27 13:47:09'),
-(1, 2, 'Encargado', '2022-05-02 20:19:12'),
-(1, 3, 'Creador', '2022-04-27 18:11:39'),
-(1, 3, 'Encargado', '2022-04-29 08:27:05'),
-(1, 4, 'Creador', '2022-04-27 18:49:51'),
-(1, 5, 'Creador', '2022-04-28 11:04:16'),
-(1, 5, 'Encargado', '2022-04-29 08:28:17'),
-(1, 6, 'Creador', '2022-04-28 17:51:35'),
-(1, 6, 'Encargado', '2022-04-29 08:27:24'),
-(1, 7, 'Creador', '2022-04-29 08:25:39'),
-(1, 8, 'Creador', '2022-04-29 08:26:06'),
-(1, 8, 'Encargado', '2022-05-02 20:26:26'),
-(1, 9, 'Creador', '2022-04-29 08:26:45'),
-(1, 9, 'Encargado', '2022-04-29 08:27:45'),
-(1, 10, 'Creador', '2022-04-29 08:28:43'),
-(1, 10, 'Encargado', '2022-05-02 20:16:13'),
-(1, 10, 'Encargado', '2022-05-02 20:26:35');
 
 --
 -- Índices para tablas volcadas
@@ -840,20 +562,18 @@ ALTER TABLE `usuario_ticket`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
-ALTER TABLE `usuario`
-  MODIFY `Id_Usuario` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `estado`
 --
 ALTER TABLE `estado`
-  MODIFY `Id_Estado` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `Id_Estado` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `pregunta`
 --
 ALTER TABLE `pregunta`
-  MODIFY `Id_Pregunta` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `Id_Pregunta` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `prioridad`
@@ -877,19 +597,19 @@ ALTER TABLE `procedencia`
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
-  MODIFY `Id_Rol` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `Id_Rol` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `Id_Ticket` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `Id_Ticket` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_incidencia`
 --
 ALTER TABLE `tipo_incidencia`
-  MODIFY `Id_Tipo_Incidencia` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `Id_Tipo_Incidencia` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
